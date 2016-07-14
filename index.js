@@ -1,3 +1,11 @@
-"use strict";
+'use strict';
 
-module.exports = require('./lib/soap');
+var base = './lib/';
+var nodeVersion = process.versions.node;
+var major = Number(nodeVersion.split('.')[0]);
+if (major >= 5) {
+  base = './src/';
+}
+
+module.exports = require(base + 'soap');
+

@@ -1,6 +1,17 @@
-<wsdl:definitions name="OperationServiceNextGen" targetNamespace="http://some.schema.com/marketplace/search/v1/services" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://some.schema.com/marketplace/search/v1/services" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions name="OperationServiceNextGen"
+                  targetNamespace="http://some.schema.com/marketplace/search/v1/services"
+                  xmlns="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:tns="http://some.schema.com/marketplace/search/v1/services"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <wsdl:types>
-        <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://some.schema.com/marketplace/search/v1/services">
+        <xs:schema attributeFormDefault="unqualified"
+                   elementFormDefault="qualified"
+                   targetNamespace="http://some.schema.com/marketplace/search/v1/services">
 
             <xs:simpleType name="AckValue">
                 <xs:restriction base="xs:string">
@@ -17,22 +28,26 @@
             <xs:element name="operationRequest" type="tns:OperationRequest"/>
             <xs:complexType name="OperationRequest">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="constraint" type="tns:Constraint">
+                    <xs:element maxOccurs="unbounded" minOccurs="0"
+                                name="constraint" type="tns:Constraint">
                     </xs:element>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="operationResponse" type="tns:AckValue"/>
             <xs:complexType name="Expression">
                 <xs:choice>
-                    <xs:element maxOccurs="1" minOccurs="0" name="expression" type="tns:Expression">
+                    <xs:element maxOccurs="1" minOccurs="0" name="expression"
+                                type="tns:Expression">
                     </xs:element>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="constraint" type="tns:Constraint">
+                    <xs:element maxOccurs="unbounded" minOccurs="0"
+                                name="constraint" type="tns:Constraint">
                     </xs:element>
                 </xs:choice>
             </xs:complexType>
             <xs:complexType name="Constraint">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="1" name="expression" type="tns:Expression">
+                    <xs:element maxOccurs="1" minOccurs="1" name="expression"
+                                type="tns:Expression">
                     </xs:element>
                 </xs:sequence>
             </xs:complexType>
@@ -53,7 +68,8 @@
             <wsdl:output message="tns:operationResponse"/>
         </wsdl:operation>
     </wsdl:portType>
-    <wsdl:binding name="OperationServiceNextGenHttpBinding" type="tns:OperationServiceNextGenPort">
+    <wsdl:binding name="OperationServiceNextGenHttpBinding"
+                  type="tns:OperationServiceNextGenPort">
 
         <http:binding verb="POST"/>
         <wsdl:operation name="operation">
@@ -69,12 +85,15 @@
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:binding name="OperationServiceNextGenSOAPBinding" type="tns:OperationServiceNextGenPort">
+    <wsdl:binding name="OperationServiceNextGenSOAPBinding"
+                  type="tns:OperationServiceNextGenPort">
 
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="operation">
 
-            <soap:operation soapAction="http://some.schema.com/marketplace/search/v1/services/operation"/>
+            <soap:operation
+                    soapAction="http://some.schema.com/marketplace/search/v1/services/operation"/>
             <wsdl:input>
 
                 <soap:body use="literal"/>
@@ -89,11 +108,15 @@
         <wsdl:documentation>
             <version>1.1.10</version>
         </wsdl:documentation>
-        <wsdl:port binding="tns:OperationServiceNextGenHttpBinding" name="OperationServiceNextGenHttpPort">
-            <http:address location="https://svcs.ebay.com/services/search/v1/OperationServiceNextGen"/>
+        <wsdl:port binding="tns:OperationServiceNextGenHttpBinding"
+                   name="OperationServiceNextGenHttpPort">
+            <http:address
+                    location="https://svcs.ebay.com/services/search/v1/OperationServiceNextGen"/>
         </wsdl:port>
-        <wsdl:port binding="tns:OperationServiceNextGenSOAPBinding" name="OperationServiceNextGenSOAPPort">
-            <soap12:address location="https://svcs.ebay.com/services/search/v1/OperationServiceNextGen"/>
+        <wsdl:port binding="tns:OperationServiceNextGenSOAPBinding"
+                   name="OperationServiceNextGenSOAPPort">
+            <soap12:address
+                    location="https://svcs.ebay.com/services/search/v1/OperationServiceNextGen"/>
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

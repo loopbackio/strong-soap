@@ -5,17 +5,19 @@
                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
                   xmlns:dummy="http://www.dummy.com/Types"
                   xmlns:tns="http://www.dummy.com">
-	<wsdl:types>
+    <wsdl:types>
         <xs:schema targetNamespace="http://www.dummy.com/Types"
                    xmlns:xs="http://www.w3.org/2001/XMLSchema"
                    xmlns:dummy="http://www.dummy.com/Types"
-                   elementFormDefault="qualified" attributeFormDefault="unqualified">
-            <xs:include schemaLocation="http://localhost:50000/Platform.asmx?xsd"/>
+                   elementFormDefault="qualified"
+                   attributeFormDefault="unqualified">
+            <xs:include
+                    schemaLocation="http://localhost:50000/Platform.asmx?xsd"/>
             <xs:element name="DummyRequest">
                 <xs:complexType>
                     <xs:sequence>
-        				<xs:element name="ID" type="dummy:IdType"/>
-        				<xs:element name="Name" type="dummy:NameType"/>
+                        <xs:element name="ID" type="dummy:IdType"/>
+                        <xs:element name="Name" type="dummy:NameType"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -27,43 +29,44 @@
                 </xs:complexType>
             </xs:element>
         </xs:schema>
-	</wsdl:types>
-	<wsdl:message name="DummyRequest">
-		<wsdl:part name="DummyRequest" element="dummy:DummyRequest"/>
-	</wsdl:message>
-	<wsdl:message name="DummyResponse">
-		<wsdl:part name="DummyResponse" element="dummy:DummyResponse"/>
-	</wsdl:message>
-	<wsdl:portType name="DummyPortType">
-		<wsdl:operation name="Dummy">
-			<wsdl:input message="tns:DummyRequest"/>
-			<wsdl:output message="tns:DummyResponse"/>
-		</wsdl:operation>
-	</wsdl:portType>
-	<wsdl:binding name="DummyBinding" type="tns:DummyPortType">
-		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-		<wsdl:operation name="Dummy">
-			<soap:operation soapAction="tns#Dummy" style="document"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="DummySave">
-			<soap:operation soapAction="tns#DummySave" style="document"/>
-			<wsdl:input>
-				<soap:body use="literal"/>
-			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal"/>
-			</wsdl:output>
-		</wsdl:operation>
-	</wsdl:binding>
-	<wsdl:service name="DummyService">
-		<wsdl:port name="DummyPortType" binding="tns:DummyBinding">
-			<soap:address location="http://www.dummy.com/"/>
-		</wsdl:port>
-	</wsdl:service>
+    </wsdl:types>
+    <wsdl:message name="DummyRequest">
+        <wsdl:part name="DummyRequest" element="dummy:DummyRequest"/>
+    </wsdl:message>
+    <wsdl:message name="DummyResponse">
+        <wsdl:part name="DummyResponse" element="dummy:DummyResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="DummyPortType">
+        <wsdl:operation name="Dummy">
+            <wsdl:input message="tns:DummyRequest"/>
+            <wsdl:output message="tns:DummyResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="DummyBinding" type="tns:DummyPortType">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Dummy">
+            <soap:operation soapAction="tns#Dummy" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DummySave">
+            <soap:operation soapAction="tns#DummySave" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="DummyService">
+        <wsdl:port name="DummyPortType" binding="tns:DummyBinding">
+            <soap:address location="http://www.dummy.com/"/>
+        </wsdl:port>
+    </wsdl:service>
 </wsdl:definitions>
