@@ -2,13 +2,17 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
                   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                  xmlns:tns="http://www.OneWay.com" xmlns:n="http://www.OneWay.com/Name/Types" xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.OneWay.com">
+                  xmlns:tns="http://www.OneWay.com"
+                  xmlns:n="http://www.OneWay.com/Name/Types"
+                  xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+                  targetNamespace="http://www.OneWay.com">
     <wsdl:types>
         <xs:schema targetNamespace="http://www.OneWay.com/Name/Types">
             <xs:element name="OneWayRequest">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="OneWayField" type="xs:string" minOccurs="0"/>
+                        <xs:element name="OneWayField" type="xs:string"
+                                    minOccurs="0"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -26,9 +30,11 @@
     </wsdl:portType>
 
     <wsdl:binding name="OneWayBinding" type="tns:OneWayPortType">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
         <wsdl:operation name="OneWay">
-            <soap:operation soapAction="http://www.OneWay.com#OneWay" style="document"/>
+            <soap:operation soapAction="http://www.OneWay.com#OneWay"
+                            style="document"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

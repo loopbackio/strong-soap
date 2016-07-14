@@ -2,6 +2,7 @@
 
 var fs = require('fs'),
   join = require('path').join;
+var XMLHandler = require('../../lib/parser/xmlHandler');
 
 describe('WSSecurity', function() {
   var WSSecurity = require('../../').WSSecurity;
@@ -39,6 +40,7 @@ describe('WSSecurity', function() {
   });
 
   it('should insert a WSSecurity when postProcess is called', function() {
+    var env = XMLHandler.createSOAPEnvelope();
     var username = 'myUser';
     var password = 'myPass';
     var options = {
@@ -47,26 +49,35 @@ describe('WSSecurity', function() {
       actor: 'urn:sample'
     };
     var instance = new WSSecurity(username, password, options);
-    var xml = instance.toXML();
+    instance.addSoapHeaders(env.header);
+    var xml = env.header.toString({pretty: true});
 
     xml.should.containEql('<wsse:Security soap:actor="urn:sample" ');
-    xml.should.containEql('xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" ');
-    xml.should.containEql('xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">');
+    xml.should.containEql(
+      'xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/' +
+      'oasis-200401-wss-wssecurity-secext-1.0.xsd"');
+    xml.should.containEql('xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/' +
+      'oasis-200401-wss-wssecurity-utility-1.0.xsd">');
     xml.should.containEql('<wsu:Timestamp wsu:Id="Timestamp-');
     xml.should.containEql('<wsu:Created>');
     xml.should.containEql('<wsu:Expires>');
     xml.should.containEql('</wsu:Timestamp>');
     xml.should.containEql('<wsse:UsernameToken ');
-    xml.should.containEql('xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" ');
+    xml.should.containEql('xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/' +
+      'oasis-200401-wss-wssecurity-utility-1.0.xsd"');
     xml.should.containEql('wsu:Id="SecurityToken-');
     xml.should.containEql('<wsse:Username>myUser</wsse:Username>');
     xml.should.containEql('<wsse:Password ');
-    xml.should.containEql('Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">');
+    xml.should.containEql('Type="http://docs.oasis-open.org/wss/2004/01/' +
+      'oasis-200401-wss-username-token-profile-1.0#PasswordText">');
     xml.should.containEql('myPass</wsse:Password>');
-    xml.should.containEql('<wsse:Nonce EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary">');
+    xml.should.containEql('<wsse:Nonce ' +
+      'EncodingType="http://docs.oasis-open.org/wss/2004/01/' +
+      'oasis-200401-wss-soap-message-security-1.0#Base64Binary">');
     xml.should.containEql('</wsse:Nonce>');
     xml.should.containEql('<wsu:Created>');
-    xml.should.containEql('</wsse:UsernameToken></wsse:Security>');
+    xml.should.containEql('</wsse:UsernameToken>');
+    xml.should.containEql('</wsse:Security>');
 
   });
 });

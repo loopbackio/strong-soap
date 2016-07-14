@@ -4,10 +4,10 @@ var fs = require('fs'),
   duplexer = require('duplexer'),
   semver = require('semver'),
   should = require('should'),
-  // stream = require('stream'),
+// stream = require('stream'),
   stream = require('readable-stream');
 
-module.exports = function createSocketStream(file, length) {
+module.exports = function createSocketStream(file) {
   //Create a duplex stream
 
   var httpReqStream = new stream.PassThrough();
@@ -28,23 +28,24 @@ module.exports = function createSocketStream(file, length) {
   socketStream.res = httpResStream;
 
   var wsdl = fs.readFileSync(file).toString('utf8');
+  var length = wsdl.length;
   //Should be able to read from stream the request
   socketStream.req.once('readable', function readRequest() {
     var chunk = socketStream.req.read();
     should.exist(chunk);
 
-    var header = 'HTTP/1.1 200 OK\r\nContent-Type: text/xml; charset=utf-8\r\nContent-Length: ' + length + '\r\n\r\n';
+    var header = 'HTTP/1.1 200 OK\r\nContent-Type: text/xml; ' +
+      'charset=utf-8\r\nContent-Length: ' + length + '\r\n\r\n';
 
     //This is for compatibility with old node releases <= 0.10
     //Hackish
-    if(semver.lt(process.version, '0.11.0'))
-    {
+    if (semver.lt(process.version, '0.11.0')) {
       socketStream.on('data', function(data) {
-        socketStream.ondata(data,0,length + header.length);
+        socketStream.ondata(data, 0, length + header.length);
       });
     }
     //Now write the response with the wsdl
-    var state = socketStream.res.write(header+wsdl);
+    var state = socketStream.res.write(header + wsdl);
   });
 
   return socketStream;

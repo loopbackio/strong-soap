@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com" xmlns:platformFaultTyp="urn:types.faults_2013_2.platform.webservices.netsuite.com" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:messages_2013_2.platform.webservices.netsuite.com" elementFormDefault="qualified" attributeFormDefault="unqualified">
-    <import namespace="urn:core_2013_2.platform.webservices.netsuite.com" schemaLocation="../../platform/platform.core.xsd"/>
-    <import namespace="urn:types.faults_2013_2.platform.webservices.netsuite.com" schemaLocation="../../platform/platform.faultTypes.xsd"/>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com"
+        xmlns:platformFaultTyp="urn:types.faults_2013_2.platform.webservices.netsuite.com"
+        xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="urn:messages_2013_2.platform.webservices.netsuite.com"
+        elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <import namespace="urn:core_2013_2.platform.webservices.netsuite.com"
+            schemaLocation="../../platform/platform.core.xsd"/>
+    <import namespace="urn:types.faults_2013_2.platform.webservices.netsuite.com"
+            schemaLocation="../../platform/platform.faultTypes.xsd"/>
     <!-- ******************************************************************** -->
     <!-- Header Information -->
     <!-- ******************************************************************** -->
@@ -26,16 +35,21 @@
     <complexType name="Preferences">
         <sequence>
             <element name="warningAsError" minOccurs="0" type="xsd:boolean"/>
-            <element name="disableMandatoryCustomFieldValidation" minOccurs="0" type="xsd:boolean"/>
-            <element name="disableSystemNotesForCustomFields" minOccurs="0" type="xsd:boolean"/>
-            <element name="ignoreReadOnlyFields" minOccurs="0" type="xsd:boolean"/>
+            <element name="disableMandatoryCustomFieldValidation" minOccurs="0"
+                     type="xsd:boolean"/>
+            <element name="disableSystemNotesForCustomFields" minOccurs="0"
+                     type="xsd:boolean"/>
+            <element name="ignoreReadOnlyFields" minOccurs="0"
+                     type="xsd:boolean"/>
         </sequence>
     </complexType>
     <element name="preferences" type="platformMsgs:Preferences"/>
     <complexType name="SearchPreferences">
         <sequence>
-            <element name="bodyFieldsOnly" minOccurs="0" type="xsd:boolean" default="true"/>
-            <element name="returnSearchColumns" minOccurs="0" type="xsd:boolean" default="true"/>
+            <element name="bodyFieldsOnly" minOccurs="0" type="xsd:boolean"
+                     default="true"/>
+            <element name="returnSearchColumns" minOccurs="0" type="xsd:boolean"
+                     default="true"/>
             <element name="pageSize" minOccurs="0" type="xsd:int"/>
         </sequence>
     </complexType>
@@ -68,13 +82,15 @@
     <element name="readResponse" type="platformMsgs:ReadResponse"/>
     <complexType name="WriteResponseList">
         <sequence>
-            <element name="writeResponse" type="platformMsgs:WriteResponse" maxOccurs="unbounded"/>
+            <element name="writeResponse" type="platformMsgs:WriteResponse"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="writeResponseList" type="platformMsgs:WriteResponseList"/>
     <complexType name="ReadResponseList">
         <sequence>
-            <element name="readResponse" type="platformMsgs:ReadResponse" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="readResponse" type="platformMsgs:ReadResponse"
+                     minOccurs="0" maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="readResponseList" type="platformMsgs:ReadResponseList"/>
@@ -108,14 +124,16 @@
             <element ref="platformMsgs:sessionResponse"/>
         </sequence>
     </complexType>
-    <element name="changePasswordResponse" type="platformMsgs:ChangePasswordResponse"/>
+    <element name="changePasswordResponse"
+             type="platformMsgs:ChangePasswordResponse"/>
     <!-- Change Password-->
     <complexType name="ChangeEmailResponse">
         <sequence>
             <element ref="platformMsgs:sessionResponse"/>
         </sequence>
     </complexType>
-    <element name="changeEmailResponse" type="platformMsgs:ChangeEmailResponse"/>
+    <element name="changeEmailResponse"
+             type="platformMsgs:ChangeEmailResponse"/>
     <!-- Logout -->
     <complexType name="LogoutResponse">
         <sequence>
@@ -195,7 +213,8 @@
             <element ref="platformCore:searchResult"/>
         </sequence>
     </complexType>
-    <element name="searchMoreWithIdResponse" type="platformMsgs:SearchMoreWithIdResponse"/>
+    <element name="searchMoreWithIdResponse"
+             type="platformMsgs:SearchMoreWithIdResponse"/>
     <complexType name="SearchNextResponse">
         <sequence>
             <element ref="platformCore:searchResult"/>
@@ -226,13 +245,15 @@
             <element ref="platformCore:getSavedSearchResult"/>
         </sequence>
     </complexType>
-    <element name="getSavedSearchResponse" type="platformMsgs:GetSavedSearchResponse"/>
+    <element name="getSavedSearchResponse"
+             type="platformMsgs:GetSavedSearchResponse"/>
     <complexType name="GetCustomizationIdResponse">
         <sequence>
             <element ref="platformCore:getCustomizationIdResult"/>
         </sequence>
     </complexType>
-    <element name="getCustomizationIdResponse" type="platformMsgs:GetCustomizationIdResponse"/>
+    <element name="getCustomizationIdResponse"
+             type="platformMsgs:GetCustomizationIdResponse"/>
     <complexType name="InitializeResponse">
         <sequence>
             <element ref="platformMsgs:readResponse"/>
@@ -244,62 +265,71 @@
             <element ref="platformMsgs:readResponseList"/>
         </sequence>
     </complexType>
-    <element name="initializeListResponse" type="platformMsgs:InitializeListResponse"/>
+    <element name="initializeListResponse"
+             type="platformMsgs:InitializeListResponse"/>
     <complexType name="getSelectValueResponse">
         <sequence>
             <element ref="platformCore:getSelectValueResult"/>
         </sequence>
     </complexType>
-    <element name="getSelectValueResponse" type="platformMsgs:getSelectValueResponse"/>
+    <element name="getSelectValueResponse"
+             type="platformMsgs:getSelectValueResponse"/>
     <!-- Item Availability-->
     <complexType name="GetItemAvailabilityResponse">
         <sequence>
             <element ref="platformCore:getItemAvailabilityResult"/>
         </sequence>
     </complexType>
-    <element name="getItemAvailabilityResponse" type="platformMsgs:GetItemAvailabilityResponse"/>
+    <element name="getItemAvailabilityResponse"
+             type="platformMsgs:GetItemAvailabilityResponse"/>
     <!-- Budget ExchangeRate-->
     <complexType name="GetBudgetExchangeRateResponse">
         <sequence>
             <element ref="platformCore:getBudgetExchangeRateResult"/>
         </sequence>
     </complexType>
-    <element name="getBudgetExchangeRateResponse" type="platformMsgs:GetBudgetExchangeRateResponse"/>
+    <element name="getBudgetExchangeRateResponse"
+             type="platformMsgs:GetBudgetExchangeRateResponse"/>
     <!-- Consolidated ExchangeRate-->
     <complexType name="GetConsolidatedExchangeRateResponse">
         <sequence>
             <element ref="platformCore:getConsolidatedExchangeRateResult"/>
         </sequence>
     </complexType>
-    <element name="getConsolidatedExchangeRateResponse" type="platformMsgs:GetConsolidatedExchangeRateResponse"/>
+    <element name="getConsolidatedExchangeRateResponse"
+             type="platformMsgs:GetConsolidatedExchangeRateResponse"/>
     <!-- CurrencyRate-->
     <complexType name="GetCurrencyRateResponse">
         <sequence>
             <element ref="platformCore:getCurrencyRateResult"/>
         </sequence>
     </complexType>
-    <element name="getCurrencyRateResponse" type="platformMsgs:GetCurrencyRateResponse"/>
+    <element name="getCurrencyRateResponse"
+             type="platformMsgs:GetCurrencyRateResponse"/>
     <!-- DataCenterUrls-->
     <complexType name="GetDataCenterUrlsResponse">
         <sequence>
             <element ref="platformCore:getDataCenterUrlsResult"/>
         </sequence>
     </complexType>
-    <element name="getDataCenterUrlsResponse" type="platformMsgs:GetDataCenterUrlsResponse"/>
+    <element name="getDataCenterUrlsResponse"
+             type="platformMsgs:GetDataCenterUrlsResponse"/>
     <!-- Posting Activity-->
     <complexType name="GetPostingTransactionSummaryResponse">
         <sequence>
             <element ref="platformCore:getPostingTransactionSummaryResult"/>
         </sequence>
     </complexType>
-    <element name="getPostingTransactionSummaryResponse" type="platformMsgs:GetPostingTransactionSummaryResponse"/>
+    <element name="getPostingTransactionSummaryResponse"
+             type="platformMsgs:GetPostingTransactionSummaryResponse"/>
     <!-- Server Time-->
     <complexType name="GetServerTimeResponse">
         <sequence>
             <element ref="platformCore:getServerTimeResult"/>
         </sequence>
     </complexType>
-    <element name="getServerTimeResponse" type="platformMsgs:GetServerTimeResponse"/>
+    <element name="getServerTimeResponse"
+             type="platformMsgs:GetServerTimeResponse"/>
     <!-- Attach-->
     <complexType name="AttachResponse">
         <sequence>
@@ -320,33 +350,45 @@
             <element ref="platformMsgs:writeResponse"/>
         </sequence>
     </complexType>
-    <element name="updateInviteeStatusResponse" type="platformMsgs:UpdateInviteeStatusResponse"/>
+    <element name="updateInviteeStatusResponse"
+             type="platformMsgs:UpdateInviteeStatusResponse"/>
     <complexType name="UpdateInviteeStatusListResponse">
         <sequence>
             <element ref="platformMsgs:writeResponseList"/>
         </sequence>
     </complexType>
-    <element name="updateInviteeStatusListResponse" type="platformMsgs:UpdateInviteeStatusListResponse"/>
+    <element name="updateInviteeStatusListResponse"
+             type="platformMsgs:UpdateInviteeStatusListResponse"/>
     <!-- Async Responses -->
     <complexType name="AsyncStatusResponse">
         <sequence>
             <element ref="platformCore:asyncStatusResult"/>
         </sequence>
     </complexType>
-    <element name="asyncAddListResponse" type="platformMsgs:AsyncStatusResponse"/>
-    <element name="asyncUpdateListResponse" type="platformMsgs:AsyncStatusResponse"/>
-    <element name="asyncUpsertListResponse" type="platformMsgs:AsyncStatusResponse"/>
-    <element name="asyncDeleteListResponse" type="platformMsgs:AsyncStatusResponse"/>
-    <element name="asyncGetListResponse" type="platformMsgs:AsyncStatusResponse"/>
-    <element name="asyncInitializeListResponse" type="platformMsgs:AsyncStatusResponse"/>
-    <element name="asyncSearchResponse" type="platformMsgs:AsyncStatusResponse"/>
-    <element name="checkAsyncStatusResponse" type="platformMsgs:AsyncStatusResponse"/>
+    <element name="asyncAddListResponse"
+             type="platformMsgs:AsyncStatusResponse"/>
+    <element name="asyncUpdateListResponse"
+             type="platformMsgs:AsyncStatusResponse"/>
+    <element name="asyncUpsertListResponse"
+             type="platformMsgs:AsyncStatusResponse"/>
+    <element name="asyncDeleteListResponse"
+             type="platformMsgs:AsyncStatusResponse"/>
+    <element name="asyncGetListResponse"
+             type="platformMsgs:AsyncStatusResponse"/>
+    <element name="asyncInitializeListResponse"
+             type="platformMsgs:AsyncStatusResponse"/>
+    <element name="asyncSearchResponse"
+             type="platformMsgs:AsyncStatusResponse"/>
+    <element name="checkAsyncStatusResponse"
+             type="platformMsgs:AsyncStatusResponse"/>
     <complexType name="GetAsyncResultResponse">
         <sequence>
-            <element ref="platformMsgs:asyncResult" minOccurs="1" maxOccurs="1"/>
+            <element ref="platformMsgs:asyncResult" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="getAsyncResultResponse" type="platformMsgs:GetAsyncResultResponse"/>
+    <element name="getAsyncResultResponse"
+             type="platformMsgs:GetAsyncResultResponse"/>
     <!-- Async Results -->
     <complexType name="AsyncResult" abstract="true"/>
     <element name="asyncResult" type="platformMsgs:AsyncResult"/>
@@ -369,7 +411,8 @@
             </extension>
         </complexContent>
     </complexType>
-    <element name="asyncUpdateListResult" type="platformMsgs:AsyncUpdateListResult"/>
+    <element name="asyncUpdateListResult"
+             type="platformMsgs:AsyncUpdateListResult"/>
     <complexType name="AsyncUpsertListResult">
         <complexContent>
             <extension base="platformMsgs:AsyncResult">
@@ -379,7 +422,8 @@
             </extension>
         </complexContent>
     </complexType>
-    <element name="asyncUpsertListResult" type="platformMsgs:AsyncUpsertListResult"/>
+    <element name="asyncUpsertListResult"
+             type="platformMsgs:AsyncUpsertListResult"/>
     <complexType name="AsyncDeleteListResult">
         <complexContent>
             <extension base="platformMsgs:AsyncResult">
@@ -389,7 +433,8 @@
             </extension>
         </complexContent>
     </complexType>
-    <element name="asyncDeleteListResult" type="platformMsgs:AsyncDeleteListResult"/>
+    <element name="asyncDeleteListResult"
+             type="platformMsgs:AsyncDeleteListResult"/>
     <complexType name="AsyncGetListResult">
         <complexContent>
             <extension base="platformMsgs:AsyncResult">
@@ -418,7 +463,8 @@
             </extension>
         </complexContent>
     </complexType>
-    <element name="asyncInitializeListResult" type="platformMsgs:AsyncInitializeListResult"/>
+    <element name="asyncInitializeListResult"
+             type="platformMsgs:AsyncInitializeListResult"/>
     <element name="asyncSearchResult" type="platformMsgs:AsyncSearchResult"/>
     <!-- Deletion-->
     <complexType name="GetDeletedResponse">
@@ -500,7 +546,8 @@
             <element name="pageIndex" type="xsd:int"/>
         </sequence>
     </complexType>
-    <element name="searchMoreWithId" type="platformMsgs:SearchMoreWithIdRequest"/>
+    <element name="searchMoreWithId"
+             type="platformMsgs:SearchMoreWithIdRequest"/>
     <complexType name="SearchNextRequest">
         <sequence/>
     </complexType>
@@ -519,25 +566,29 @@
     <element name="upsert" type="platformMsgs:UpsertRequest"/>
     <complexType name="AddListRequest">
         <sequence>
-            <element name="record" type="platformCore:Record" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="record" type="platformCore:Record" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="addList" type="platformMsgs:AddListRequest"/>
     <complexType name="DeleteListRequest">
         <sequence>
-            <element name="baseRef" type="platformCore:BaseRef" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="baseRef" type="platformCore:BaseRef" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="deleteList" type="platformMsgs:DeleteListRequest"/>
     <complexType name="UpdateListRequest">
         <sequence>
-            <element name="record" type="platformCore:Record" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="record" type="platformCore:Record" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="updateList" type="platformMsgs:UpdateListRequest"/>
     <complexType name="UpsertListRequest">
         <sequence>
-            <element name="record" type="platformCore:Record" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="record" type="platformCore:Record" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="upsertList" type="platformMsgs:UpsertListRequest"/>
@@ -549,150 +600,196 @@
     <element name="get" type="platformMsgs:GetRequest"/>
     <complexType name="GetListRequest">
         <sequence>
-            <element name="baseRef" type="platformCore:BaseRef" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="baseRef" type="platformCore:BaseRef" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="getList" type="platformMsgs:GetListRequest"/>
     <complexType name="GetAllRequest">
         <sequence>
-            <element name="record" type="platformCore:GetAllRecord" minOccurs="1"/>
+            <element name="record" type="platformCore:GetAllRecord"
+                     minOccurs="1"/>
         </sequence>
     </complexType>
     <element name="getAll" type="platformMsgs:GetAllRequest"/>
     <complexType name="GetSavedSearchRequest">
         <sequence>
-            <element name="record" type="platformCore:GetSavedSearchRecord" minOccurs="1"/>
+            <element name="record" type="platformCore:GetSavedSearchRecord"
+                     minOccurs="1"/>
         </sequence>
     </complexType>
     <element name="getSavedSearch" type="platformMsgs:GetSavedSearchRequest"/>
     <complexType name="GetCustomizationIdRequest">
         <sequence>
-            <element name="customizationType" type="platformCore:CustomizationType" minOccurs="1"/>
+            <element name="customizationType"
+                     type="platformCore:CustomizationType" minOccurs="1"/>
             <element name="includeInactives" type="xsd:boolean" minOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="getCustomizationId" type="platformMsgs:GetCustomizationIdRequest"/>
+    <element name="getCustomizationId"
+             type="platformMsgs:GetCustomizationIdRequest"/>
     <complexType name="InitializeRequest">
         <sequence>
-            <element name="initializeRecord" type="platformCore:InitializeRecord" minOccurs="1"/>
+            <element name="initializeRecord"
+                     type="platformCore:InitializeRecord" minOccurs="1"/>
         </sequence>
     </complexType>
     <element name="initialize" type="platformMsgs:InitializeRequest"/>
     <complexType name="InitializeListRequest">
         <sequence>
-            <element name="initializeRecord" type="platformCore:InitializeRecord" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="initializeRecord"
+                     type="platformCore:InitializeRecord" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="initializeList" type="platformMsgs:InitializeListRequest"/>
     <complexType name="getSelectValueRequest">
         <sequence>
-            <element name="fieldDescription" type="platformCore:GetSelectValueFieldDescription" minOccurs="1" maxOccurs="1"/>
-            <element name="pageIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <element name="fieldDescription"
+                     type="platformCore:GetSelectValueFieldDescription"
+                     minOccurs="1" maxOccurs="1"/>
+            <element name="pageIndex" type="xsd:int" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
     <element name="getSelectValue" type="platformMsgs:getSelectValueRequest"/>
     <complexType name="GetItemAvailabilityRequest">
         <sequence>
-            <element name="itemAvailabilityFilter" type="platformCore:ItemAvailabilityFilter" minOccurs="1" maxOccurs="1"/>
+            <element name="itemAvailabilityFilter"
+                     type="platformCore:ItemAvailabilityFilter" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="getItemAvailability" type="platformMsgs:GetItemAvailabilityRequest"/>
+    <element name="getItemAvailability"
+             type="platformMsgs:GetItemAvailabilityRequest"/>
     <complexType name="GetBudgetExchangeRateRequest">
         <sequence>
-            <element name="budgetExchangeRateFilter" type="platformCore:BudgetExchangeRateFilter" minOccurs="1" maxOccurs="1"/>
+            <element name="budgetExchangeRateFilter"
+                     type="platformCore:BudgetExchangeRateFilter" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="getBudgetExchangeRate" type="platformMsgs:GetBudgetExchangeRateRequest"/>
+    <element name="getBudgetExchangeRate"
+             type="platformMsgs:GetBudgetExchangeRateRequest"/>
     <complexType name="GetConsolidatedExchangeRateRequest">
         <sequence>
-            <element name="consolidatedExchangeRateFilter" type="platformCore:ConsolidatedExchangeRateFilter" minOccurs="1" maxOccurs="1"/>
+            <element name="consolidatedExchangeRateFilter"
+                     type="platformCore:ConsolidatedExchangeRateFilter"
+                     minOccurs="1" maxOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="getConsolidatedExchangeRate" type="platformMsgs:GetConsolidatedExchangeRateRequest"/>
+    <element name="getConsolidatedExchangeRate"
+             type="platformMsgs:GetConsolidatedExchangeRateRequest"/>
     <complexType name="GetCurrencyRateRequest">
         <sequence>
-            <element name="currencyRateFilter" type="platformCore:CurrencyRateFilter" minOccurs="1" maxOccurs="1"/>
+            <element name="currencyRateFilter"
+                     type="platformCore:CurrencyRateFilter" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
     <element name="getCurrencyRate" type="platformMsgs:GetCurrencyRateRequest"/>
     <complexType name="GetDataCenterUrlsRequest">
         <sequence>
-            <element name="account" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <element name="account" type="xsd:string" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="getDataCenterUrls" type="platformMsgs:GetDataCenterUrlsRequest"/>
+    <element name="getDataCenterUrls"
+             type="platformMsgs:GetDataCenterUrlsRequest"/>
     <complexType name="GetPostingTransactionSummaryRequest">
         <sequence>
-            <element name="fields" type="platformCore:PostingTransactionSummaryField" minOccurs="1" maxOccurs="1"/>
-            <element name="filters" type="platformCore:PostingTransactionSummaryFilter" minOccurs="0" maxOccurs="1"/>
-            <element name="pageIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <element name="fields"
+                     type="platformCore:PostingTransactionSummaryField"
+                     minOccurs="1" maxOccurs="1"/>
+            <element name="filters"
+                     type="platformCore:PostingTransactionSummaryFilter"
+                     minOccurs="0" maxOccurs="1"/>
+            <element name="pageIndex" type="xsd:int" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="getPostingTransactionSummary" type="platformMsgs:GetPostingTransactionSummaryRequest"/>
+    <element name="getPostingTransactionSummary"
+             type="platformMsgs:GetPostingTransactionSummaryRequest"/>
     <complexType name="GetServerTimeRequest"/>
     <element name="getServerTime" type="platformMsgs:GetServerTimeRequest"/>
     <complexType name="AttachRequest">
         <sequence>
-            <element name="attachReference" type="platformCore:AttachReference" minOccurs="1" maxOccurs="1"/>
+            <element name="attachReference" type="platformCore:AttachReference"
+                     minOccurs="1" maxOccurs="1"/>
         </sequence>
     </complexType>
     <element name="attach" type="platformMsgs:AttachRequest"/>
     <complexType name="DetachRequest">
         <sequence>
-            <element name="detachReference" type="platformCore:DetachReference" minOccurs="1" maxOccurs="1"/>
+            <element name="detachReference" type="platformCore:DetachReference"
+                     minOccurs="1" maxOccurs="1"/>
         </sequence>
     </complexType>
     <element name="detach" type="platformMsgs:DetachRequest"/>
     <!-- Async -->
     <complexType name="AsyncAddListRequest">
         <sequence>
-            <element name="record" type="platformCore:Record" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="record" type="platformCore:Record" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <!-- UpdateInviteeStatus requests -->
     <complexType name="UpdateInviteeStatusRequest">
         <sequence>
-            <element name="updateInviteeStatusReference" type="platformCore:UpdateInviteeStatusReference" minOccurs="1"/>
+            <element name="updateInviteeStatusReference"
+                     type="platformCore:UpdateInviteeStatusReference"
+                     minOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="updateInviteeStatus" type="platformMsgs:UpdateInviteeStatusRequest"/>
+    <element name="updateInviteeStatus"
+             type="platformMsgs:UpdateInviteeStatusRequest"/>
     <complexType name="UpdateInviteeStatusListRequest">
         <sequence>
-            <element name="updateInviteeStatusReference" type="platformCore:UpdateInviteeStatusReference" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="updateInviteeStatusReference"
+                     type="platformCore:UpdateInviteeStatusReference"
+                     minOccurs="1" maxOccurs="unbounded"/>
         </sequence>
     </complexType>
-    <element name="updateInviteeStatusList" type="platformMsgs:UpdateInviteeStatusListRequest"/>
+    <element name="updateInviteeStatusList"
+             type="platformMsgs:UpdateInviteeStatusListRequest"/>
     <element name="asyncAddList" type="platformMsgs:AsyncAddListRequest"/>
     <complexType name="AsyncUpdateListRequest">
         <sequence>
-            <element name="record" type="platformCore:Record" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="record" type="platformCore:Record" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="asyncUpdateList" type="platformMsgs:AsyncUpdateListRequest"/>
     <complexType name="AsyncUpsertListRequest">
         <sequence>
-            <element name="record" type="platformCore:Record" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="record" type="platformCore:Record" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="asyncUpsertList" type="platformMsgs:AsyncUpsertListRequest"/>
     <complexType name="AsyncDeleteListRequest">
         <sequence>
-            <element name="baseRef" type="platformCore:BaseRef" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="baseRef" type="platformCore:BaseRef" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="asyncDeleteList" type="platformMsgs:AsyncDeleteListRequest"/>
     <complexType name="AsyncGetListRequest">
         <sequence>
-            <element name="baseRef" type="platformCore:BaseRef" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="baseRef" type="platformCore:BaseRef" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
     <element name="asyncGetList" type="platformMsgs:AsyncGetListRequest"/>
     <complexType name="AsyncInitializeListRequest">
         <sequence>
-            <element name="initializeRecord" type="platformCore:InitializeRecord" minOccurs="1" maxOccurs="unbounded"/>
+            <element name="initializeRecord"
+                     type="platformCore:InitializeRecord" minOccurs="1"
+                     maxOccurs="unbounded"/>
         </sequence>
     </complexType>
-    <element name="asyncInitializeList" type="platformMsgs:AsyncInitializeListRequest"/>
+    <element name="asyncInitializeList"
+             type="platformMsgs:AsyncInitializeListRequest"/>
     <complexType name="AsyncSearchRequest">
         <sequence>
             <element name="searchRecord" type="platformCore:SearchRecord"/>
@@ -701,21 +798,27 @@
     <element name="asyncSearch" type="platformMsgs:AsyncSearchRequest"/>
     <complexType name="CheckAsyncStatusRequest">
         <sequence>
-            <element name="jobId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+            <element name="jobId" type="xsd:string" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
-    <element name="checkAsyncStatus" type="platformMsgs:CheckAsyncStatusRequest"/>
+    <element name="checkAsyncStatus"
+             type="platformMsgs:CheckAsyncStatusRequest"/>
     <complexType name="GetAsyncResultRequest">
         <sequence>
-            <element name="jobId" type="xsd:string" minOccurs="1" maxOccurs="1"/>
-            <element name="pageIndex" type="xsd:int" minOccurs="1" maxOccurs="1"/>
+            <element name="jobId" type="xsd:string" minOccurs="1"
+                     maxOccurs="1"/>
+            <element name="pageIndex" type="xsd:int" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
     <element name="getAsyncResult" type="platformMsgs:GetAsyncResultRequest"/>
     <!-- Deletion-->
     <complexType name="GetDeletedRequest">
         <sequence>
-            <element name="getDeletedFilter" type="platformCore:GetDeletedFilter" minOccurs="1" maxOccurs="1"/>
+            <element name="getDeletedFilter"
+                     type="platformCore:GetDeletedFilter" minOccurs="1"
+                     maxOccurs="1"/>
         </sequence>
     </complexType>
     <element name="getDeleted" type="platformMsgs:GetDeletedRequest"/>

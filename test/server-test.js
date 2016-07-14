@@ -177,6 +177,9 @@ describe('SOAP Server', function() {
                 '</soapenv:Envelope>',
         headers: {'Content-Type': 'text/xml'}
       }, function(err, res, body) {
+        if (err) {
+          console.error(err);
+        }
         assert.ok(!err);
         assert.equal(res.statusCode, 500);
         assert.ok(body.length);
@@ -206,6 +209,9 @@ describe('SOAP Server', function() {
 
   it('should server up WSDL', function(done) {
     request(test.baseUrl + '/stockquote?wsdl', function(err, res, body) {
+      if (err) {
+        console.error(err);
+      }
       assert.ok(!err);
       assert.equal(res.statusCode, 200);
       assert.ok(body.length);
