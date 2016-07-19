@@ -8,7 +8,7 @@ var path = require('path');
 var timekeeper = require('timekeeper');
 var jsdiff = require('diff');
 require('colors');
-var soap = require('../');
+var soap = require('..').soapModule;
 var WSSecurity = require('../lib/security/WSSecurity');
 var server;
 var port;

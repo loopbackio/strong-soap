@@ -7,5 +7,11 @@ if (major >= 5) {
   base = './src/';
 }
 
-module.exports = require(base + 'soap');
+module.exports = {
+  'soapModule': require(base + 'soap'),
+  'httpModule': require(base + 'http'),
+  'QName': require(base + 'parser/qname'),
+  'WSDL': require(base + 'parser/wsdl')
+};
+
 
