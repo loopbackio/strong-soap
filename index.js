@@ -11,7 +11,8 @@ module.exports = {
   'soapModule': require(base + 'soap'),
   'httpModule': require(base + 'http'),
   'QName': require(base + 'parser/qname'),
-  'WSDL': require(base + 'parser/wsdl')
+  'WSDL': require(base + 'parser/wsdl'),
+  'WSSecurity': require(base + 'security/WSSecurity')
 };
 
 
