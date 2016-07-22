@@ -24,6 +24,7 @@ class Client extends Base {
     this.xmlHandler = new XMLHandler(options);
     this._initializeServices(endpoint);
     this.httpClient = options.httpClient || new HttpClient(options);
+    console.log("client constructor done");
   }
 
   setEndpoint(endpoint) {
