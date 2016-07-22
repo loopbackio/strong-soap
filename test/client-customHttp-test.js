@@ -1,12 +1,12 @@
 'use strict';
 
 var fs = require('fs'),
-  soap = require('..').soapModule,
+  soap = require('..').soap,
   http = require('http'),
   assert = require('assert'),
   duplexer = require('duplexer'),
   req = require('request'),
-  httpClient = require('..').httpModule,
+  httpClient = require('..').http,
 // stream = require('stream'),
   stream = require('readable-stream'),
   util = require('util'),

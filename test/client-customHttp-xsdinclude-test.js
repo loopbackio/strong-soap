@@ -1,10 +1,10 @@
 'use strict';
 
-var soap = require('..').soapModule,
+var soap = require('..').soap,
   http = require('http'),
   assert = require('assert'),
   req = require('request'),
-  httpClient = require('..').httpModule,
+  httpClient = require('..').http,
   util = require('util'),
   events = require('events'),
   createSocketStream = require('./_socketStream');

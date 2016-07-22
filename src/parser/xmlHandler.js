@@ -485,16 +485,18 @@ class XMLHandler {
 
     if (root.Envelope) {
       var body = root.Envelope.Body;
-      if (body.Fault) {
-        var code = selectn('faultcode.$value', body.Fault) ||
-          selectn('faultcode', body.Fault);
-        var string = selectn('faultstring.$value', body.Fault) ||
-          selectn('faultstring', body.Fault);
-        var detail = selectn('detail.$value', body.Fault) ||
-          selectn('detail.message', body.Fault);
-        var error = new Error(code + ': ' + string + (detail ? ': ' + detail : ''));
-        error.root = root;
-        throw error;
+      if (root.Envelope.Body !== undefined && root.Envelope.Body !== null) {
+        if (body.Fault !== undefined && body.Fault !== null) {
+          var code = selectn('faultcode.$value', body.Fault) ||
+            selectn('faultcode', body.Fault);
+          var string = selectn('faultstring.$value', body.Fault) ||
+            selectn('faultstring', body.Fault);
+          var detail = selectn('detail.$value', body.Fault) ||
+            selectn('detail.message', body.Fault);
+          var error = new Error(code + ': ' + string + (detail ? ': ' + detail : ''));
+          error.root = root;
+          throw error;
+        }
       }
       return root.Envelope;
     }
