@@ -208,15 +208,27 @@ class Server extends Base {
           Object.keys(body)[1] : Object.keys(body)[0]);
         var pair = binding.topElements[messageElemName];
 
-        self.emit('request', obj, pair.operationName);
+        var operationName, outputName;
+
+        var operations = binding.operations;
+        for (var name in operations) {
+          if(operations[name].input.message.parts.body.element.$name === messageElemName) {
+            operationName = operations[name].$name;
+            outputName = operations[name].output.message.parts.body.element.$name;
+            break;
+          }
+        }
+
+        console.log(operationName);
+        self.emit('request', obj, operationName);
         if (headers)
-          self.emit('headers', headers, pair.operationName);
+          self.emit('headers', headers, operationName);
 
         self._executeMethod({
           serviceName: serviceName,
           portName: portName,
-          operationName: pair.operationName,
-          outputName: pair.outputName,
+          operationName: operationName,
+          outputName: outputName,
           args: body[messageElemName],
           headers: headers,
           style: 'document',
@@ -268,12 +280,25 @@ class Server extends Base {
       if (style === 'rpc') {
         body = self.wsdl.objectToRpcXML(outputName, result, '', self.wsdl.definitions.$targetNamespace);
       } else {
-        var element = self.wsdl.definitions.services[serviceName]
-          .ports[portName].binding.operations[operationName].output;
-        body = self.wsdl.objectToDocumentXML(outputName, result,
-          element.targetNSAlias, element.targetNamespace);
+
+        var operation  = self.wsdl.definitions.services[serviceName]
+          .ports[portName].binding.operations[operationName];
+        var element = operation.output;
+        //  self.wsdl.objectToDocumentXML(outputName, result, element.targetNSAlias, element.targetNamespace);
+
+        var operationDescriptor = operation.describe(self.wsdl.definitions);
+        var outputBodyDescriptor = operationDescriptor.output.body;
+
+        var nsContext = self.createNamespaceContext(element.targetNSAlias, element.targetNamespace);
+        self.xmlHandler.jsonToXml(env.body, nsContext, outputBodyDescriptor, result);
+
+        var message = env.body.toString({pretty: true});
+        var xml = env.doc.end({pretty: true});
+
       }
-      callback(self._envelope(body, includeTimestamp));
+      //callback(self._envelope(env, includeTimestamp));
+      callback(xml);
+
     }
 
     if (!self.wsdl.definitions.services[serviceName].ports[portName]
