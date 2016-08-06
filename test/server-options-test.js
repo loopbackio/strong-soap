@@ -176,7 +176,7 @@ describe('SOAP Server with Options', function() {
       
       soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
         assert.ok(!err);
-        client.GetLastTradePrice({ tickerSymbol: 'xml response' }, function(err, response, body) {
+        client.GetLastTradePrice({TradePriceRequest: { tickerSymbol: 'xml response' }}, function(err, response, body) {
           assert.ok(!err);
           assert.strictEqual(body, responseData);
           done();

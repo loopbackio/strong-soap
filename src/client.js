@@ -186,8 +186,7 @@ class Client extends Base {
       }
     }
 
-    xmlHandler.jsonToXml(soapBodyElement, nsContext, inputBodyDescriptor,
-      null, args);
+    xmlHandler.jsonToXml(soapBodyElement, nsContext, inputBodyDescriptor, args);
 
     if (self.security && self.security.postProcess) {
       self.security.postProcess(envelope.header, envelope.body);
