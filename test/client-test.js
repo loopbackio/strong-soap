@@ -16,7 +16,7 @@ describe('SOAP Client', function() {
   it('should add and clear soap headers', function(done) {
     soap.createClient(__dirname+'/wsdl/default_namespace.wsdl', function(err, client) {
       assert.ok(client);
-      assert.ok(!client.getSoapHeaders());
+      assert.ok(client.getSoapHeaders().length === 0);
 
       var i1 = client.addSoapHeader('about-to-change-1');
       var i2 = client.addSoapHeader('about-to-change-2');
@@ -27,11 +27,11 @@ describe('SOAP Client', function() {
 
       client.changeSoapHeader(0, 'header1');
       client.changeSoapHeader(1, 'header2');
-      assert.ok(client.getSoapHeaders()[0] === 'header1');
-      assert.ok(client.getSoapHeaders()[1] === 'header2');
+      assert.ok(client.getSoapHeaders()[0].xml === 'header1');
+      assert.ok(client.getSoapHeaders()[1].xml === 'header2');
 
       client.clearSoapHeaders();
-      assert.ok(!client.getSoapHeaders());
+      assert.ok(client.getSoapHeaders().length == 0);
       done();
     });
   });
@@ -408,7 +408,7 @@ describe('SOAP Client', function() {
     before(function(done) {
       server = http.createServer(function (req, res) {
         res.statusCode = 200;
-        res.write(JSON.stringify({tempResponse: 'temp'}), 'utf8');
+        res.write(JSON.stringify({Response: {tempResponse: 'temp'}}), 'utf8');
         res.end();
       }).listen(port, hostname, done);
     });
