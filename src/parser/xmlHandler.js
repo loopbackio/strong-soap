@@ -2,6 +2,7 @@ var xmlBuilder = require('xmlbuilder');
 var sax = require('sax');
 var stream = require('stream');
 var assert = require('assert');
+var selectn = require('selectn');
 var debug = require('debug')('node-soap:wsdl:xml');
 var descriptor = require('./xsd/descriptor');
 var ElementDescriptor = descriptor.ElementDescriptor;
@@ -11,6 +12,7 @@ var QName = require('./qname');
 var helper = require('./helper');
 var NamespaceContext = require('./nscontext');
 var Set = helper.Set;
+
 
 class XMLHandler {
   constructor(options) {
