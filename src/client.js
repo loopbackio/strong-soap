@@ -24,7 +24,6 @@ class Client extends Base {
     this.xmlHandler = new XMLHandler(options);
     this._initializeServices(endpoint);
     this.httpClient = options.httpClient || new HttpClient(options);
-    console.log("client constructor done");
   }
 
   setEndpoint(endpoint) {
@@ -160,13 +159,16 @@ class Client extends Base {
     var soapHeaderElement = envelope.header;
     var soapBodyElement = envelope.body;
 
-    for (let i = 0, n = self.soapHeaders.length; i < n; i++) {
-      let soapHeader = self.soapHeaders[i];
-      let element = self.findElement(soapHeader.nsURI, soapHeader.name);
+    for (let i = 0, n = this.soapHeaders.length; i < n; i++) {
+      let soapHeader = this.soapHeaders[i];
+      if (soapHeader.qname.nsURI === null || soapHeader.qname.nsURI === undefined) {
+        continue;
+      }
+      let element = this.findElement(soapHeader.qname.nsURI, soapHeader.name);
       let elementDescriptor =
-        element && element.describe(self.wsdl.definitions);
+        element && element.describe(this.wsdl.definitions);
       xmlHandler.jsonToXml(soapHeaderElement, nsContext, elementDescriptor,
-        soapHeader.name, soapHeader.value);
+        soapHeader.value);
     }
 
     if (self.security && self.security.addSoapHeaders) {
@@ -249,7 +251,6 @@ class Client extends Base {
           // one-way, no output expected
           return callback(null, null, body, obj.Header);
         }
-
         if (typeof obj.Body !== 'object') {
           var error = new Error('Cannot parse response');
           error.response = response;
