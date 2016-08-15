@@ -5,10 +5,11 @@ var QName = require('./parser/qname');
  * Representation for soap elements
  */
 class SOAPElement {
-  constructor(value, qname, options) {
+  constructor(name, value, qname, options) {
     if (typeof value === 'string' && !qname) {
       this.xml = value;
     } else {
+      this.name = name;
       this.value = value;
       this.qname = qname;
       this.options = options || {};

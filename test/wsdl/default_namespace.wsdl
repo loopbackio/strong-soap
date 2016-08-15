@@ -14,6 +14,24 @@
             </xs:element>
             <xs:element name="Response">
             </xs:element>
+            <xs:element name="MyHeaderElem" type="ComplexHeader">
+            </xs:element>
+            <xs:complexType name="ComplexHeader">
+                <xs:sequence>
+                    <xs:element name="esnext" type="xs:boolean"/>
+                    <xs:element name="moz" type="xs:boolean"/>
+                    <xs:element name="boss" type="xs:boolean"/>
+                    <xs:element name="node" type="xs:boolean"/>
+                    <xs:element name="validthis" type="xs:boolean"/>
+                    <xs:element name="globals" type="Globals"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="Globals">
+                <xs:sequence>
+                    <xs:element name="EventEmitter" type="xs:boolean"/>
+                    <xs:element name="Promise" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="InputMessage">
@@ -24,6 +42,10 @@
         <wsdl:part name="parameter" element="Response">
         </wsdl:part>
     </wsdl:message>
+
+    <message name="MyHeader">
+        <part name="header1" element="MyHeaderElem"/>
+    </message>
 
     <wsdl:portType name="MyServicePortType">
         <wsdl:operation name="MyOperation">
@@ -42,6 +64,7 @@
             <wsdl:input>
                 <soap:body use="literal"
                            encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+                <soap:header message="MyHeader" part="header1" use="literal"/>
             </wsdl:input>
             <wsdl:output>
                 <soap:body use="literal"

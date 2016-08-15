@@ -99,7 +99,7 @@ class XMLHandler {
       return node;
     }
 
-    if (descriptor == null || descriptor instanceof TypeDescriptor) {
+    if (descriptor == null  || descriptor === undefined || descriptor instanceof TypeDescriptor) {
       this.mapObject(node, nsContext, descriptor, val);
       return node;
     }
@@ -123,16 +123,20 @@ class XMLHandler {
     }
 
     var elements = {}, attributes = {};
-    for (let i = 0, n = descriptor.elements.length; i < n; i++) {
-      let elementDescriptor = descriptor.elements[i];
-      let elementName = elementDescriptor.qname.name;
-      elements[elementName] = elementDescriptor;
+    if (descriptor !== undefined) {
+      for (let i = 0, n = descriptor.elements.length; i < n; i++) {
+        let elementDescriptor = descriptor.elements[i];
+        let elementName = elementDescriptor.qname.name;
+        elements[elementName] = elementDescriptor;
+      }
     }
 
-    for (let a in descriptor.attributes) {
-      let attributeDescriptor = descriptor.attributes[a];
-      let attributeName = attributeDescriptor.qname.name;
-      attributes[attributeName] = attributeDescriptor;
+    if (descriptor !== undefined) {
+      for (let a in descriptor.attributes) {
+        let attributeDescriptor = descriptor.attributes[a];
+        let attributeName = attributeDescriptor.qname.name;
+        attributes[attributeName] = attributeDescriptor;
+      }
     }
 
     for (let p in val) {
@@ -160,6 +164,7 @@ class XMLHandler {
           let prefix = mapping ? mapping.prefix : xsiType.prefix;
           node.attribute('xsi:type', prefix ? prefix + ':' + xsiType.name :
             xsiType.name);
+          continue;
         }
         let childDescriptor = attributes[p];
         if (childDescriptor == null) {
@@ -512,6 +517,7 @@ function declareNamespace(nsContext, node, prefix, nsURI) {
     return false;
   } else if (node) {
     node.attribute('xmlns:' + mapping.prefix, mapping.uri);
+    return mapping;
   }
 }
 
