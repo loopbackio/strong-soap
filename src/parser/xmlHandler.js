@@ -499,7 +499,7 @@ class XMLHandler {
           var string = selectn('faultstring.$value', body.Fault) ||
             selectn('faultstring', body.Fault);
           var detail = selectn('detail.$value', body.Fault) ||
-            selectn('detail.message', body.Fault);
+            selectn('detail', body.Fault);
           var error = new Error(code + ': ' + string + (detail ? ': ' + detail : ''));
           error.root = root;
           throw error;

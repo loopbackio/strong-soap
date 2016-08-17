@@ -109,7 +109,8 @@ describe('SOAP Client', function() {
 
         res.setHeader('status', status_value);
         res.statusCode = 200;
-        res.write(JSON.stringify({tempResponse: 'temp'}), 'utf8');
+        //res.write(JSON.stringify({tempResponse: 'temp'}), 'utf8');
+        res.write('<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><Response>temp response</Response></soap:Body></soap:Envelope>');
         res.end();
       }).listen(port, hostname, done);
     });
@@ -331,10 +332,10 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation({}, function(err, result, body) {
+        client.MyOperation({Request: 'temp request'}, function(err, result, body) {
           assert.ok(!err);
           assert.ok(result);
-          assert.ok(body.tempResponse === 'temp');
+          assert.ok(result === 'temp response');
           assert.ok(client.lastResponseHeaders.status === 'pass');
           assert.ok(client.lastRequestHeaders['options-test-header'] === 'test');
 
@@ -348,10 +349,10 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation(function(err, result, body) {
+        client.MyOperation({Request: 'temp request'}, function(err, result, body) {
           assert.ok(!err);
           assert.ok(result);
-          assert.ok(body.tempResponse === 'temp');
+          assert.ok(result === 'temp response');
           assert.ok(client.lastResponseHeaders.status === 'fail');
 
           done();
@@ -364,10 +365,10 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation({}, {headers: {'options-test-header': 'test'}}, function(err, result, body) {
+        client.MyOperation({Request: 'temp request'}, {headers: {'options-test-header': 'test'}}, function(err, result, body) {
           assert.ok(!err);
           assert.ok(result);
-          assert.ok(body.tempResponse === 'temp');
+          assert.ok(result === 'temp response');
           assert.ok(client.lastResponseHeaders.status === 'fail');
           assert.ok(client.lastRequestHeaders['options-test-header'] === 'test');
 
@@ -381,10 +382,10 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation({}, {headers: {'options-test-header': 'test'}}, {'test-header': 'test'}, function(err, result, body) {
+        client.MyOperation({Request: 'temp request'}, {headers: {'options-test-header': 'test'}}, {'test-header': 'test'}, function(err, result, body) {
           assert.ok(!err);
           assert.ok(result);
-          assert.ok(body.tempResponse === 'temp');
+          assert.ok(result === 'temp response');
           assert.ok(client.lastResponseHeaders.status === 'pass');
           assert.ok(client.lastRequestHeaders['options-test-header'] === 'test');
 
