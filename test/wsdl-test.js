@@ -1,8 +1,9 @@
 "use strict";
 
 var fs = require('fs'),
-    soap = require('..'),
-    assert = require('assert');
+    soap = require('..').soap,
+    assert = require('assert'),
+    should = require('should');
 
 var wsdlStrictTests = {},
     wsdlNonStrictTests = {};

@@ -1,9 +1,10 @@
 'use strict';
 
 var fs = require('fs'),
-    soap = require('..'),
+    soap = require('..').soap,
     http = require('http'),
-    assert = require('assert');
+    assert = require('assert'),
+    QName = require('..').QName;
 
 describe('SOAP Client', function() {
   it('should error on invalid host', function(done) {
@@ -16,7 +17,7 @@ describe('SOAP Client', function() {
   it('should add and clear soap headers', function(done) {
     soap.createClient(__dirname+'/wsdl/default_namespace.wsdl', function(err, client) {
       assert.ok(client);
-      assert.ok(!client.getSoapHeaders());
+      assert.ok(client.getSoapHeaders().length === 0);
 
       var i1 = client.addSoapHeader('about-to-change-1');
       var i2 = client.addSoapHeader('about-to-change-2');
@@ -25,13 +26,13 @@ describe('SOAP Client', function() {
       assert.ok(i2 === 1);
       assert.ok(client.getSoapHeaders().length === 2);
 
-      client.changeSoapHeader(0, 'header1');
-      client.changeSoapHeader(1, 'header2');
-      assert.ok(client.getSoapHeaders()[0] === 'header1');
-      assert.ok(client.getSoapHeaders()[1] === 'header2');
+      client.changeSoapHeader(0,'header1');
+      client.changeSoapHeader(1,'header2');
+      assert.ok(client.getSoapHeaders()[0].xml === 'header1');
+      assert.ok(client.getSoapHeaders()[1].xml === 'header2');
 
       client.clearSoapHeaders();
-      assert.ok(!client.getSoapHeaders());
+      assert.ok(client.getSoapHeaders().length == 0);
       done();
     });
   });
@@ -108,7 +109,8 @@ describe('SOAP Client', function() {
 
         res.setHeader('status', status_value);
         res.statusCode = 200;
-        res.write(JSON.stringify({tempResponse: 'temp'}), 'utf8');
+        //res.write(JSON.stringify({tempResponse: 'temp'}), 'utf8');
+        res.write('<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><Response>temp response</Response></soap:Body></soap:Envelope>');
         res.end();
       }).listen(port, hostname, done);
     });
@@ -245,6 +247,55 @@ describe('SOAP Client', function() {
       }, baseUrl);
     });
 
+    it('should add soap headers', function (done) {
+      soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, client) {
+        assert.ok(client);
+        assert.ok(client.getSoapHeaders().length === 0);
+        var soapheader = {
+          'esnext': false,
+          'moz': true,
+          'boss': true,
+          'node': true,
+          'validthis': true,
+          'globals': {
+            'EventEmitter': true,
+            'Promise': true
+          }
+        };
+
+        var qname = new QName('{http://www.example.com/v1}MyHeaderElem');
+        client.addSoapHeader(soapheader, qname);
+
+        //lastRequest should have proper header value of above JSON header object serialized based on header schema defined
+        //in default-namespace1.wsdl
+        var lastRequest = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n    <MyHeaderElem>\n      <esnext>false</esnext>\n      <moz>true</moz>\n      <boss>true</boss>\n      <node>true</node>\n      <validthis>true</validthis>\n      <globals>\n        <EventEmitter>true</EventEmitter>\n        <Promise>true</Promise>\n      </globals>\n    </MyHeaderElem>\n  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>';
+        client.MyOperation({}, function(err, result) {
+          //using lastRequest instead of lastRequestHeaders() since this doesn't contain soap header which this test case needs to test.
+          assert.equal(client.lastRequest, lastRequest);
+          done();
+        });
+      }, baseUrl);
+    });
+
+    it('should add soap headers with a namespace', function(done) {
+      soap.createClient(__dirname+'/wsdl/default_namespace.wsdl', function(err, client) {
+        assert.ok(client);
+        assert.ok(client.getSoapHeaders().length === 0);
+
+        var qname = new QName('{http://www.example.com/v1}header1');
+        client.addSoapHeader({header1: 'content'}, qname);
+
+        //lastRequest should have proper header value of above JSON header object serialized based on header schema defined
+        //in default-namespace1.wsdl
+        var lastRequest = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n    <header1>content</header1>\n  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>';
+        client.MyOperation({}, function(err, result) {
+          //using lastRequest instead of lastRequestHeaders() since this doesn't contain soap header which this test case needs to test.
+          assert.equal(client.lastRequest, lastRequest);
+          done();
+        });
+      }, baseUrl);
+    });
+
     it('should not return error in the call and return the json in body', function(done) {
       soap.createClient(__dirname+'/wsdl/json_response.wsdl', function(err, client) {
         assert.ok(client);
@@ -281,10 +332,10 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation({}, function(err, result, body) {
+        client.MyOperation({Request: 'temp request'}, function(err, result, body) {
           assert.ok(!err);
           assert.ok(result);
-          assert.ok(body.tempResponse === 'temp');
+          assert.ok(result === 'temp response');
           assert.ok(client.lastResponseHeaders.status === 'pass');
           assert.ok(client.lastRequestHeaders['options-test-header'] === 'test');
 
@@ -298,10 +349,10 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation(function(err, result, body) {
+        client.MyOperation({Request: 'temp request'}, function(err, result, body) {
           assert.ok(!err);
           assert.ok(result);
-          assert.ok(body.tempResponse === 'temp');
+          assert.ok(result === 'temp response');
           assert.ok(client.lastResponseHeaders.status === 'fail');
 
           done();
@@ -314,10 +365,10 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation({}, {headers: {'options-test-header': 'test'}}, function(err, result, body) {
+        client.MyOperation({Request: 'temp request'}, {headers: {'options-test-header': 'test'}}, function(err, result, body) {
           assert.ok(!err);
           assert.ok(result);
-          assert.ok(body.tempResponse === 'temp');
+          assert.ok(result === 'temp response');
           assert.ok(client.lastResponseHeaders.status === 'fail');
           assert.ok(client.lastRequestHeaders['options-test-header'] === 'test');
 
@@ -331,10 +382,10 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation({}, {headers: {'options-test-header': 'test'}}, {'test-header': 'test'}, function(err, result, body) {
+        client.MyOperation({Request: 'temp request'}, {headers: {'options-test-header': 'test'}}, {'test-header': 'test'}, function(err, result, body) {
           assert.ok(!err);
           assert.ok(result);
-          assert.ok(body.tempResponse === 'temp');
+          assert.ok(result === 'temp response');
           assert.ok(client.lastResponseHeaders.status === 'pass');
           assert.ok(client.lastRequestHeaders['options-test-header'] === 'test');
 
@@ -344,49 +395,13 @@ describe('SOAP Client', function() {
     });
   });
 
-  it('should add soap headers', function (done) {
-    soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, client) {
-        assert.ok(client);
-        assert.ok(!client.getSoapHeaders());
-        var soapheader = {
-          'esnext': false,
-          'moz': true,
-          'boss': true,
-          'node': true,
-          'validthis': true,
-          'globals': {
-            'EventEmitter': true,
-            'Promise': true
-          }
-        };
 
-        client.addSoapHeader(soapheader);
 
-        assert.ok(client.getSoapHeaders()[0] === '<esnext>false</esnext><moz>true</moz><boss>true</boss><node>true</node><validthis>true</validthis><globals><EventEmitter>true</EventEmitter><Promise>true</Promise></globals>');
-        done();
-      });
-  });
-
-  it('should add soap headers with a namespace', function(done) {
-    soap.createClient(__dirname+'/wsdl/default_namespace.wsdl', function(err, client) {
-      assert.ok(client);
-      assert.ok(!client.getSoapHeaders());
-
-      client.addSoapHeader({header1: 'content'}, null, null, 'http://example.com');
-
-      assert.ok(client.getSoapHeaders().length === 1);
-      assert.ok(client.getSoapHeaders()[0] === '<header1 xmlns="http://example.com">content</header1>');
-
-      client.clearSoapHeaders();
-      assert.ok(!client.getSoapHeaders());
-      done();
-    });
-  });
 
   it('should add http headers', function(done) {
     soap.createClient(__dirname+'/wsdl/default_namespace.wsdl', function(err, client) {
       assert.ok(client);
-      assert.ok(!client.getHttpHeaders());
+      assert.ok(client.getHttpHeaders());
 
       client.addHttpHeader('foo', 'bar');
 
@@ -423,28 +438,38 @@ describe('SOAP Client', function() {
       soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, client) {
         assert.ok(client);
 
+        //in the new implementation xsiType has to be defined in the format below.
         var data = {
-          attributes: {
-            xsi_type: {
-              type: 'Ty',
-              xmlns: 'xmlnsTy'
+          Request: {
+            $attributes: {
+              $xsiType: '{xmlnsTy}Ty'
             }
           }
         };
 
-        var message = '<Request xsi:type="ns1:Ty" xmlns:ns1="xmlnsTy" xmlns="http://www.example.com/v1"></Request>';
+        //In the new implementation the xsi:type results in the following format.
+        var message = '<soap:Body>\n  <Request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="xmlnsTy" xsi:type="ns2:Ty"/>\n</soap:Body>\n';
         client.MyOperation(data, function(err, result) {
           assert.ok(client.lastRequest);
           assert.ok(client.lastMessage);
           assert.ok(client.lastEndpoint);
-          assert.equal(client.lastMessage, message);
+          assert.equal(client.lastMessage.toString(), message);
 
-          delete data.attributes.xsi_type.namespace;
-          client.MyOperation(data, function(err, result) {
+          //test removing the xsiType. The resulting Request shouldn't have the attribute xsiType
+          var newData = {
+            Request: {
+              $attributes: {
+
+              }
+            }
+          };
+
+          var newMessage = '<soap:Body>\n  <Request/>\n</soap:Body>\n';
+          client.MyOperation(newData, function(err, result) {
             assert.ok(client.lastRequest);
             assert.ok(client.lastMessage);
             assert.ok(client.lastEndpoint);
-            assert.equal(client.lastMessage, message);
+            assert.equal(client.lastMessage, newMessage);
 
             done();
           });
