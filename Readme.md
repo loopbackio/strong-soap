@@ -1,4 +1,4 @@
-# Soap [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Gitter chat][gitter-image]][gitter-url]
+# Soap 
 
 > A SOAP client and server for node.js.
 
@@ -61,23 +61,15 @@ This module lets you connect to web services using SOAP.  It also provides a ser
 Install with [npm](http://github.com/isaacs/npm):
 
 ```
-  npm install soap
+  npm install strong-soap
 ```
-
-## Where can I file an issue?
-
-We've disabled issues in the repository and are now solely reviewing pull requests.  The reasons why we disabled issues can be found here [#731](https://github.com/vpulim/node-soap/pull/731).
-
-If you're in need of support we encourage you to join us and other `node-soap` users on gitter:
-
-[![Gitter chat][gitter-image]][gitter-url]
 
 ## Module
 
 ### soap.createClient(url[, options], callback) - create a new SOAP client from a WSDL url. Also supports a local filesystem path.
 
 ``` javascript
-  var soap = require('soap');
+  var soap = require('strong-soap');
   var url = 'http://example.com/wsdl?wsdl';
   var args = {name: 'value'};
   soap.createClient(url, function(err, client) {
@@ -389,7 +381,7 @@ client.MyService.MyPort.MyFunction({name: 'value'}, options, extraHeaders, funct
 ```
 
 ###Overriding the namespace prefix
-`node-soap` is still working out some kinks regarding namespaces.  If you find that an element is given the wrong namespace prefix in the request body, you can add the prefix to it's name in the containing object.  I.E.:
+`strong-soap` is still working out some kinks regarding namespaces.  If you find that an element is given the wrong namespace prefix in the request body, you can add the prefix to it's name in the containing object.  I.E.:
 
 ```javascript
   client.MyService.MyPort.MyFunction({'ns1:name': 'value'}, function(err, result) {
@@ -424,7 +416,7 @@ This is emitted for all responses (both success and errors).
 
 ## Security
 
-`node-soap` has several default security protocols.  You can easily add your own
+`strong-soap` has several default security protocols.  You can easily add your own
 as well.  The interface is quite simple. Each protocol defines 2 methods:
 * `addOptions` - a method that accepts an options arg that is eventually passed directly to `request`
 * `toXML` - a method that returns a string of XML.
@@ -485,7 +477,7 @@ WS-Security X509 Certificate support.
 _Note_: Optional dependency 'ursa' is required to be installed succefully when WSSecurityCert is used.
 
 ## Handling XML Attributes, Value and XML (wsdlOptions).
-Sometimes it is necessary to override the default behaviour of `node-soap` in order to deal with the special requirements
+Sometimes it is necessary to override the default behaviour of `strong-soap` in order to deal with the special requirements
 of your code base or a third library you use. Therefore you can use the `wsdlOptions` Object, which is passed in the
 `#createClient()` method and could have any (or all) of the following contents:
 ```javascript
@@ -495,10 +487,10 @@ var wsdlOptions = {
   xmlKey: 'theXml'
 }
 ```
-If nothing (or an empty Object `{}`) is passed to the `#createClient()` method, the `node-soap` defaults (`attributesKey: 'attributes'`, `valueKey: '$value'` and `xmlKey: '$xml'`) are used.
+If nothing (or an empty Object `{}`) is passed to the `#createClient()` method, the `strong-soap` defaults (`attributesKey: 'attributes'`, `valueKey: '$value'` and `xmlKey: '$xml'`) are used.
 
 ###Overriding the `value` key
-By default, `node-soap` uses `$value` as key for any parsed XML value which may interfere with your other code as it
+By default, `strong-soap` uses `$value` as key for any parsed XML value which may interfere with your other code as it
 could be some reserved word, or the `$` in general cannot be used for a key to start with.
 
 You can define your own `valueKey` by passing it in the `wsdl_options` to the createClient call like so:
@@ -513,7 +505,7 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 ```
 
 ###Overriding the `xml` key
-As `valueKey`, `node-soap` uses `$xml` as key. The xml key is used to pass XML Object without adding namespace or parsing the string.
+As `valueKey`, `strong-soap` uses `$xml` as key. The xml key is used to pass XML Object without adding namespace or parsing the string.
 
 Example :
 
@@ -605,7 +597,7 @@ var wsdlOptions = {
 };
 ```
 
-To see it in practice, consider the sample files in: [test/request-response-samples/addPets__force_namespaces](https://github.com/vpulim/node-soap/tree/master/test/request-response-samples/addPets__force_namespaces)
+To see it in practice, consider the sample files in: [test/request-response-samples/addPets__force_namespaces](https://github.com/strongloop/strong-soap/tree/master/test/request-response-samples/addPets__force_namespaces)
 
 
 ## Handling "ignored" namespaces
@@ -614,7 +606,7 @@ namespace prefix is used to identify this Element. This is not much of a problem
 (inline or in a separate file). If there are more `schema` files, the `tns:` in the generated `soap` file resolved mostly to the parent `wsdl` file,
  which was obviously wrong.
 
- `node-soap` now handles namespace prefixes which shouldn't be resolved (because it's not necessary) as so called `ignoredNamespaces`
+ `strong-soap` now handles namespace prefixes which shouldn't be resolved (because it's not necessary) as so called `ignoredNamespaces`
  which default to an Array of 3 Strings (`['tns', 'targetNamespace', 'typedNamespace']`).
 
  If this is not sufficient for your purpose you can easily add more namespace prefixes to this Array, or override it in its entirety
@@ -720,21 +712,5 @@ describe('myService', function() {
 
 ## Contributors
 
- * Author: [Vinay Pulim](https://github.com/vpulim)
- * Maintainers:
-   - [Joe Spencer](https://github.com/jsdevel)
-   - [Heinz Romirer](https://github.com/herom)
- * [All Contributors](https://github.com/vpulim/node-soap/graphs/contributors)
+ * [All Contributors](https://github.com/strongloop/strong-soap/graphs/contributors)
 
-[downloads-image]: http://img.shields.io/npm/dm/soap.svg
-[npm-url]: https://npmjs.org/package/soap
-[npm-image]: http://img.shields.io/npm/v/soap.svg
-
-[travis-url]: https://travis-ci.org/vpulim/node-soap
-[travis-image]: http://img.shields.io/travis/vpulim/node-soap.svg
-
-[gitter-url]: https://gitter.im/vpulim/node-soap
-[gitter-image]: https://badges.gitter.im/vpulim/node-soap.png
-
-[coveralls-url]: https://coveralls.io/r/vpulim/node-soap
-[coveralls-image]: http://img.shields.io/coveralls/vpulim/node-soap/master.svg
