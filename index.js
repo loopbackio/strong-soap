@@ -7,12 +7,17 @@ if (major >= 5) {
   base = './src/';
 }
 
+var securityModules = require(base + 'security/index');
+
 module.exports = {
   'soap': require(base + 'soap'),
   'http': require(base + 'http'),
   'QName': require(base + 'parser/qname'),
   'WSDL': require(base + 'parser/wsdl'),
-  'WSSecurity': require(base + 'security/WSSecurity')
 };
+
+for (var i in securityModules) {
+  module.exports[i] = securityModules[i];
+}
 
 
