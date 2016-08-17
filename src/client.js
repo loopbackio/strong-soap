@@ -227,13 +227,13 @@ class Client extends Base {
         callback(err);
       } else {
 
-        var outputDescriptor = operationDescriptor.outputEnvelope;
+        var outputEnvDescriptor = operationDescriptor.outputEnvelope;
         try {
-          obj = xmlHandler.xmlToJson(nsContext, body, outputDescriptor);
+          obj = xmlHandler.xmlToJson(nsContext, body, outputBodyDescriptor);
         } catch (error) {
           //  When the output element cannot be looked up in the wsdl and the body is JSON
           //  instead of sending the error, we pass the body in the response.
-          if (!output || !output.$lookupTypes) {
+          if (!output) {
             debug('Response element is not present. Unable to convert response xml to json.');
             //  If the response is JSON then return it as-is.
             var json = _.isObject(body) ? body : tryJSONparse(body);

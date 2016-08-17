@@ -10,10 +10,8 @@
                    elementFormDefault="qualified"
                    targetNamespace="http://www.example.com/v1"
                    xmlns="http://www.example.com/v1">
-            <xs:element name="Request">
-            </xs:element>
-            <xs:element name="Response">
-            </xs:element>
+            <xs:element name="Request" type="xsd:string"/>
+            <xs:element name="Response" type="xsd:string"/>
         </xs:schema>
     </wsdl:types>
     <wsdl:message name="InputMessage">
