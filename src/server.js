@@ -304,10 +304,10 @@ class Server extends Base {
 
         self.xmlHandler.jsonToXml(envelope.body, nsContext, outputBodyDescriptor, result);
 
-        var message = envelope.body.toString({pretty: true});
-        var xml = envelope.doc.end({pretty: true});
-
       }
+      self._envelope(envelope, includeTimestamp);
+      var message = envelope.body.toString({pretty: true});
+      var xml = envelope.doc.end({pretty: true});
       //callback(self._envelope(envelope, includeTimestamp));
       callback(xml);
 

@@ -164,7 +164,7 @@ class Client extends Base {
       if (soapHeader.qname.nsURI === null || soapHeader.qname.nsURI === undefined) {
         continue;
       }
-      let element = this.findElement(soapHeader.qname.nsURI, soapHeader.name);
+      let element = this.findElement(soapHeader.qname.nsURI, soapHeader.qname.name);
       let elementDescriptor =
         element && element.describe(this.wsdl.definitions);
       xmlHandler.jsonToXml(soapHeaderElement, nsContext, elementDescriptor,

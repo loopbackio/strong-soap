@@ -36,8 +36,10 @@ test.service = {
               faultstring: "Error while processing arguments"
             }
           };
-        } else {
-          return { price: 19.56 };
+        } else if (args.tickerSymbol === 'AAPL') {
+            var jsonResponse = {TradePrice: {"price": "19.56"}};
+            return jsonResponse;
+          }
         }
       },
 
@@ -72,7 +74,6 @@ test.service = {
         setTimeout(isValidPrice, 10);
       }
     }
-  }
 };
 
 describe('SOAP Server', function() {
@@ -117,7 +118,7 @@ describe('SOAP Server', function() {
 
 
   it('should add and clear response soap headers', function(done) {
-    assert.ok(!test.soapServer.getSoapHeaders());
+    assert.ok((test.soapServer.getSoapHeaders().length === 0));
 
     var i1 = test.soapServer.addSoapHeader('about-to-change-1');
     var i2 = test.soapServer.addSoapHeader('about-to-change-2');
@@ -126,22 +127,24 @@ describe('SOAP Server', function() {
     assert.ok(i2 === 1);
     assert.ok(test.soapServer.getSoapHeaders().length === 2);
 
-    test.soapServer.changeSoapHeader(0, 'header1');
-    test.soapServer.changeSoapHeader(1, 'header2');
-    assert.ok(test.soapServer.getSoapHeaders()[0] === 'header1');
-    assert.ok(test.soapServer.getSoapHeaders()[1] === 'header2');
+    test.soapServer.changeSoapHeader(0,'header1');
+    test.soapServer.changeSoapHeader(1,'header2');
+    assert.ok(test.soapServer.getSoapHeaders()[0].xml === 'header1');
+    assert.ok(test.soapServer.getSoapHeaders()[1].xml === 'header2');
 
     test.soapServer.clearSoapHeaders();
-    assert.ok(!test.soapServer.getSoapHeaders());
+    assert.ok(test.soapServer.getSoapHeaders().length === 0);
     done();
   });
 
   it('should return predefined headers in response', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
-      assert.ok(!err);
+      assert.ok(!err)
+
       test.soapServer.addSoapHeader('<header1>ONE</header1>');
+
       test.soapServer.changeSoapHeader(1, { header2: 'TWO' });
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL'}, function(err, result, raw, headers) {
+      client.GetLastTradePrice({TradePriceRequest: { tickerSymbol: 'AAPL'}}, function(err, result, raw, headers) {
         assert.ok(!err);
         assert.deepEqual(headers, { header1: 'ONE', header2: 'TWO' });
         done();
