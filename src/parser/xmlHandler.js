@@ -2,6 +2,7 @@ var xmlBuilder = require('xmlbuilder');
 var sax = require('sax');
 var stream = require('stream');
 var assert = require('assert');
+var selectn = require('selectn');
 var debug = require('debug')('node-soap:wsdl:xml');
 var descriptor = require('./xsd/descriptor');
 var ElementDescriptor = descriptor.ElementDescriptor;
@@ -11,6 +12,7 @@ var QName = require('./qname');
 var helper = require('./helper');
 var NamespaceContext = require('./nscontext');
 var Set = helper.Set;
+
 
 class XMLHandler {
   constructor(options) {
@@ -97,7 +99,7 @@ class XMLHandler {
       return node;
     }
 
-    if (descriptor == null || descriptor instanceof TypeDescriptor) {
+    if (descriptor == null  || descriptor === undefined || descriptor instanceof TypeDescriptor) {
       this.mapObject(node, nsContext, descriptor, val);
       return node;
     }
@@ -121,16 +123,20 @@ class XMLHandler {
     }
 
     var elements = {}, attributes = {};
-    for (let i = 0, n = descriptor.elements.length; i < n; i++) {
-      let elementDescriptor = descriptor.elements[i];
-      let elementName = elementDescriptor.qname.name;
-      elements[elementName] = elementDescriptor;
+    if (descriptor !== undefined) {
+      for (let i = 0, n = descriptor.elements.length; i < n; i++) {
+        let elementDescriptor = descriptor.elements[i];
+        let elementName = elementDescriptor.qname.name;
+        elements[elementName] = elementDescriptor;
+      }
     }
 
-    for (let a in descriptor.attributes) {
-      let attributeDescriptor = descriptor.attributes[a];
-      let attributeName = attributeDescriptor.qname.name;
-      attributes[attributeName] = attributeDescriptor;
+    if (descriptor !== undefined) {
+      for (let a in descriptor.attributes) {
+        let attributeDescriptor = descriptor.attributes[a];
+        let attributeName = attributeDescriptor.qname.name;
+        attributes[attributeName] = attributeDescriptor;
+      }
     }
 
     for (let p in val) {
@@ -158,6 +164,7 @@ class XMLHandler {
           let prefix = mapping ? mapping.prefix : xsiType.prefix;
           node.attribute('xsi:type', prefix ? prefix + ':' + xsiType.name :
             xsiType.name);
+          continue;
         }
         let childDescriptor = attributes[p];
         if (childDescriptor == null) {
@@ -485,16 +492,18 @@ class XMLHandler {
 
     if (root.Envelope) {
       var body = root.Envelope.Body;
-      if (body.Fault) {
-        var code = selectn('faultcode.$value', body.Fault) ||
-          selectn('faultcode', body.Fault);
-        var string = selectn('faultstring.$value', body.Fault) ||
-          selectn('faultstring', body.Fault);
-        var detail = selectn('detail.$value', body.Fault) ||
-          selectn('detail.message', body.Fault);
-        var error = new Error(code + ': ' + string + (detail ? ': ' + detail : ''));
-        error.root = root;
-        throw error;
+      if (root.Envelope.Body !== undefined && root.Envelope.Body !== null) {
+        if (body.Fault !== undefined && body.Fault !== null) {
+          var code = selectn('faultcode.$value', body.Fault) ||
+            selectn('faultcode', body.Fault);
+          var string = selectn('faultstring.$value', body.Fault) ||
+            selectn('faultstring', body.Fault);
+          var detail = selectn('detail.$value', body.Fault) ||
+            selectn('detail', body.Fault);
+          var error = new Error(code + ': ' + string + (detail ? ': ' + detail : ''));
+          error.root = root;
+          throw error;
+        }
       }
       return root.Envelope;
     }
@@ -508,6 +517,7 @@ function declareNamespace(nsContext, node, prefix, nsURI) {
     return false;
   } else if (node) {
     node.attribute('xmlns:' + mapping.prefix, mapping.uri);
+    return mapping;
   }
 }
 

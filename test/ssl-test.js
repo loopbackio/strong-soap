@@ -1,7 +1,7 @@
 "use strict";
 
 var fs = require('fs'),
-  soap = require('..'),
+  soap = require('..').soap,
   https = require('https'),
   constants = require('constants'),
   assert = require('assert');

@@ -1,12 +1,12 @@
 'use strict';
 
 var fs = require('fs'),
-  soap = require('..'),
+  soap = require('..').soap,
   http = require('http'),
   assert = require('assert'),
   duplexer = require('duplexer'),
   req = require('request'),
-  httpClient = require('../lib/http.js'),
+  httpClient = require('..').http,
 // stream = require('stream'),
   stream = require('readable-stream'),
   util = require('util'),
@@ -52,7 +52,7 @@ describe('custom http client', function() {
 
     //Custom httpClient
     function MyHttpClient(options, socket) {
-      httpClient.call(this, options);
+      this.httpCl = new httpClient(options);
       this.agent = new CustomAgent(options, socket);
     }
 
@@ -64,7 +64,7 @@ describe('custom http client', function() {
       //Specify agent to use
       options.agent = this.agent;
       var headers = options.headers;
-      var req = self._request(options, function(err, res, body) {
+      var req = this.httpCl._request(options, function(err, res, body) {
         if (err) {
           return callback(err);
         }
@@ -99,7 +99,7 @@ describe('custom http client', function() {
 
       //Custom httpClient
       function MyHttpClient(options, socket) {
-        httpClient.call(this, options);
+        this.httpCl = new httpClient(options);
         this.agent = new CustomAgent(options, socket);
       }
 
@@ -112,7 +112,7 @@ describe('custom http client', function() {
           //Specify agent to use
           options.agent = this.agent;
           var headers = options.headers;
-          var req = self._request(options, function(err, res, body) {
+          var req = this.httpCl._request(options, function(err, res, body) {
             if (err) {
               return callback(err);
             }

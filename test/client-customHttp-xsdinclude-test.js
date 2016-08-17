@@ -1,10 +1,10 @@
 'use strict';
 
-var soap = require('..'),
+var soap = require('..').soap,
   http = require('http'),
   assert = require('assert'),
   req = require('request'),
-  httpClient = require('../lib/http.js'),
+  httpClient = require('..').http,
   util = require('util'),
   events = require('events'),
   createSocketStream = require('./_socketStream');
@@ -37,7 +37,7 @@ describe('custom http client', function() {
 
       //Custom httpClient
       function MyHttpClient(options, wsdlSocket, xsdSocket) {
-        httpClient.call(this, options);
+        this.httpCl = new httpClient(options);
         this.agent = new CustomAgent(options, wsdlSocket, xsdSocket);
       }
 
@@ -50,7 +50,7 @@ describe('custom http client', function() {
           //Specify agent to use
           options.agent = this.agent;
           var headers = options.headers;
-          var req = self._request(options, function(err, res, body) {
+          var req = this.httpCl._request(options, function(err, res, body) {
             if (err) {
               return callback(err);
             }

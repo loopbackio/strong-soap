@@ -159,13 +159,16 @@ class Client extends Base {
     var soapHeaderElement = envelope.header;
     var soapBodyElement = envelope.body;
 
-    for (let i = 0, n = self.soapHeaders.length; i < n; i++) {
-      let soapHeader = self.soapHeaders[i];
-      let element = self.findElement(soapHeader.nsURI, soapHeader.name);
+    for (let i = 0, n = this.soapHeaders.length; i < n; i++) {
+      let soapHeader = this.soapHeaders[i];
+      if (soapHeader.qname.nsURI === null || soapHeader.qname.nsURI === undefined) {
+        continue;
+      }
+      let element = this.findElement(soapHeader.qname.nsURI, soapHeader.qname.name);
       let elementDescriptor =
-        element && element.describe(self.wsdl.definitions);
+        element && element.describe(this.wsdl.definitions);
       xmlHandler.jsonToXml(soapHeaderElement, nsContext, elementDescriptor,
-        soapHeader.name, soapHeader.value);
+        soapHeader.value);
     }
 
     if (self.security && self.security.addSoapHeaders) {
@@ -185,8 +188,7 @@ class Client extends Base {
       }
     }
 
-    xmlHandler.jsonToXml(soapBodyElement, nsContext, inputBodyDescriptor,
-      null, args);
+    xmlHandler.jsonToXml(soapBodyElement, nsContext, inputBodyDescriptor, args);
 
     if (self.security && self.security.postProcess) {
       self.security.postProcess(envelope.header, envelope.body);
@@ -225,13 +227,13 @@ class Client extends Base {
         callback(err);
       } else {
 
-        var outputDescriptor = operationDescriptor.outputEnvelope;
+        var outputEnvDescriptor = operationDescriptor.outputEnvelope;
         try {
-          obj = xmlHandler.xmlToJson(nsContext, body, outputDescriptor);
+          obj = xmlHandler.xmlToJson(nsContext, body, outputBodyDescriptor);
         } catch (error) {
           //  When the output element cannot be looked up in the wsdl and the body is JSON
           //  instead of sending the error, we pass the body in the response.
-          if (!output || !output.$lookupTypes) {
+          if (!output) {
             debug('Response element is not present. Unable to convert response xml to json.');
             //  If the response is JSON then return it as-is.
             var json = _.isObject(body) ? body : tryJSONparse(body);
@@ -249,7 +251,6 @@ class Client extends Base {
           // one-way, no output expected
           return callback(null, null, body, obj.Header);
         }
-
         if (typeof obj.Body !== 'object') {
           var error = new Error('Cannot parse response');
           error.response = response;
