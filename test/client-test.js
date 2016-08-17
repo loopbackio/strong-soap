@@ -19,15 +19,15 @@ describe('SOAP Client', function() {
       assert.ok(client);
       assert.ok(client.getSoapHeaders().length === 0);
 
-      var i1 = client.addSoapHeader(null,'about-to-change-1');
-      var i2 = client.addSoapHeader(null,'about-to-change-2');
+      var i1 = client.addSoapHeader('about-to-change-1');
+      var i2 = client.addSoapHeader('about-to-change-2');
 
       assert.ok(i1 === 0);
       assert.ok(i2 === 1);
       assert.ok(client.getSoapHeaders().length === 2);
 
-      client.changeSoapHeader(0, null, 'header1');
-      client.changeSoapHeader(1, null,  'header2');
+      client.changeSoapHeader(0,'header1');
+      client.changeSoapHeader(1,'header2');
       assert.ok(client.getSoapHeaders()[0].xml === 'header1');
       assert.ok(client.getSoapHeaders()[1].xml === 'header2');
 
@@ -263,8 +263,8 @@ describe('SOAP Client', function() {
           }
         };
 
-        var qname = new QName('{http://www.example.com/v1}y');
-        client.addSoapHeader('MyHeaderElem', soapheader, qname);
+        var qname = new QName('{http://www.example.com/v1}MyHeaderElem');
+        client.addSoapHeader(soapheader, qname);
 
         //lastRequest should have proper header value of above JSON header object serialized based on header schema defined
         //in default-namespace1.wsdl
@@ -282,8 +282,8 @@ describe('SOAP Client', function() {
         assert.ok(client);
         assert.ok(client.getSoapHeaders().length === 0);
 
-        var qname = new QName('{http://www.example.com/v1}y');
-        client.addSoapHeader(null, {header1: 'content'}, qname);
+        var qname = new QName('{http://www.example.com/v1}header1');
+        client.addSoapHeader({header1: 'content'}, qname);
 
         //lastRequest should have proper header value of above JSON header object serialized based on header schema defined
         //in default-namespace1.wsdl
