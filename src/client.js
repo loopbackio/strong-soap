@@ -158,18 +158,8 @@ class Client extends Base {
 
     var soapHeaderElement = envelope.header;
     var soapBodyElement = envelope.body;
-
-    for (let i = 0, n = this.soapHeaders.length; i < n; i++) {
-      let soapHeader = this.soapHeaders[i];
-      if (soapHeader.qname.nsURI === null || soapHeader.qname.nsURI === undefined) {
-        continue;
-      }
-      let element = this.findElement(soapHeader.qname.nsURI, soapHeader.qname.name);
-      let elementDescriptor =
-        element && element.describe(this.wsdl.definitions);
-      xmlHandler.jsonToXml(soapHeaderElement, nsContext, elementDescriptor,
-        soapHeader.value);
-    }
+    //add soapHeaders to envelope. Header can be xml, or JSON object which may or may not be described in WSDL/XSD.
+    this.addSoapHeadersToEnvelope(soapHeaderElement, this.xmlHandler);
 
     if (self.security && self.security.addSoapHeaders) {
       xml = self.security.addSoapHeaders(envelope.header);
@@ -229,7 +219,7 @@ class Client extends Base {
 
         var outputEnvDescriptor = operationDescriptor.outputEnvelope;
         try {
-          obj = xmlHandler.xmlToJson(nsContext, body, outputBodyDescriptor);
+          obj = xmlHandler.xmlToJson(nsContext, body, outputEnvDescriptor);
         } catch (error) {
           //  When the output element cannot be looked up in the wsdl and the body is JSON
           //  instead of sending the error, we pass the body in the response.
