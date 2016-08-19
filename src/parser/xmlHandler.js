@@ -118,8 +118,7 @@ class XMLHandler {
   mapObject(node, nsContext, descriptor, val) {
     if (val == null) return node;
     if (typeof val !== 'object' || (val instanceof Date)) {
-      parseXml(node, val, null);
-      //node.text(val);
+      node.text(val);
       return node;
     }
 

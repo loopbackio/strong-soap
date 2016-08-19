@@ -128,19 +128,15 @@ class Base extends EventEmitter {
       let soapHeader = this.soapHeaders[i];
       let elementDescriptor;
       if (typeof soapHeader.value === 'object') {
-        if (soapHeader.qname !== undefined) {
-          if (soapHeader.qname.nsURI !== undefined) {
+        if (soapHeader.qname && soapHeader.qname.nsURI) {
             let element = this.findElement(soapHeader.qname.nsURI, soapHeader.qname.name);
             elementDescriptor =
               element && element.describe(this.wsdl.definitions);
-          }
         }
         xmlHandler.jsonToXml(soapHeaderElement, null, elementDescriptor,
           soapHeader.value);
       } else { //soapHeader has XML value
         XMLHandler.parseXml(soapHeaderElement, soapHeader.xml);
-        xmlHandler.jsonToXml(soapHeaderElement, null, null,
-          soapHeader.value);
       }
     }
   }
