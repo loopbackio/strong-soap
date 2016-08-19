@@ -35,7 +35,7 @@
     "cover": "istanbul cover _mocha -- --timeout 10000 test/*-test.js test/security/*.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls -v",
     "test": "mocha --timeout 10000 test/*-test.js test/security/*.js",
-    "build": "babel src -d lib"
+    "pretest": "babel src -d lib"
   },
   "keywords": [
     "soap"
