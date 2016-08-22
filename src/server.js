@@ -356,13 +356,9 @@ class Server extends Base {
       this._addWSSecurityHeader(env.header);
     }
 
-    if (this.soapHeaders) {
-      for (var i = 0, n = this.soapHeaders.length; i < n; i++) {
-        var header = this.soapHeaders[i];
-        env.header.element(header);
-      }
-    }
-
+    var soapHeaderElement = env.header;
+    //add soapHeaders to envelope. Header can be xml, or JSON object which may or may not be described in WSDL/XSD.
+    this.addSoapHeadersToEnvelope(soapHeaderElement, this.xmlHandler);
     return env;
   };
 

@@ -15,13 +15,6 @@ class SOAPElement {
     }
   }
 
-  addTo(parent, nsContext, xmlHandler) {
-    if (this.xml) {
-      xmlHandler.parseXml(parent, xml);
-    } else {
-      xmlHandler.jsonToXml(parent, nsContext, null, this.qname, this.value);
-    }
-  }
 }
 
 /**
