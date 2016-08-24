@@ -18,7 +18,7 @@ test.service = {
         if (args.tickerSymbol === 'trigger error') {
           throw new Error('triggered server error');
         } else if (args.tickerSymbol === 'Async') {
-          return cb({ price: 19.56 });
+          return cb({ TradePrice: {price: 19.56 }});
         } else if (args.tickerSymbol === 'SOAP Fault v1.2') {
           throw {
             Fault: {
@@ -40,8 +40,7 @@ test.service = {
             var jsonResponse = {TradePrice: {"price": "19.56"}};
             return jsonResponse;
           }
-        }
-      },
+        },
 
       SetTradePrice: function(args, cb, soapHeader) {
       },
@@ -72,6 +71,7 @@ test.service = {
         };
 
         setTimeout(isValidPrice, 10);
+      }
       }
     }
 };
@@ -225,9 +225,10 @@ describe('SOAP Server', function() {
   it('should return complete client description', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      var description = client.describe(),
-          expected = { input: { tickerSymbol: "string" }, output:{ price: "float" } };
-      assert.deepEqual(expected , description.StockQuoteService.StockQuotePort.GetLastTradePrice);
+      var description = client.describe();
+      assert.equal(description.StockQuoteService.StockQuotePort.GetLastTradePrice.input.body.elements[0].qname.name,'TradePriceRequest');
+      assert.equal(description.StockQuoteService.StockQuotePort.GetLastTradePrice.input.body.elements[0].elements[0].qname.name,'tickerSymbol');
+      assert.equal(description.StockQuoteService.StockQuotePort.GetLastTradePrice.input.body.elements[0].elements[0].type.name,'string');
       done();
     });
   });
@@ -235,7 +236,7 @@ describe('SOAP Server', function() {
   it('should return correct results', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL'}, function(err, result) {
+      client.GetLastTradePrice({TradePriceRequest: { tickerSymbol: 'AAPL'}}, function(err, result) {
         assert.ok(!err);
         assert.equal(19.56, parseFloat(result.price));
         done();
@@ -246,7 +247,7 @@ describe('SOAP Server', function() {
   it('should return correct async results (single argument callback style)', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.GetLastTradePrice({ tickerSymbol: 'Async'}, function(err, result) {
+      client.GetLastTradePrice({TradePriceRequest: { tickerSymbol: 'Async'}}, function(err, result, body) {
         assert.ok(!err);
         assert.equal(19.56, parseFloat(result.price));
         done();
@@ -258,9 +259,9 @@ describe('SOAP Server', function() {
   it('should return correct async results (double argument callback style)', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.IsValidPrice({ price: 50000 }, function(err, result) {
+      client.IsValidPrice({ TradePrice: {price: 50000 } }, function(err, result) {
         assert.ok(!err);
-        assert.equal(true, !!(result.valid));
+        assert.equal(true, !!(result));
         done();
       });
     });
@@ -269,7 +270,7 @@ describe('SOAP Server', function() {
   it('should pass the original req to async methods', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.IsValidPrice({ price: 50000 }, function(err, result) {
+      client.IsValidPrice({TradePrice: {price: 50000 }}, function(err, result) {
         // node V3.x+ reports addresses as IPV6
         var addressParts = lastReqAddress.split(':');
         addressParts[(addressParts.length - 1)].should.equal('127.0.0.1');
@@ -281,7 +282,7 @@ describe('SOAP Server', function() {
   it('should return correct async errors', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.IsValidPrice({ price: "invalid_price"}, function(err, result) {
+      client.IsValidPrice({TradePrice: { price: "invalid_price"}}, function(err, result) {
         assert.ok(err);
         assert.ok(err.root.Envelope.Body.Fault);
         assert.equal(err.response.statusCode, 500);
