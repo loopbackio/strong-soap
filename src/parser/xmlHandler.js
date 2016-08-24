@@ -123,7 +123,7 @@ class XMLHandler {
     }
 
     var elements = {}, attributes = {};
-    if (descriptor !== null && descriptor !== undefined) {
+    if (descriptor != null) {
       for (let i = 0, n = descriptor.elements.length; i < n; i++) {
         let elementDescriptor = descriptor.elements[i];
         let elementName = elementDescriptor.qname.name;
@@ -131,7 +131,7 @@ class XMLHandler {
       }
     }
 
-    if (descriptor !== null && descriptor !== undefined) {
+    if (descriptor != null) {
       for (let a in descriptor.attributes) {
         let attributeDescriptor = descriptor.attributes[a];
         let attributeName = attributeDescriptor.qname.name;
