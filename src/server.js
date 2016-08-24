@@ -269,7 +269,7 @@ class Server extends Base {
       handled = true;
 
       if (error && error.Fault !== undefined) {
-        return self._sendError(error.Fault, callback, includeTimestamp);
+        return self._sendError(error, callback, includeTimestamp);
       }
       else if (result === undefined) {
         // Backward compatibility to support one argument callback style
@@ -286,7 +286,6 @@ class Server extends Base {
         var operation  = self.wsdl.definitions.services[serviceName]
           .ports[portName].binding.operations[operationName];
         var element = operation.output;
-        //  self.wsdl.objectToDocumentXML(outputName, result, element.targetNSAlias, element.targetNamespace);
 
         var operationDescriptor = operation.describe(self.wsdl.definitions);
         var outputBodyDescriptor = operationDescriptor.output.body;
@@ -308,7 +307,6 @@ class Server extends Base {
       self._envelope(envelope, includeTimestamp);
       var message = envelope.body.toString({pretty: true});
       var xml = envelope.doc.end({pretty: true});
-      //callback(self._envelope(envelope, includeTimestamp));
       callback(xml);
 
     }
@@ -362,31 +360,38 @@ class Server extends Base {
     return env;
   };
 
-  _sendError(soapFault, callback, includeTimestamp) {
+  _sendError(error, callback, includeTimestamp) {
     var self = this,
       fault;
 
     var statusCode;
-    if (soapFault.statusCode) {
-      statusCode = soapFault.statusCode;
-      soapFault.statusCode = undefined;
+    if (error.Fault.statusCode) {
+      statusCode = error.Fault.statusCode;
+      error.Fault.statusCode = undefined;
     }
 
     var env = XMLHandler.createSOAPEnvelope();
-    if (soapFault.faultcode) {
+    var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
+    //revisit this logic.  It doesn't seem to make any difference whether prefix is 'soap' or null
+    if (error.Fault.faultcode) {
       // Soap 1.1 error style
       // Root element will be prependend with the soap NS
       // It must match the NS defined in the Envelope (set by the _envelope method)
-      this.xmlHandler.jsonToXml(env.body, null, null, 'soap:Fault', soapFault);
+      var nsContext = self.createNamespaceContext('soap', soapNsURI);
     }
     else {
       // Soap 1.2 error style.
       // 3rd param is the NS prepended to all elements
       // It must match the NS defined in the Envelope (set by the _envelope method)
-      this.xmlHandler.jsonToXml(env.body, null, null, 'Fault', soapFault);
+      var nsContext = self.createNamespaceContext(null, soapNsURI);
     }
+    //jsonToXML needs the outer wrapper object which in this case is error in order to extract serialize Fault into the soap body
+    this.xmlHandler.jsonToXml(env.body, nsContext, null, error);
 
-    return callback(self._envelope(fault, includeTimestamp), statusCode);
+    self._envelope(env, includeTimestamp);
+    var message = env.body.toString({pretty: true});
+    var xml = env.doc.end({pretty: true});
+    callback(xml, statusCode);
   }
 }
 
