@@ -14,7 +14,7 @@ test.service = {
     StockQuotePort: {
       GetLastTradePrice: function(args, cb, soapHeader) {
         if (soapHeader)
-          return { price: soapHeader.SomeToken };
+          return {TradePrice: {price: soapHeader.SomeToken }};
         if (args.tickerSymbol === 'trigger error') {
           throw new Error('triggered server error');
         } else if (args.tickerSymbol === 'Async') {
@@ -295,7 +295,7 @@ describe('SOAP Server', function() {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
       client.addSoapHeader('<SomeToken>123.45</SomeToken>');
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL'}, function(err, result) {
+      client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'AAPL'}}, function(err, result) {
         assert.ok(!err);
         assert.equal(123.45, parseFloat(result.price));
         done();
@@ -307,7 +307,7 @@ describe('SOAP Server', function() {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
       client.addSoapHeader('<Security><Timestamp><Created>2015-02-23T12:00:00.000Z</Created><Expires>2015-02-23T12:05:00.000Z</Expires></Timestamp></Security>');
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL'}, function(err, result, raw, soapHeader) {
+      client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'AAPL'}}, function(err, result, raw, soapHeader) {
         assert.ok(!err);
         assert.ok(soapHeader && soapHeader.Security && soapHeader.Security.Timestamp);
         done();
@@ -322,7 +322,7 @@ describe('SOAP Server', function() {
     });
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL'}, function() {});
+      client.GetLastTradePrice({TradePriceRequest: {tickerSymbol: 'AAPL'}}, function() {});
     });
   });
 
@@ -334,7 +334,7 @@ describe('SOAP Server', function() {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
       client.addSoapHeader('<SomeToken>123.45</SomeToken>');
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL'}, function(err, result) {
+      client.GetLastTradePrice({TradePriceRequest: { tickerSymbol: 'AAPL'}}, function(err, result) {
         assert.ok(!err);
         assert.equal(0, parseFloat(result.price));
         done();
@@ -348,7 +348,7 @@ describe('SOAP Server', function() {
     });
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL'}, function(err, result) {
+      client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'AAPL'}}, function(err, result) {
         assert.ok(!err);
         done();
       });
@@ -358,7 +358,7 @@ describe('SOAP Server', function() {
   it('should include response and body in error object', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.GetLastTradePrice({ tickerSymbol: 'trigger error' }, function(err, response, body) {
+      client.GetLastTradePrice({TradePriceRequest: {tickerSymbol: 'trigger error' }}, function(err, response, body) {
         assert.ok(err);
         assert.strictEqual(err.response, response);
         assert.strictEqual(err.body, body);
@@ -370,17 +370,14 @@ describe('SOAP Server', function() {
   it('should return SOAP Fault body for SOAP 1.2', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.GetLastTradePrice({ tickerSymbol: 'SOAP Fault v1.2' }, function(err, response, body) {
+      var expectedBody = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <Fault>\n      <Code>\n        <Value>soap:Sender</Value>\n        <Subcode>\n          <value>rpc:BadArguments</value>\n        </Subcode>\n      </Code>\n      <Reason>\n        <Text>Processing Error</Text>\n      </Reason>\n    </Fault>\n  </soap:Body>\n</soap:Envelope>';
+      client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'SOAP Fault v1.2' }}, function(err, response, body) {
         assert.ok(err);
         var fault = err.root.Envelope.Body.Fault;
         assert.equal(err.message, fault.faultcode + ': ' + fault.faultstring);
         assert.equal(fault.Code.Value, "soap:Sender");
         assert.equal(fault.Reason.Text, "Processing Error");
-        // Verify namespace on elements set according to fault spec 1.2
-        assert.ok(body.match(/<soap:Code>.*<\/soap:Code>/g),
-          "Body should contain Code-element with namespace");
-        assert.ok(body.match(/<soap:Reason>.*<\/soap:Reason>/g),
-          "Body should contain Reason-element with namespace");
+        assert.equal(body.toString(), expectedBody);
         assert.equal(err.response.statusCode, 200);
         done();
       });
@@ -390,7 +387,7 @@ describe('SOAP Server', function() {
   it('should return SOAP Fault body for SOAP 1.1', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.GetLastTradePrice({ tickerSymbol: 'SOAP Fault v1.1' }, function(err, response, body) {
+      client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'SOAP Fault v1.1' }}, function(err, response, body) {
         assert.ok(err);
         var fault = err.root.Envelope.Body.Fault;
         assert.equal(err.message, fault.faultcode + ': ' + fault.faultstring);
@@ -420,7 +417,7 @@ describe('SOAP Server', function() {
     });
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       client.addSoapHeader('<SomeToken>0.0</SomeToken>');
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL'}, function(err, result) {
+      client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'AAPL'}}, function(err, result) {
         assert.ok(err);
         assert.ok(err.root.Envelope.Body.Fault);
         done();
@@ -432,7 +429,7 @@ describe('SOAP Server', function() {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
       client.addBodyAttribute('xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="######################"');
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL' }, function(err, response, body) {
+      client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'AAPL' }}, function(err, response, body) {
         assert.ok(!err);
         done();
       });
@@ -444,7 +441,7 @@ describe('SOAP Server', function() {
       assert.ok(!err);
       var attributes = { 'xmlns:wsu': 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 'wsu:Id': '######################' };
       client.addBodyAttribute(attributes);
-      client.GetLastTradePrice({ tickerSymbol: 'AAPL' }, function(err, response, body) {
+      client.GetLastTradePrice( {TradePriceRequest: {tickerSymbol: 'AAPL' }}, function(err, response, body) {
         assert.ok(!err);
         done();
       });
@@ -454,7 +451,7 @@ describe('SOAP Server', function() {
   it('should handle one-way operations', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.SetTradePrice({ tickerSymbol: 'GOOG', price: 575.33 }, function(err, result) {
+      client.SetTradePrice({ TradePriceRequest: {tickerSymbol: 'GOOG', price: 575.33 }}, function(err, result) {
         assert.ok(!err);
         assert.equal(result,null);
         done();
