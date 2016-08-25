@@ -214,7 +214,9 @@ class Server extends Base {
         for (var name in operations) {
           if(operations[name].input.message.parts.body.element.$name === messageElemName) {
             operationName = operations[name].$name;
-            outputName = operations[name].output.message.parts.body.element.$name;
+            if (operations[name].output != null) {
+              outputName = operations[name].output.message.parts.body.element.$name;
+            }
             break;
           }
         }

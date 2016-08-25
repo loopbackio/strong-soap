@@ -425,33 +425,10 @@ describe('SOAP Server', function() {
     });
   });
 
-  it('should accept attributes as a string on the body element', function(done) {
-    soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
-      assert.ok(!err);
-      client.addBodyAttribute('xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="######################"');
-      client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'AAPL' }}, function(err, response, body) {
-        assert.ok(!err);
-        done();
-      });
-    });
-  });
-
-  it('should accept attributes as an object on the body element', function(done) {
-    soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
-      assert.ok(!err);
-      var attributes = { 'xmlns:wsu': 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 'wsu:Id': '######################' };
-      client.addBodyAttribute(attributes);
-      client.GetLastTradePrice( {TradePriceRequest: {tickerSymbol: 'AAPL' }}, function(err, response, body) {
-        assert.ok(!err);
-        done();
-      });
-    });
-  });
-
   it('should handle one-way operations', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      client.SetTradePrice({ TradePriceRequest: {tickerSymbol: 'GOOG', price: 575.33 }}, function(err, result) {
+      client.SetTradePrice({ TradePriceSubmit: {tickerSymbol: 'GOOG', price: 575.33 }}, function(err, result) {
         assert.ok(!err);
         assert.equal(result,null);
         done();
