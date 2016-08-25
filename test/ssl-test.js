@@ -14,7 +14,7 @@ test.service = {
         if (args.tickerSymbol === 'trigger error') {
           throw new Error('triggered server error');
         } else {
-          return {price: 19.56};
+          return {TradePrice: {price: 19.56}};
         }
       }
     }
@@ -84,7 +84,7 @@ describe('SOAP Client(SSL)', function() {
           }
         });
 
-        client.GetLastTradePrice({tickerSymbol: 'AAPL'}, function(err, result) {
+        client.GetLastTradePrice({TradePriceRequest: {tickerSymbol: 'AAPL'}}, function(err, result) {
           assert.ok(!err);
           assert.equal(19.56, parseFloat(result.price));
           done();
