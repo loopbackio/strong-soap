@@ -54,18 +54,6 @@ class Base extends EventEmitter {
     this.httpHeaders = {};
   }
 
-  addBodyAttribute(value, qname) {
-    this.bodyAttributes.push(bodyAttribute);
-  }
-
-  getBodyAttributes() {
-    return this.bodyAttributes;
-  }
-
-  clearBodyAttributes() {
-    this.bodyAttributes = [];
-  }
-
   _initializeOptions(options) {
     options = options || {};
     this.wsdl.options.attributesKey = options.attributesKey || 'attributes';

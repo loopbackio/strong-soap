@@ -214,7 +214,9 @@ class Server extends Base {
         for (var name in operations) {
           if(operations[name].input.message.parts.body.element.$name === messageElemName) {
             operationName = operations[name].$name;
-            outputName = operations[name].output.message.parts.body.element.$name;
+            if (operations[name].output != null) {
+              outputName = operations[name].output.message.parts.body.element.$name;
+            }
             break;
           }
         }
@@ -237,7 +239,7 @@ class Server extends Base {
       }
     } catch (error) {
       if (error.Fault !== undefined) {
-        return self._sendError(error.Fault, callback, includeTimestamp);
+        return self._sendError(error, callback, includeTimestamp);
       }
 
       throw error;
@@ -320,11 +322,11 @@ class Server extends Base {
 
     var result = operation(args, handleResult, options.headers, req);
     if (typeof result !== 'undefined') {
-      handleResult(result);
+      handleResult(null, result);
     }
   };
 
-  _addWSSecurityHeader(headerElemnet) {
+  _addWSSecurityHeader(headerElement) {
     var secElement = headerElement.element('wsse:Security')
       .attribute('soap:mustUnderstand', '1');
 
@@ -337,14 +339,14 @@ class Server extends Base {
     var now = new Date();
     var created = toXMLDate(now);
     var timeStampXml = '';
-    if (this._hasTimeStamp) {
-      var expires = toXMLDate(new Date(now.getTime() + (1000 * 600)));
 
-      var tsElement = secElement.element('wsu:Timestamp')
-        .attribute('wsu:Id', 'Timestamp-' + created);
-      tsElement.element('wsu:Created', created);
-      tsElement.element('wsu:Expires', expires);
-    }
+    var expires = toXMLDate(new Date(now.getTime() + (1000 * 600)));
+
+    var tsElement = secElement.element('wsu:Timestamp')
+      .attribute('wsu:Id', 'Timestamp-' + created);
+    tsElement.element('wsu:Created', created);
+    tsElement.element('wsu:Expires', expires);
+
   }
 
   _envelope(env, includeTimestamp) {
