@@ -4,3 +4,4 @@ coverage
 lib
 .idea
 *.iml
+.vscode

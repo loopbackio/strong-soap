@@ -50,6 +50,7 @@ class XMLHandler {
     if (descriptor instanceof ElementDescriptor) {
       name = descriptor.qname.name;
       let isSimple = descriptor.isSimple;
+      let attrs = null;
       if (descriptor.isMany && !isSimple) {
         if (Array.isArray(val)) {
           for (let i = 0, n = val.length; i < n; i++) {
@@ -58,31 +59,52 @@ class XMLHandler {
           return node;
         }
       }
+      if(isSimple && val !== null && typeof val === "object"){
+        if (typeof val[this.options.attributesKey] !== "undefined"){
+          attrs = val[this.options.attributesKey];
+        }
+        if (typeof val[this.options.valueKey] !== "undefined"){
+          val = val[this.options.valueKey];
+        } 
+	    }
+      
       let element;
       if (descriptor.form === 'unqualified') {
         element = isSimple ? node.element(name, val) : node.element(name);
       } else if (descriptor.qname) {
         nsContext.pushContext();
-        let mapping = declareNamespace(nsContext, null,
+	      let mapping = nsContext.getPrefix(descriptor.qname.nsURI);
+        let newlyDeclared = false;
+        if(mapping === null || mapping.declared === false) {
+          newlyDeclared = true;
+          mapping = declareNamespace(nsContext, null,
           descriptor.qname.prefix, descriptor.qname.nsURI);
+        }
         let prefix = mapping ? mapping.prefix : descriptor.qname.prefix;
         let elementName = prefix ? prefix + ':' + name : name;
         element = isSimple ? node.element(elementName, val) :
           node.element(elementName);
-        if (mapping) {
+        if (newlyDeclared) {
           element.attribute(prefix ? 'xmlns:' + prefix : 'xmlns',
             descriptor.qname.nsURI);
         }
       }
       if (isSimple) {
-        nsContext.popContext();
-        return node;
-      }
-      if (val == null) {
-        if (descriptor.isNillable) {
-          // Set xsi:nil = true
-          declareNamespace(nsContext, element, 'xsi', helper.namespaces.xsi);
-          element.attribute('xsi:nil', true);
+        if(attrs !== null){
+          if(typeof attrs === "object"){
+            for (var _p in attrs) {
+              var _child = attrs[_p];
+              element.attribute(_p,_child);
+            }
+          }
+        }
+        if (val == null) {
+          if (descriptor.isNillable) {
+            // Set xsi:nil = true
+            declareNamespace(nsContext, element, 'xsi', helper.namespaces.xsi);
+            element.attribute('xsi:nil', true);
+          }
+<<<<<<< e0fcf4af0b54a12fc73109c541de73a25f1f95f9
         }
         nsContext.popContext();
         return node;
@@ -90,7 +112,7 @@ class XMLHandler {
 
       if (typeof val !== 'object' || (val instanceof Date)) {
         element.text(val);
-        nsContext.popContext();
+        //nsContext.popContext();
         return node;
       }
 
@@ -139,17 +161,21 @@ class XMLHandler {
       }
     }
 
-    for (let p in val) {
-      if (p === this.options.attributesKey) continue;
-      let child = val[p];
-      let childDescriptor = elements[p] || attributes[p];
-      if (childDescriptor == null) {
-        if (this.options.ignoreUnknownProperties) continue;
-        else childDescriptor =
-          new ElementDescriptor(QName.parse(p), null, 'unqualified',
-            Array.isArray(child));
-      }
-      this.jsonToXml(node, nsContext, childDescriptor, child);
+    if (!Array.isArray(val)) {
+	    for (let p in val) {
+	      if (p === this.options.attributesKey) continue;
+	      let child = val[p];
+	      let childDescriptor = elements[p] || attributes[p];
+	      if (childDescriptor == null) {
+	        if (this.options.ignoreUnknownProperties) continue;
+	        else childDescriptor =
+	          new ElementDescriptor(QName.parse(p), null, 'unqualified',
+	            Array.isArray(child));
+	      }
+        if (childDescriptor){
+	        this.jsonToXml(node, nsContext, childDescriptor, child);
+	      }	
+	    }
     }
 
     var attrs = val[this.options.attributesKey];
@@ -157,7 +183,7 @@ class XMLHandler {
       for (let p in attrs) {
         let child = attrs[p];
         if (p === this.options.xsiTypeKey) {
-          let xsiType = QName.parse(child);
+          let xsiType = QName.parse(child.type, child.xmlns);
           declareNamespace(nsContext, node, 'xsi', helper.namespaces.xsi);
           let mapping = declareNamespace(nsContext, node, xsiType.prefix,
             xsiType.nsURI);
@@ -348,6 +374,7 @@ class XMLHandler {
     var root = {};
     var refs = {}, id; // {id: {hrefs:[], obj:}, ...}
     var stack = [{name: null, object: root, descriptor: descriptor}];
+    var options = this.options;
 
     p.onopentag = function(node) {
       nsContext.pushContext();
@@ -370,6 +397,9 @@ class XMLHandler {
       for (let a in attrs) {
         if (/^xmlns:|^xmlns$/.test(a)) continue;
         let qname = QName.parse(a);
+        var isXsiType = false;
+        var xsiType = null;
+        var xsiXmlns = null;
         if (nsContext.getNamespaceURI(qname.prefix) === helper.namespaces.xsi) {
           // Handle xsi:*
           if (qname.name == 'nil') {
@@ -377,16 +407,30 @@ class XMLHandler {
             if (attrs[a] === 'true') {
               obj = null;
             }
+            continue;
           } else if (qname.name === 'type') {
             // xsi:type
+            isXsiType = true;
+            xsiType = attrs[a];
+            xsiType = QName.parse(xsiType);
+            attrs[a] = xsiType.name;
+            if(xsiType.prefix){
+              xsiXmlns = nsContext.getNamespaceURI(xsiType.prefix);
+            }  
           }
-          continue;
         }
         let attrName = qname.name;
         elementAttributes = elementAttributes || {};
         let attrDescriptor = descriptor && descriptor.findAttribute(qname.name);
         let attrValue = parseValue(attrs[a], attrDescriptor);
-        elementAttributes[attrName] = attrs[a];
+        if(isXsiType) {
+          xsiType = {};
+          xsiType.type = attrs[a];
+          xsiType.xmlns = xsiXmlns;
+          elementAttributes[options.xsiTypeKey] = xsiType;
+        } else {
+          elementAttributes[attrName] = attrs[a];
+        }  
       }
 
       if (elementAttributes) {
@@ -457,9 +501,14 @@ class XMLHandler {
       if (/<\?xml[\s\S]+\?>/.test(text)) {
         text = self.xmlToJson(null, text);
       }
-      p.ontext(text);
+      p.handleJsonObject(text);
     };
 
+    p.handleJsonObject = function (text) {
+        var top = stack[stack.length - 1];
+        self._processText(top, text);
+    };
+      
     p.ontext = function(text) {
       text = text && text.trim();
       if (!text.length)
@@ -518,7 +567,8 @@ function declareNamespace(nsContext, node, prefix, nsURI) {
   } else if (node) {
     node.attribute('xmlns:' + mapping.prefix, mapping.uri);
     return mapping;
-  }
+  } 
+  return mapping;
 }
 
 function parseValue(text, descriptor) {

@@ -2,7 +2,7 @@
 <xs:schema xmlns:tns="http://www.Dummy.com/Name/Types" xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://www.Dummy.com/Name/Types" elementFormDefault="qualified"
            attributeFormDefault="unqualified" xmlns:c="http://www.Dummy.com/Common/Types">
-    <xs:import namespace="common.xsd" schemaLocation="common.xsd"/>
+    <xs:import namespace="http://www.Dummy.com/Common/Types" schemaLocation="common.xsd"/>
     <xs:element name="DummyRequest">
         <xs:complexType>
             <xs:sequence>

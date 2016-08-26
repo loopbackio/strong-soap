@@ -1,6 +1,13 @@
 {
-  "DummyField1": "Humpty",
-  "DummyFilter": {
-    "DummyStringFilter": "Dumpty"
+  "DummyRequest": {
+    "DummyField1": {
+      "$value": "Humpty",
+      "$attributes": {
+        "language": "en-US"
+      }
+    },
+    "DummyFilter": {
+      "DummyStringFilter": "Dumpty"
+    }
   }
 }

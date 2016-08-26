@@ -1,1 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:typens="http://schemas.My.com/My11" xmlns:wsdlns="http://schemas.My.com/My11/wsdl"><soap:Body><typens:Administrate xmlns:typens="http://schemas.My.com/My11" xmlns="http://schemas.My.com/My11"><typens:AdminOperation><typens:CreateUser><typens:User><typens:Name>name</typens:Name><typens:Password>password</typens:Password></typens:User><typens:IgnoreDup></typens:IgnoreDup></typens:CreateUser></typens:AdminOperation></typens:Administrate></soap:Body></soap:Envelope>
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://schemas.My.com/My11">
+	<soap:Body>
+		<ns1:Administrate xmlns="http://schemas.My.com/My11" xmlns:typens="http://schemas.My.com/My11">
+			<ns1:AdminOperation>
+				<ns1:CreateUser>
+					<ns1:User>
+						<ns1:Name>name</ns1:Name>
+						<ns1:Password>password</ns1:Password>
+					</ns1:User>
+					<ns1:IgnoreDup/>
+				</ns1:CreateUser>
+			</ns1:AdminOperation>
+		</ns1:Administrate>
+	</soap:Body>
+</soap:Envelope>

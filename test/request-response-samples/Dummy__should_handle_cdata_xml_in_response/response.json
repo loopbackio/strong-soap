@@ -2,14 +2,14 @@
   "DummyResult": {
     "DummyList": {
       "DummyElement": {
-        "attributes": {
+        "$attributes": {
           "language": "en-US"
         },
         "$value": {
 		  "response":  {
 		    "forms": {
 			  "form": {
-			    "attributes": {
+			    "$attributes": {
 				  "ObjectId":  "1234",
 				  "Form_Name": "Dummy Form"
 				},

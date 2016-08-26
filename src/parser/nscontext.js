@@ -79,7 +79,7 @@ class NamespaceScope {
       default:
         for (var p in this.namespaces) {
           if (this.namespaces[p].uri === nsURI) {
-            return p;
+            return this.namespaces[p];
           }
         }
         if (!localOnly && this.parent) {
@@ -206,7 +206,7 @@ class NamespaceContext {
         return mapping;
       }
     }
-    if (this.getNamespaceURI(prefix, true)) {
+    if (this.getNamespaceURI(prefix)) {
       // The prefix is already mapped to a different namespace
       prefix = this.generatePrefix();
     }

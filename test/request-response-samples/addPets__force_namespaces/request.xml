@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://tempuri.org/">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" >
+  <soap:Header/>
   <soap:Body>
-    <xmlns:tns:addPets xmlns:ns2="http://tempuri.org/" xmlns:ns3="http://sillypets.com/xsd">
-      <petList>
+    <ns1:addPets xmlns:ns1="http://tempuri.org/">
         <pet>
-          <name>Max</name>
+          <Name>Max</Name>
         </pet>
-      </petList>
-    </xmlns:tns:addPets>
+        <pet>
+          <Name>dillon</Name>
+        </pet>
+    </ns1:addPets>
   </soap:Body>
 </soap:Envelope>

@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:tns="urn:platform_2013_2.webservices.netsuite.com" xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com" xmlns:platformFaults="urn:faults_2013_2.platform.webservices.netsuite.com"><soap:Body><platformMsgs:addList xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com" xmlns="urn:messages_2013_2.platform.webservices.netsuite.com"><platformMsgs:record xsi:type="ns1:Contact" xmlns:ns1="urn:relationships_2013_2.lists.webservices.netsuite.com"><ns1:firstName>First-1400867779067</ns1:firstName><ns1:lastName>Sullivan</ns1:lastName><ns1:phone>800-555-2819</ns1:phone><ns1:subsidiary internalId="1" xsi:type="platformCore:RecordRef" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"></ns1:subsidiary></platformMsgs:record><platformMsgs:record xsi:type="ns1:Contact" xmlns:ns1="urn:relationships_2013_2.lists.webservices.netsuite.com"><ns1:firstName>aLFirst-1400867779067</ns1:firstName><ns1:lastName>Sullivan</ns1:lastName><ns1:phone>800-555-2819</ns1:phone><ns1:subsidiary internalId="1" xsi:type="platformCore:RecordRef" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"></ns1:subsidiary></platformMsgs:record></platformMsgs:addList></soap:Body></soap:Envelope>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Header/>
+<soap:Body>
+		<ns1:addList xmlns:ns1="urn:messages_2011_1.platform.webservices.netsuite.com">
+		<ns1:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns3:Contact">
+				<firstName>First-1400867779067</firstName>
+				<lastName>Sullivan</lastName>
+				<phone>800-555-2819</phone>
+				<subsidiary internalId="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="core_2011_1.platform.webservices.netsuite.com" xsi:type="ns2:RecordRef"/>
+		</ns1:record>
+		<ns4:record xmlns:ns4="urn:messages_2011_1.platform.webservices.netsuite.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns6="relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns6:Contact">
+				<firstName>aLFirst-1400867779067</firstName>
+				<lastName>Sullivan</lastName>
+				<phone>800-555-2819</phone>
+				<subsidiary internalId="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="core_2011_1.platform.webservices.netsuite.com" xsi:type="ns5:RecordRef"/>
+		</ns4:record>
+		</ns1:addList>
+</soap:Body>
+</soap:Envelope>

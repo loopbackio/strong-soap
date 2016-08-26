@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:cmn="http://NamespaceTest.com/CommonTypes"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.Dummy.com/Common" 
+    xmlns="http://www.Dummy.com/Common">
+<xs:import schemaLocation="common.xsd" namespace="http://NamespaceTest.com/CommonTypes" />    
+    <xs:element name="Order">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Id" type="xs:integer"/>
+                <xs:element name="Name" type="cmn:restrictedString"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Result">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Status" type="xs:integer"/>
+                <xs:element name="Message" type="cmn:restrictedString"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
+

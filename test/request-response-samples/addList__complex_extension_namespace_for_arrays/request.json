@@ -5,18 +5,18 @@
          "lastName":"Sullivan",
          "phone":"800-555-2819",
          "subsidiary":{
-            "attributes":{
-               "internalId":"1",
-               "xsi_type":{
-                  "type":"RecordRef",
-                  "xmlns":"urn:core_2013_2.platform.webservices.netsuite.com"
+            "$attributes":{
+               "internalId": "1",
+               "$xsiType": {
+                    "type": "RecordRef",
+                    "xmlns":"core_2011_1.platform.webservices.netsuite.com"
                }
             }
          },
-         "attributes":{
-            "xsi_type":{
-               "type":"Contact",
-               "xmlns":"urn:relationships_2013_2.lists.webservices.netsuite.com"
+         "$attributes":{
+            "$xsiType": {
+                  "type": "Contact",
+                  "xmlns": "relationships_2011_1.lists.webservices.netsuite.com"
             }
          }
       },
@@ -25,18 +25,18 @@
          "lastName":"Sullivan",
          "phone":"800-555-2819",
          "subsidiary":{
-            "attributes":{
+            "$attributes":{
                "internalId":"1",
-               "xsi_type":{
-                  "type":"RecordRef",
-                  "xmlns":"urn:core_2013_2.platform.webservices.netsuite.com"
+               "$xsiType": {
+                    "type": "RecordRef",
+                    "xmlns":"core_2011_1.platform.webservices.netsuite.com"
                }
             }
          },
-         "attributes":{
-            "xsi_type":{
-               "type":"Contact",
-               "xmlns":"urn:relationships_2013_2.lists.webservices.netsuite.com"
+         "$attributes":{
+               "$xsiType": {
+                  "type": "Contact",
+                  "xmlns": "relationships_2011_1.lists.webservices.netsuite.com"
             }
          }
       }

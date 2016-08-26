@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://3e.pl/ADInterface">
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:ns1="http://3e.pl/ADInterface">
    <soap:Body>
-      <tns:createData>
-         <tns:ModelCRUDRequest>
+      <ns1:createData>
+         <ns1:ModelCRUDRequest>
             <ModelCRUD>
                <serviceType>CreateInterest</serviceType>
                <TableName>WTC_EmployeeInterest</TableName>
@@ -10,12 +10,12 @@
                <Filter></Filter>
                <Action>Create</Action>
                <DataRow>
-                  <tns:field column="C_BPartner_ID">
+                  <ns1:field column="C_BPartner_ID">
                      <val>1001047</val>
-                  </tns:field>
-                  <tns:field column="Interest">
+                  </ns1tns:field>
+                  <ns1:field column="Interest">
                      <val>Cooking</val>
-                  </tns:field>
+                  </ns1:field>
                </DataRow>
             </ModelCRUD>
             <ADLoginRequest>
@@ -28,7 +28,7 @@
                <WarehouseID>1000000</WarehouseID>
                <stage>0</stage>
             </ADLoginRequest>
-         </tns:ModelCRUDRequest>
-      </tns:createData>
+         </ns1:ModelCRUDRequest>
+      </ns1:createData>
    </soap:Body>
 </soap:Envelope>

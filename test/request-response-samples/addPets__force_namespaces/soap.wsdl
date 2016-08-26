@@ -17,7 +17,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="addPetsResponse" type="xs:string">
+      <s:element name="addPetsResponse" type="s:string">
       </s:element>
       <s:complexType name="Pet">
         <s:sequence>

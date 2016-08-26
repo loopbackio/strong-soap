@@ -1,6 +1,8 @@
-{
-  "Order": {
-    "Id": 1,
-    "Name": "foo"
+{ 
+  "DummyRequest": {
+    "Order": {
+      "Id": 1,
+      "Name": "foo"
+    }
   }
 }
