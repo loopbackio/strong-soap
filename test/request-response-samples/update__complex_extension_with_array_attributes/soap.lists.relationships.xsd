@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:listRel="urn:relationships_2013_2.lists.webservices.netsuite.com" xmlns:listRelTyp="urn:types.relationships_2013_2.lists.webservices.netsuite.com" xmlns:platformCoreTyp="urn:types.core_2013_2.platform.webservices.netsuite.com" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com" xmlns:platformCommon="urn:common_2013_2.platform.webservices.netsuite.com" xmlns:platformCommonTyp="urn:types.common_2013_2.platform.webservices.netsuite.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:relationships_2013_2.lists.webservices.netsuite.com" elementFormDefault="qualified">
-    <import namespace="urn:core_2013_2.platform.webservices.netsuite.com" schemaLocation="../../platform/platform.core.xsd"/>
-    <import namespace="urn:types.relationships_2013_2.lists.webservices.netsuite.com" schemaLocation="../../platform/lists.relationshipTypes.xsd"/>
-    <xsd:import namespace="urn:common_2013_2.platform.webservices.netsuite.com" schemaLocation="../../platform/platform.common.xsd"/>
-    <import namespace="urn:types.common_2013_2.platform.webservices.netsuite.com" schemaLocation="../../platform/platform.commonTypes.xsd"/>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:listRel="urn:relationships_2011_1.lists.webservices.netsuite.com" xmlns:listRelTyp="urn:types.relationships_2011_1.lists.webservices.netsuite.com" xmlns:platformCoreTyp="urn:types.core_2011_1.platform.webservices.netsuite.com" xmlns:platformCore="urn:core_2011_1.platform.webservices.netsuite.com" xmlns:platformCommon="urn:common_2011_1.platform.webservices.netsuite.com" xmlns:platformCommonTyp="urn:types.common_2011_1.platform.webservices.netsuite.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:relationships_2011_1.lists.webservices.netsuite.com" elementFormDefault="qualified">
+    <import namespace="urn:core_2011_1.platform.webservices.netsuite.com" schemaLocation="../../platform/platform.core.xsd"/>
+    <import namespace="urn:types.relationships_2011_1.lists.webservices.netsuite.com" schemaLocation="../../platform/lists.relationshipTypes.xsd"/>
+    <xsd:import namespace="urn:common_2011_1.platform.webservices.netsuite.com" schemaLocation="../../platform/platform.common.xsd"/>
+    <import namespace="urn:types.common_2011_1.platform.webservices.netsuite.com" schemaLocation="../../platform/platform.commonTypes.xsd"/>
     <!-- shared/start -->
     <complexType name="Subscriptions">
         <sequence>
@@ -15,7 +15,7 @@
     </complexType>
     <complexType name="SubscriptionsList">
         <sequence>
-            <element name="subscriptions" type="listRel:Subscriptions" minOccurs="0" maxOccurs="unbounded"/>
+            <element name="subscriptions" type="Subscriptions" minOccurs="0" maxOccurs="unbounded"/>
         </sequence>
         <attribute name="replaceAll" type="xsd:boolean" default="true"/>
     </complexType>
@@ -56,7 +56,7 @@
                     <element name="billPay" type="xsd:boolean" minOccurs="0"/>
                     <element name="dateCreated" type="xsd:dateTime" minOccurs="0"/>
                     <element name="lastModifiedDate" type="xsd:dateTime" minOccurs="0"/>
-                    <element name="subscriptionsList" type="listRel:SubscriptionsList" minOccurs="0"/>                    
+                    <element name="subscriptionsList" type="SubscriptionsList" minOccurs="0"/>                    
                 </sequence>
                 <!-- primary record internalId -->
                 <attribute name="internalId" type="xsd:string"/>

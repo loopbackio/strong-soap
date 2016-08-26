@@ -2,8 +2,7 @@
 <soap:Envelope
   xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
->
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <soap:Body>
     <GetAccountXmlResponse xmlns="#Foo">
       <ResultCode>0</ResultCode>
@@ -15,16 +14,13 @@
             IsPastDue="False"
             IsFree="True"
             CurrentTreeID="1091"
-            CurrentUnifiedProductID="70761"
-            xmlns=""
-          >
+            CurrentUnifiedProductID="70761">
             <Tree
               TreeID="1091"
               NodeID="1091"
               UnifiedProductID="70761"
-              IsFree="True"
-            >
-              <FilteredTransitions />
+              IsFree="True">
+              <FilteredTransitions xsi:nil="true"/>
             </Tree>
           </Foo>
         </Foo>

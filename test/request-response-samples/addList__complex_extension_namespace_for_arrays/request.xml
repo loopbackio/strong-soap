@@ -3,18 +3,18 @@
 <soap:Header/>
 <soap:Body>
 		<ns1:addList xmlns:ns1="urn:messages_2011_1.platform.webservices.netsuite.com">
-		<ns1:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns3:Contact">
-				<firstName>First-1400867779067</firstName>
-				<lastName>Sullivan</lastName>
-				<phone>800-555-2819</phone>
-				<subsidiary internalId="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="core_2011_1.platform.webservices.netsuite.com" xsi:type="ns2:RecordRef"/>
-		</ns1:record>
-		<ns4:record xmlns:ns4="urn:messages_2011_1.platform.webservices.netsuite.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns6="relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns6:Contact">
-				<firstName>aLFirst-1400867779067</firstName>
-				<lastName>Sullivan</lastName>
-				<phone>800-555-2819</phone>
-				<subsidiary internalId="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns5="core_2011_1.platform.webservices.netsuite.com" xsi:type="ns5:RecordRef"/>
-		</ns4:record>
+			<ns1:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns2:Contact">
+				<ns2:firstName xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">First-1400867779067</ns2:firstName>
+				<ns2:lastName xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">Sullivan</ns2:lastName>
+				<ns2:phone xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">800-555-2819</ns2:phone>
+				<ns2:subsidiary xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com" internalId="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="core_2011_1.platform.webservices.netsuite.com" xsi:type="ns3:RecordRef"/>
+			</ns1:record>
+			<ns1:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns2:Contact">
+				<ns2:firstName xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">aLFirst-1400867779067</ns2:firstName>
+				<ns2:lastName xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">Sullivan</ns2:lastName>
+				<ns2:phone xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">800-555-2819</ns2:phone>
+				<ns2:subsidiary xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com" internalId="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="core_2011_1.platform.webservices.netsuite.com" xsi:type="ns3:RecordRef"/>
+			</ns1:record>
 		</ns1:addList>
 </soap:Body>
 </soap:Envelope>

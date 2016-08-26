@@ -9,7 +9,7 @@
         <xs:complexContent>
             <xs:extension base="c:Phone">
                 <xs:sequence>
-                    <xs:element name="IDs" type="c:UniqueIDList" minOccurs="0"/>
+                    <xs:element name="details" type="c:dataList" minOccurs="0"/>
                 </xs:sequence>
                 <xs:attribute name="primary" type="xs:boolean"/>
             </xs:extension>

@@ -1,21 +1,22 @@
 {
+  "UpdateProfileRequest": {
   "Profile": {
     "IDs": {
       "UniqueID": [
         {
-          "attributes": {
+          "$attributes": {
             "source": "TESTSOURCE"
           },
           "$value": 100
         },
         {
-          "attributes": {
+          "$attributes": {
             "source": "TESTSOURCE2"
           },
           "$value": 100
         },
         {
-          "attributes": {
+          "$attributes": {
             "source": "TESTSOURCE3"
           },
           "$value": 100
@@ -35,22 +36,41 @@
     "Phones": {
       "NamePhone": [
         {
-          "attributes": {
+          "$attributes": {
             "primary": true
           },
           "PhoneData": {
-            "PhoneNumber": "123"
+            "PhoneNumber": "400123"
+          },
+          "details": {
+            "data": [
+              {
+                "$attributes": {
+                  "type": "Extension"
+                },
+                "$value": 1001
+              },
+              {
+                "$attributes": {
+                  "type": "AreaCode"
+                },
+                "$value": 377
+              }
+            ]
           }
         },
         {
-          "attributes": {
+          "$attributes": {
             "primary": false
           },
           "PhoneData": {
-            "PhoneNumber": "456"
+            "PhoneNumber": "555010456"
           }
         }
       ]
     }
   }
+  }
 }
+
+

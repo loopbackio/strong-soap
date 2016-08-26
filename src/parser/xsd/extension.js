@@ -15,7 +15,12 @@ class Extension extends XSDElement {
     var descriptor = this.descriptor =
       new XSDElement.TypeDescriptor();
     if (this.base) {
-      descriptor.add(this.base.describe(definitions));
+      let baseDescriptor = this.base.describe(definitions);
+      descriptor.add(baseDescriptor);
+      descriptor.extension = {};
+      descriptor.extension.name = baseDescriptor.name;
+      descriptor.extension.xmlns = baseDescriptor.xmlns;
+      descriptor.extension.isSimple = baseDescriptor.isSimple;
     }
     return this.describeChildren(definitions, descriptor);
   }

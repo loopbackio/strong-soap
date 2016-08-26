@@ -4,9 +4,9 @@
     "password":"pwd",
     "account":"acc",
     "role": {
-      "$attributes": {            
-        "internalId": "3",
-        "externalId": "2"
+      "$thisIsAttributesKey": {    
+        "externalId": "2",        
+        "internalId": "3"
       }
     }
   }

@@ -13,7 +13,11 @@ class SimpleType extends XSDElement {
   }
 
   describe(definitions) {
-    return null;
+    var descriptor = this.descriptor = new XSDElement.TypeDescriptor();
+    descriptor.name = this.$name || this.name;
+    descriptor.xmlns = this.nsURI;
+    descriptor.isSimple = true;
+    return descriptor;
   }
 
   postProcess(definitions) {

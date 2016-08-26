@@ -1,5 +1,7 @@
 {
-  "DummyXML": {
-  	"$xml": "<myObject attr='myAttr'></myObject>"
+  "DummyRequest": {
+    "DummyXML": {
+      "$xml": "<myObject attr='myAttr'></myObject>"
+    }
   }
 }

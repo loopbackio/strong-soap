@@ -1,1 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:tns="#Foo" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"><soap:Body><tns:GetAccountXml xmlns:tns="#Foo" xmlns="#Foo"><tns:ResourceID>234</tns:ResourceID><tns:ResourceType>foo</tns:ResourceType><tns:IDType>more foo</tns:IDType><tns:TreeID>43</tns:TreeID><tns:PrivateLabelID>34</tns:PrivateLabelID></tns:GetAccountXml></soap:Body></soap:Envelope>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Header/>
+<soap:Body>
+<ns1:GetAccountXml xmlns:ns1="#Foo">
+<ns1:ResourceID>234</ns1:ResourceID>
+<ns1:ResourceType>foo</ns1:ResourceType>
+<ns1:IDType>more foo</ns1:IDType>
+<ns1:TreeID>43</ns1:TreeID>
+    <ns1:PrivateLabelID>34</ns1:PrivateLabelID>
+</ns1:GetAccountXml>
+</soap:Body>
+</soap:Envelope>

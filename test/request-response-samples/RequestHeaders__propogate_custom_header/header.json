@@ -1,3 +1,5 @@
 {
-  "headerName": "headerContent"
+  "header1": {
+      "headerContent": "value1"
+  }
 }

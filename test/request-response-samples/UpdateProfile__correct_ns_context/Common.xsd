@@ -24,16 +24,26 @@
         </xs:sequence>
         <xs:attribute name="resultStatusFlag" type="tns:ResultStatusFlag"/>
     </xs:complexType>
-    <xs:complexType name="UniqueID">
-        <xs:simpleContent>
+    <xs:simpleType name="UniqueID">
             <xs:extension base="xs:string">
                 <xs:attribute name="source" type="xs:string"/>
             </xs:extension>
-        </xs:simpleContent>
-    </xs:complexType>
+    </xs:simpleType>
     <xs:complexType name="UniqueIDList">
         <xs:sequence>
             <xs:element name="UniqueID" type="tns:UniqueID" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+   <xs:complexType name="dataContent">
+        <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attribute name="type" type="xs:string"/>
+                </xs:extension>
+        </xs:simpleContent>        
+    </xs:complexType>
+    <xs:complexType name="dataList">
+        <xs:sequence>
+            <xs:element name="data" type="tns:dataContent" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:simpleType name="ResultStatusFlag">

@@ -1,34 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"  xmlns:ns1="http://3e.pl/ADInterface">
-   <soap:Body>
-      <ns1:createData>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Header/>
+<soap:Body>
+      <ns1:createData xmlns:ns1="http://3e.pl/ADInterface">
          <ns1:ModelCRUDRequest>
-            <ModelCRUD>
-               <serviceType>CreateInterest</serviceType>
-               <TableName>WTC_EmployeeInterest</TableName>
-               <RecordID>0</RecordID>
-               <Filter></Filter>
-               <Action>Create</Action>
-               <DataRow>
+            <ns1:ModelCRUD>
+               <ns1:serviceType>CreateInterest</ns1:serviceType>
+               <ns1:TableName>WTC_EmployeeInterest</ns1:TableName>
+               <ns1:RecordID>0</ns1:RecordID>
+               <ns1:Filter/>
+               <ns1:Action>Create</ns1:Action>
+               <ns1:DataRow>
                   <ns1:field column="C_BPartner_ID">
-                     <val>1001047</val>
-                  </ns1tns:field>
-                  <ns1:field column="Interest">
-                     <val>Cooking</val>
+                     <ns1:val>1001047</ns1:val>
                   </ns1:field>
-               </DataRow>
-            </ModelCRUD>
-            <ADLoginRequest>
-               <user>WTCAdmin</user>
-               <pass>WTCAdmin</pass>
-               <lang>192</lang>
-               <ClientID>11</ClientID>
-               <RoleID>102</RoleID>
-               <OrgID>1000001</OrgID>
-               <WarehouseID>1000000</WarehouseID>
-               <stage>0</stage>
-            </ADLoginRequest>
+                  <ns1:field column="Interest">
+                     <ns1:val>Cooking</ns1:val>
+                  </ns1:field>
+               </ns1:DataRow>
+            </ns1:ModelCRUD>
+            <ns1:ADLoginRequest>
+               <ns1:user>WTCAdmin</ns1:user>
+               <ns1:pass>WTCAdmin</ns1:pass>
+               <ns1:lang>192</ns1:lang>
+               <ns1:ClientID>11</ns1:ClientID>
+               <ns1:RoleID>102</ns1:RoleID>
+               <ns1:OrgID>1000001</ns1:OrgID>
+               <ns1:WarehouseID>1000000</ns1:WarehouseID>
+               <ns1:stage>0</ns1:stage>
+            </ns1:ADLoginRequest>
          </ns1:ModelCRUDRequest>
       </ns1:createData>
-   </soap:Body>
+</soap:Body>
 </soap:Envelope>

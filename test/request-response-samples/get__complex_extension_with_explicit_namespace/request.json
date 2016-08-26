@@ -1,11 +1,11 @@
 {
   "baseRef":{
-    "attributes":{
+    "$attributes":{
       "type":"contact",
       "internalId":"42",
-      "xsi_type":{
+      "$xsiType":{
         "type":"RecordRef",
-        "xmlns":"urn:core_2013_2.platform.webservices.netsuite.com",
+        "xmlns":"urn:core_2011_1.platform.webservices.netsuite.com",
         "namespace":"platformCore"
       }
     }

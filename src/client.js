@@ -153,7 +153,7 @@ class Client extends Base {
       self.security.addOptions(options);
 
     var nsContext = this.createNamespaceContext(soapNsPrefix, soapNsURI);
-    var xmlHandler = new XMLHandler(options);
+    var xmlHandler = this.xmlHandler || new XMLHandler(options);
     var envelope = Client.createSOAPEnvelope(soapNsPrefix, soapNsURI);
 
     var soapHeaderElement = envelope.header;
@@ -165,10 +165,29 @@ class Client extends Base {
       xml = self.security.addSoapHeaders(envelope.header);
     }
 
+    let schemas = defs.schemas;
+
+    for(let uri in schemas) {
+      let complexTypes = schemas[uri].complexTypes;
+      if(complexTypes) {
+        for (let type in complexTypes) {
+            complexTypes[type].describe(this.wsdl.definitions);
+        }
+      }
+    }
+
+    for(let uri in schemas) {
+      let complexTypes = schemas[uri].complexTypes;
+      if(complexTypes) {
+        for (let type in complexTypes) {
+          complexTypes[type].describeChildren(this.wsdl.definitions);
+        }
+      }
+    }
+
     var operationDescriptor = operation.describe(this.wsdl.definitions);
     var inputBodyDescriptor = operationDescriptor.input.body;
     var inputHeadersDescriptor = operationDescriptor.input.headers;
-
 
     xmlHandler.jsonToXml(soapBodyElement, nsContext, inputBodyDescriptor, args);
 

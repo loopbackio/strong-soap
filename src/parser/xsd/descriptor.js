@@ -45,10 +45,13 @@ class TypeDescriptor {
     } else if (item instanceof TypeDescriptor) {
       var i, n;
       for (i = 0, n = item.elements.length; i < n; i++) {
-        this.addElement(item.elements[i].clone(isMany));
+        this.addElement(item.elements[i]);
       }
       for (i = 0, n = item.attributes.length; i < n; i++) {
         this.addAttribute(item.attributes[i]);
+      }
+      if (item.extension) {
+          this.extension = item.extension;
       }
     }
   }
@@ -106,6 +109,7 @@ class ElementDescriptor extends TypeDescriptor {
     if (this.elements != null) copy.elements = this.elements;
     if (this.attributes != null) copy.attributes = this.attributes;
     if (this.mixed != null) copy.mixed = this.mixed;
+    copy.refOriginal = this;
     return copy;
   }
 }

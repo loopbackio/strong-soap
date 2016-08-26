@@ -1,11 +1,11 @@
 {
   "record": {
-    "attributes": {
+    "$attributes": {
       "internalId": "42",
       "externalId": "Alex Dniprovskyy",
-      "xsi_type": {
+      "$xsiType": {
         "type": "Contact",
-        "xmlns": "urn:relationships_2013_2.lists.webservices.netsuite.com"
+        "xmlns": "urn:relationships_2011_1.lists.webservices.netsuite.com"
       }
     },
     "firstName": "Allister",
@@ -18,19 +18,21 @@
     },
     "phone": "800-555-2819",
     "subscriptionsList": {
-      "replaceAll": false,
+      "$attributes": {
+        "replaceAll": false
+      }, 
       "subscriptions": [
         {
           "subscribed": "true",
-          "attributes": {
+          "$attributes": {
             "tempId": "34"
           },
           "subscription": {
-            "attributes": {
+            "$attributes": {
               "internalId": "2",
-              "xsi_type": {
+              "$xsiType": {
                 "type": "RecordRef",
-                "xmlns": "urn:core_2013_2.platform.webservices.netsuite.com"
+                "xmlns": "urn:core_2011_1.platform.webservices.netsuite.com"
               }
             },
             "name": "Billing Communication"
@@ -39,11 +41,11 @@
         {
           "subscribed": "true",
           "subscription": {
-            "attributes": {
+            "$attributes": {
               "internalId": "1",
-              "xsi_type": {
+              "$xsiType": {
                 "type": "RecordRef",
-                "xmlns": "urn:core_2013_2.platform.webservices.netsuite.com"
+                "xmlns": "urn:core_2011_1.platform.webservices.netsuite.com"
               }
             },
             "name": "Marketing"

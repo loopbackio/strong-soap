@@ -8,7 +8,7 @@
             <xs:sequence>
                 <xs:element name="DummyField1" type="xs:string" minOccurs="0"/>
                 <xs:element name="DummyFilter" type="c:DummyFilter" minOccurs="0"/>
-                <xs:element name="Account" type="tns:DummyAccount" minOccurs="0"/>
+                <xs:element name="DummyAccount" type="tns:DummyAccount" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

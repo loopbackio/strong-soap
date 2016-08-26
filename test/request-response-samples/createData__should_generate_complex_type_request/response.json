@@ -1,6 +1,6 @@
 {
   "StandardResponse":{
-    "attributes":{"RecordID":"1000027"}
+    "$attributes":{"RecordID":"1000027"}
   }
 
 }

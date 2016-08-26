@@ -1,1 +1,20 @@
-{"return":{"attributes":{"xsi:type":"NS2:TewsLoginResult"},"$value":"lrSuccess"},"SessionID":{"attributes":{"xsi:type":"xsd:string"},"$value":"{B26106C6-1F0A-416E-B8EB-B66BBA2A450A}"}}
+{
+    "SessionID": {
+        "$attributes": {
+            "$xsiType": {
+                "type": "string",
+                "xmlns": "http://www.w3.org/2001/XMLSchema"
+            }
+        },
+        "$value": "{B26106C6-1F0A-416E-B8EB-B66BBA2A450A}"
+    },
+    "return": {
+        "$attributes": {
+            "$xsiType": {
+                "type": "TewsLoginResult",
+                "xmlns": "urn:webservice-electrasoft-ru:types-ewsServerIntf"
+            }
+        },
+        "$value": "lrSuccess"
+    }
+}

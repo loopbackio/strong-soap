@@ -3,10 +3,10 @@
 <soap:Header/>
 <soap:Body>
 		<ns1:DummyRequest xmlns:ns1="http://www.Dummy.com/Name/Types">
-		<DummyField1 language="en-US">Humpty</DummyField1>
-		<DummyFilter>
-		<DummyStringFilter>Dumpty</DummyStringFilter>
-		</DummyFilter>
+		<ns1:DummyField1 language="en-US">Humpty</ns1:DummyField1>
+		<ns1:DummyFilter>
+		   <ns2:DummyStringFilter xmlns:ns2="http://www.Dummy.com/Common/Types">Dumpty</ns2:DummyStringFilter>
+		</ns1:DummyFilter>
 		</ns1:DummyRequest>
 </soap:Body>
 </soap:Envelope>

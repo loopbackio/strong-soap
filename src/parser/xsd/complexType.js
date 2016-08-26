@@ -25,7 +25,40 @@ class ComplexType extends XSDElement {
         descriptor.add(childDescriptor);
       }
     }
+    descriptor.name = this.$name || this.name;
+    descriptor.xmlns = this.targetNamespace;
+    descriptor.isSimple = false;
     return descriptor;
+  }
+
+  describeChildren(definitions) {
+    if (this.descriptor) {
+      if (this.descriptor.extension) {
+        let extension = this.descriptor.extension;
+        let xmlns = extension.xmlns;
+        let name = extension.name;
+        if (xmlns) {
+          let schemas = definitions.schemas;
+          if (schemas) {
+            let schema = schemas[xmlns];
+            if (schema) {
+              let complexTypes = schema.complexTypes;
+              if (complexTypes) {
+                let type = complexTypes[name];
+                if (type) {
+                  if (type.descriptor) {
+                    if(!type.descriptor.inheritance){
+                      type.descriptor.inheritance = {};
+                    }
+                    type.descriptor.inheritance[this.descriptor.name] = this.descriptor;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }  
+    }
   }
 }
 

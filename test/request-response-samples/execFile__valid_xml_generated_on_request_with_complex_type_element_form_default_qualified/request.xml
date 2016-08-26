@@ -1,1 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="urn:FileExecutor" xmlns:FileExecutor="urn:FileExecutor"><soap:Body><FileExecutor:execFileParams xmlns:FileExecutor="urn:FileExecutor" xmlns="urn:FileExecutor"><FileExecutor:fileName>PSTN</FileExecutor:fileName><FileExecutor:arguments>0</FileExecutor:arguments><FileExecutor:base64EncodedStdIn>null</FileExecutor:base64EncodedStdIn><FileExecutor:startDetached>true</FileExecutor:startDetached></FileExecutor:execFileParams></soap:Body></soap:Envelope>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Header/>
+<soap:Body>
+<ns1:execFileParams xmlns:ns1="urn:FileExecutor">
+			<ns1:fileName>PSTN</ns1:fileName>
+			<ns1:arguments>0</ns1:arguments>
+			<ns1:base64EncodedStdIn>null</ns1:base64EncodedStdIn>
+			<ns1:startDetached>true</ns1:startDetached>
+</ns1:execFileParams>
+</soap:Body>
+</soap:Envelope>

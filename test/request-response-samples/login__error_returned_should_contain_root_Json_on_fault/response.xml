@@ -5,7 +5,7 @@
 			<faultcode>soapenv:Server.userException</faultcode>
 			<faultstring>You have entered an invalid email address or password. Please try again.</faultstring>
 			<detail>
-				<platformFaults:invalidCredentialsFault xmlns:platformFaults="urn:faults_2013_2.platform.webservices.netsuite.com">
+				<platformFaults:invalidCredentialsFault xmlns:platformFaults="urn:faults_2011_1.platform.webservices.netsuite.com">
 				<platformFaults:code>INVALID_LOGIN_CREDENTIALS</platformFaults:code>
 				<platformFaults:message>You have entered an invalid email address or password. Please try again.</platformFaults:message>
 				</platformFaults:invalidCredentialsFault>

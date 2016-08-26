@@ -1,11 +1,11 @@
 {
   "record":{
-    "attributes":{
+    "$attributes":{
       "internalId":"42",
       "externalId":"Alex Dniprovskyy",
-      "xsi_type":{
+      "$xsiType":{
         "type":"Contact",
-        "xmlns":"urn:relationships_2013_2.lists.webservices.netsuite.com"
+        "xmlns":"urn:relationships_2011_1.lists.webservices.netsuite.com"
       }
     },
     "nullFieldList":{

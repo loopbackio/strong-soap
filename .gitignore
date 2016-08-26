@@ -5,3 +5,4 @@ lib
 .idea
 *.iml
 .vscode
+.eslintrc

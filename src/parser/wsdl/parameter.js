@@ -40,7 +40,7 @@ class Parameter extends WSDLElement {
           this.body.parts = {};
           let parts = this.body.$parts.split(/\s+/);
           for (let i = 0, n = parts.length; i < n; i++) {
-            this.body.parts[part] = this.message.parts[parts[i]];
+            this.body.parts[parts[i]] = this.message.parts[parts[i]];
           }
         } else {
           if (this.message && this.message.parts) {

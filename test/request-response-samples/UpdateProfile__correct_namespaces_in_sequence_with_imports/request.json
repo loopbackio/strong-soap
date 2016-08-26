@@ -1,9 +1,10 @@
 {
+  "UpdateProfileRequest": {
   "Profile": {
     "IDs": {
       "UniqueID": [
         {
-          "attributes": {
+          "$attributes": {
             "source": "TESTSOURCE"
           },
           "$value": 100
@@ -13,13 +14,13 @@
     "Phones": {
       "NamePhone": [
         {
-          "attributes": {
+          "$attributes": {
             "primary": true
           },
           "IDs": {
             "UniqueID": [
               {
-                "attributes": {
+                "$attributes": {
                   "source": "TEST"
                 },
                 "$value": 1
@@ -28,13 +29,13 @@
           }
         },
         {
-          "attributes": {
+          "$attributes": {
             "primary": false
           },
           "IDs": {
             "UniqueID": [
               {
-                "attributes": {
+                "$attributes": {
                   "source": "TEST"
                 },
                 "$value": 2
@@ -44,5 +45,6 @@
         }
       ]
     }
+  }
   }
 }

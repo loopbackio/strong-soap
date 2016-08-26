@@ -1,1 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:tns="urn:platform_2013_2.webservices.netsuite.com" xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com" xmlns:platformFaults="urn:faults_2013_2.platform.webservices.netsuite.com"><soap:Body><platformMsgs:update xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com" xmlns="urn:messages_2013_2.platform.webservices.netsuite.com"><platformMsgs:record internalId="42" externalId="Alex Dniprovskyy" xsi:type="ns1:Contact" xmlns:ns1="urn:relationships_2013_2.lists.webservices.netsuite.com"><platformCore:nullFieldList xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"><platformCore:name>officephone</platformCore:name></platformCore:nullFieldList><ns1:firstName xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">Allister</ns1:firstName><ns1:lastName xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">Sullivan</ns1:lastName><ns1:phone xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com">800-555-2819</ns1:phone></platformMsgs:record></platformMsgs:update></soap:Body></soap:Envelope>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Header/>
+<soap:Body>
+		<ns1:update xmlns:ns1="urn:messages_2011_1.platform.webservices.netsuite.com">
+			<ns1:record internalId="42" externalId="Alex Dniprovskyy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns2:Contact">
+				<ns2:nullFieldList xmlns:ns2="urn:core_2011_1.platform.webservices.netsuite.com">
+					<ns2:name>officephone</ns2:name>
+				</ns2:nullFieldList>
+				<ns2:firstName xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">Allister</ns2:firstName>
+				<ns2:lastName xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">Sullivan</ns2:lastName>
+				<ns2:phone xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">800-555-2819</ns2:phone>
+			</ns1:record>
+		</ns1:update>
+</soap:Body>
+</soap:Envelope>
