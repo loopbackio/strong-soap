@@ -277,35 +277,26 @@ class Server extends Base {
         // Backward compatibility to support one argument callback style
         result = error;
       }
+      var operation  = self.wsdl.definitions.services[serviceName]
+        .ports[portName].binding.operations[operationName];
+      var element = operation.output;
 
+      var operationDescriptor = operation.describe(self.wsdl.definitions);
+      var outputBodyDescriptor = operationDescriptor.output.body;
 
-      if (style === 'rpc') {
-        //[rashmi] this needs a fix, calling non existent api
-        var env = XMLHandler.createSOAPEnvelope();
-        body = self.wsdl.objectToRpcXML(outputName, result, '', self.wsdl.definitions.$targetNamespace);
-      } else {
+      var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
+      var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
 
-        var operation  = self.wsdl.definitions.services[serviceName]
-          .ports[portName].binding.operations[operationName];
-        var element = operation.output;
-
-        var operationDescriptor = operation.describe(self.wsdl.definitions);
-        var outputBodyDescriptor = operationDescriptor.output.body;
-
-        var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
-        var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
-
-        if (self.wsdl.options.forceSoap12Headers) {
-          headers['Content-Type'] = 'application/soap+xml; charset=utf-8';
-          soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
-        }
-
-        var nsContext = self.createNamespaceContext(soapNsPrefix, soapNsURI);
-        var envelope = XMLHandler.createSOAPEnvelope(soapNsPrefix, soapNsURI);
-
-        self.xmlHandler.jsonToXml(envelope.body, nsContext, outputBodyDescriptor, result);
-
+      if (self.wsdl.options.forceSoap12Headers) {
+        headers['Content-Type'] = 'application/soap+xml; charset=utf-8';
+        soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
       }
+
+      var nsContext = self.createNamespaceContext(soapNsPrefix, soapNsURI);
+      var envelope = XMLHandler.createSOAPEnvelope(soapNsPrefix, soapNsURI);
+
+      self.xmlHandler.jsonToXml(envelope.body, nsContext, outputBodyDescriptor, result);
+
       self._envelope(envelope, includeTimestamp);
       var message = envelope.body.toString({pretty: true});
       var xml = envelope.doc.end({pretty: true});
