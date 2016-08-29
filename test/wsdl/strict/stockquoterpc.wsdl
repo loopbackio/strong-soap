@@ -12,7 +12,7 @@
     <xsd:schema targetNamespace="http://example.com/stockquoterpc.xsd"
                 xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xmlns="http://example.com/stockquoterpc.xsd" elementFormDefault="qualified">
 
-            <xsd:element name="setLastTradePriceResponse" type="setLastTradePriceResponseType"/>
+            <xsd:element name="setLastTradePriceRequest" type="setLastTradePriceResponseType"/>
             <xsd:element name="setLastTradePriceResponseType">
                 <xsd:complexType>
                     <xsd:sequence>
