@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+
+<!-- rpc/literal example -->
+
+<wsdl:definitions name="StockQuoteRPC"
+                  targetNamespace="http://example.com/stockquoterpc.wsdl"
+                  xmlns:tns="http://example.com/stockquoterpc.wsdl"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+<wsdl:types>
+    <xsd:schema targetNamespace="http://example.com/stockquoterpc.xsd"
+                xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xmlns="http://example.com/stockquoterpc.xsd" elementFormDefault="qualified">
+
+            <xsd:element name="setLastTradePriceRequest" type="setLastTradePriceResponseType"/>
+            <xsd:element name="setLastTradePriceResponseType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="tradePrice" type="xsd:float"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="setLastTradePriceResponse" type="setLastTradePriceResponseType"/>
+            <xsd:element name="setLastTradePriceResponseType">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="result" type="xsd:boolean"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+
+
+    <wsdl:message name="setLastTradePriceRequest">
+        <wsdl:part name="tradePrice"
+              type="xsd:float"/>
+    </wsdl:message>
+    <wsdl:message name="setLastTradePriceResponse">
+        <wsdl:part name="result"
+              type="xsd:boolean"/>
+    </wsdl:message>
+
+    <wsdl:portType name="StockQuoteUpdater">
+        <wsdl:operation name="setLastTradePrice">
+            <wsdl:input message="tns:setLastTradePriceRequest"/>
+            <wsdl:output message="tns:setLastTradePriceResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+
+    <wsdl:binding name="StockQuoteSoapBindingRPC" type="tns:StockQuoteUpdater">
+        <soap:binding style="rpc"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="setLastTradePrice">
+            <soap:operation soapAction="http://example.com/StockQuoteUpdater"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="StockQuoteServiceRPC">
+        <wsdl:port name="StockQuotePortRPC" binding="tns:StockQuoteSoapBindingRPC">
+            <soap:address location="http://localhost:15099/stockquoterpc"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
+
