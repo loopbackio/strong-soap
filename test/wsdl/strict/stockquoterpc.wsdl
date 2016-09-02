@@ -3,49 +3,46 @@
 <!-- rpc/literal example -->
 
 <wsdl:definitions name="StockQuoteRPC"
-                  targetNamespace="http://example.com/stockquoterpc.wsdl"
-                  xmlns:tns="http://example.com/stockquoterpc.wsdl"
+
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="http://example.com/stockquoterpc.wsdl"
+                  targetNamespace="http://example.com/stockquoterpc.wsdl"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+    <xsd:schema elementFormDefault="qualified"
+              targetNamespace="http://example.com/stockquoterpc.wsdl">
 
-<wsdl:types>
-    <xsd:schema targetNamespace="http://example.com/stockquoterpc.xsd"
-                xmlns:xsd="http://www.w3.org/2000/10/XMLSchema" xmlns="http://example.com/stockquoterpc.xsd" elementFormDefault="qualified">
 
-            <xsd:element name="setLastTradePriceRequest" type="setLastTradePriceResponseType"/>
-            <xsd:element name="setLastTradePriceResponseType">
-                <xsd:complexType>
+                <xsd:complexType name="setLastTradePriceRequestType">
                     <xsd:sequence>
                         <xsd:element name="tradePrice" type="xsd:float"/>
                     </xsd:sequence>
                 </xsd:complexType>
-            </xsd:element>
 
-            <xsd:element name="setLastTradePriceResponse" type="setLastTradePriceResponseType"/>
-            <xsd:element name="setLastTradePriceResponseType">
-                <xsd:complexType>
+                <xsd:complexType name="setLastTradePriceResponseType">
                     <xsd:sequence>
                         <xsd:element name="result" type="xsd:boolean"/>
                     </xsd:sequence>
                 </xsd:complexType>
-            </xsd:element>
+
         </xsd:schema>
     </wsdl:types>
 
 
-    <wsdl:message name="setLastTradePriceRequest">
+    <wsdl:message name="myRequest">
         <wsdl:part name="tradePrice"
-              type="xsd:float"/>
+              type="tns:setLastTradePriceRequestType"/>
     </wsdl:message>
-    <wsdl:message name="setLastTradePriceResponse">
+    <wsdl:message name="myResponse">
         <wsdl:part name="result"
-              type="xsd:boolean"/>
+              type="tns:setLastTradePriceResponseType"/>
     </wsdl:message>
 
     <wsdl:portType name="StockQuoteUpdater">
         <wsdl:operation name="setLastTradePrice">
-            <wsdl:input message="tns:setLastTradePriceRequest"/>
-            <wsdl:output message="tns:setLastTradePriceResponse"/>
+            <wsdl:input message="tns:myRequest"/>
+            <wsdl:output message="tns:myResponse"/>
         </wsdl:operation>
     </wsdl:portType>
 
