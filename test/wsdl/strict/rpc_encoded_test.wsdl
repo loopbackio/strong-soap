@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<!-- rpc/encoded example -->
+
+<wsdl:definitions name="StockQuoteRPCEncoded"
+                  targetNamespace="http://example.com/rpc_encoded_test.wsdl"
+                  xmlns:tns="http://example.com/rpc_encoded_test.wsdl"
+                  xmlns:xsd1="http://example.com/rpc_encoded_test.xsd"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">
+
+    <wsdl:message name="myMethodRequest">
+        <wsdl:part name="x" type="xsd:int"/>
+        <wsdl:part name="y" type="xsd:float"/>
+    </wsdl:message>
+
+
+    <wsdl:portType name="RPCEncodedTest">
+        <wsdl:operation name="myMethod">
+            <wsdl:input message="tns:myMethodRequest"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+
+    <wsdl:binding name="RPCEncodedTestBinding" type="tns:RPCEncodedTest">
+        <soap:binding style="rpc"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="myMethod">
+            <soap:operation soapAction="http://example.com/RPCEncodedTest"/>
+            <wsdl:input>
+                <soap:body/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="RPCEncodedService">
+        <wsdl:port name="RpcEncodedTestPort" binding="tns:RPCEncodedTestBinding">
+            <soap:address location="http://localhost:15099/rpc_Encoded_testing"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
+

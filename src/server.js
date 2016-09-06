@@ -203,25 +203,31 @@ class Server extends Base {
           headers: headers,
           style: 'rpc'
         }, req, callback);
-      } else {
+      } else { //document style
         var messageElemName = (Object.keys(body)[0] === 'attributes' ?
           Object.keys(body)[1] : Object.keys(body)[0]);
         var pair = binding.topElements[messageElemName];
 
         var operationName, outputName;
-
         var operations = binding.operations;
+        //figure out the output name
         for (var name in operations) {
-          if(operations[name].input.message.parts.body.element.$name === messageElemName) {
+          var inputParts = operations[name].input.message.parts;
+          //find the first part of the input message. There could be more than one parts in input message.
+          var firstInPart = inputParts[Object.keys(inputParts)[0]];
+          if(firstInPart.element.$name === messageElemName) {
             operationName = operations[name].$name;
             if (operations[name].output != null) {
-              outputName = operations[name].output.message.parts.body.element.$name;
+              var outPart = operations[name].output.message.parts;
+              //there will be only one output part
+              var firstOutPart = outPart[Object.keys(outPart)[0]];
+              outputName = firstOutPart.element.$name;
             }
             break;
           }
         }
 
-        console.log(operationName);
+        console.log(' operationName: ' + operationName + ' outputName: ' + outputName);
         self.emit('request', obj, operationName);
         if (headers)
           self.emit('headers', headers, operationName);
@@ -262,6 +268,8 @@ class Server extends Base {
     try {
       operation = this.services[serviceName][portName][operationName];
     } catch (error) {
+      //fix - should create a fault and call sendError (..) so that this error is not lost and will be sent as Fault in soap envelope
+      //to the client?
       return callback(this._envelope('', includeTimestamp));
     }
 

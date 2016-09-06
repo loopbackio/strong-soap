@@ -169,14 +169,6 @@ class Client extends Base {
     var inputBodyDescriptor = operationDescriptor.input.body;
     var inputHeadersDescriptor = operationDescriptor.input.headers;
 
-    if (operation.style === Operation.Style.documentLiteralWrapped) {
-      // For document literal wrapper style, allow skipping of wrapper element
-      if (args == null || typeof args !== 'object' || !(operation.$name in args)) {
-        let wrapper = {};
-        wrapper[operation.$name] = args;
-        args = wrapper;
-      }
-    }
 
     xmlHandler.jsonToXml(soapBodyElement, nsContext, inputBodyDescriptor, args);
 

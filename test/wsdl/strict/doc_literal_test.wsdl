@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<wsdl:definitions name="DocLiteral"
+                  targetNamespace="http://example.com/doc_literal_test.wsdl"
+                  xmlns:tns="http://example.com/doc_literal_test.wsdl"
+                  xmlns:xsd1="http://example.com/doc_literal_test.xsd"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://example.com/doc_literal_test.xsd"
+                    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">
+            <xsd:element name="xElement" type="xsd:boolean"/>
+            <xsd:element name="yElement" type="xsd:boolean"/>
+            <xsd:element name="zElement" type="xsd:boolean"/>
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="myMethodRequest">
+        <wsdl:part name="x" element="xsd1:xElement"/>
+        <wsdl:part name="y" element="xsd1:yElement"/>
+    </wsdl:message>
+
+    <wsdl:message name="myMethodResponse">
+        <wsdl:part name="z" element="xsd1:zElement"/>
+    </wsdl:message>
+
+    <wsdl:portType name="DocLiteralPortType">
+        <wsdl:operation name="myMethod">
+            <wsdl:input message="tns:myMethodRequest"/>
+            <wsdl:output message="tns:myMethodResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="DocLiteralBinding" type="tns:DocLiteralPortType">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="myMethod">
+            <soap:operation soapAction="http://example.com/myMethod"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="DocLiteralService">
+        <wsdl:port name="DocLiteralPort" binding="tns:DocLiteralBinding">
+            <soap:address location="http://localhost:15099/doc_literal_test"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
