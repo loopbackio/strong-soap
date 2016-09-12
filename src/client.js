@@ -209,7 +209,14 @@ class Client extends Base {
         callback(err);
       } else {
 
-        var outputEnvDescriptor = operationDescriptor.outputEnvelope;
+        //figure out if this is a Fault response or normal output from the server.
+        //There seem to be no good way to figure this out other than
+        //checking for <Fault> element in server response.
+        if (body.indexOf('<soap:Fault>') > -1  || body.indexOf('<Fault>') > -1) {
+          var outputEnvDescriptor = operationDescriptor.faultEnvelope;
+        } else  {
+          var outputEnvDescriptor = operationDescriptor.outputEnvelope;
+        }
         try {
           obj = xmlHandler.xmlToJson(nsContext, body, outputEnvDescriptor);
         } catch (error) {
@@ -223,6 +230,7 @@ class Client extends Base {
               return callback(null, response, json);
             }
           }
+          //Reaches here for Fault processing as well since Fault is thrown as an error in xmlHandler.xmlToJson(..) function.
           error.response = response;
           error.body = body;
           self.emit('soapError', error);

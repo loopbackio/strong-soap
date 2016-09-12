@@ -370,7 +370,7 @@ describe('SOAP Server', function() {
   it('should return SOAP Fault body for SOAP 1.2', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      var expectedBody = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <Fault>\n      <Code>\n        <Value>soap:Sender</Value>\n        <Subcode>\n          <value>rpc:BadArguments</value>\n        </Subcode>\n      </Code>\n      <Reason>\n        <Text>Processing Error</Text>\n      </Reason>\n    </Fault>\n  </soap:Body>\n</soap:Envelope>';
+      var expectedBody = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <soap:Fault>\n      <Code>\n        <Value>soap:Sender</Value>\n        <Subcode>\n          <value>rpc:BadArguments</value>\n        </Subcode>\n      </Code>\n      <Reason>\n        <Text>Processing Error</Text>\n      </Reason>\n    </soap:Fault>\n  </soap:Body>\n</soap:Envelope>';
       client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'SOAP Fault v1.2' }}, function(err, response, body) {
         assert.ok(err);
         var fault = err.root.Envelope.Body.Fault;
@@ -394,9 +394,11 @@ describe('SOAP Server', function() {
         assert.equal(fault.faultcode, "soap:Client.BadArguments");
         assert.equal(fault.faultstring, "Error while processing arguments");
         // Verify namespace on elements set according to fault spec 1.1
-        assert.ok(body.match(/<faultcode>.*<\/faultcode>/g),
+        //revisit soap: namespace for below elements. Current code either can add soap: for <Fault> including every child element
+        //under <Fault> or NOT add soap: for <Fault> including every child element under <Fault>.
+        assert.ok(body.match(/<soap:faultcode>.*<\/soap:faultcode>/g),
           "Body should contain faultcode-element without namespace");
-        assert.ok(body.match(/<faultstring>.*<\/faultstring>/g),
+        assert.ok(body.match(/<soap:faultstring>.*<\/soap:faultstring>/g),
           "Body should contain faultstring-element without namespace");
         done();
       });

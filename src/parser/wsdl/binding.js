@@ -43,10 +43,11 @@ class Binding extends WSDLElement {
           if (operation.output && child.output) {
             child.output.message = operation.output.message;
           }
-          // Set portType.operation.fault.message to binding.operation.fault
-          for (var f in child.faults) {
+
+          //portType.operation.fault is fully processed with message etc. Hence set to binding.operation.fault
+          for (var f in operation.faults) {
             if (operation.faults[f]) {
-              child.faults[f].message = operation.faults[f].message;
+              child.faults[f] = operation.faults[f];
             }
           }
           if (operation.$parameterOrder) {

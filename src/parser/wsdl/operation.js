@@ -3,6 +3,7 @@ var descriptor = require('../xsd/descriptor');
 var ElementDescriptor = descriptor.ElementDescriptor;
 var TypeDescriptor = descriptor.TypeDescriptor;
 var QName = require('../qname');
+var helper = require('../helper');
 
 var assert = require('assert');
 
@@ -17,7 +18,9 @@ const Style = {
 class Operation extends WSDLElement {
   constructor(nsName, attrs, options) {
     super(nsName, attrs, options);
-    this.faults = {};
+    //there can be multiple faults defined in the operation. They all will have same type name 'fault'
+    //what differentiates them from each other is, the element/s which will get added under fault <detail> during runtime.
+    this.faults = [];
   }
 
   addChild(child) {
@@ -29,7 +32,7 @@ class Operation extends WSDLElement {
         this.output = child;
         break;
       case 'fault':
-        this.faults[child.$name] = child;
+        this.faults.push(child);
         break;
       case 'operation': // soap:operation
         this.soapAction = child.$soapAction || '';
@@ -72,7 +75,7 @@ class Operation extends WSDLElement {
     var faults = {};
     for (var f in this.faults) {
       let fault = this.faults[f];
-      let part = fault.fault && fault.fault.part;
+      let part = fault.message && fault.message.children[0]; //find the part through Fault message. There is only one part in fault message
       if (part && part.element) {
         faults[f] = part.element.describe(definitions);
       } else {
@@ -190,12 +193,17 @@ class Operation extends WSDLElement {
         body: output,
         headers: outputHeaders
       },
-      faults: this.faults
+      faults: {
+          body: {Fault : {faults}}
+      }
     };
     this.descriptor.inputEnvelope =
       Operation.createEnvelopeDescriptor(this.descriptor.input, false);
     this.descriptor.outputEnvelope =
       Operation.createEnvelopeDescriptor(this.descriptor.output, true);
+    this.descriptor.faultEnvelope =
+      Operation.createEnvelopeDescriptor(this.descriptor.faults, true);
+
     return this.descriptor;
   }
 
@@ -217,7 +225,9 @@ class Operation extends WSDLElement {
     envelopeDescriptor.addElement(headerDescriptor);
     envelopeDescriptor.addElement(bodyDescriptor);
 
-    if (parameterDescriptor && parameterDescriptor.body) {
+    //add only if input or output. Fault is list of faults unlike input/output element and fault needs further processing below,
+    //before it can be added to the <body>
+    if (parameterDescriptor && parameterDescriptor.body && !parameterDescriptor.body.Fault) {
       bodyDescriptor.add(parameterDescriptor.body);
     }
 
@@ -225,22 +235,49 @@ class Operation extends WSDLElement {
       bodyDescriptor.add(parameterDescriptor.headers);
     }
 
-    if (isOutput && parameterDescriptor && parameterDescriptor.faults) {
+    //process faults. An example of resulting structure of the <Body> element with <Fault> element descriptor:
+    /*
+     <Body>
+        <Fault>
+          <faultcode> </faultcode>
+          <faultstring> </faultstring>
+          <faultactor> </faultactor>
+          <detail>
+            <myMethodFault1>
+              <errorMessage1> </errorMessage1>
+              <value1> </value1>
+            </myMethodFault1>
+          </detail>
+          <detail>
+            <myMethodFault2>
+              <errorMessage2> </errorMessage2>
+              <value2> </value2>
+            </myMethodFault2>
+          </detail>
+      </Fault>
+     </Body>
+     */
+    if (isOutput && parameterDescriptor && parameterDescriptor.body.Fault) {
       let xsdStr = new QName(helper.namespaces.xsd, 'string', 'xsd');
       let faultDescriptor = new ElementDescriptor(
         new QName(nsURI, 'Fault', prefix), null, 'qualified', false);
+      bodyDescriptor.add(faultDescriptor);
       faultDescriptor.add(
-        new ElementDescriptor(nsURI, 'faultcode', xsdStr, 'qualified', false));
+        new ElementDescriptor(new QName(nsURI, 'faultcode', prefix), null, 'qualified', false));
       faultDescriptor.add(
-        new ElementDescriptor(nsURI, 'faultstring', xsdStr, 'qualified', false));
+        new ElementDescriptor(new QName(nsURI, 'faultstring', prefix), null, 'qualified', false));
       faultDescriptor.add(
-        new ElementDescriptor(nsURI, 'faultactor', xsdStr, 'qualified', false));
+        new ElementDescriptor(new QName(nsURI, 'faultactor', prefix), null, 'qualified', false));
       let detailDescriptor =
-        new ElementDescriptor(nsURI, 'detail', null, 'qualified', false);
-      faultDescriptor.add(detailDescriptor);
+        new ElementDescriptor(new QName(nsURI, 'detail', prefix), null, 'qualified', false);
 
-      for (let f in parameterDescriptor.faults) {
-        detailDescriptor.add(parameterDescriptor.faults[f]);
+      //multiple faults may be defined in wsdl for this operation. Go though every Fault and add it under <detail> element.
+      for (var f in parameterDescriptor.body.Fault.faults) {
+        detailDescriptor.add(parameterDescriptor.body.Fault.faults[f]);
+      }
+      //only add <detail> element to <Fault> descriptor only if there is more than one <detail> element
+      if (detailDescriptor.elements.length > 0) {
+        faultDescriptor.add(detailDescriptor);
       }
     }
 
