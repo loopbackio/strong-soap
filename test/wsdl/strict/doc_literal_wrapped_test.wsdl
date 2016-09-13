@@ -32,6 +32,25 @@
                 </xsd:complexType>
             </xsd:element>
 
+            <!--Fault element -->
+            <xsd:element name="myMethodFault1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="errorMessage1" type="xsd:string"/>
+                        <xsd:element name="value1" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="myMethodFault2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="errorMessage2" type="xsd:string"/>
+                        <xsd:element name="value2" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
         </xsd:schema>
     </wsdl:types>
 
@@ -43,10 +62,20 @@
         <wsdl:part name="parameters" element="xsd1:myMethodResponse"/>
     </wsdl:message>
 
+    <wsdl:message name="myMethodFault1">
+        <wsdl:part name="parameters" element="xsd1:myMethodFault1"/>
+    </wsdl:message>
+
+    <wsdl:message name="myMethodFault2">
+        <wsdl:part name="parameters" element="xsd1:myMethodFault2"/>
+    </wsdl:message>
+
     <wsdl:portType name="DocLiteralWrappedPortType">
         <wsdl:operation name="myMethod">
             <wsdl:input message="tns:myMethodRequest"/>
             <wsdl:output message="tns:myMethodResponse"/>
+            <wsdl:fault message="tns:myMethodFault1"/>
+            <wsdl:fault message="tns:myMethodFault2"/>
         </wsdl:operation>
     </wsdl:portType>
 
@@ -61,6 +90,9 @@
             <wsdl:output>
                 <soap:body use="literal"/>
             </wsdl:output>
+            <wsdl:fault>
+                <soap:body use="literal"/>
+            </wsdl:fault>
         </wsdl:operation>
     </wsdl:binding>
 

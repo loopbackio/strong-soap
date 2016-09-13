@@ -18,7 +18,7 @@ class Parameter extends WSDLElement {
       this.headers = this.headers || [];
       // soap:header
       this.headers.push(child);
-    } else if (child.name === 'fault') {
+    } else if (child.name === 'fault') { //Revisit. Never gets executed.
       this.fault = child;
     }
   }
@@ -68,7 +68,9 @@ class Parameter extends WSDLElement {
           }
         }
       }
-      if (this.fault) {
+      //Revisit.. this.name is always undefined because there is no code which calls addChild(..) with child.name = 'fault.
+      //code works inspite of not executing this block. Remove it?
+      if (this.name === 'fault') {
         let message = this.fault.parent.message;
         if (message) {
           message.postProcess(definitions);
