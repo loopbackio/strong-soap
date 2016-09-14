@@ -28,7 +28,8 @@ class Definitions extends WSDLElement {
       self.messages[child.$name] = child;
     }
     else if (child.name === 'import') {
-      self.schemas[child.$namespace] = new Schema(child.$namespace, {});
+      //create a Schema element for the <import ../>. targetNamespace is the 'namespace' of the <import  />  element in the wsdl.
+      self.schemas[child.$namespace] = new Schema('xs:schema',{targetNamespace: child.$namespace});
       self.schemas[child.$namespace].addChild(child);
     }
     else if (child instanceof PortType) {
