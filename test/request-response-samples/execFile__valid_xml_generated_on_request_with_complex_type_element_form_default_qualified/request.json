@@ -1,6 +1,8 @@
 {
-		"fileName": "PSTN",
-		"arguments": "0",
-		"base64EncodedStdIn": "null",
-		"startDetached": "true"
+ "execFileParams": {
+    "fileName": "PSTN",
+    "arguments": "0",
+    "base64EncodedStdIn": "null",
+    "startDetached": "true"
+}
 }

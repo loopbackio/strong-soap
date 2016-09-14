@@ -148,13 +148,14 @@ class Operation extends WSDLElement {
             let type;
             if (part.type) {
               type = part.type.qname;
+              let element = new descriptor.ElementDescriptor(
+                new QName(nsURI, p), type, 'unqualified', false);
+              inputParts.addElement(element);
             } else if (part.element) {
-              type = part.element.type.qname;
+              var elementDescriptor = part.element.describe(definitions);
+              inputParts.addElement(elementDescriptor);
             }
-            let element = new descriptor.ElementDescriptor(
-              new QName(nsURI, p), type, 'unqualified', false);
-            inputParts.addElement(element);
-          }
+          } 
         }
         if (this.output && this.output.body) {
           for (let p in this.output.body.parts) {
@@ -162,12 +163,13 @@ class Operation extends WSDLElement {
             let type;
             if (part.type) {
               type = part.type.qname;
+              let element = new descriptor.ElementDescriptor(
+                new QName(nsURI, p), type, 'unqualified', false);
+              outputParts.addElement(element);
             } else if (part.element) {
-              type = part.element.type.qname;
+              let elementDescriptor = part.element.describe(definitions);
+              outputParts.addElement(elementDescriptor);
             }
-            let element = new descriptor.ElementDescriptor(
-              new QName(nsURI, p), type, 'unqualified', false);
-            outputParts.addElement(element);
           }
         }
         input.elements = inputParts.elements;

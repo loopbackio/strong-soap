@@ -1,19 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <soap:Envelope
-    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:dummy="http://www.Dummy.com"
-    xmlns:tns="http://www.Dummy.com"
-    xmlns:common="http://www.Dummy.com/Common">
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header/>
     <soap:Body>
-        <dummy:DummyRequest
-            xmlns:dummy="http://www.Dummy.com"
-            xmlns="http://www.Dummy.com">
-            <common:Order
-                xmlns:common="http://www.Dummy.com/Common">
-                <common:Id>1</common:Id>
-                <common:Name>foo</common:Name>
-            </common:Order>
-        </dummy:DummyRequest>
+        <ns1:DummyRequest
+            xmlns:ns1="http://www.Dummy.com">
+            <ns2:Order
+                xmlns:ns2="http://www.Dummy.com/Common">
+                <Id>1</Id>
+                <Name>foo</Name>
+            </ns2:Order>
+        </ns1:DummyRequest>
     </soap:Body>
 </soap:Envelope>

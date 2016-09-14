@@ -11,7 +11,7 @@
             targetNamespace="http://www.Dummy.com"
             xmlns:common="http://www.Dummy.com/Common"
             elementFormDefault="qualified" attributeFormDefault="unqualified">
-            <xsd:import namespace="http://www.Dummy.com/Common" schemaLocation="common.xsd"/>
+            <xsd:import namespace="http://www.Dummy.com/Common" schemaLocation="main.xsd"/>
             <xsd:element name="DummyRequest">
                 <xsd:complexType>
                     <xsd:sequence>

@@ -10,6 +10,7 @@ class NamespaceScope {
   constructor(parent) {
     this.parent = parent;
     this.namespaces = {};
+    this.prefixCount = 0;
   }
 
   /**
@@ -89,6 +90,48 @@ class NamespaceScope {
         }
     }
   }
+
+  /**
+   * Look up the namespace prefix by URI
+   * @param {String} nsURI Namespace URI
+   * @param {Boolean} [localOnly] Search current scope only
+   * @returns {String} Namespace prefix
+   */
+  getPrefixMapping(nsURI, localOnly) {
+    switch (nsURI) {
+      case 'http://www.w3.org/XML/1998/namespace':
+        return 'xml';
+      case 'http://www.w3.org/2000/xmlns/':
+        return 'xmlns';
+      default:
+        for (var p in this.namespaces) {
+          if (this.namespaces[p].uri === nsURI && this.namespaces[p].declared===true) {
+            return this.namespaces[p];
+          }
+        }
+        if (!localOnly && this.parent) {
+          return this.parent.getPrefixMapping(nsURI);
+        } else {
+          return null;
+        }
+    }
+  }
+
+  /**
+   * Generate a new prefix that is not mapped to any uris
+   * @param base {string} The base for prefix
+   * @returns {string}
+   */
+  generatePrefix(base) {
+    base = base || 'ns';
+    while (true) {
+      let prefix = 'ns' + (++this.prefixCount);
+      if (!this.getNamespaceURI(prefix)) {
+        // The prefix is not used
+        return prefix;
+      }
+    }
+  }
 }
 
 /**
@@ -100,7 +143,6 @@ class NamespaceContext {
   constructor() {
     this.scopes = [];
     this.pushContext();
-    this.prefixCount = 0;
   }
 
   /**
@@ -174,19 +216,23 @@ class NamespaceContext {
   }
 
   /**
+   * Look up the namespace mapping by nsURI
+   * @param {String} nsURI Namespace URI
+   * @returns {String} Namespace mapping
+   */
+  getPrefixMapping(nsURI) {
+    return this.currentScope &&
+      this.currentScope.getPrefixMapping(nsURI);
+  }
+
+  /**
    * Generate a new prefix that is not mapped to any uris
    * @param base {string} The base for prefix
    * @returns {string}
    */
   generatePrefix(base) {
-    base = base || 'ns';
-    while (true) {
-      let prefix = 'ns' + (++this.prefixCount);
-      if (!this.getNamespaceURI(prefix)) {
-        // The prefix is not used
-        return prefix;
-      }
-    }
+    return this.currentScope &&
+      this.currentScope.generatePrefix(base);
   }
 
   /**
@@ -206,7 +252,7 @@ class NamespaceContext {
         return mapping;
       }
     }
-    if (this.getNamespaceURI(prefix, true)) {
+    if (this.getNamespaceURI(prefix)) {
       // The prefix is already mapped to a different namespace
       prefix = this.generatePrefix();
     }

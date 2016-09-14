@@ -1,21 +1,22 @@
-<soapenv:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
-    <soapenv:Header>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" >
+   <soapenv:Header>
         <platformMsgs:documentInfo xmlns:platformMsgs="urn:messages_2013_2.platform.webservices.netsuite.com">
             <platformMsgs:nsId>WEBSERVICES_TSTDRV1081821_052320147072010331947189232_5a90eb</platformMsgs:nsId>
         </platformMsgs:documentInfo>
-    </soapenv:Header>
-    <soapenv:Body>
-        <addListResponse xmlns="urn:messages_2013_2.platform.webservices.netsuite.com">
-            <writeResponseList>
-                <writeResponse>
-                    <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
-                    <baseRef xsi:type="platformCore:RecordRef" type="contact" internalId="7080" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
-                </writeResponse>
-                <writeResponse>
-                    <platformCore:status isSuccess="true" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
-                    <baseRef xsi:type="platformCore:RecordRef" type="contact" internalId="7081" xmlns:platformCore="urn:core_2013_2.platform.webservices.netsuite.com"/>
-                </writeResponse>
-            </writeResponseList>
-        </addListResponse>
-    </soapenv:Body>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:addListResponse xmlns:urn="urn:messages_2011_1.platform.webservices.netsuite.com"  xmlns:urn1="urn:core_2011_1.platform.webservices.netsuite.com">
+         <urn:writeResponseList>
+            <!--1 or more repetitions:-->
+            <urn:writeResponse>
+               <urn1:status isSuccess="true"/>
+               <baseRef internalId="7080" xsi:type="platformCore:RecordRef" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:platformCore="urn:core_2011_1.platform.webservices.netsuite.com"/>
+            </urn:writeResponse>
+            <urn:writeResponse>
+               <urn1:status isSuccess="true"/>
+               <baseRef internalId="7081" xsi:type="platformCore:RecordRef" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:platformCore="urn:core_2011_1.platform.webservices.netsuite.com"/>
+            </urn:writeResponse>
+         </urn:writeResponseList>
+      </urn:addListResponse>
+   </soapenv:Body>
 </soapenv:Envelope>

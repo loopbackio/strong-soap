@@ -1,9 +1,10 @@
 {
+  "UpdateProfileRequest": {
   "Profile": {
     "IDs": {
       "UniqueID": [
         {
-          "attributes": {
+          "$attributes": {
             "source": "TESTSOURCE"
           },
           "$value": 100
@@ -23,7 +24,7 @@
     "Phones": {
       "NamePhone": [
         {
-          "attributes": {
+          "$attributes": {
             "primary": true
           },
           "PhoneData": {
@@ -31,7 +32,7 @@
           }
         },
         {
-          "attributes": {
+          "$attributes": {
             "primary": false
           },
           "PhoneData": {
@@ -40,5 +41,6 @@
         }
       ]
     }
+  }
   }
 }

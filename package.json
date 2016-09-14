@@ -49,6 +49,8 @@
     "diff": "^2.2.3",
     "doctoc": "^1.1.1",
     "duplexer": "^0.1.1",
+    "eslint": "^3.4.0",
+    "eslint-config-google": "^0.6.0",
     "glob": "^7.0.3",
     "istanbul": "^0.4.3",
     "jshint": "2.9.2",

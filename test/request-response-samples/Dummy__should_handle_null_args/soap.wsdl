@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 xmlns:tns="http://www.Dummy.com"  xmlns:n="http://www.Dummy.com/Name/Types"  xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.Dummy.com">
 	<wsdl:types>
-		<xs:schema>
-			<xs:import namespace="http://www.Dummy.com/Common/Types" schemaLocation="common.xsd"/>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://www.example.com/v1" xmlns="http://www.example.com/v1">
+            <xs:import namespace="http://www.Dummy.com/Common/Types" schemaLocation="common.xsd"/>
 			<xs:import namespace="http://www.Dummy.com/Name/Types" schemaLocation="name.xsd"/>
 		</xs:schema>
 	</wsdl:types>

@@ -3,8 +3,8 @@
   "calls": {
     "item": [
       {
-        "attributes": {
-          "xsi_type": {
+        "$attributes": {
+          "$xsiType": {
             "type": "Array",
             "xmlns": "http://schemas.xmlsoap.org/soap/encoding/"
           }
@@ -12,8 +12,8 @@
         "item": [
           "product_stock.update",
           {
-            "attributes": {
-              "xsi_type": {
+            "$attributes": {
+              "$xsiType": {
                 "type": "Array",
                 "xmlns": "http://schemas.xmlsoap.org/soap/encoding/"
               }
@@ -21,8 +21,8 @@
             "item": [
               "HTC Touch Diamond",
               {
-                "attributes": {
-                  "xsi_type": {
+                "$attributes": {
+                  "$xsiType": {
                     "type": "Map",
                     "xmlns": "http://xml.apache.org/xml-soap"
                   }

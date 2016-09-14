@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:typens="urn:Magento" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Magento" targetNamespace="urn:Magento">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:typens="urn:Magento" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Magento" targetNamespace="urn:Magento" elementFormDefault="qualified">
    <types>
-      <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento">
+      <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:Magento" elementFormDefault="qualified">
           <complexType name="FixedArray">
             <complexContent>
                <restriction base="soapenc:Array">
@@ -11,13 +11,13 @@
          </complexType>
       </schema>
    </types>
-   <message name="multiCall">
+   <message name="multiCall" elementFormDefault="qualified">
       <part name="sessionId" type="xsd:string" />
-      <part name="calls" type="typens:FixedArray" />
+      <part name="calls" type="FixedArray" />
       <part name="options" type="xsd:anyType" />
    </message>
    <message name="multiCallResponse">
-      <part name="multiCallReturn" type="typens:FixedArray" />
+      <part name="multiCallReturn" type="FixedArray" />
    </message>
    <portType name="Mage_Api_Model_Server_HandlerPortType">
       <operation name="multiCall">

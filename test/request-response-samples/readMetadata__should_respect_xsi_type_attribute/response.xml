@@ -5,7 +5,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <soapenv:Body>
     <readMetadataResponse>
       <result>
-        <records xsi:type="CustomObject">
+        <records xsi:type="ns2:CustomObject" xmlns:ns2="http://soap.sforce.com/2006/04/metadata">
           <fullName>Opportunity</fullName>
           <businessProcesses>
             <fullName>Some Process</fullName>

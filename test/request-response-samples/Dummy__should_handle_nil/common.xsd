@@ -18,11 +18,12 @@
 			<xs:element name="DummyElement" type="tns:Dummy" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-    <xs:complexType name="DummyFilter">
+    <xs:complexType name="DummyFilterType">
         <xs:sequence>
             <xs:element name="DummyIntFilter" type="xs:string" minOccurs="0"/>
             <xs:element name="DummyStringFilter" type="xs:string" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
+	<xs:element name="DummyFilter" type="tns:DummyFilterType" />
 </xs:schema>
 

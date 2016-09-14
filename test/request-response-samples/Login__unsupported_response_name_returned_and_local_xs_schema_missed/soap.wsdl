@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="IewsServerservice" targetNamespace="urn:webservice-electrasoft-ru" xmlns:tns="urn:webservice-electrasoft-ru"
-             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns1="http://www.borland.com/namespaces/Types"
-             xmlns:ns2="urn:webservice-electrasoft-ru:types-ewsServerIntf">
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:nstypes="http://www.borland.com/namespaces/Types"
+             xmlns:nstypes2="urn:webservice-electrasoft-ru:types-ewsServerIntf" elementFormDefault="qualified">
     <types>
-        <xs:schema targetNamespace="http://www.borland.com/namespaces/Types" xmlns="http://www.borland.com/namespaces/Types">
+        <xs:schema targetNamespace="http://www.borland.com/namespaces/Types" elementFormDefault="qualified">
             <xs:complexType name="TWideStringDynArray">
                 <xs:complexContent>
                     <xs:restriction base="soapenc:Array">
@@ -21,7 +21,7 @@
                 </xs:complexContent>
             </xs:complexType>
         </xs:schema>
-        <xs:schema targetNamespace="urn:webservice-electrasoft-ru:types-ewsServerIntf" xmlns="urn:webservice-electrasoft-ru:types-ewsServerIntf">
+        <xs:schema targetNamespace="urn:webservice-electrasoft-ru:types-ewsServerIntf" elementFormDefault="qualified">
             <xs:simpleType name="TewsLoginResult">
                 <xs:restriction base="xs:string">
                     <xs:enumeration value="lrSuccess"/>
@@ -53,7 +53,7 @@
     </message>
     <message name="Login1Response">
         <part name="SessionID" type="xs:string"/>
-        <part name="return" type="ns2:TewsLoginResult"/>
+        <part name="return" type="nstypes2:TewsLoginResult"/>
     </message>
     <portType name="IewsServer">
         <operation name="Login">
@@ -66,10 +66,10 @@
         <operation name="Login">
             <soap:operation soapAction="urn:webservice-electrasoft-ru:types-ewsServerIntf-IewsServer#Login" style="rpc"/>
             <input message="tns:Login1Request">
-                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:webservice-electrasoft-ru:types-ewsServerIntf-IewsServer"/>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
             </input>
             <output message="tns:Login1Response">
-                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:webservice-electrasoft-ru:types-ewsServerIntf-IewsServer"/>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
             </output>
         </operation>
     </binding>

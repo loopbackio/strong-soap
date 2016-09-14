@@ -6,7 +6,7 @@
                   xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
                   targetNamespace="http://www.bigdatacollect.or">
     <wsdl:types>
-        <xs:schema>
+        <xs:schema elementFormDefault="qualified">
             <xs:import namespace="http://www.bigdatacollect.or/Common/Types" schemaLocation="Common.xsd"/>
             <xs:import namespace="http://www.bigdatacollect.or/Name/Types" schemaLocation="Name.xsd"/>
         </xs:schema>

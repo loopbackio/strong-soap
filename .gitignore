@@ -4,3 +4,5 @@ coverage
 lib
 .idea
 *.iml
+.vscode
+.eslintrc

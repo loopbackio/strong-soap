@@ -8,10 +8,10 @@
     "Action":"Create",
           "DataRow":{
               "field":[{
-                  "attributes":{"column":"C_BPartner_ID"},
+                  "$attributes":{"column":"C_BPartner_ID"},
                   "val":"1001047"
               },{
-                "attributes":{"column":"Interest"},
+                "$attributes":{"column":"Interest"},
                 "val":"Cooking"
               }]
           }

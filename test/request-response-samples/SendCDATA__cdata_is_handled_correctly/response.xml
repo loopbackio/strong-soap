@@ -1,1 +1,8 @@
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" ><soap:Body><TestResponse><TestResult><![CDATA[Hello World! & Hello Me!]]></TestResult></TestResponse></soap:Body></soap:Envelope>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://example.com/testservice.wsdl">
+<soap:Body>
+    <ns1:TestResponse xmlns:ns1="http://example.com/testservice.wsdl">
+      <ns1:TestResult><![CDATA[Hello World! & Hello Me!]]></ns1:TestResult>
+    </ns1:TestResponse>
+</soap:Body>
+</soap:Envelope>

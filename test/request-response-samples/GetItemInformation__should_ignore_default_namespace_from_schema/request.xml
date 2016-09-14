@@ -1,1 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:tns="SAMPLE"><soap:Body><GetItemInformation xmlns="SAMPLE"><Items><Item><ItemNumber>1234</ItemNumber><RequestedQuantity><Value>1.00</Value></RequestedQuantity></Item></Items></GetItemInformation></soap:Body></soap:Envelope>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Header/>
+<soap:Body>
+		<ns1:GetItemInformation xmlns:ns1="SAMPLE">
+			<ns1:Items>
+				<ns1:Item>
+					<ns1:ItemNumber>1234</ns1:ItemNumber>
+					<ns1:RequestedQuantity>
+						<ns1:Value>1.00</ns1:Value>
+					</ns1:RequestedQuantity>
+				</ns1:Item>
+			</ns1:Items>
+		</ns1:GetItemInformation>
+</soap:Body>
+</soap:Envelope>

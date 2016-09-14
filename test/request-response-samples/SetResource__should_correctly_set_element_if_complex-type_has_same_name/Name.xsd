@@ -15,7 +15,7 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="SetResourceRespone">
+    <xs:element name="SetResourceResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Result" type="tns:ResultStatus"/>

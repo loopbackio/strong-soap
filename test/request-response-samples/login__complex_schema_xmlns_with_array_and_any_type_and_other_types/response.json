@@ -1,12 +1,12 @@
 {
   "sessionResponse":{
     "status":{
-      "attributes":{
+      "$attributes":{
         "isSuccess":"true"
        }
     },
     "userId":{
-      "attributes":{
+      "$attributes":{
         "internalId":"1645"
        },
        "name":"SCPlus Dev"
@@ -15,7 +15,7 @@
       "wsRole": [
       {
         "role":{
-          "attributes":{
+          "$attributes":{
             "internalId":"3"
            },
            "name":"Administrator"
@@ -25,14 +25,14 @@
          "isLoggedInRole":false,
          "changedBy": {
            "when": {
-            "timestamp": 3472394626
+            "timestamp": "3472394626"
            },
            "by": "John Doe"
          }
       },
       {
         "role":{
-          "attributes":{
+          "$attributes":{
             "internalId":"4"
            },
            "name":"User"
@@ -40,10 +40,10 @@
          "isDefault":false,
          "isInactive":false,
          "isLoggedInRole":false,
-         "priority":{"attributes":{"type":"Number"},"$value":"10"},
+         "priority":{"$attributes":{"type":"Number"},"$value":"10"},
          "changedBy": {
            "when": {
-            "time": {"attributes":{"zone":"PDT"},"$value":"2014-06-20T02:04:12.000Z"}
+            "time": {"$attributes":{"zone":"PDT"},"$value":"2014-06-20T02:04:12.000Z"}
            },
            "by": "John Doe"
          }

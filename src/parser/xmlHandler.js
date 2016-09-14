@@ -33,6 +33,7 @@ class XMLHandler {
     }
 
     var name;
+    let nameSpaceContextCreated = false;
     if (descriptor instanceof AttributeDescriptor) {
       name = descriptor.qname.name;
       if (descriptor.form === 'unqualified') {
@@ -50,7 +51,8 @@ class XMLHandler {
     if (descriptor instanceof ElementDescriptor) {
       name = descriptor.qname.name;
       let isSimple = descriptor.isSimple;
-      if (descriptor.isMany && !isSimple) {
+      let attrs = null;
+      if (descriptor.isMany) {
         if (Array.isArray(val)) {
           for (let i = 0, n = val.length; i < n; i++) {
             node = this.jsonToXml(node, nsContext, descriptor, val[i]);
@@ -58,44 +60,120 @@ class XMLHandler {
           return node;
         }
       }
+      if(isSimple && val !== null && typeof val === "object"){
+        // check for $attributes field
+        if (typeof val[this.options.attributesKey] !== "undefined"){
+          attrs = val[this.options.attributesKey];
+        }
+        // add any $value field as xml element value
+        if (typeof val[this.options.valueKey] !== "undefined"){
+          val = val[this.options.valueKey];
+        }
+      }
       let element;
+      let elementName;
+      let xmlns;
       if (descriptor.form === 'unqualified') {
-        element = isSimple ? node.element(name, val) : node.element(name);
+        elementName = name;
+        nsContext.pushContext();
+        nameSpaceContextCreated = true;
       } else if (descriptor.qname) {
         nsContext.pushContext();
-        let mapping = declareNamespace(nsContext, null,
+        nameSpaceContextCreated = true;
+        // get the mapping for the namespace uri
+        let mapping = nsContext.getPrefixMapping(descriptor.qname.nsURI);
+        let newlyDeclared = false;
+        // if namespace not declared, declare it
+        if (mapping === null || mapping.declared === false) {
+          newlyDeclared = true;
+          mapping = declareNamespace(nsContext, null,
           descriptor.qname.prefix, descriptor.qname.nsURI);
+        }
+        // add the element to a parent node
         let prefix = mapping ? mapping.prefix : descriptor.qname.prefix;
-        let elementName = prefix ? prefix + ':' + name : name;
-        element = isSimple ? node.element(elementName, val) :
-          node.element(elementName);
-        if (mapping) {
-          element.attribute(prefix ? 'xmlns:' + prefix : 'xmlns',
-            descriptor.qname.nsURI);
+        elementName = prefix ? prefix + ':' + name : name;
+        // if namespace is newly declared add the xmlns attribute
+        if (newlyDeclared) {
+          xmlns = prefix ? 'xmlns:' + prefix : 'xmlns';
         }
       }
+
+      // add the element to a parent node
+      if (isSimple && /<!\[CDATA/.test(val)) {
+        element = node.element(elementName);
+        val = val.replace("<![CDATA[","");
+        val = val.replace("]]>","");
+        element.cdata(val);
+      }else if(isSimple && typeof val !== "undefined" && val !== null 
+        && typeof val[this.options.xmlKey] !== "undefined") {
+        val = val[this.options.xmlKey];        
+        element = node.element(elementName);
+        element.raw(val);
+      }else {
+        element = isSimple ? node.element(elementName, val) : node.element(elementName);
+      } 
+
+      if (xmlns && descriptor.qname.nsURI) {
+        element.attribute(xmlns, descriptor.qname.nsURI);
+      }
+
       if (isSimple) {
-        nsContext.popContext();
-        return node;
-      }
-      if (val == null) {
-        if (descriptor.isNillable) {
-          // Set xsi:nil = true
-          declareNamespace(nsContext, element, 'xsi', helper.namespaces.xsi);
-          element.attribute('xsi:nil', true);
+        if (attrs !== null) {
+          // add each field in $attributes object as xml element attribute
+          if (typeof attrs === "object") {
+            for (let p in attrs) {
+              let child = attrs[p];
+              element.attribute(p, child);
+            }
+          }
         }
-        nsContext.popContext();
+        if (val == null) {
+          if (descriptor.isNillable) {
+            // Set xsi:nil = true
+            declareNamespace(nsContext, element, 'xsi', helper.namespaces.xsi);
+            element.attribute('xsi:nil', true);
+          }
+        }
+        if (nameSpaceContextCreated) {
+          nsContext.popContext();
+        }
         return node;
+      } else {
+        let attrs = val[this.options.attributesKey];
+        if (typeof attrs === 'object') {
+          for (let p in attrs) {
+            let child = attrs[p];
+            if (p === this.options.xsiTypeKey) {
+              if (descriptor instanceof ElementDescriptor) {
+                if (descriptor.refOriginal) {
+                  if (descriptor.refOriginal.typeDescriptor) {
+                    if (descriptor.refOriginal.typeDescriptor.inheritance){
+                      let extension = descriptor.refOriginal.typeDescriptor.inheritance[child.type];
+                      if (extension) {
+                        descriptor.elements = descriptor.elements.concat(extension.elements);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }  
       }
 
       if (typeof val !== 'object' || (val instanceof Date)) {
+        // for adding a field value nsContext.popContext() shouldnt be called
         element.text(val);
-        nsContext.popContext();
+        if (nameSpaceContextCreated) {
+          nsContext.popContext();
+        }  
         return node;
       }
 
       this.mapObject(element, nsContext, descriptor, val);
-      nsContext.popContext();
+      if (nameSpaceContextCreated) {
+        nsContext.popContext();
+      }  
       return node;
     }
 
@@ -139,25 +217,34 @@ class XMLHandler {
       }
     }
 
-    for (let p in val) {
-      if (p === this.options.attributesKey) continue;
-      let child = val[p];
-      let childDescriptor = elements[p] || attributes[p];
-      if (childDescriptor == null) {
-        if (this.options.ignoreUnknownProperties) continue;
-        else childDescriptor =
-          new ElementDescriptor(QName.parse(p), null, 'unqualified',
-            Array.isArray(child));
-      }
-      this.jsonToXml(node, nsContext, childDescriptor, child);
+    // handle later if value is an array 
+    if (!Array.isArray(val)) {
+      for (let p in val) {
+        if (p === this.options.attributesKey)
+          continue;
+	      let child = val[p];
+	      let childDescriptor = elements[p] || attributes[p];
+	      if (childDescriptor == null) {
+	        if (this.options.ignoreUnknownProperties) 
+            continue;
+          else 
+            childDescriptor = new ElementDescriptor(
+              QName.parse(p), null, 'unqualified', Array.isArray(child));
+        }
+        if (childDescriptor) {
+          this.jsonToXml(node, nsContext, childDescriptor, child);
+        }	
+	    }
     }
 
     var attrs = val[this.options.attributesKey];
     if (attrs != null && typeof attrs === 'object') {
       for (let p in attrs) {
         let child = attrs[p];
+        // if field is $xsiType add xsi:type attribute
         if (p === this.options.xsiTypeKey) {
-          let xsiType = QName.parse(child);
+          // $xsiType has two fields - type, xmlns
+          let xsiType = QName.parse(child.type, child.xmlns);
           declareNamespace(nsContext, node, 'xsi', helper.namespaces.xsi);
           let mapping = declareNamespace(nsContext, node, xsiType.prefix,
             xsiType.nsURI);
@@ -348,6 +435,7 @@ class XMLHandler {
     var root = {};
     var refs = {}, id; // {id: {hrefs:[], obj:}, ...}
     var stack = [{name: null, object: root, descriptor: descriptor}];
+    var options = this.options;
 
     p.onopentag = function(node) {
       nsContext.pushContext();
@@ -370,6 +458,9 @@ class XMLHandler {
       for (let a in attrs) {
         if (/^xmlns:|^xmlns$/.test(a)) continue;
         let qname = QName.parse(a);
+        var isXsiType = false;
+        var xsiType = null;
+        var xsiXmlns = null;
         if (nsContext.getNamespaceURI(qname.prefix) === helper.namespaces.xsi) {
           // Handle xsi:*
           if (qname.name == 'nil') {
@@ -377,16 +468,32 @@ class XMLHandler {
             if (attrs[a] === 'true') {
               obj = null;
             }
+            continue;
           } else if (qname.name === 'type') {
             // xsi:type
+            isXsiType = true;
+            xsiType = attrs[a];
+            xsiType = QName.parse(xsiType);
+            attrs[a] = xsiType.name;
+            if(xsiType.prefix){
+              xsiXmlns = nsContext.getNamespaceURI(xsiType.prefix);
+            }  
           }
-          continue;
         }
         let attrName = qname.name;
         elementAttributes = elementAttributes || {};
         let attrDescriptor = descriptor && descriptor.findAttribute(qname.name);
         let attrValue = parseValue(attrs[a], attrDescriptor);
-        elementAttributes[attrName] = attrs[a];
+        // if element attribute is xsi:type add $xsiType field
+        if (isXsiType) {
+          // $xsiType object has two fields - type and xmlns
+          xsiType = {};
+          xsiType.type = attrs[a];
+          xsiType.xmlns = xsiXmlns;
+          elementAttributes[options.xsiTypeKey] = xsiType;
+        } else {
+          elementAttributes[attrName] = attrs[a];
+        }
       }
 
       if (elementAttributes) {
@@ -457,9 +564,15 @@ class XMLHandler {
       if (/<\?xml[\s\S]+\?>/.test(text)) {
         text = self.xmlToJson(null, text);
       }
-      p.ontext(text);
+      // add contents of CDATA to the xml output as a text
+      p.handleJsonObject(text);
     };
 
+    p.handleJsonObject = function(text) {
+      var top = stack[stack.length - 1];
+      self._processText(top, text);
+    };
+    
     p.ontext = function(text) {
       text = text && text.trim();
       if (!text.length)
@@ -518,7 +631,8 @@ function declareNamespace(nsContext, node, prefix, nsURI) {
   } else if (node) {
     node.attribute('xmlns:' + mapping.prefix, mapping.uri);
     return mapping;
-  }
+  } 
+  return mapping;
 }
 
 function parseValue(text, descriptor) {

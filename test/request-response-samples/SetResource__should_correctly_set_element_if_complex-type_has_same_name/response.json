@@ -1,6 +1,6 @@
 {
   "Result":{
-    "attributes": {
+    "$attributes": {
       "resultStatusFlag": "SUCCESS"
     }
   }

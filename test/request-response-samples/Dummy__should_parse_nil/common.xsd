@@ -21,7 +21,7 @@
     <xs:complexType name="DummyFilter">
         <xs:sequence>
             <xs:element name="DummyIntFilter" type="xs:string" minOccurs="0"/>
-            <xs:element name="DummyStringFilter" type="xs:string" minOccurs="0"/>
+            <xs:element name="DummyStringFilter" type="xs:string" nillable="true" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

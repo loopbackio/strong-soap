@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:c="http://www.bigdatacollect.or/Common/Types" xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:tns="http://www.bigdatacollect.or/Name/Types"
-           targetNamespace="http://www.bigdatacollect.or/Name/Types" elementFormDefault="qualified"
+           targetNamespace="http://www.bigdatacollect.or/Name/Types" elementFormDefault="unqualified"
            attributeFormDefault="unqualified">
     <xs:import namespace="http://www.bigdatacollect.or/Common/Types" schemaLocation="Common.xsd"/>
     <xs:element name="Profile"/>

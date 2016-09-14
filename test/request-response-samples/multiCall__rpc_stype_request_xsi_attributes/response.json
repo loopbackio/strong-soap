@@ -1,14 +1,20 @@
-{  
-   "multiCallReturn":{  
-      "attributes":{  
-         "SOAP-ENC:arrayType":"xsd:ur-type[1]",
-         "xsi:type":"ns1:FixedArray"
-      },
-      "item":{  
-         "attributes":{  
-            "xsi:type":"xsd:boolean"
-         },
-         "$value":"true"
-      }
-   }
+{
+    "multiCallReturn": {
+        "$attributes": {
+            "arrayType": "xsd:ur-type[1]",
+            "$xsiType": {
+                "type": "FixedArray",
+                "xmlns": "urn:Magento"
+            }
+        },
+        "item": {
+            "$attributes": {
+                "$xsiType": {
+                    "type": "boolean",
+                    "xmlns": "http://www.w3.org/2001/XMLSchema"
+                }
+            },
+            "$value": "true"
+        }
+    }
 }

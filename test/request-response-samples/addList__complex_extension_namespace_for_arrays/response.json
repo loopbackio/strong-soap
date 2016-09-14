@@ -3,30 +3,34 @@
      "writeResponse":[
         {
            "status":{
-              "attributes":{
+              "$attributes":{
                  "isSuccess":"true"
               }
            },
            "baseRef":{
-              "attributes":{
-                 "xsi:type":"platformCore:RecordRef",
-                 "type":"contact",
-                 "internalId":"7080"
+              "$attributes":{
+                "internalId":"7080",
+                "$xsiType": {
+                      "type": "RecordRef",
+                      "xmlns":"urn:core_2011_1.platform.webservices.netsuite.com"
+                }
               }
            }
         },
         {
            "status":{
-              "attributes":{
+              "$attributes":{
                  "isSuccess":"true"
               }
            },
            "baseRef":{
-              "attributes":{
-                 "xsi:type":"platformCore:RecordRef",
-                 "type":"contact",
-                 "internalId":"7081"
-              }
+            "$attributes":{
+               "internalId":"7081",
+               "$xsiType": {
+                    "type": "RecordRef",
+                    "xmlns":"urn:core_2011_1.platform.webservices.netsuite.com"
+               }
+            }
            }
         }
      ]

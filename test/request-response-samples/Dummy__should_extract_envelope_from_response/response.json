@@ -2,7 +2,7 @@
   "DummyResult": {
     "DummyList": {
       "DummyElement": {
-        "attributes": {
+        "$attributes": {
           "language": "en-US"
         },
         "$value": "Dummy Element Entry"

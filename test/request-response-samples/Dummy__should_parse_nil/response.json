@@ -1,5 +1,7 @@
 {
   "DummyResult": {
-    "DummyList": null
+    "DummyList": {
+      "DummyElement": null
+    }
   }
 }

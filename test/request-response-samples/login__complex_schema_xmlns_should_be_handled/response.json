@@ -1,12 +1,12 @@
 {
   "sessionResponse":{
     "status":{
-      "attributes":{
+      "$attributes":{
         "isSuccess":"true"
        }
     },
     "userId":{
-      "attributes":{
+      "$attributes":{
         "internalId":"1645"
        },
        "name":"SCPlus Dev"
@@ -14,10 +14,21 @@
     "wsRoleList":{
       "wsRole":[{
         "role":{
-          "attributes":{
-            "internalId":"3"
+          "$attributes":{
+            "internalId":"2"
            },
            "name":"Administrator"
+         },
+         "isDefault":false,
+         "isInactive":false,
+         "isLoggedInRole":false
+      },
+      {
+        "role":{
+          "$attributes":{
+            "internalId":"3"
+           },
+           "name":"User1"
          },
          "isDefault":false,
          "isInactive":false,

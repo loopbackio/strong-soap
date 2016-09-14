@@ -51,6 +51,11 @@ class Element extends XSDElement {
           descriptor.elements = typeDescriptor.elements;
           descriptor.attributes = typeDescriptor.attributes;
           definitions.mixed = typeDescriptor.mixed;
+          descriptor.extension = typeDescriptor.extension;
+          if(descriptor.extension && descriptor.extension.isSimple === true) {
+            descriptor.isSimple = true;
+          }
+          descriptor.typeDescriptor = typeDescriptor;
         }
       } else if (this.type instanceof SimpleType) {
         descriptor.isSimple = true;

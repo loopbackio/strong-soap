@@ -1,17 +1,16 @@
 {
   "Result":{
-    "attributes": {
+    "$attributes": {
       "resultStatusFlag": "SUCCESS"
     },
     "IDs": {
-      "UniqueID": [
+      "UniqueID":
         {
-          "attributes": {
+          "$attributes": {
             "source": "TESTSOURCE"
           },
           "$value": "100"
         }
-      ]
     }
   }
 }

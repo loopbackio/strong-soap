@@ -17,7 +17,12 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="addPetsResponse" type="xs:string">
+     <s:complexType name="addPetsResponseType">
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="status" nillable="true" type="s:string"/>
+          </s:sequence>
+     </s:complexType>
+      <s:element name="addPetsResponse" type="tns:addPetsResponseType">
       </s:element>
       <s:complexType name="Pet">
         <s:sequence>
