@@ -21,6 +21,7 @@ class Operation extends WSDLElement {
     //there can be multiple faults defined in the operation. They all will have same type name 'fault'
     //what differentiates them from each other is, the element/s which will get added under fault <detail> during runtime.
     this.faults = [];
+    this.soapVersion;
   }
 
   addChild(child) {
@@ -261,6 +262,13 @@ class Operation extends WSDLElement {
      */
     if (isOutput && parameterDescriptor && parameterDescriptor.body.Fault) {
       let xsdStr = new QName(helper.namespaces.xsd, 'string', 'xsd');
+      var form;
+      if (this.soapVersion === '1.1') {
+         form == 'unqualified';
+      } else if (this.soapVersion === '1.2') {
+        form == 'qualified';
+      }
+
       let faultDescriptor = new ElementDescriptor(
         new QName(nsURI, 'Fault', prefix), null, 'qualified', false);
       bodyDescriptor.add(faultDescriptor);
