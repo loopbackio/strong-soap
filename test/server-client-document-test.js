@@ -316,7 +316,8 @@ describe('Document style tests', function() {
         client.myMethod({x: 200, y: 10.55}, function (err, result, body) {
           assert.ok(err);
           //check if fault exists with correct 'detail' parameters in the response
-          var index = body.indexOf('<myMethodFault1>');
+          
+          var index = body.indexOf('myMethodFault1');
           assert.ok(index > -1);
           var index = body.indexOf('<errorMessage1>MyMethod Business Exception message</errorMessage1>');
           assert.ok(index > -1);
@@ -437,7 +438,7 @@ describe('Document style tests', function() {
         client.myMethod({x: 200, y: 10.55}, function (err, result, body) {
           assert.ok(err);
           //check if fault exists with correct 'detail' parameters in the response
-          var index = body.indexOf('<myMethodFault2>');
+          var index = body.indexOf('myMethodFault2');
           assert.ok(index > -1);
           var index = body.indexOf('<errorMessage2>MyMethod Business Exception message</errorMessage2>');
           assert.ok(index > -1);

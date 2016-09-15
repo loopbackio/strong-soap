@@ -138,7 +138,7 @@ class XMLHandler {
           nsContext.popContext();
         }
         return node;
-      } else {
+      } else if (typeof val !== 'undefined' && typeof val != null) {
         let attrs = val[this.options.attributesKey];
         if (typeof attrs === 'object') {
           for (let p in attrs) {
@@ -161,7 +161,7 @@ class XMLHandler {
         }  
       }
 
-      if (typeof val !== 'object' || (val instanceof Date)) {
+      if (typeof val !== 'undefined' && val !== null && ( typeof val !== 'object' || val instanceof Date)) {
         // for adding a field value nsContext.popContext() shouldnt be called
         element.text(val);
         if (nameSpaceContextCreated) {
@@ -243,8 +243,13 @@ class XMLHandler {
         let child = attrs[p];
         // if field is $xsiType add xsi:type attribute
         if (p === this.options.xsiTypeKey) {
-          // $xsiType has two fields - type, xmlns
-          let xsiType = QName.parse(child.type, child.xmlns);
+          let xsiType;
+          if(typeof child === 'object' && typeof child.type !== 'undefined') {
+            // $xsiType has two fields - type, xmlns
+            xsiType = QName.parse(child.type, child.xmlns);
+          } else {
+            xsiType = QName.parse(child);
+          }
           declareNamespace(nsContext, node, 'xsi', helper.namespaces.xsi);
           let mapping = declareNamespace(nsContext, node, xsiType.prefix,
             xsiType.nsURI);
