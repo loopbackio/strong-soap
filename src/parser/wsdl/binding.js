@@ -35,18 +35,6 @@ class Binding extends WSDLElement {
           this.operations[child.$name] = child;
           child.operation = operation;
 
-          //figure out from the binding operation soap version 1.1 or 1.2
-          for (let p in child.children){
-              if (child.children[p].$soapAction !== undefined){
-                if(child.children[p].nsURI === 'http://schemas.xmlsoap.org/wsdl/soap/'){
-                  child.soapVersion ='1.1';
-                  break;
-                } else if(child.children[p].nsURI === 'http://schemas.xmlsoap.org/wsdl/soap12/') {
-                  child.soapVersion ='1.2';
-                  break;
-                }
-              }
-          }
           // Set portType.operation.input.message to binding.operation.input
           if (operation.input && child.input) {
             child.input.message = operation.input.message;
@@ -66,7 +54,6 @@ class Binding extends WSDLElement {
             // For RPC style
             child.parameterOrder = operation.$parameterOrder.split(/\s+/);
           }
-          child.soapVersion = operation
           child.style = child.style || style;
           child.postProcess(definitions);
         }
