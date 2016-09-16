@@ -21,6 +21,7 @@ class Operation extends WSDLElement {
     //there can be multiple faults defined in the operation. They all will have same type name 'fault'
     //what differentiates them from each other is, the element/s which will get added under fault <detail> during runtime.
     this.faults = [];
+    this.soapVersion;
   }
 
   addChild(child) {
@@ -37,6 +38,14 @@ class Operation extends WSDLElement {
       case 'operation': // soap:operation
         this.soapAction = child.$soapAction || '';
         this.style = child.$style || '';
+        //figure out from the binding operation soap version 1.1 or 1.2
+        if (child.$soapAction !== undefined){
+          if(child.nsURI === 'http://schemas.xmlsoap.org/wsdl/soap/'){
+            this.soapVersion ='1.1';
+          } else if(child.nsURI === 'http://schemas.xmlsoap.org/wsdl/soap12/') {
+            this.soapVersion ='1.2';
+          }
+        }
         break;
     }
   }
@@ -187,6 +196,7 @@ class Operation extends WSDLElement {
       name: this.$name,
       style: this.mode,
       soapAction: this.soapAction,
+      soapVersion: this.soapVersion,
       input: {
         body: input,
         headers: inputHeaders
@@ -204,12 +214,12 @@ class Operation extends WSDLElement {
     this.descriptor.outputEnvelope =
       Operation.createEnvelopeDescriptor(this.descriptor.output, true);
     this.descriptor.faultEnvelope =
-      Operation.createEnvelopeDescriptor(this.descriptor.faults, true);
+      Operation.createEnvelopeDescriptor(this.descriptor.faults, true, this.soapVersion);
 
     return this.descriptor;
   }
 
-  static createEnvelopeDescriptor(parameterDescriptor, isOutput, prefix, nsURI) {
+  static createEnvelopeDescriptor(parameterDescriptor, isOutput, soapVersion, prefix, nsURI) {
     prefix = prefix || 'soap';
     nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/';
     var descriptor = new TypeDescriptor();
@@ -237,41 +247,41 @@ class Operation extends WSDLElement {
       bodyDescriptor.add(parameterDescriptor.headers);
     }
 
-    //process faults. An example of resulting structure of the <Body> element with <Fault> element descriptor:
+    //process faults. An example of resulting structure of the <Body> element with soap 1.1 <Fault> element descriptor:
     /*
-     <Body>
-        <Fault>
-          <faultcode> </faultcode>
-          <faultstring> </faultstring>
-          <faultactor> </faultactor>
+     <soap:Body>
+       <soap:Fault>
+          <faultcode>sampleFaultCode</faultcode>
+          <faultstring>sampleFaultString</faultstring>
           <detail>
-            <myMethodFault1>
-              <errorMessage1> </errorMessage1>
-              <value1> </value1>
-            </myMethodFault1>
+            <ns1:myMethodFault1 xmlns:ns1="http://example.com/doc_literal_wrapped_test.wsdl">
+              <errorMessage1>MyMethod Business Exception message</errorMessage1>
+              <value1>10</value1>
+            </ns1:myMethodFault1>
           </detail>
-          <detail>
-            <myMethodFault2>
-              <errorMessage2> </errorMessage2>
-              <value2> </value2>
-            </myMethodFault2>
-          </detail>
-      </Fault>
-     </Body>
+        </soap:Fault>
+     </soap:Body>
      */
     if (isOutput && parameterDescriptor && parameterDescriptor.body.Fault) {
       let xsdStr = new QName(helper.namespaces.xsd, 'string', 'xsd');
+      var form;
+      if (soapVersion === '1.1') {
+        form = 'unqualified';
+      } else if (soapVersion === '1.2') {
+        form = 'qualified';
+      }
+
       let faultDescriptor = new ElementDescriptor(
         new QName(nsURI, 'Fault', prefix), null, 'qualified', false);
       bodyDescriptor.add(faultDescriptor);
       faultDescriptor.add(
-        new ElementDescriptor(new QName(nsURI, 'faultcode', prefix), null, 'qualified', false));
+        new ElementDescriptor(new QName(nsURI, 'faultcode', prefix), null,  form, false));
       faultDescriptor.add(
-        new ElementDescriptor(new QName(nsURI, 'faultstring', prefix), null, 'qualified', false));
+        new ElementDescriptor(new QName(nsURI, 'faultstring', prefix), null, form, false));
       faultDescriptor.add(
-        new ElementDescriptor(new QName(nsURI, 'faultactor', prefix), null, 'qualified', false));
+        new ElementDescriptor(new QName(nsURI, 'faultactor', prefix), null, form, false));
       let detailDescriptor =
-        new ElementDescriptor(new QName(nsURI, 'detail', prefix), null, 'qualified', false);
+        new ElementDescriptor(new QName(nsURI, 'detail', prefix), null, form, false);
 
       //multiple faults may be defined in wsdl for this operation. Go though every Fault and add it under <detail> element.
       for (var f in parameterDescriptor.body.Fault.faults) {

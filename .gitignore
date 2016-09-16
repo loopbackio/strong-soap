@@ -6,3 +6,5 @@ lib
 *.iml
 .vscode
 .eslintrc
+.DS_Store
+
