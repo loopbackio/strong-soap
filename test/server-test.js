@@ -370,7 +370,7 @@ describe('SOAP Server', function() {
   it('should return SOAP Fault body for SOAP 1.2', function(done) {
     soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
       assert.ok(!err);
-      var expectedBody = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <soap:Fault>\n      <Code>\n        <Value>soap:Sender</Value>\n        <Subcode>\n          <value>rpc:BadArguments</value>\n        </Subcode>\n      </Code>\n      <Reason>\n        <Text>Processing Error</Text>\n      </Reason>\n    </soap:Fault>\n  </soap:Body>\n</soap:Envelope>';
+      var expectedBody = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <ns1:Fault>\n      <Code>\n        <Value>soap:Sender</Value>\n        <Subcode>\n          <value>rpc:BadArguments</value>\n        </Subcode>\n      </Code>\n      <Reason>\n        <Text>Processing Error</Text>\n      </Reason>\n    </ns1:Fault>\n  </soap:Body>\n</soap:Envelope>';
       client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'SOAP Fault v1.2' }}, function(err, response, body) {
         assert.ok(err);
         var fault = err.root.Envelope.Body.Fault;

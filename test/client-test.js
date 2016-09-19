@@ -268,7 +268,9 @@ describe('SOAP Client', function() {
 
         //lastRequest should have proper header value of above JSON header object serialized based on header schema defined
         //in default-namespace1.wsdl
-        var lastRequest = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n    <MyHeaderElem>\n      <esnext>false</esnext>\n      <moz>true</moz>\n      <boss>true</boss>\n      <node>true</node>\n      <validthis>true</validthis>\n      <globals>\n        <EventEmitter>true</EventEmitter>\n        <Promise>true</Promise>\n      </globals>\n    </MyHeaderElem>\n  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>';
+        var lastRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n    <ns1:MyHeaderElem xmlns:ns1=\"http://www.example.com/v1\">\n      <ns1:esnext>false</ns1:esnext>\n"      
+        + "      <ns1:moz>true</ns1:moz>\n      <ns1:boss>true</ns1:boss>\n      <ns1:node>true</ns1:node>\n      <ns1:validthis>true</ns1:validthis>\n      <ns1:globals>\n        <ns1:EventEmitter>true</ns1:EventEmitter>\n        <ns1:Promise>true</ns1:Promise>\n      </ns1:globals>\n" 
+        + "    </ns1:MyHeaderElem>\n  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>";
         client.MyOperation({}, function(err, result) {
           //using lastRequest instead of lastRequestHeaders() since this doesn't contain soap header which this test case needs to test.
           assert.equal(client.lastRequest, lastRequest);
@@ -442,13 +444,13 @@ describe('SOAP Client', function() {
         var data = {
           Request: {
             $attributes: {
-              $xsiType: '{xmlnsTy}Ty'
+              $xsiType: "{xmlnsTy}Ty"
             }
           }
         };
 
         //In the new implementation the xsi:type results in the following format.
-        var message = '<soap:Body>\n  <Request xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="xmlnsTy" xsi:type="ns2:Ty"/>\n</soap:Body>\n';
+        var message = '<soap:Body>\n  <ns1:Request xmlns:ns1=\"http://www.example.com/v1\" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="xmlnsTy" xsi:type="ns2:Ty"/>\n</soap:Body>\n';
         client.MyOperation(data, function(err, result) {
           assert.ok(client.lastRequest);
           assert.ok(client.lastMessage);
@@ -464,7 +466,7 @@ describe('SOAP Client', function() {
             }
           };
 
-          var newMessage = '<soap:Body>\n  <Request/>\n</soap:Body>\n';
+          var newMessage = '<soap:Body>\n  <ns1:Request xmlns:ns1=\"http://www.example.com/v1\"/>\n</soap:Body>\n';
           client.MyOperation(newData, function(err, result) {
             assert.ok(client.lastRequest);
             assert.ok(client.lastMessage);
