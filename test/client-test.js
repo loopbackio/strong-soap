@@ -712,7 +712,7 @@ describe('SOAP Client', function() {
           server.close();
           server = null;
           assert.ok(err);
-          assert.strictEqual(err.message, 'Test: test error: test detail');
+          assert.strictEqual(err.message, 'faultcode: Test faultstring: test error detail: test detail');
           assert.ok(result);
           assert.ok(body);
           done();

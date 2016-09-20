@@ -284,6 +284,7 @@ class Operation extends WSDLElement {
           new ElementDescriptor(new QName(nsURI, 'faultactor', prefix), null, form, false));
         detailDescriptor =
           new ElementDescriptor(new QName(nsURI, 'detail', prefix), null, form, false);
+        faultDescriptor.add(detailDescriptor);
       } else if (soapVersion === '1.2') {
         let code = new ElementDescriptor(new QName(nsURI, 'Code', prefix));
         code.add(
@@ -303,14 +304,11 @@ class Operation extends WSDLElement {
           new ElementDescriptor(new QName(nsURI, 'Role', prefix), null, form, false));
         detailDescriptor =
           new ElementDescriptor(new QName(nsURI, 'Detail', prefix), null, form, false);
+        faultDescriptor.add(detailDescriptor);
       }
       //multiple faults may be defined in wsdl for this operation. Go though every Fault and add it under <detail> element.
       for (var f in parameterDescriptor.body.Fault.faults) {
         detailDescriptor.add(parameterDescriptor.body.Fault.faults[f]);
-      }
-      //only add <detail> element to <Fault> descriptor only if there is more than one <detail> element
-      if (detailDescriptor.elements.length > 0) {
-        faultDescriptor.add(detailDescriptor);
       }
     }
 
