@@ -396,9 +396,9 @@ describe('SOAP Server', function() {
         // Verify namespace on elements set according to fault spec 1.1
         //revisit soap: namespace for below elements. Current code either can add soap: for <Fault> including every child element
         //under <Fault> or NOT add soap: for <Fault> including every child element under <Fault>.
-        assert.ok(body.match(/<soap:faultcode>.*<\/soap:faultcode>/g),
+        assert.ok(body.match(/<faultcode>.*<\/faultcode>/g),
           "Body should contain faultcode-element without namespace");
-        assert.ok(body.match(/<soap:faultstring>.*<\/soap:faultstring>/g),
+        assert.ok(body.match(/<faultstring>.*<\/faultstring>/g),
           "Body should contain faultstring-element without namespace");
         done();
       });
