@@ -374,7 +374,6 @@ describe('SOAP Server', function() {
       client.GetLastTradePrice({ TradePriceRequest: {tickerSymbol: 'SOAP Fault v1.2' }}, function(err, response, body) {
         assert.ok(err);
         var fault = err.root.Envelope.Body.Fault;
-        assert.equal(err.message, fault.faultcode + ': ' + fault.faultstring);
         assert.equal(fault.Code.Value, "soap:Sender");
         assert.equal(fault.Reason.Text, "Processing Error");
         assert.equal(body.toString(), expectedBody);

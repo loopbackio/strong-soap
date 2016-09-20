@@ -274,15 +274,36 @@ class Operation extends WSDLElement {
       let faultDescriptor = new ElementDescriptor(
         new QName(nsURI, 'Fault', prefix), null, 'qualified', false);
       bodyDescriptor.add(faultDescriptor);
-      faultDescriptor.add(
-        new ElementDescriptor(new QName(nsURI, 'faultcode', prefix), null,  form, false));
-      faultDescriptor.add(
-        new ElementDescriptor(new QName(nsURI, 'faultstring', prefix), null, form, false));
-      faultDescriptor.add(
-        new ElementDescriptor(new QName(nsURI, 'faultactor', prefix), null, form, false));
-      let detailDescriptor =
-        new ElementDescriptor(new QName(nsURI, 'detail', prefix), null, form, false);
-
+      let detailDescriptor;
+      if (soapVersion === '1.1') {
+        faultDescriptor.add(
+          new ElementDescriptor(new QName(nsURI, 'faultcode', prefix), null, form, false));
+        faultDescriptor.add(
+          new ElementDescriptor(new QName(nsURI, 'faultstring', prefix), null, form, false));
+        faultDescriptor.add(
+          new ElementDescriptor(new QName(nsURI, 'faultactor', prefix), null, form, false));
+        detailDescriptor =
+          new ElementDescriptor(new QName(nsURI, 'detail', prefix), null, form, false);
+      } else if (soapVersion === '1.2') {
+        let code = new ElementDescriptor(new QName(nsURI, 'Code', prefix));
+        code.add(
+          new ElementDescriptor(new QName(nsURI, 'Value', prefix), null, form, false));
+        let subCode = new ElementDescriptor(new QName(nsURI, 'Subcode', prefix), null, form, false);
+        code.add (subCode);
+        subCode.add(
+          new ElementDescriptor(new QName(nsURI, 'Value', prefix), null, form, false));
+        faultDescriptor.add(code, null, form, false);
+        let reason = new ElementDescriptor(new QName(nsURI, 'Reason', prefix));
+        reason.add(
+          new ElementDescriptor(new QName(nsURI, 'Text', prefix), null, form, false));
+        faultDescriptor.add(reason, null, form, false);
+        faultDescriptor.add(
+          new ElementDescriptor(new QName(nsURI, 'Node', prefix), null, form, false));
+        faultDescriptor.add(
+          new ElementDescriptor(new QName(nsURI, 'Role', prefix), null, form, false));
+        detailDescriptor =
+          new ElementDescriptor(new QName(nsURI, 'Detail', prefix), null, form, false);
+      }
       //multiple faults may be defined in wsdl for this operation. Go though every Fault and add it under <detail> element.
       for (var f in parameterDescriptor.body.Fault.faults) {
         detailDescriptor.add(parameterDescriptor.body.Fault.faults[f]);

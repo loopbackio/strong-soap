@@ -612,13 +612,28 @@ class XMLHandler {
       var body = root.Envelope.Body;
       if (root.Envelope.Body !== undefined && root.Envelope.Body !== null) {
         if (body.Fault !== undefined && body.Fault !== null) {
-          var code = selectn('faultcode.$value', body.Fault) ||
-            selectn('faultcode', body.Fault);
-          var string = selectn('faultstring.$value', body.Fault) ||
-            selectn('faultstring', body.Fault);
-          var detail = selectn('detail.$value', body.Fault) ||
-            selectn('detail', body.Fault);
-          var error = new Error(code + ': ' + string + (detail ? ': ' + detail : ''));
+          var errorMessage = 'Error occurred processing Fault response: ';
+          var error;
+          var code = selectn('faultcode', body.Fault);
+          if (code) { //soap 1.1 fault
+            var string = selectn('faultstring', body.Fault);
+            var faultactor = selectn('faultactor', body.Fault);
+            var detail = selectn('detail', body.Fault);
+            errorMessage = errorMessage + 'faultcode : ' +  code +  ' faultstring: ' + string + ' ' +  'faultactor: ' +
+                faultactor + ' detail: '  + JSON.stringify(detail);
+          }
+          code = selectn('Code', body.Fault);
+          if (code) { //soap 1.2 fault
+            var value = selectn('Value', body.Fault);
+            var subCode = selectn('Subcode', body.Fault);
+            var reason = selectn('Reason', body.Fault);
+            var node = selectn('Node', body.Fault);
+            var role = selectn('Role', body.Fault);
+            var detail = selectn('Detail', body.Fault);
+            errorMessage =  errorMessage + 'Code : ' +  JSON.stringify(code) +  ' Value: ' + value + ' Subcode: ' + JSON.stringify(subCode) +
+                ' Reason: ' + JSON.stringify(reason)+ ' ' + 'Node : ' +  node +  ' Role: ' + role + ' '+ 'Detail' + JSON.stringify(detail);
+          }
+          error = new Error(errorMessage);
           error.root = root;
           throw error;
         }

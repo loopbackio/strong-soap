@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+
+<!-- this is document/literal-wrapped style wsdl -->
+
+<wsdl:definitions name="DocLiteralWrapped"
+                  targetNamespace="http://example.com/doc_literal_wrapped_test_soap12.wsdl"
+                  xmlns:tns="http://example.com/doc_literal_wrapped_test_soap12.wsdl"
+                  xmlns:xsd1="http://example.com/doc_literal_wrapped_test_soap12.xsd"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://example.com/doc_literal_wrapped_test_soap12.xsd"
+                    xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">
+
+            <!-- input complexType name should match the oprtationName for document/literal-wrapped style -->
+            <xsd:element name="myMethod">
+                <xsd:complexType>
+                     <xsd:sequence>
+                        <xsd:element name="x" type="xsd:int"/>
+                        <xsd:element name="y" type="xsd:float"/>
+                     </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!-- as per WS-I, complexType name should be operation name+"Response" in document/literal-wrapped style -->
+            <xsd:element name="myMethodResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="z" type="xsd:boolean"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <!--Fault element -->
+            <xsd:element name="myMethodFault1">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="errorMessage1" type="xsd:string"/>
+                        <xsd:element name="value1" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="myMethodFault2">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="errorMessage2" type="xsd:string"/>
+                        <xsd:element name="value2" type="xsd:int"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </wsdl:types>
+
+    <wsdl:message name="myMethodRequest">
+        <wsdl:part name="parameters" element="xsd1:myMethod"/>
+    </wsdl:message>
+
+    <wsdl:message name="myMethodResponse">
+        <wsdl:part name="parameters" element="xsd1:myMethodResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="myMethodFault1">
+        <wsdl:part name="parameters" element="xsd1:myMethodFault1"/>
+    </wsdl:message>
+
+    <wsdl:message name="myMethodFault2">
+        <wsdl:part name="parameters" element="xsd1:myMethodFault2"/>
+    </wsdl:message>
+
+    <wsdl:portType name="DocLiteralWrappedPortType">
+        <wsdl:operation name="myMethod">
+            <wsdl:input message="tns:myMethodRequest"/>
+            <wsdl:output message="tns:myMethodResponse"/>
+            <wsdl:fault message="tns:myMethodFault1"/>
+            <wsdl:fault message="tns:myMethodFault2"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="DocLiteralWrappedBinding" type="tns:DocLiteralWrappedPortType">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="myMethod">
+            <soap:operation soapAction="http://example.com/myMethod"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault>
+                <soap:body use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="DocLiteralWrappedService">
+        <wsdl:port name="DocLiteralWrappedPort" binding="tns:DocLiteralWrappedBinding">
+            <soap:address location="http://localhost:15099/doc_literal_wrapped_test_soap12"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>
