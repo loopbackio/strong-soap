@@ -31,29 +31,29 @@
     <complexType name="ChangedBy">
         <all>
             <element name="when" type="platformCore:When" />
-            <element name="by" type="xs:string" />
+            <element name="by" type="xsd:string" />
         </all>
     </complexType>
     <complexType name="When">
         <choice>
-            <element name="timestamp" type="xs:int" minOccurs="0"/>
+            <element name="timestamp" type="xsd:int" minOccurs="0"/>
             <element name="time" type="platformCore:Time" minOccurs="0"/>
         </choice>
     </complexType>
     <complexType name="Time">
         <simpleContent>
-            <extension base="xs:date">
-                <attribute name="zone" type="xs:string" />
+            <extension base="xsd:date">
+                <attribute name="zone" type="xsd:string" />
             </extension>
         </simpleContent>
     </complexType>
-    <xs:complexType name="any_with_type">
+    <complexType name="any_with_type">
         <xs:simpleContent>
-            <xs:extension base="xs:anyType">
-                <xs:attribute name="type" type="xs:string"/>
+            <xs:extension base="xsd:anyType">
+                <xs:attribute name="type" type="xsd:string"/>
             </xs:extension>
         </xs:simpleContent>
-    </xs:complexType> 
+    </complexType> 
     <complexType name="WsRoleList">
         <sequence>
             <element name="wsRole" type="platformCore:WsRole" minOccurs="0" maxOccurs="unbounded"/>
