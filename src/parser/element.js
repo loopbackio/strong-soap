@@ -1,3 +1,4 @@
+var g = require('../globalize');
 var assert = require('assert');
 var QName = require('./qname');
 var typeRegistry = require('./typeRegistry');
@@ -79,7 +80,7 @@ class Element {
     var ElementType = typeRegistry.getElementType(qname);
     if (this.constructor.allowedChildren.indexOf(qname.name) === -1 &&
       this.constructor.allowedChildren.indexOf('any') === -1) {
-      console.warn('Element %s is not allowed within %j', qname, this.nsName);
+      g.warn('Element %s is not allowed within %j', qname, this.nsName);
     }
     
     if (ElementType) {
@@ -124,7 +125,7 @@ class Element {
   }
 
   unexpected(name) {
-    throw new Error('Found unexpected element (' + name + ') inside ' + this.nsName);
+    throw new Error(g.f('Found unexpected element (%s) inside %s', name, this.nsName));
   }
 
   describe(definitions) {
@@ -191,7 +192,7 @@ class Element {
     }
     var schema = schemas[nsURI];
     if (!schema) {
-      console.warn('Schema not found: %s (%s)', qname, elementType);
+      g.warn('Schema not found: %s (%s)', qname, elementType);
       return null;
     }
     var found = null;
@@ -219,8 +220,7 @@ class Element {
         break;
     }
     if (!found) {
-      console.warn('Schema ' + elementType + ' not found: ' + nsURI +
-        ' ' + nsName);
+      g.warn('Schema %s not found: %s %s', elementType, nsURI, nsName);
       return null;
     }
     return found;

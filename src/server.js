@@ -5,6 +5,7 @@
 
 'use strict';
 
+var g = require('./globalize');
 var url = require('url'),
   compress = null,
   events = require('events'),
@@ -141,10 +142,10 @@ class Server extends Base {
 
     if (typeof self.authenticate === 'function') {
       if (!obj.Header || !obj.Header.Security) {
-        throw new Error('No security header');
+        throw new Error(g.f('No security header'));
       }
       if (!self.authenticate(obj.Header.Security)) {
-        throw new Error('Invalid username or password');
+        throw new Error(g.f('Invalid username or password'));
       }
     }
 
@@ -183,7 +184,7 @@ class Server extends Base {
     })(this);
 
     if (!binding) {
-      throw new Error('Failed to bind to WSDL');
+      throw new Error(g.f('Failed to bind to {{WSDL}}'));
     }
 
     try {
@@ -227,7 +228,7 @@ class Server extends Base {
           }
         }
 
-        console.log(' operationName: ' + operationName + ' outputName: ' + outputName);
+        g.log(' {{operationName}}: %s {{outputName}}: %s', operationName, outputName);
         self.emit('request', obj, operationName);
         if (headers)
           self.emit('headers', headers, operationName);

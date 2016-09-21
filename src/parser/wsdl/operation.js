@@ -1,3 +1,4 @@
+var g = require('../../globalize');
 var WSDLElement = require('./wsdlElement');
 var descriptor = require('../xsd/descriptor');
 var ElementDescriptor = descriptor.ElementDescriptor;
@@ -72,9 +73,9 @@ class Operation extends WSDLElement {
       if (part && part.element) {
         headers.addElement(part.element.describe(definitions));
       } else if (part && part.type) {
-        console.warn('WS-I violation: ' +
-          'http://ws-i.org/profiles/basicprofile-1.2-2010-11-09.html#BP2113' +
-          ' part ' + part.$name);
+        g.warn('{{WS-I}} violation: ' +
+          '{{http://ws-i.org/profiles/basicprofile-1.2-2010-11-09.html#BP2113}}' +
+          ' part %s', part.$name);
       }
     });
     return headers;
@@ -88,9 +89,9 @@ class Operation extends WSDLElement {
       if (part && part.element) {
         faults[f] = part.element.describe(definitions);
       } else {
-        console.warn('WS-I violation: ' +
-          'http://ws-i.org/profiles/basicprofile-1.2-2010-11-09.html#BP2113' +
-          ' part ' + part.$name);
+        g.warn('{{WS-I}} violation: ' +
+          '{{http://ws-i.org/profiles/basicprofile-1.2-2010-11-09.html#BP2113}}' +
+          ' part %s', part.$name);
       }
     }
     return faults;
@@ -185,7 +186,7 @@ class Operation extends WSDLElement {
         output.elements = outputParts.elements;
         break;
       case Style.documentEncoded:
-        throw new Error('WSDL style not supported: ' + Style.documentEncoded);
+        throw new Error(g.f('{{WSDL}} style not supported: %s', Style.documentEncoded));
     }
 
     let faults = this.describeFaults(definitions);

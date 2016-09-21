@@ -1,3 +1,4 @@
+var g = require('../../globalize');
 var XSDElement = require('./xsdElement');
 var helper = require('../helper');
 var QName = require('../qname');
@@ -21,16 +22,16 @@ class List extends XSDElement {
     this.children.forEach(function(c) {
       if (c instanceof SimpleType) {
         if (self.$itemType) {
-          console.warn('Attribute itemType is not allowed if the content ' +
-            'contains a simpleType element');
+          g.warn('Attribute {{itemType}} is not allowed if the content ' +
+            'contains a {{simpleType}} element');
         } else if (self.itemType) {
-          console.warn('List can only contain one simpleType element');
+          g.warn('List can only contain one {{simpleType}} element');
         }
         self.itemType = c;
       }
     });
     if (!this.itemType) {
-      console.warn('List must have an item type');
+      g.warn('List must have an item type');
     }
   }
 }
