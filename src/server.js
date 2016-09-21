@@ -378,20 +378,19 @@ class Server extends Base {
     var operationDescriptor = operation.describe(this.wsdl.definitions);
     //get envelope descriptor
     var faultEnvDescriptor = operation.descriptor.faultEnvelope.elements[0];
-    var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
 
-    if (error.Fault.faultcode) {
-      // Soap 1.1 error style
-      // Root element will be prepended with the soap NS
-      // It must match the NS defined in the Envelope (set by the _envelope method)
-      var nsContext = self.createNamespaceContext('soap', soapNsURI);
+    var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
+    var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
+
+    if (self.wsdl.options.forceSoap12Headers) {
+      headers['Content-Type'] = 'application/soap+xml; charset=utf-8';
+      soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
     }
-    else {
-      // Soap 1.2 error style.
-      // 3rd param is the NS prepended to all elements
-      // It must match the NS defined in the Envelope (set by the _envelope method)
-      var nsContext = self.createNamespaceContext(null, soapNsURI);
-    }
+
+    var nsContext = self.createNamespaceContext(soapNsPrefix, soapNsURI);
+    var envelope = XMLHandler.createSOAPEnvelope(soapNsPrefix, soapNsURI);
+
+
     //find the envelope body descriptor
     var bodyDescriptor = faultEnvDescriptor.elements[1];
 
@@ -404,6 +403,7 @@ class Server extends Base {
     self._envelope(env, includeTimestamp);
     var message = env.body.toString({pretty: true});
     var xml = env.doc.end({pretty: true});
+
     callback(xml, statusCode);
   }
 }

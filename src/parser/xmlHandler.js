@@ -612,13 +612,17 @@ class XMLHandler {
       var body = root.Envelope.Body;
       if (root.Envelope.Body !== undefined && root.Envelope.Body !== null) {
         if (body.Fault !== undefined && body.Fault !== null) {
-          var code = selectn('faultcode.$value', body.Fault) ||
-            selectn('faultcode', body.Fault);
-          var string = selectn('faultstring.$value', body.Fault) ||
-            selectn('faultstring', body.Fault);
-          var detail = selectn('detail.$value', body.Fault) ||
-            selectn('detail', body.Fault);
-          var error = new Error(code + ': ' + string + (detail ? ': ' + detail : ''));
+          //check if fault is soap 1.1 fault
+          var errorMessage = getSoap11FaultErrorMessage(body.Fault);
+          //check if fault is soap 1.2 fault
+          if (errorMessage == null) {
+            errorMessage = getSoap12FaultErrorMessage(body.Fault);
+          }
+          //couldn't process error message for neither soap 1.1 nor soap 1.2 fault. Nothing else can be done at this point. Send a generic error message.
+          if (errorMessage == null) {
+            errorMessage = 'Error occurred processing Fault response.';
+          }
+          var error = new Error(errorMessage);
           error.root = root;
           throw error;
         }
@@ -627,7 +631,88 @@ class XMLHandler {
     }
     return root;
   }
+
 }
+
+function getSoap11FaultErrorMessage(faultBody) {
+  var errorMessage = null;
+  var faultcode = selectn('faultcode.$value', faultBody)||
+    selectn('faultcode', faultBody);
+  if (faultcode) { //soap 1.1 fault
+    errorMessage = ' ';
+    //All of the soap 1.1 fault elements should contain string value except detail element which may be a complex type or plain text (string)
+    if (typeof faultcode == 'string') {
+      errorMessage =  'faultcode: ' + faultcode;
+    }
+    var faultstring = selectn('faultstring.$value', faultBody) ||
+      selectn('faultstring', faultBody);
+    if (faultstring && (typeof faultstring == 'string')) {
+      errorMessage = errorMessage + ' faultstring: ' + faultstring;
+    }
+    var faultactor = selectn('faultactor.$value', faultBody) ||
+      selectn('faultactor', faultBody);
+    if (faultactor && (typeof faultactor == 'string')) {
+      errorMessage = errorMessage + ' faultactor: ' + faultactor;
+    }
+    var detail = selectn('detail.$value', faultBody) ||
+      selectn('detail', faultBody);
+    if (detail != null) {
+      if (typeof detail == 'string') { //plain text
+        errorMessage = errorMessage + ' detail: ' + detail;
+      } else { //XML type defined in wsdl
+        errorMessage = errorMessage + ' detail: ' + JSON.stringify(detail)
+      }
+    }
+  }
+  return errorMessage;
+}
+
+function getSoap12FaultErrorMessage(faultBody) {
+  var errorMessage = null;
+  code = selectn('Code', faultBody)||
+    selectn('Code', faultBody);
+  if (code) {
+    //soap 1.2 fault elements have child elements. Hence use JSON.stringify to formulate the error message.
+    errorMessage = ' ';
+    errorMessage = errorMessage + 'Code: ' + JSON.stringify(code);
+    var value = selectn('Value.$value', faultBody) ||
+      selectn('Value', faultBody);
+    if (value) {
+      errorMessage = errorMessage + ' ' + 'Value: ' + JSON.stringify(value);
+    }
+    var subCode = selectn('Subcode.$value', faultBody) ||
+      selectn('Subcode', faultBody);
+    if (subCode) {
+      errorMessage = errorMessage + ' ' + 'Subcode: ' + JSON.stringify(subCode);
+    }
+    var reason = selectn('reason.$value', faultBody) ||
+      selectn('Reason', faultBody);
+    if (reason) {
+      errorMessage = errorMessage + ' ' + 'Reason: ' + JSON.stringify(reason);
+    }
+    var node = selectn('Node.$value', faultBody) ||
+      selectn('Node', faultBody);
+    if (node) {
+      errorMessage = errorMessage + ' ' + 'Node: ' + JSON.stringify(node);
+    }
+    var role = selectn('Role.$value', faultBody) ||
+      selectn('Role', faultBody);
+    if (role) {
+      errorMessage = errorMessage + ' ' + 'Role: ' + JSON.stringify(role);
+    }
+    var detail = selectn('Detail.$value', faultBody) ||
+      selectn('Detail', faultBody);
+    if (detail != null) {
+      if (typeof detail == 'string') { //plain text
+        errorMessage = errorMessage + ' Detail: ' + detail;
+      } else { //XML type defined in wsdl
+        errorMessage = errorMessage + ' Detail: ' + JSON.stringify(detail)
+      }
+    }
+  }
+  return errorMessage;
+}
+
 
 function declareNamespace(nsContext, node, prefix, nsURI) {
   var mapping = nsContext.declareNamespace(prefix, nsURI);
