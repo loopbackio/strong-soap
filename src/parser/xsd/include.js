@@ -6,6 +6,7 @@ class Include extends XSDElement {
   }
 }
 
+
 Include.elementName = 'include';
 
 module.exports = Include;

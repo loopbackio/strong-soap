@@ -669,7 +669,7 @@ function getSoap11FaultErrorMessage(faultBody) {
 
 function getSoap12FaultErrorMessage(faultBody) {
   var errorMessage = null;
-  code = selectn('Code', faultBody)||
+  let code = selectn('Code', faultBody)||
     selectn('Code', faultBody);
   if (code) {
     //soap 1.2 fault elements have child elements. Hence use JSON.stringify to formulate the error message.
