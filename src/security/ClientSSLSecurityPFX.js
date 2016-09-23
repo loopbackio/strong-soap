@@ -1,5 +1,6 @@
 'use strict';
 
+var g = require('../globalize');
 var fs = require('fs')
   , https = require('https')
   , _ = require('lodash')
@@ -27,8 +28,8 @@ class ClientSSLSecurityPFX extends Security {
       } else if (typeof pfx === 'string') {
         this.pfx = fs.readFileSync(pfx);
       } else {
-        throw new Error(
-          'supplied pfx file should be a buffer or a file location');
+        throw new Error(g.f(
+          'supplied {{pfx}} file should be a {{buffer}} or a file location'));
       }
     }
 

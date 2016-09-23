@@ -5,6 +5,7 @@
 
 'use strict';
 
+var g = require('./globalize');
 var HttpClient = require('./http'),
   assert = require('assert'),
   xmlBuilder = require('xmlbuilder'),
@@ -261,7 +262,7 @@ class Client extends Base {
           return callback(null, null, body, obj.Header);
         }
         if (typeof obj.Body !== 'object') {
-          var error = new Error('Cannot parse response');
+          var error = new Error(g.f('Cannot parse response'));
           error.response = response;
           error.body = body;
           return callback(error, obj, body);

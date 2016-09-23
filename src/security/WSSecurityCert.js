@@ -1,5 +1,6 @@
 'use strict';
 
+var g = require('../globalize');
 var optional = require('optional');
 var ursa = optional('ursa');
 var fs = require('fs');
@@ -42,7 +43,7 @@ class WSSecurityCert extends Security {
   constructor(privatePEM, publicP12PEM, password, encoding) {
     super();
     if (!ursa) {
-      throw new Error('Module ursa must be installed to use WSSecurityCert');
+      throw new Error(g.f('Module {{ursa}} must be installed to use {{WSSecurityCert}}'));
     }
     this.privateKey = ursa.createPrivateKey(privatePEM, password, encoding);
     this.publicP12PEM = publicP12PEM.toString()

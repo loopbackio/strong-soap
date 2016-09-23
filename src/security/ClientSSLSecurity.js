@@ -1,5 +1,6 @@
 'use strict';
 
+var g = require('../globalize');
 var fs = require('fs')
   , https = require('https')
   , _ = require('lodash')
@@ -25,7 +26,7 @@ class ClientSSLSecurity extends Security {
       } else if (typeof key === 'string') {
         this.key = fs.readFileSync(key);
       } else {
-        throw new Error('key should be a buffer or a string!');
+        throw new Error(g.f('{{key}} should be a {{buffer}} or a {{string}}!'));
       }
     }
 
@@ -35,7 +36,7 @@ class ClientSSLSecurity extends Security {
       } else if (typeof cert === 'string') {
         this.cert = fs.readFileSync(cert);
       } else {
-        throw new Error('cert should be a buffer or a string!');
+        throw new Error(g.f('{{cert}} should be a {{buffer}} or a {{string}}!'));
       }
     }
 

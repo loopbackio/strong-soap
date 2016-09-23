@@ -1,3 +1,4 @@
+var g = require('../../globalize');
 var XSDElement = require('./xsdElement');
 
 class KeyBase extends XSDElement {
@@ -10,7 +11,7 @@ class KeyBase extends XSDElement {
   addChild(child) {
     if (child.name === 'selector') {
       if (this.selector) {
-        console.warn(
+        g.warn(
           'The key element %s %s MUST contain one and only one selector element',
           this.nsName, this.$name);
       }
@@ -22,12 +23,12 @@ class KeyBase extends XSDElement {
 
   postProcess(definitions) {
     if (!this.selector) {
-      console.warn(
+      g.warn(
         'The key element %s %s MUST contain one and only one selector element',
         this.nsName, this.$name);
     }
     if (!this.fields.length) {
-      console.warn(
+      g.warn(
         'The key element %s %s MUST contain one or more field elements',
         this.nsName, this.$name);
     }

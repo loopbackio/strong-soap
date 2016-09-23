@@ -1,3 +1,4 @@
+var g = require('../globalize');
 var assert = require('assert');
 var qnameExp = /^(?:\{([^\{\}]*)\})?(?:([^\{\}]+):)?([^\{\}\:]+)$/;
 
@@ -22,7 +23,7 @@ class QName {
         this.prefix = qname[2] || '';
         this.name = qname[3] || '';
       } else {
-        throw new Error('Invalid qname: ' + nsURI);
+        throw new Error(g.f('Invalid qname: %s', nsURI));
       }
     } else {
       this.nsURI = nsURI || '';

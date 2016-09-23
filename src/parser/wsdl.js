@@ -1,3 +1,4 @@
+var g = require('../globalize');
 var sax = require('sax');
 var HttpClient = require('./../http');
 var fs = require('fs');
@@ -261,7 +262,7 @@ class WSDL {
           root.addChild(types);
           stack.push(schema);
         } else {
-          throw new Error('Unexpected root element of WSDL or include');
+          throw new Error(g.f('Unexpected root element of {{WSDL}} or include'));
         }
       }
     };
@@ -389,8 +390,8 @@ class WSDL {
             wsdl.WSDL_CACHE = WSDL_CACHE;
             wsdl.load(callback);
           } else {
-            callback(new Error('Invalid WSDL URL: ' + uri + "\n\n\r Code: " +
-              response.statusCode + "\n\n\r Response Body: " + response.body));
+            callback(new Error(g.f('Invalid {{WSDL URL}}: %s\n\n\r Code: %s' +
+              "\n\n\r Response Body: %j", uri, response.statusCode, response.body)));
           }
         }, request_headers, request_options);
     }
