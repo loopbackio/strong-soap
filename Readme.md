@@ -28,7 +28,10 @@ This module provides SOAP client for invoking Web Services. It also provides a m
 - [SOAP Headers](#soap-headers)
   - [Received SOAP Headers](#received-soap-headers)
   - [Outgoing SOAP Headers](#outgoing-soap-headers)
-- [Handling XML Attributes, Value and XML (wsdlOptions))](#handling-xml-attributes-value-and-xml-wsdloptions)
+- [XML Attributes](#XML_Attributes)
+  - [Handling XML Attributes](#Handling_XML_Attributes)
+  - [Overriding the value key](#Overriding_the_value_key)
+  - [Overriding the xml key](#Overriding_the_xml_key)  
 - [XMLHandler](#XMLHandler)
 - [WSDL](#WSDL)  
 - [Server](#server)
@@ -292,7 +295,8 @@ WS-Security X509 Certificate support.
 
 _Note_: Optional dependency 'ursa' is required to be installed successfully when WSSecurityCert is used.
 
-## Handling XML Attributes, Value and XML (wsdlOptions)
+## XML Attributes
+### Handling XML Attributes, Value and XML (wsdlOptions)
 Sometimes it is necessary to override the default behaviour of `strong-soap` in order to deal with the special requirements
 of your code base or a third library you use. Therefore you can use the `wsdlOptions` Object, which is passed in the
 `#createClient()` method and could have any (or all) of the following contents:
@@ -306,7 +310,7 @@ var wsdlOptions = {
 
 If nothing (or an empty Object `{}`) is passed to the `#createClient()` method, the `strong-soap` defaults (`attributesKey: '$attributes'`, `valueKey: '$value'` and `xmlKey: '$xml'`) are used.
 
-### Overriding the `value` key
+### Overriding the value key
 By default, `strong-soap` uses `$value` as key for any parsed XML value which may interfere with your other code as it
 could be some reserved word, or the `$` in general cannot be used for a key to start with.
 
@@ -321,7 +325,7 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 });
 ```
 
-### Overriding the `xml` key
+### Overriding the xml key
 As `valueKey`, `strong-soap` uses `$xml` as key. The xml key is used to pass XML Object without adding namespace or parsing the string.
 
 Example :
