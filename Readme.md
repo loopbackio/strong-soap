@@ -9,7 +9,7 @@ This module provides SOAP client for invoking Web Services. It also provides a m
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Features:](#features)
+- [Features](#features)
 - [Install](#install)
 - [Client](#client)
   - [Client.describe() - description of services, ports and methods as a JavaScript object](#clientdescribe---description-of-services-ports-and-methods-as-a-javascript-object)
@@ -28,8 +28,7 @@ This module provides SOAP client for invoking Web Services. It also provides a m
 - [SOAP Headers](#soap-headers)
   - [Received SOAP Headers](#received-soap-headers)
   - [Outgoing SOAP Headers](#outgoing-soap-headers)
-- [Handling XML Attributes, Value and XML (wsdlOptions).](#handling-xml-attributes-value-and-xml-wsdloptions)
-  - [Specifying the exact namespace definition of the root element](#specifying-the-exact-namespace-definition-of-the-root-element)
+- [Handling XML Attributes, Value and XML (wsdlOptions))](#handling-xml-attributes-value-and-xml-wsdloptions)
 - [XMLHandler](#XMLHandler)
 - [WSDL](#WSDL)  
 - [Server](#server)
@@ -293,7 +292,7 @@ WS-Security X509 Certificate support.
 
 _Note_: Optional dependency 'ursa' is required to be installed successfully when WSSecurityCert is used.
 
-## Handling XML Attributes, Value and XML (wsdlOptions).
+## Handling XML Attributes, Value and XML (wsdlOptions)
 Sometimes it is necessary to override the default behaviour of `strong-soap` in order to deal with the special requirements
 of your code base or a third library you use. Therefore you can use the `wsdlOptions` Object, which is passed in the
 `#createClient()` method and could have any (or all) of the following contents:
