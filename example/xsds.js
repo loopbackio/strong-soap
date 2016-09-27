@@ -1,4 +1,4 @@
-var soap = require('../index');
+var soap = require('..').soap;
 var WSDL = soap.WSDL;
 
 WSDL.loadSystemSchemas(function(err, schemas) {
