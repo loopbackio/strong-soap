@@ -11,19 +11,8 @@ This module provides SOAP client for invoking Web Services. It also provides a m
 
 - [Features:](#features)
 - [Install](#install)
-- [Usage](#Usage)
-  - [soap.createClient(url[, options], callback) - create a new SOAP client from a WSDL url. Also supports a local filesystem path.](#soapcreateclienturl-options-callback---create-a-new-soap-client-from-a-wsdl-url-also-supports-a-local-filesystem-path)
-  - [soap.listen(*server*, *path*, *services*, *wsdl*) - create a new SOAP server that listens on *path* and provides *services*.](#soaplistenserver-path-services-wsdl---create-a-new-soap-server-that-listens-on-path-and-provides-services)
-  - [Options](#options)
-  - [Server Logging](#server-logging)
-  - [Server Events](#server-events)
-  - [SOAP Fault](#soap-fault)
-  - [Server security example using PasswordDigest](#server-security-example-using-passworddigest)
-  - [Server connection authorization](#server-connection-authorization)
-- [SOAP Headers](#soap-headers)
-  - [Received SOAP Headers](#received-soap-headers)
-  - [Outgoing SOAP Headers](#outgoing-soap-headers)
 - [Client](#client)
+  - [soap.createClient(url[, options], callback) - create a new SOAP client from a WSDL url. Also supports a local filesystem path.](#soapcreateclienturl-options-callback---create-a-new-soap-client-from-a-wsdl-url-also-supports-a-local-filesystem-path)
   - [Client.describe() - description of services, ports and methods as a JavaScript object](#clientdescribe---description-of-services-ports-and-methods-as-a-javascript-object)
   - [Client.setSecurity(security) - use the specified security protocol](#clientsetsecuritysecurity---use-the-specified-security-protocol)
   - [Client.*method*(args, callback) - call *method* on the SOAP service.](#clientmethodargs-callback---call-method-on-the-soap-service)
@@ -37,10 +26,19 @@ This module provides SOAP client for invoking Web Services. It also provides a m
   - [ClientSSLSecurity](#clientsslsecurity)
   - [WSSecurity](#wssecurity)
   - [WSSecurityCert](#wssecuritycert)
+- [SOAP Headers](#soap-headers)
+  - [Received SOAP Headers](#received-soap-headers)
+  - [Outgoing SOAP Headers](#outgoing-soap-headers)
 - [Handling XML Attributes, Value and XML (wsdlOptions).](#handling-xml-attributes-value-and-xml-wsdloptions)
   - [Specifying the exact namespace definition of the root element](#specifying-the-exact-namespace-definition-of-the-root-element)
-- [Handling "ignored" namespaces](#handling-ignored-namespaces)
-- [Handling "ignoreBaseNameSpaces" attribute](#handling-ignorebasenamespaces-attribute)
+- [Server](#server)
+  - [soap.listen(*server*, *path*, *services*, *wsdl*) - create a new SOAP server that listens on *path* and provides *services*.](#soaplistenserver-path-services-wsdl---create-a-new-soap-server-that-listens-on-path-and-provides-services)
+  - [Options](#options)
+  - [Server Logging](#server-logging)
+  - [Server Events](#server-events)
+  - [SOAP Fault](#soap-fault)
+  - [Server security example using PasswordDigest](#server-security-example-using-passworddigest)
+  - [Server connection authorization](#server-connection-authorization)
 - [soap-stub](#soap-stub)
   - [Example](#example)
 - [Contributors](#contributors)
@@ -65,7 +63,7 @@ Install with [npm](http://github.com/isaacs/npm):
   npm install strong-soap
 ```
 
-## Client Scenario
+## Client
 
 - Start with the WSDL for the Web Service you want to invoke. For e.g the Weather Web Service http://wsf.cdyne.com/WeatherWS/Weather.asmx and the WSDL is http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL
 
@@ -117,7 +115,7 @@ Note: for versions of node >0.10.X, you may need to specify `{connection: 'keep-
 ## XMLHandler
 XMLHandler provides capabilities for the user to convert JSON object to XML and XML to JSON object.  It also provides capability to Parse XML string or stream into the XMLBuilder tree.
 
-- API usage to Convert JSON object to XML and XML to JSON object. 
+- API to Convert JSON object to XML and XML to JSON object. 
 
 ```
         var soap = require('..').soap;
