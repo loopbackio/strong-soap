@@ -12,7 +12,6 @@ This module provides SOAP client for invoking Web Services. It also provides a m
 - [Features:](#features)
 - [Install](#install)
 - [Client](#client)
-  - [XMLHandler](#XMLHandler)
   - [Client.describe() - description of services, ports and methods as a JavaScript object](#clientdescribe---description-of-services-ports-and-methods-as-a-javascript-object)
   - [Client.setSecurity(security) - use the specified security protocol](#clientsetsecuritysecurity---use-the-specified-security-protocol)
   - [Client.*method*(args, callback) - call *method* on the SOAP service.](#clientmethodargs-callback---call-method-on-the-soap-service)
@@ -31,6 +30,8 @@ This module provides SOAP client for invoking Web Services. It also provides a m
   - [Outgoing SOAP Headers](#outgoing-soap-headers)
 - [Handling XML Attributes, Value and XML (wsdlOptions).](#handling-xml-attributes-value-and-xml-wsdloptions)
   - [Specifying the exact namespace definition of the root element](#specifying-the-exact-namespace-definition-of-the-root-element)
+- [XMLHandler](#XMLHandler)
+- [WSDL](#WSDL)  
 - [Server](#server)
   - [soap.listen(*server*, *path*, *services*, *wsdl*) - create a new SOAP server that listens on *path* and provides *services*.](#soaplistenserver-path-services-wsdl---create-a-new-soap-server-that-listens-on-path-and-provides-services)
   - [Options](#options)
@@ -111,41 +112,6 @@ The `options` argument allows you to customize the client with the following pro
 - wsdl_headers: custom HTTP headers to be sent on WSDL requests.
 
 Note: for versions of node >0.10.X, you may need to specify `{connection: 'keep-alive'}` in SOAP headers to avoid truncation of longer chunked responses.
-
-### XMLHandler
-XMLHandler provides capabilities for the user to convert JSON object to XML and XML to JSON object.  It also provides capability to Parse XML string or stream into the XMLBuilder tree.
-
-- API to Convert JSON object to XML and XML to JSON object. 
-
-```
-        var soap = require('..').soap;
-        var XMLHandler = soap.XMLHandler;
-        var xmlHandler = new XMLHandler();
-        var util = require('util');
-        
-        //custom request header
-        var customRequestHeader = {customheader1: 'test1'};
-        var options = {};
-        client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope, soapHeader) {
-          //convert 'result' JSON object to XML
-          var node = xmlHandler.jsonToXml(null, null,
-            XMLHandler.createSOAPEnvelopeDescriptor('soap'), result);
-          var xml = node.end({pretty: true});
-          console.log(xml);
-        
-          //convert XML to JSON object
-          var root = xmlHandler.xmlToJson(null, xml, null);
-          console.log('%s', util.inspect(root, {depth: null}));
-
-        }, options, customRequestHeader);
-      });
-```
-
-- Parse XML string or stream into the XMLBuilder tree
-
-```
-var root = XMLHandler.parseXml(null, xmlString);
-```
 
 
 ### Extra Headers (optional)
@@ -454,6 +420,70 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 
 To see it in practice, consider the sample in: [test/request-response-samples/addPets__force_namespaces](https://github.com/strongloop/strong-soap/tree/master/test/request-response-samples/addPets__force_namespaces)
 
+## XMLHandler
+XMLHandler provides capabilities for the user to convert JSON object to XML and XML to JSON object.  It also provides capability to Parse XML string or stream into the XMLBuilder tree.
+
+- API to Convert JSON object to XML and XML to JSON object. 
+
+```
+        var soap = require('..').soap;
+        var XMLHandler = soap.XMLHandler;
+        var xmlHandler = new XMLHandler();
+        var util = require('util');
+        
+        //custom request header
+        var customRequestHeader = {customheader1: 'test1'};
+        var options = {};
+        client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope, soapHeader) {
+          //convert 'result' JSON object to XML
+          var node = xmlHandler.jsonToXml(null, null,
+            XMLHandler.createSOAPEnvelopeDescriptor('soap'), result);
+          var xml = node.end({pretty: true});
+          console.log(xml);
+        
+          //convert XML to JSON object
+          var root = xmlHandler.xmlToJson(null, xml, null);
+          console.log('%s', util.inspect(root, {depth: null}));
+
+        }, options, customRequestHeader);
+      });
+```
+
+- Parse XML string or stream into the XMLBuilder tree
+
+```
+var root = XMLHandler.parseXml(null, xmlString);
+```
+
+## WSDL
+### wsdl.open(wsdlURL, options, callback(err, wsdl))
+API to load WSDL into a tree form. User can traverse through WSDL tree to get to bindings, services, ports, operations etc.
+##### Parameters
+  - `wsdlURL` WSDL url to load. 
+  - `options` WSDL options
+  - `callback` Error and WSDL loaded into object tree.
+
+```
+var soap = require('..').soap;
+var WSDL = soap.WSDL;
+var path = require('path');
+
+//pass in WSDL options if any
+
+var options = {};
+WSDL.open('./wsdls/weather.wsdl',options,
+    function(err, wsdl) {
+    //user should be able to get to any information of this WSDL from this object. User can traverse
+    //the WSDL tree and get to bindings, operations, services, portTypes, messages, parts and XSD elements/Attributes.
+  
+    var getCityForecastOp = wsdl.definitions.bindings.WeatherSoap.operations.GetCityForecastByZIP;
+    //print operation name
+    console.log(getCityForecastOp.name);
+    var service = wsdl.definitions.services['Weather'];
+    print service name 
+    console.log(service.name);;
+});
+```
 
 ## Server 
 
