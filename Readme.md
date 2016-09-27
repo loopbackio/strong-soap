@@ -11,7 +11,7 @@ This module provides SOAP client for invoking Web Services. It also provides a m
 
 - [Features:](#features)
 - [Install](#install)
-- [Module](#module)
+- [Usage](#Usage)
   - [soap.createClient(url[, options], callback) - create a new SOAP client from a WSDL url. Also supports a local filesystem path.](#soapcreateclienturl-options-callback---create-a-new-soap-client-from-a-wsdl-url-also-supports-a-local-filesystem-path)
   - [soap.listen(*server*, *path*, *services*, *wsdl*) - create a new SOAP server that listens on *path* and provides *services*.](#soaplistenserver-path-services-wsdl---create-a-new-soap-server-that-listens-on-path-and-provides-services)
   - [Options](#options)
@@ -65,9 +65,7 @@ Install with [npm](http://github.com/isaacs/npm):
   npm install strong-soap
 ```
 
-## Usage
-
-### Client Scenario
+## Client Scenario
 
 - Start with the WSDL for the Web Service you want to invoke. For e.g the Weather Web Service http://wsf.cdyne.com/WeatherWS/Weather.asmx and the WSDL is http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL
 
@@ -155,7 +153,7 @@ var root = XMLHandler.parseXml(null, xmlString);
 
 An instance of `Client` is passed to the `soap.createClient` callback.  It is used to execute methods on the soap service.
 
-#### Extra Headers (optional)
+### Extra Headers (optional)
 
 User can define extra HTTP headers to be sent on the request.
 
@@ -181,9 +179,9 @@ User can define extra HTTP headers to be sent on the request.
 
 
 ### Client.setSecurity(security) - use the specified security protocol
-```
+
 Refer to test case [ssl-test](https://github.com/strongloop/strong-soap/blob/master/test/ssl-test.js) for this API usage.
-```
+
 
 ### Client.*method*(args, callback) - call *method* on the SOAP service.
 
@@ -268,7 +266,7 @@ Refer to test case [ssl-test](https://github.com/strongloop/strong-soap/blob/mas
 ```
 
 
-## Security
+### Security
 
 `strong-soap` has several default security protocols.  You can easily add your own
 as well.  The interface is quite simple. Each protocol defines 2 methods:
@@ -344,7 +342,7 @@ var wsdlOptions = {
 
 If nothing (or an empty Object `{}`) is passed to the `#createClient()` method, the `strong-soap` defaults (`attributesKey: '$attributes'`, `valueKey: '$value'` and `xmlKey: '$xml'`) are used.
 
-###Overriding the `value` key
+### Overriding the `value` key
 By default, `strong-soap` uses `$value` as key for any parsed XML value which may interfere with your other code as it
 could be some reserved word, or the `$` in general cannot be used for a key to start with.
 
@@ -359,7 +357,7 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 });
 ```
 
-###Overriding the `xml` key
+### Overriding the `xml` key
 As `valueKey`, `strong-soap` uses `$xml` as key. The xml key is used to pass XML Object without adding namespace or parsing the string.
 
 Example :
@@ -389,7 +387,7 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 });
 ```
 
-###Overriding the `attributes` key
+### Overriding the `attributes` key
 You can achieve attributes like:
 ``` xml
 <parentnode>
