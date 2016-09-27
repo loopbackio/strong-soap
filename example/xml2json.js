@@ -1,4 +1,4 @@
-var soap = require('../index');
+var soap = require('..').soap;
 var XMLHandler = soap.XMLHandler;
 
 var xmlHandler = new XMLHandler();
@@ -8,29 +8,30 @@ var xmlString = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Header/>
   <soap:Body>
-    <com.td.payment:IFX_PmtInqRq xmlns:com.td.payment="http://services.tdgroup.com/ifxpmt/2012/09/10">
-      <IFX:SignonRq xmlns:IFX="http://services.tdgroup.com/IFX170_XSD/2008/08/14">
-        <IFX:ClientApp>
-          <IFX:Org>IBM</IFX:Org>
-          <IFX:Name>TestApp</IFX:Name>
-        </IFX:ClientApp>
-      </IFX:SignonRq>
-      <com.td.payment:BankSvcRq Id="id1">
-        <IFX:RqUID>1</IFX:RqUID>
-        <com.td.payment:PmtInqRq>
-          <IFX:RqUID>11</IFX:RqUID>
-        </com.td.payment:PmtInqRq>
-      </com.td.payment:BankSvcRq>
-      <com.td.payment:BankSvcRq Id="id2">
-        <IFX:RqUID>2</IFX:RqUID>
-        <com.td.payment:PmtInqRq>
-          <IFX:RqUID>22</IFX:RqUID>
-        </com.td.payment:PmtInqRq>
-      </com.td.payment:BankSvcRq>
-    </com.td.payment:IFX_PmtInqRq>
+    <ns1:BookStore xmlns:ns1="http://bookstore.com/">
+      <ns2:Detail xmlns:ns2="http://bookstore.com/detail">
+        <ns2:StoreDetail>
+          <ns2:Name>Modern Book Store</ns2:Name>
+          <ns2:Address>1001 Lane</ns2:Address>
+        </ns2:StoreDetail>
+      </ns2:Detail>
+      <ns1:Genre Id="id1">
+        <ns2:Aisle>1</ns2:Aisle>
+        <ns1:Name>
+          <ns2:Fiction>11</ns2:Fiction>
+        </ns1:Name>
+      </ns1:Genre>
+      <ns1:Genre Id="id2">
+        <ns2:Aisle>2</ns2:Aisle>
+        <ns1:Name>
+          <ns2:NonFiction>22</ns2:NonFiction>
+        </ns1:Name>
+      </ns1:Genre>
+    </ns1:BookStore>
   </soap:Body>
 </soap:Envelope>`;
 
+var xmlString1 = ''
 var root = xmlHandler.xmlToJson(null, xmlString, null);
 console.log('%s', util.inspect(root, {depth: null}));
 

@@ -1,58 +1,148 @@
-#Contribution Guidelines
+### Contributing ###
 
-Thank you for your support!  node-soap wouldn't be where it is today without contributors like you who are willing to take the time to improve it for everyone else.
+Thank you for your interest in `strong-soap`, an open source project
+administered by StrongLoop.
 
-Because SOAP Web Services can differ amongst implementations, there is high risk involved in making changes.  What works for your WSDL, might not work with another.  It is therefore _essential_ that contributors to node-soap adhere to these guidelines.
+Contributing to `strong-soap` is easy. In a few simple steps:
 
-##Filing issues
-* Please look through the issues that are currently open in the attempt to find one that matches yours.
-* If you find an issue that matches yours, please submit your documentation about it there as it will help everyone understand it more.
-* If you plan on fixing the issue, please take the time to fix it first and then provide a Pull Request.
-* Please be descriptive in your issue titles  I.E. "Error occurs when calling client.foo on WSDL without import element."
+  * Ensure that your effort is aligned with the project's roadmap by
+    talking to the maintainers, especially if you are going to spend a
+    lot of time on it.
 
-##Submitting a Pull Request
-* Pull Requests **must be rebased to the latest version of master and _squashed to a single commit_** i.e. `git checkout master;git pull upstream master;git checkout feature-branch;git rebase -i master`
-* Pull Requests **must have accompanying tests** (either Unit or Request/Response Sample tests are welcome). Your chances of getting the PR merged are very low if you don't provide any tests.
-* Pull Requests must have passing travis builds.
-* Pull Requests must be able to merge automatically from github.
-* Please **do not close a pull request due to a request to rebase**.  Git is a powerful VCS and deserves your time in learning how to rebase properly.  Pull Requests are updated automatically on github when you force push to your branch after rebasing.
+  * Make something better or fix a bug.
 
-Very useful articles/help on this topic:
-  - [GitHub Help - About Git rebase](https://help.github.com/articles/about-git-rebase/)
-  - [GitHub Help - Using Git rebase](https://help.github.com/articles/using-git-rebase/)
+  * Adhere to code style outlined in the [Google C++ Style Guide][] and
+    [Google Javascript Style Guide][].
 
-* Please use descriptive commit messages.  Commit messages are used during the creation of history and release notes.  You'll make the job of maintainers much easier by doing this.
+  * Sign the [Contributor License Agreement](https://cla.strongloop.com/agreements/strongloop/strong-soap)
 
-##Making Changes
-* Any and all pull requests to change documentation or typos are welcome!
-* Any WSDL checked in should be as small and as generic as possible.  This is to keep the size of the codebase from growing too large and to keep the reason for submitting the WSDL clear I.E. if the WSDL was submitted because attributes were not being parsed on response XML, then it would be appropriate to submit a WSDL that defines a response with attributes *and nothing else*.  If you find an issue with the parser not being able to handle large WSDLs, then it would be appropriate to submit a large WSDL to recreate the issue with.
-* If your issue is WSDL related:
-````
-    1. Make your WSDL as generic as possible to recreate the issue
-    2. Add the WSDL to the appropriate path in test/wsdl.
-    3. Commit your changes to a feature branch within your fork.
-    4. Issue a pull request.
-````
+  * Submit a pull request through Github.
 
-* If your issue is client related:
-````
-    1. Capture the request / response XML via client.lastRequest and client.lastResponse as well as the WSDL.
-    2. Make the WSDL, request, and response XML as generic as possible.
-    3. Only include the messages or operations that are having issues.
-    4. Add the appropriate files to test/request-response-samples (see the README therein)
-    5. Commit your changes to a feature branch within your fork.
-    6. Issue a pull request
-````
 
-* If your issue is neither WSDL nor client related:
-````
-    1. Provide a test of some form in an appropriate *-test.js file under test/
-    2. Commit your changes to a feature branch within your fork.
-    3. Issue a pull request.
-````
+### Contributor License Agreement ###
 
-##Issue Expiration
-Any pull request or issue filed is subject to an expiration date.  We will close any open issue that has not received a response within a 2 week timeframe.  The goal is not to sweep dirt under the rug, but to keep the focus on merging in pull requests.  Please provide pull requests that meet the above criteria wherever possible.
+```
+  Individual Contributor License Agreement
 
-##Other ways you can contribute
-Please add response, request, and WSDL files to test/wsdl, and test/request-response-samples (see README therein).  Doing so documents behavior and reduces the likelihood that bugs will be introduced by future pull requests.
+  By signing this Individual Contributor License Agreement
+  ("Agreement"), and making a Contribution (as defined below) to
+  StrongLoop, Inc. ("StrongLoop"), You (as defined below) accept and
+  agree to the following terms and conditions for Your present and
+  future Contributions submitted to StrongLoop. Except for the license
+  granted in this Agreement to StrongLoop and recipients of software
+  distributed by StrongLoop, You reserve all right, title, and interest
+  in and to Your Contributions.
+
+  1. Definitions
+
+     "You" or "Your" shall mean the copyright owner or the individual
+     authorized by the copyright owner that is entering into this
+     Agreement with StrongLoop.
+
+     "Contribution" shall mean any original work of authorship,
+     including any modifications or additions to an existing work, that
+     is intentionally submitted by You to StrongLoop for inclusion in,
+     or documentation of, any of the products owned or managed by
+     StrongLoop ("Work"). For purposes of this definition, "submitted"
+     means any form of electronic, verbal, or written communication
+     sent to StrongLoop or its representatives, including but not
+     limited to communication or electronic mailing lists, source code
+     control systems, and issue tracking systems that are managed by,
+     or on behalf of, StrongLoop for the purpose of discussing and
+     improving the Work, but excluding communication that is
+     conspicuously marked or otherwise designated in writing by You as
+     "Not a Contribution."
+
+  2. You Grant a Copyright License to StrongLoop
+
+     Subject to the terms and conditions of this Agreement, You hereby
+     grant to StrongLoop and recipients of software distributed by
+     StrongLoop, a perpetual, worldwide, non-exclusive, no-charge,
+     royalty-free, irrevocable copyright license to reproduce, prepare
+     derivative works of, publicly display, publicly perform,
+     sublicense, and distribute Your Contributions and such derivative
+     works under any license and without any restrictions.
+
+  3. You Grant a Patent License to StrongLoop
+
+     Subject to the terms and conditions of this Agreement, You hereby
+     grant to StrongLoop and to recipients of software distributed by
+     StrongLoop a perpetual, worldwide, non-exclusive, no-charge,
+     royalty-free, irrevocable (except as stated in this Section)
+     patent license to make, have made, use, offer to sell, sell,
+     import, and otherwise transfer the Work under any license and
+     without any restrictions. The patent license You grant to
+     StrongLoop under this Section applies only to those patent claims
+     licensable by You that are necessarily infringed by Your
+     Contributions(s) alone or by combination of Your Contributions(s)
+     with the Work to which such Contribution(s) was submitted. If any
+     entity institutes a patent litigation against You or any other
+     entity (including a cross-claim or counterclaim in a lawsuit)
+     alleging that Your Contribution, or the Work to which You have
+     contributed, constitutes direct or contributory patent
+     infringement, any patent licenses granted to that entity under
+     this Agreement for that Contribution or Work shall terminate as
+     of the date such litigation is filed.
+
+  4. You Have the Right to Grant Licenses to StrongLoop
+
+     You represent that You are legally entitled to grant the licenses
+     in this Agreement.
+
+     If Your employer(s) has rights to intellectual property that You
+     create, You represent that You have received permission to make
+     the Contributions on behalf of that employer, that Your employer
+     has waived such rights for Your Contributions, or that Your
+     employer has executed a separate Corporate Contributor License
+     Agreement with StrongLoop.
+
+  5. The Contributions Are Your Original Work
+
+     You represent that each of Your Contributions are Your original
+     works of authorship (see Section 8 (Submissions on Behalf of
+     Others) for submission on behalf of others). You represent that to
+     Your knowledge, no other person claims, or has the right to claim,
+     any right in any intellectual property right related to Your
+     Contributions.
+
+     You also represent that You are not legally obligated, whether by
+     entering into an agreement or otherwise, in any way that conflicts
+     with the terms of this Agreement.
+
+     You represent that Your Contribution submissions include complete
+     details of any third-party license or other restriction (including,
+     but not limited to, related patents and trademarks) of which You
+     are personally aware and which are associated with any part of
+     Your Contributions.
+
+  6. You Don't Have an Obligation to Provide Support for Your Contributions
+
+     You are not expected to provide support for Your Contributions,
+     except to the extent You desire to provide support. You may provide
+     support for free, for a fee, or not at all.
+
+  6. No Warranties or Conditions
+
+     StrongLoop acknowledges that unless required by applicable law or
+     agreed to in writing, You provide Your Contributions on an "AS IS"
+     BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, EITHER
+     EXPRESS OR IMPLIED, INCLUDING, WITHOUT LIMITATION, ANY WARRANTIES
+     OR CONDITIONS OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, OR
+     FITNESS FOR A PARTICULAR PURPOSE.
+
+  7. Submission on Behalf of Others
+
+     If You wish to submit work that is not Your original creation, You
+     may submit it to StrongLoop separately from any Contribution,
+     identifying the complete details of its source and of any license
+     or other restriction (including, but not limited to, related
+     patents, trademarks, and license agreements) of which You are
+     personally aware, and conspicuously marking the work as
+     "Submitted on Behalf of a Third-Party: [named here]".
+
+  8. Agree to Notify of Change of Circumstances
+
+     You agree to notify StrongLoop of any facts or circumstances of
+     which You become aware that would make these representations
+     inaccurate in any respect. Email us at callback@strongloop.com.
+```

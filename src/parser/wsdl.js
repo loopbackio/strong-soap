@@ -143,9 +143,6 @@ class WSDL {
     // Works only in client
     this.options.forceSoap12Headers = options.forceSoap12Headers;
 
-    if (options.overrideRootElement !== undefined) {
-      this.options.overrideRootElement = options.overrideRootElement;
-    }
   }
 
   _processNextInclude(includes, callback) {
