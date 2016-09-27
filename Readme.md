@@ -12,7 +12,7 @@ This module provides SOAP client for invoking Web Services. It also provides a m
 - [Features:](#features)
 - [Install](#install)
 - [Client](#client)
-  - [soap.createClient(url[, options], callback) - create a new SOAP client from a WSDL url. Also supports a local filesystem path.](#soapcreateclienturl-options-callback---create-a-new-soap-client-from-a-wsdl-url-also-supports-a-local-filesystem-path)
+  - [XMLHandler](#XMLHandler)
   - [Client.describe() - description of services, ports and methods as a JavaScript object](#clientdescribe---description-of-services-ports-and-methods-as-a-javascript-object)
   - [Client.setSecurity(security) - use the specified security protocol](#clientsetsecuritysecurity---use-the-specified-security-protocol)
   - [Client.*method*(args, callback) - call *method* on the SOAP service.](#clientmethodargs-callback---call-method-on-the-soap-service)
@@ -67,7 +67,7 @@ Install with [npm](http://github.com/isaacs/npm):
 
 - Start with the WSDL for the Web Service you want to invoke. For e.g the Weather Web Service http://wsf.cdyne.com/WeatherWS/Weather.asmx and the WSDL is http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL
 
-- Create a new SOAP client from WSDL url using soap.createClient(url[, options], callback) API. Also supports a local filesystem path.
+- Create a new SOAP client from WSDL url using soap.createClient(url[, options], callback) API. Also supports a local filesystem path. An instance of `Client` is passed to the `soap.createClient` callback.  It is used to execute methods on the soap service.
 ```
       var soap = require('strong-soap').soap;
       //wsdl of the Web Service this client is going to invoke. This can point to local wsdl as well.
@@ -112,7 +112,7 @@ The `options` argument allows you to customize the client with the following pro
 
 Note: for versions of node >0.10.X, you may need to specify `{connection: 'keep-alive'}` in SOAP headers to avoid truncation of longer chunked responses.
 
-## XMLHandler
+### XMLHandler
 XMLHandler provides capabilities for the user to convert JSON object to XML and XML to JSON object.  It also provides capability to Parse XML string or stream into the XMLBuilder tree.
 
 - API to Convert JSON object to XML and XML to JSON object. 
@@ -147,9 +147,6 @@ XMLHandler provides capabilities for the user to convert JSON object to XML and 
 var root = XMLHandler.parseXml(null, xmlString);
 ```
 
-## Client APIs
-
-An instance of `Client` is passed to the `soap.createClient` callback.  It is used to execute methods on the soap service.
 
 ### Extra Headers (optional)
 
@@ -230,9 +227,13 @@ client.MyService.MyPort.MyFunction({name: 'value'}, options, extraHeaders, funct
 })
 ```
 
-### Client.*lastRequest* - the property that contains last full soap request for client logging
+### Client.*lastRequest* 
 
-### Client.setEndpoint(url) - overwrite the SOAP service endpoint address
+The property that contains last full soap request for client logging
+
+### Client.setEndpoint(url) 
+
+Overwrites the SOAP service endpoint address
 
 ### Client Events
 Client instances emit the following events:
@@ -454,7 +455,7 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 To see it in practice, consider the sample in: [test/request-response-samples/addPets__force_namespaces](https://github.com/strongloop/strong-soap/tree/master/test/request-response-samples/addPets__force_namespaces)
 
 
-##SOAP Server 
+## Server 
 
 ### soap.listen(*server*, *path*, *services*, *wsdl*) - create a new SOAP server that listens on *path* and provides *services*.
 *wsdl* is an xml string that defines the service.
