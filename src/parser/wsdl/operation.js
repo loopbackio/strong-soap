@@ -211,9 +211,9 @@ class Operation extends WSDLElement {
       }
     };
     this.descriptor.inputEnvelope =
-      Operation.createEnvelopeDescriptor(this.descriptor.input, false);
+      Operation.createEnvelopeDescriptor(this.descriptor.input, false, this.soapVersion);
     this.descriptor.outputEnvelope =
-      Operation.createEnvelopeDescriptor(this.descriptor.output, true);
+      Operation.createEnvelopeDescriptor(this.descriptor.output, true, this.soapVersion);
     this.descriptor.faultEnvelope =
       Operation.createEnvelopeDescriptor(this.descriptor.faults, true, this.soapVersion);
 
@@ -222,7 +222,14 @@ class Operation extends WSDLElement {
 
   static createEnvelopeDescriptor(parameterDescriptor, isOutput, soapVersion, prefix, nsURI) {
     prefix = prefix || 'soap';
-    nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/';
+    var soapNsURI;
+    if (soapVersion === '1.1') {
+      soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
+    } else if (soapVersion === '1.2') {
+      soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
+    }
+
+    nsURI = nsURI || soapNsURI;
     var descriptor = new TypeDescriptor();
 
     var envelopeDescriptor = new ElementDescriptor(

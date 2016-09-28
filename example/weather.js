@@ -23,8 +23,11 @@ soap.createClient(url, clientOptions, function(err, client) {
   //custom request header
   var customRequestHeader = {timeout: 5000};
   var options = {};
+  //navigate to the correct operation in the client using [service][port][operation] since GetCityWeatherByZIP operation is used
+  //by more than one port.
+  var method = client['Weather']['WeatherSoap']['GetCityWeatherByZIP'];
   //you can also call
-  client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope, soapHeader) {
+  method(requestArgs, function(err, result, envelope, soapHeader) {
     //response envelope
     console.log(envelope);
     //result in SOAP envelope body which is the wrapper element. In this case, result object corresponds to GetCityForecastByZIPResponse

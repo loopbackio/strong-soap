@@ -10,7 +10,7 @@ WSDL.open('./wsdls/weather.wsdl', options,
   //User can traverse the WSDL tree and get to bindings - > operations, services, portTypes, messages, parts and XSD elements/Attributes
   function(err, wsdl) {
     var getCityForecastOp = wsdl.definitions.bindings.WeatherSoap.operations.GetCityForecastByZIP;
-    console.log(getCityForecastOp.name);
+    console.log(getCityForecastOp.$name);
     var service = wsdl.definitions.services['Weather'];
-    console.log(service.name);;
+    console.log(service.$name);
   });

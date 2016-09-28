@@ -120,7 +120,7 @@ class Client extends Base {
     var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
     var soapNsPrefix = this.wsdl.options.envelopeKey || 'soap';
 
-    if (this.wsdl.options.forceSoap12Headers) {
+    if (operation.soapVersion === '1.2') {
       headers['Content-Type'] = 'application/soap+xml; charset=utf-8';
       soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
     }
@@ -133,7 +133,7 @@ class Client extends Base {
       soapAction = ((ns.lastIndexOf("/") !== ns.length - 1) ? ns + "/" : ns) + name;
     }
 
-    if (!this.wsdl.options.forceSoap12Headers) {
+    if (operation.soapVersion !== '1.2') {
       headers.SOAPAction = '"' + soapAction + '"';
     }
 
