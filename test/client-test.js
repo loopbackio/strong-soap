@@ -313,11 +313,11 @@ describe('SOAP Client', function() {
     });
 
     it('should add proper headers for soap12', function(done) {
-      soap.createClient(__dirname+'/wsdl/default_namespace_soap12.wsdl', {forceSoap12Headers: true}, function(err, client) {
+      soap.createClient(__dirname+'/wsdl/default_namespace_soap12.wsdl', function(err, client) {
         assert.ok(client);
         assert.ok(!err);
 
-        client.MyOperation({}, function(err, result) {
+        client.MyOperation({}, function(err, result, envelope) {
           assert.ok(result);
           assert.ok(client.lastRequestHeaders);
           assert.ok(client.lastRequest);

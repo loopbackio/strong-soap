@@ -278,7 +278,7 @@ class XMLHandler {
       {version: '1.0', encoding: 'UTF-8', standalone: true});
     nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/'
     doc.attribute('xmlns:' + prefix,
-      'http://schemas.xmlsoap.org/soap/envelope/');
+      nsURI);
     let header = doc.element(prefix + ':Header');
     let body = doc.element(prefix + ':Body');
     return {

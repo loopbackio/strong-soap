@@ -133,7 +133,20 @@ function generateTest(name, methodName, wsdlPath, headerJSON, securityJSON, requ
       if (securityJSON && securityJSON.type === 'ws') {
         client.setSecurity(new WSSecurity(securityJSON.username, securityJSON.password, securityJSON.options));
       }
-      client[methodName](requestJSON, function(err, json, body, soapHeader){
+      //For the test cases with  method names  'addPets'/'GetAccountXML'/'GetNodes', the corresponding wsdls(see soap.wsdl in corresponding sub directories) has 2 wsdl ports/2 bindings pointing to
+      //same operation e.g addPets(). The correct way to invoke operation in this case is  to pick the operation to be invoked using 'client['Service1']['Service1Soap']['addPets'].
+      var method;
+      if (methodName === 'addPets') { //use soap 1.1 binding operation
+        method = client ['Service1']['Service1Soap'][methodName];
+      } else if (methodName === 'GetNodes') {//use soap 1.2 binding operation
+        method = client ['Service1']['Service1Soap12'][methodName];
+      } else if (methodName === 'GetAccountXML' ) {//use 1.2 binding operation
+        method = client ['Service1']['Service1Soap12'][methodName];
+      } else { //rest of the tests which has unique operation
+        method = client[methodName];
+      }
+
+      method(requestJSON, function(err, json, body, soapHeader){
         if(requestJSON){
           if (err) {
             assert.notEqual('undefined: undefined', err.message);

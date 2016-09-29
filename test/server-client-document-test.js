@@ -523,14 +523,14 @@ describe('Document style tests', function() {
 
      Client Request
      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-      <soap:Header/>
-      <soap:Body>
-        <myMethod>
-          <x>200</x>
-          <y>10.55</y>
-        </myMethod>
-      </soap:Body>
+     <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+        <soap:Header/>
+        <soap:Body>
+          <ns1:myMethod xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.wsdl">
+            <x>200</x>
+            <y>10.55</y>
+          </ns1:myMethod>
+        </soap:Body>
      </soap:Envelope>
 
      Server Response
@@ -538,27 +538,27 @@ describe('Document style tests', function() {
      //and also the response envelope should contain <Fault> and <Detailt> element should contain element <myMethodFault> defined in the wsdl
 
      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-      <soap:Header/>
-      <soap:Body>
-        <soap:Fault>
-          <soap:Code>
-            <soap:Value>soap:Sender</soap:Value>
-            <soap:Subcode>
-              <soap:Value>rpc:BadArguments</soap:Value>
-            </soap:Subcode>
-          </soap:Code>
-          <soap:Reason>
-            <soap:Text>Processing Error</soap:Text>
-          </soap:Reason>
-          <soap:Detail>
-            <ns1:myMethodFault2 xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.wsdl">
-                <errorMessage2>MyMethod Business Exception message</errorMessage2>
-                <value2>10</value2>
-            </ns1:myMethodFault2>
-          </soap:Detail>
-         </soap:Fault>
-     </soap:Body>
+     <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+       <soap:Header/>
+        <soap:Body>
+          <soap:Fault>
+            <soap:Code>
+              <soap:Value>soap:Sender</soap:Value>
+              <soap:Subcode>
+                <soap:Value>rpc:BadArguments</soap:Value>
+              </soap:Subcode>
+            </soap:Code>
+            <soap:Reason>
+              <soap:Text>Processing Error</soap:Text>
+            </soap:Reason>
+            <soap:Detail>
+                <ns1:myMethodFault2 xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.wsdl">
+                    <errorMessage2>MyMethod Business Exception message</errorMessage2>
+                    <value2>10</value2>
+                </ns1:myMethodFault2>
+            </soap:Detail>
+          </soap:Fault>
+        </soap:Body>
      </soap:Envelope>
 
      */
