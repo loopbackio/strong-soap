@@ -139,10 +139,6 @@ class WSDL {
       this.options.ignoreBaseNameSpaces = ignoreBaseNameSpaces;
     else
       this.options.ignoreBaseNameSpaces = this.ignoreBaseNameSpaces;
-
-    // Works only in client
-    this.options.forceSoap12Headers = options.forceSoap12Headers;
-
   }
 
   _processNextInclude(includes, callback) {

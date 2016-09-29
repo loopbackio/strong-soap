@@ -299,8 +299,7 @@ class Server extends Base {
       var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
       var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
 
-      if (self.wsdl.options.forceSoap12Headers) {
-        headers['Content-Type'] = 'application/soap+xml; charset=utf-8';
+      if (operation.soapVersion === '1.2') {
         soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
       }
 
@@ -375,7 +374,6 @@ class Server extends Base {
       error.Fault.statusCode = undefined;
     }
 
-    var env = XMLHandler.createSOAPEnvelope();
     var operationDescriptor = operation.describe(this.wsdl.definitions);
     //get envelope descriptor
     var faultEnvDescriptor = operation.descriptor.faultEnvelope.elements[0];
@@ -383,8 +381,7 @@ class Server extends Base {
     var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
     var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
 
-    if (self.wsdl.options.forceSoap12Headers) {
-      headers['Content-Type'] = 'application/soap+xml; charset=utf-8';
+    if (operation.soapVersion === '1.2') {
       soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
     }
 
@@ -399,11 +396,11 @@ class Server extends Base {
     var faultDescriptor = bodyDescriptor.elements[0];
 
     //serialize Fault object into XML as per faultDescriptor
-    this.xmlHandler.jsonToXml(env.body, nsContext, faultDescriptor, error.Fault);
+    this.xmlHandler.jsonToXml(envelope.body, nsContext, faultDescriptor, error.Fault);
 
-    self._envelope(env, includeTimestamp);
-    var message = env.body.toString({pretty: true});
-    var xml = env.doc.end({pretty: true});
+    self._envelope(envelope, includeTimestamp);
+    var message = envelope.body.toString({pretty: true});
+    var xml = envelope.doc.end({pretty: true});
 
     callback(xml, statusCode);
   }
