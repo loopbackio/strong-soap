@@ -5,33 +5,71 @@ var fs = require('fs'),
     assert = require('assert'),
     should = require('should'),
     request = require('request'),
-    http = require('http');
+    http = require('http'),
+    async = require('async');
 
 describe('wsdl-tests', function() {
 
-  describe('wsdl parsing test cases', function () {
+  describe('should parse and describe wsdls under /wsdl/strict dir', function () {
+    var files = [];
 
-    it('should parse and describe - 1 set of wsdls', function (done) {
-      fs.readdirSync(__dirname+'/wsdl/strict').forEach(function(file) {
+    before(function (done) {
+      fs.readdirSync(__dirname + '/wsdl/strict').forEach(function (file) {
         if (!/.wsdl$/.exec(file)) return;
-          soap.createClient(__dirname+'/wsdl/strict/'+file, {strict: true}, function(err, client) {
-            assert.ok(!err);
-            client.describe();
-          });
+        files.push(file);
       });
       done();
     });
 
-
-    it('should parse and describe - 2nd set of wsdls', function (done) {
-      fs.readdirSync(__dirname+'/wsdl').forEach(function(file) {
-        if (!/.wsdl$/.exec(file)) return;
-        soap.createClient(__dirname+'/wsdl/'+file, function(err, client) {
+    it('should parse and describe wsdls under /wsdl/strict dir', function (done) {
+      async.each(files, function (file, cb) {
+        soap.createClient(__dirname + '/wsdl/strict/' + file, {strict: true}, function (err, client) {
           assert.ok(!err);
           client.describe();
         });
       });
       done();
+    });
+  });
+
+  describe('should parse and describe wsdls directly under /wsdl/ dir', function () {
+    var files = [];
+
+    before(function (done) {
+      fs.readdirSync(__dirname + '/wsdl/').forEach(function (file) {
+        if (!/.wsdl$/.exec(file)) return;
+        files.push(file);
+      });
+      done();
+    });
+
+    it('should parse and describe wsdls directly under /wsdl/ dir', function (done) {
+      async.each(files, function (file, cb) {
+        soap.createClient(__dirname + '/wsdl/' + file, {strict: true}, function (err, client) {
+          assert.ok(!err);
+          client.describe();
+        });
+      });
+      done();
+    });
+  });
+
+
+  describe('wsdl parsing test cases', function () {
+
+    it('document/encoded style wsdl is not a supported type', function (done) {
+      soap.createClient(__dirname+'/wsdl/unsupported/ImportSample.wsdl', function(err, client) {
+        var expectedError = false;
+        try {
+          client.describe();
+        } catch (err) {
+          //Error is expected in this negative test where ImportSample.wsdl is an invalid wsdl since it uses
+          //document/encode style. Code throws "WSDL not supported DocumentEncode Style" error.
+          expectedError = true;
+        }
+        assert.ok(expectedError);
+        done();
+      });
     });
 
     it('should not parse connection error', function (done) {
