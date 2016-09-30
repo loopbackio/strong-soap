@@ -1,3 +1,15 @@
+2016-09-30, Version 1.0.1
+=========================
+
+ * code review fixes (rashmihunt)
+
+ * fixed wsdl-test failure (rashmihunt)
+
+ * add babel script as prepublish (deepakrkris)
+
+ * remove forceSoap12Headers wsdl option and reimplement (rashmihunt)
+
+
 2016-09-27, Version 1.0.0
 =========================
 
