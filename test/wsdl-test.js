@@ -26,10 +26,11 @@ describe('wsdl-tests', function() {
         soap.createClient(__dirname + '/wsdl/strict/' + file, {strict: true}, function (err, client) {
           assert.ok(!err);
           client.describe();
+          cb(err);
         });
-      });
-      done();
+      }, done);
     });
+
   });
 
   describe('should parse and describe wsdls directly under /wsdl/ dir', function () {
@@ -46,11 +47,10 @@ describe('wsdl-tests', function() {
     it('should parse and describe wsdls directly under /wsdl/ dir', function (done) {
       async.each(files, function (file, cb) {
         soap.createClient(__dirname + '/wsdl/' + file, {strict: true}, function (err, client) {
-          assert.ok(!err);
           client.describe();
+          cb(err);
         });
-      });
-      done();
+      }, done);
     });
   });
 
