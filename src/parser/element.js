@@ -4,7 +4,7 @@ var QName = require('./qname');
 var typeRegistry = require('./typeRegistry');
 var helper = require('./helper');
 var xsd = require('./xsd');
-var debug = require('debug')('node-soap:wsdl');
+var debug = require('debug')('strong-soap:wsdl:element');
 
 var EMPTY_PREFIX = helper.EMPTY_PREFIX;
 var namespaces = helper.namespaces;
@@ -80,7 +80,7 @@ class Element {
     var ElementType = typeRegistry.getElementType(qname);
     if (this.constructor.allowedChildren.indexOf(qname.name) === -1 &&
       this.constructor.allowedChildren.indexOf('any') === -1) {
-      g.warn('Element %s is not allowed within %j', qname, this.nsName);
+      debug('Element %s is not allowed within %j', qname, this.nsName);
     }
     
     if (ElementType) {
@@ -192,7 +192,7 @@ class Element {
     }
     var schema = schemas[nsURI];
     if (!schema) {
-      g.warn('Schema not found: %s (%s)', qname, elementType);
+      debug('Schema not found: %s (%s)', qname, elementType);
       return null;
     }
     var found = null;
@@ -220,7 +220,7 @@ class Element {
         break;
     }
     if (!found) {
-      g.warn('Schema %s not found: %s %s', elementType, nsURI, nsName);
+      debug('Schema %s not found: %s %s', elementType, nsURI, nsName);
       return null;
     }
     return found;

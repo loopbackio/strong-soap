@@ -26,27 +26,45 @@ soap.createClient(url, clientOptions, function(err, client) {
   //navigate to the correct operation in the client using [service][port][operation] since GetCityWeatherByZIP operation is used
   //by more than one port.
   var method = client['Weather']['WeatherSoap']['GetCityWeatherByZIP'];
+  //this describes the entire WSDL in a tree form.
+  var description = client.describe();
+  //inspect GetCityWeatherByZIP operation
+  var operation = description.Weather.WeatherSoap.GetCityWeatherByZIP;
+  console.log('Invoking operation: ' + operation.name);
+
   //you can also call
   method(requestArgs, function(err, result, envelope, soapHeader) {
+    console.log('Response envelope:');
     //response envelope
     console.log(envelope);
-    //result in SOAP envelope body which is the wrapper element. In this case, result object corresponds to GetCityForecastByZIPResponse
-    console.log(JSON.stringify(result));
-    //this describes the entire WSDL in a tree form.
-    var description = client.describe();
-    //inspect GetCityWeatherByZIP operation
-    var operation = description.Weather.WeatherSoap.GetCityWeatherByZIP;
+
+    var response;
+    if (!err) {
+      console.log('Result:');
+      //result in SOAP envelope body which is the wrapper element. In this case, result object corresponds to GetCityForecastByZIPResponse
+      console.log(JSON.stringify(result));
+      response = result;
+    } else {
+      response = err.root;
+    }
 
     var node = xmlHandler.jsonToXml(null, null,
-      XMLHandler.createSOAPEnvelopeDescriptor('soap'), result);
+        XMLHandler.createSOAPEnvelopeDescriptor('soap'), response);
+
     var xml = node.end({pretty: true});
+    console.log('jsonToXml:');
     console.log(xml);
 
-    var root = xmlHandler.xmlToJson(null, xml, null);
-    console.log('%s', util.inspect(root, {depth: null}));
+    var root;
+    try {
+      root = xmlHandler.xmlToJson(null, xml, null);
+    } catch (error) {
+    //do nothing
+    }
 
     var root = XMLHandler.parseXml(null, xml);
     var result = root.end({pretty: true});
+    console.log('parseXml:');
     console.log(result);
 
 

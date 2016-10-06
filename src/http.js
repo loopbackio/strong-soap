@@ -2,7 +2,7 @@
 
 var url = require('url');
 var req = require('request');
-var debug = require('debug')('node-soap:http');
+var debug = require('debug')('st-soap:http');
 
 var VERSION = require('../package.json').version;
 
@@ -35,7 +35,7 @@ class HttpClient {
     var path = [curl.pathname || '/', curl.search || '', curl.hash || ''].join('');
     var method = data ? 'POST' : 'GET';
     var headers = {
-      'User-Agent': 'node-soap/' + VERSION,
+      'User-Agent': 'strong-soap/' + VERSION,
       'Accept': 'text/html,application/xhtml+xml,application/xml,text/xml;q=0.9,*/*;q=0.8',
       'Accept-Encoding': 'none',
       'Accept-Charset': 'utf-8',

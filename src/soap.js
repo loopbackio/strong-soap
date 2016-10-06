@@ -11,7 +11,8 @@ var Client = require('./client'),
   security = require('./security'),
   passwordDigest = require('./utils').passwordDigest,
   parser = require('./parser/index'),
-  openWSDL = parser.WSDL.open;
+  openWSDL = parser.WSDL.open,
+  debug = require('debug')('strong-soap:soap');
 
 var _wsdlCache = {};
 
@@ -23,6 +24,7 @@ function _requestWSDL(url, options, callback) {
 
   var wsdl = _wsdlCache[url];
   if (wsdl) {
+    debug('_requestWSDL, wsdl in cache %s', wsdl);
     process.nextTick(function() {
       callback(null, wsdl);
     });
@@ -46,12 +48,14 @@ function createClient(url, options, callback, endpoint) {
     options = {};
   }
   endpoint = options.endpoint || endpoint;
+  debug('createClient params: wsdl url: %s client options: %j', url, options);
   _requestWSDL(url, options, function(err, wsdl) {
     callback(err, wsdl && new Client(wsdl, endpoint, options));
   });
 }
 
 function listen(server, pathOrOptions, services, xml) {
+  debug('listen params: pathOrOptions: %j services: %j xml: %j', pathOrOptions, services, xml);
   var options = {},
     path = pathOrOptions,
     uri = null;
@@ -63,7 +67,7 @@ function listen(server, pathOrOptions, services, xml) {
     xml = options.xml;
     uri = options.uri;
   }
-  
+
   var wsdl = new parser.WSDL(xml || services, uri, options);
   return new Server(server, path, services, wsdl);
 }

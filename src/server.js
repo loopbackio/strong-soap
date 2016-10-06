@@ -12,7 +12,9 @@ var url = require('url'),
   XMLHandler = require('./parser/xmlHandler'),
   Base = require('./base'),
   toXMLDate = require('./utils').toXMLDate,
-  util = require('util');
+  util = require('util'),
+  debug = require('debug')('strong-soap:server'),
+  debugDetail = require('debug')('strong-soap:server:detail');
 
 try {
   compress = require('compress');
@@ -25,12 +27,12 @@ class Server extends Base {
   constructor(server, path, services, wsdl, options) {
     super(wsdl, options);
     var self = this;
-
     options = options || {};
     this.path = path;
     this.services = services;
     this.xmlHandler = new XMLHandler(this.wsdl.options);
 
+    debug('Server parameters: path: %s services: %j wsdl: %j', path, services, wsdl);
     if (path[path.length - 1] !== '/')
       path += '/';
     wsdl.load(function(err) {
@@ -228,7 +230,6 @@ class Server extends Base {
           }
         }
 
-        g.log(' {{operationName}}: %s {{outputName}}: %s', operationName, outputName);
         self.emit('request', obj, operationName);
         if (headers)
           self.emit('headers', headers, operationName);
@@ -268,7 +269,9 @@ class Server extends Base {
 
     try {
       operation = this.services[serviceName][portName][operationName];
+      debug('Server operation: %s ', operationName);
     } catch (error) {
+      debug('Server executeMethod: error: %s ', error.message);
       //fix - should create a fault and call sendError (..) so that this error is not lost and will be sent as Fault in soap envelope
       //to the client?
       return callback(this._envelope('', includeTimestamp));
@@ -294,7 +297,10 @@ class Server extends Base {
       var element = operation.output;
 
       var operationDescriptor = operation.describe(self.wsdl.definitions);
+      debugDetail('Server handleResult. operationDescriptor: %j ', operationDescriptor);
+
       var outputBodyDescriptor = operationDescriptor.output.body;
+      debugDetail('Server handleResult. outputBodyDescriptor: %j ', outputBodyDescriptor);
 
       var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
       var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
@@ -303,14 +309,19 @@ class Server extends Base {
         soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
       }
 
+      debug('Server soapNsURI: %s soapNsPrefix: %s', soapNsURI, soapNsPrefix);
+
       var nsContext = self.createNamespaceContext(soapNsPrefix, soapNsURI);
       var envelope = XMLHandler.createSOAPEnvelope(soapNsPrefix, soapNsURI);
+
 
       self.xmlHandler.jsonToXml(envelope.body, nsContext, outputBodyDescriptor, result);
 
       self._envelope(envelope, includeTimestamp);
       var message = envelope.body.toString({pretty: true});
       var xml = envelope.doc.end({pretty: true});
+
+      debug('Server handleResult. xml: %s ', xml);
       callback(xml);
 
     }
@@ -375,8 +386,11 @@ class Server extends Base {
     }
 
     var operationDescriptor = operation.describe(this.wsdl.definitions);
+    debugDetail('Server sendError. operationDescriptor: %j ', operationDescriptor);
+
     //get envelope descriptor
     var faultEnvDescriptor = operation.descriptor.faultEnvelope.elements[0];
+
 
     var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
     var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
@@ -394,6 +408,9 @@ class Server extends Base {
 
     //there will be only one <Fault> element descriptor under <Body>
     var faultDescriptor = bodyDescriptor.elements[0];
+    debugDetail('Server sendError. faultDescriptor: %j ', faultDescriptor);
+
+    debug('Server sendError.  error.Fault: %j ',  error.Fault);
 
     //serialize Fault object into XML as per faultDescriptor
     this.xmlHandler.jsonToXml(envelope.body, nsContext, faultDescriptor, error.Fault);
@@ -402,6 +419,7 @@ class Server extends Base {
     var message = envelope.body.toString({pretty: true});
     var xml = envelope.doc.end({pretty: true});
 
+    debug('Server sendError. Response envelope: %s ', xml);
     callback(xml, statusCode);
   }
 }

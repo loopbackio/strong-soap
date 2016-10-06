@@ -3,7 +3,7 @@ var sax = require('sax');
 var stream = require('stream');
 var assert = require('assert');
 var selectn = require('selectn');
-var debug = require('debug')('node-soap:wsdl:xml');
+var debug = require('debug')('strong-soap:xmlhandler');
 var descriptor = require('./xsd/descriptor');
 var ElementDescriptor = descriptor.ElementDescriptor;
 var AttributeDescriptor = descriptor.AttributeDescriptor;
@@ -138,7 +138,7 @@ class XMLHandler {
           nsContext.popContext();
         }
         return node;
-      } else if (typeof val !== 'undefined' && typeof val != null) {
+      } else if ( val != null) {
         let attrs = val[this.options.attributesKey];
         if (typeof attrs === 'object') {
           for (let p in attrs) {
@@ -161,7 +161,7 @@ class XMLHandler {
         }  
       }
 
-      if (typeof val !== 'undefined' && val !== null && ( typeof val !== 'object' || val instanceof Date)) {
+      if (val != null && ( typeof val !== 'object' || val instanceof Date)) {
         // for adding a field value nsContext.popContext() shouldnt be called
         element.text(val);
         if (nameSpaceContextCreated) {
@@ -346,6 +346,7 @@ class XMLHandler {
   static parseXml(root, xml, cb) {
     let parser;
     let stringMode = true;
+    debug('XMLHandler parseXML. root: %j xml: %j', root, xml);
     if (typeof xml === 'string') {
       stringMode = true;
       parser = sax.parser(true, {opt: {xmlns: true}});

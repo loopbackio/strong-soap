@@ -1,6 +1,6 @@
 var WSDLElement = require('./wsdlElement');
 var QName = require('../qname');
-var debug = require('debug')('node-soap:wsdl:parameter');
+var debug = require('debug')('strong-soap:wsdl:parameter');
 
 /**
  * Base class for Input/Output
