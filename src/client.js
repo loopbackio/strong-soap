@@ -17,7 +17,8 @@ var HttpClient = require('./http'),
   util = require('util'),
   _ = require('lodash'),
   debug = require('debug')('strong-soap:client'),
-  debugDetail = require('debug')('strong-soap:client:detail');
+  debugDetail = require('debug')('strong-soap:client:detail'),
+  debugSensitive = require('debug')('strong-soap:client:sensitive');
 
 class Client extends Base {
   constructor(wsdl, endpoint, options) {
@@ -146,6 +147,7 @@ class Client extends Base {
     debug('client request. soapAction: %s', soapAction);
 
     options = options || {};
+    debugSensitive('client request. options: %j', options);
 
     //Add extra headers
     for (var header in this.httpHeaders) {
@@ -158,12 +160,16 @@ class Client extends Base {
     debug('client request. headers: %j', headers);
 
     // Allow the security object to add headers
-    if (self.security && self.security.addHttpHeaders)
+    if (self.security && self.security.addHttpHeaders) {
       self.security.addHttpHeaders(headers);
-    if (self.security && self.security.addOptions)
+      debugSensitive('client request. options: %j', options);
+    }
+    if (self.security && self.security.addOptions) {
       self.security.addOptions(options);
+      debugSensitive('client request. options: %j', options);
+    }
 
-    debug('client request. options: %j', options);
+
 
     var nsContext = this.createNamespaceContext(soapNsPrefix, soapNsURI);
     var xmlHandler = this.xmlHandler || new XMLHandler(options);
