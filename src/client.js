@@ -16,7 +16,9 @@ var HttpClient = require('./http'),
   Base = require('./base'),
   util = require('util'),
   _ = require('lodash'),
-  debug = require('debug')('node-soap:client');
+  debug = require('debug')('strong-soap:client'),
+  debugDetail = require('debug')('strong-soap:client:detail'),
+  debugSensitive = require('debug')('strong-soap:client:sensitive');
 
 class Client extends Base {
   constructor(wsdl, endpoint, options) {
@@ -117,13 +119,18 @@ class Client extends Base {
         'Content-Type': 'text/xml; charset=utf-8'
       };
 
+    debug('client request. operation: %s args: %j options: %j extraHeaders: %j', operation.name, args, options, extraHeaders);
+
     var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
     var soapNsPrefix = this.wsdl.options.envelopeKey || 'soap';
+
 
     if (operation.soapVersion === '1.2') {
       headers['Content-Type'] = 'application/soap+xml; charset=utf-8';
       soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
     }
+
+    debug('client request. soapNsURI: %s soapNsPrefix: %s ', soapNsURI, soapNsPrefix);
 
     if (this.SOAPAction) {
       soapAction = this.SOAPAction;
@@ -137,7 +144,10 @@ class Client extends Base {
       headers.SOAPAction = '"' + soapAction + '"';
     }
 
+    debug('client request. soapAction: %s', soapAction);
+
     options = options || {};
+    debugSensitive('client request. options: %j', options);
 
     //Add extra headers
     for (var header in this.httpHeaders) {
@@ -147,11 +157,19 @@ class Client extends Base {
       headers[attr] = extraHeaders[attr];
     }
 
+    debug('client request. headers: %j', headers);
+
     // Allow the security object to add headers
-    if (self.security && self.security.addHttpHeaders)
+    if (self.security && self.security.addHttpHeaders) {
       self.security.addHttpHeaders(headers);
-    if (self.security && self.security.addOptions)
+      debugSensitive('client request. options: %j', options);
+    }
+    if (self.security && self.security.addOptions) {
       self.security.addOptions(options);
+      debugSensitive('client request. options: %j', options);
+    }
+
+
 
     var nsContext = this.createNamespaceContext(soapNsPrefix, soapNsURI);
     var xmlHandler = this.xmlHandler || new XMLHandler(options);
@@ -167,6 +185,7 @@ class Client extends Base {
     }
 
     let schemas = defs.schemas;
+
 
     for(let uri in schemas) {
       let complexTypes = schemas[uri].complexTypes;
@@ -187,9 +206,15 @@ class Client extends Base {
     }
 
     var operationDescriptor = operation.describe(this.wsdl.definitions);
+    debugDetail('client request. operationDescriptor: %j', operationDescriptor);
+
     var inputBodyDescriptor = operationDescriptor.input.body;
+    debug('client request. inputBodyDescriptor: %j', inputBodyDescriptor);
+
     var inputHeadersDescriptor = operationDescriptor.input.headers;
 
+
+    debug('client request, calling jsonToXml. args: %j', args);
     xmlHandler.jsonToXml(soapBodyElement, nsContext, inputBodyDescriptor, args);
 
     if (self.security && self.security.postProcess) {
@@ -225,6 +250,8 @@ class Client extends Base {
       self.lastElapsedTime = response && response.elapsedTime;
       self.emit('response', body, response);
 
+      debug('client response. response: %j body: %j', response, body);
+
       if (err) {
         callback(err);
       } else {
@@ -238,12 +265,15 @@ class Client extends Base {
           var outputEnvDescriptor = operationDescriptor.outputEnvelope;
         }
         try {
+          debugDetail('client response. outputEnvDescriptor: %j', outputEnvDescriptor);
           obj = xmlHandler.xmlToJson(nsContext, body, outputEnvDescriptor);
         } catch (error) {
           //  When the output element cannot be looked up in the wsdl and the body is JSON
           //  instead of sending the error, we pass the body in the response.
+          debug('client response. error message: %s', error.message);
+
           if (!output) {
-            debug('Response element is not present. Unable to convert response xml to json.');
+            debug('client response. output not present');
             //  If the response is JSON then return it as-is.
             var json = _.isObject(body) ? body : tryJSONparse(body);
             if (json) {
@@ -287,6 +317,7 @@ class Client extends Base {
             }
           });
         }
+        debug('client response. result: %j body: %j obj.Header: %j', result, body, obj.Header);
 
         callback(null, result, body, obj.Header);
       }
@@ -294,6 +325,7 @@ class Client extends Base {
 
     // Added mostly for testability, but possibly useful for debugging
     self.lastRequestHeaders = req.headers;
+    debug('client response. lastRequestHeaders: %j', self.lastRequestHeaders);
   }
 }
 

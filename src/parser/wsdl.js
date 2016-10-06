@@ -6,7 +6,7 @@ var url = require('url');
 var path = require('path');
 var assert = require('assert');
 var stripBom = require('../strip-bom');
-var debug = require('debug')('node-soap:wsdl');
+var debug = require('debug')('strong-soap:wsdl');
 var _ = require('lodash');
 var selectn = require('selectn');
 var utils = require('./helper');
@@ -96,7 +96,6 @@ class WSDL {
 
         // prepare soap envelope xmlns definition string
         self.xmlnsInEnvelope = self._xmlnsMap();
-
         callback(err, self);
       });
 
@@ -233,7 +232,7 @@ class WSDL {
         try {
           top.startElement(stack, nsName, attrs, options);
         } catch (e) {
-          debug(e);
+          debug("WSDL error: %s ", e.message);
           if (self.options.strict) {
             throw e;
           } else {
@@ -268,6 +267,7 @@ class WSDL {
       top.endElement(stack, name);
     };
 
+    debug('WSDL xml: %s', xml);
     p.write(xml).close();
 
     return root;
@@ -355,6 +355,7 @@ class WSDL {
     var request_headers = options.wsdl_headers;
     var request_options = options.wsdl_options;
 
+    debug('wsdl open. request_headers: %j request_options: %j', request_headers, request_options);
     var wsdl;
     if (!/^https?:/.test(uri)) {
       debug('Reading file: %s', uri);
@@ -371,7 +372,6 @@ class WSDL {
       });
     }
     else {
-      debug('Reading url: %s', uri);
       var httpClient = options.httpClient || new HttpClient(options);
       httpClient.request(uri, null /* options */,
         function(err, response, definition) {
