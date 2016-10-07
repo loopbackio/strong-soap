@@ -1,3 +1,11 @@
+2016-10-07, Version 1.0.2
+=========================
+
+ * fixed debug level (rashmihunt)
+
+ * debug support & fixed warning (rashmihunt)
+
+
 2016-09-30, Version 1.0.1
 =========================
 
