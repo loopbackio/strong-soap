@@ -3,6 +3,7 @@
 var url = require('url');
 var req = require('request');
 var debug = require('debug')('st-soap:http');
+var httpntlm = require('httpntlm');
 
 var VERSION = require('../package.json').version;
 
@@ -15,7 +16,7 @@ var VERSION = require('../package.json').version;
  */
 class HttpClient {
   constructor(options) {
-    options = options || {};
+    this.options = options || {};
     this._request = options.request || req;
   }
 
@@ -104,13 +105,36 @@ class HttpClient {
     var self = this;
     var options = self.buildRequest(rurl, data, exheaders, exoptions);
     var headers = options.headers;
-    var req = self._request(options, function(err, res, body) {
+    var req;
+
+    //typically clint.js would do addOptions() if security is set to get all security options added to options{}. But client.js
+    //addoptions() code runs after this code is trying to contact server to load remote WSDL, hence we would NTLM authentication
+    //object passed in as option to createClient( ) call for now. Revisit.
+    var ntlmSecurity = this.options.NTLMSecurity;
+    if (ntlmSecurity == null) {
+      req = self._request(options, function (err, res, body) {
       if (err) {
         return callback(err);
       }
       body = self.handleResponse(req, res, body);
       callback(null, res, body);
     });
+    } else {
+      //NTLMSecurity code needs 'url' in options{} and it should be plain string, not parsed uri
+      options.url = rurl;
+      options.username = ntlmSecurity.username;
+      options.password = ntlmSecurity.password;
+      options.domain = ntlmSecurity.domain;
+      options.workstation = ntlmSecurity.workstation;
+      var method = options.method;
+      req = httpntlm['method'](method, options, function (err, res, body) {
+        if (err) {
+          return callback(err);
+        }
+        body = self.handleResponse(req, res, body);
+        callback(null, res, body);
+      });
+    }
 
     return req;
   }

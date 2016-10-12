@@ -17,7 +17,8 @@
     "selectn": "^1.0.20",
     "strong-globalize": "^2.8.0",
     "xml-crypto": "^0.8.4",
-    "xmlbuilder": "^8.2.2"
+    "xmlbuilder": "^8.2.2",
+    "httpntlm": "^1.6.1"
   },
   "optionalDependencies": {
     "ursa": "^0.9.4"

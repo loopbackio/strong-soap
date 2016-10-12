@@ -13,5 +13,6 @@ module.exports = {
   ClientSSLSecurityPFX: require('./ClientSSLSecurityPFX'),
   WSSecurity: require('./WSSecurity'),
   BearerSecurity: require('./BearerSecurity'),
-  WSSecurityCert: WSSecurityCert
+  WSSecurityCert: WSSecurityCert,
+  NTLMSecurity: require('./NTLMSecurity')
 };
