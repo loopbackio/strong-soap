@@ -87,7 +87,7 @@ class HttpClient {
    * @param {Object} body The http body
    * @param {Object} The parsed body
    */
-  handleResponse(req, res, body) {
+  handleResponse(body) {
     debug('Http response body: %j', body);
     if (typeof body === 'string') {
       // Remove any extra characters that appear before or after the SOAP
@@ -101,41 +101,55 @@ class HttpClient {
     return body;
   }
 
+  //check if NTLM authentication needed
+  isNtlmAuthRequired(ntlmSecurity, methodName) {
+    //if ntlmSecurity is not set, then remote web service is not NTLM authenticated Web Service
+    if (ntlmSecurity == null) {
+      return false;
+    } else if (methodName === 'GET' && (ntlmSecurity.wsdlAuthRequired == null || ntlmSecurity.wsdlAuthRequired === false)) {
+      //In some WebServices, getting remote WSDL is not NTLM authenticated. Only WebService invocation is NTLM authenticated.
+      return false;
+    }
+    //need NTLM authentication for both 'GET' (wsdl retrieval) and 'POST' (Web Service invocation)
+    return true;
+  }
+
   request(rurl, data, callback, exheaders, exoptions) {
     var self = this;
     var options = self.buildRequest(rurl, data, exheaders, exoptions);
     var headers = options.headers;
     var req;
 
-    //typically clint.js would do addOptions() if security is set to get all security options added to options{}. But client.js
-    //addoptions() code runs after this code is trying to contact server to load remote WSDL, hence we would NTLM authentication
-    //object passed in as option to createClient( ) call for now. Revisit.
+    //typically clint.js would do addOptions() if security is set in order to get all security options added to options{}. But client.js
+    //addOptions() code runs after this code is trying to contact server to load remote WSDL, hence we have NTLM authentication
+    //object passed in as option to createClient() call for now. Revisit.
     var ntlmSecurity = this.options.NTLMSecurity;
-    if (ntlmSecurity == null) {
+    var ntlmAuth = self.isNtlmAuthRequired(ntlmSecurity, options.method);
+    if (!ntlmAuth) {
       req = self._request(options, function (err, res, body) {
-      if (err) {
-        return callback(err);
-      }
-      body = self.handleResponse(req, res, body);
-      callback(null, res, body);
-    });
-    } else {
-      //NTLMSecurity code needs 'url' in options{} and it should be plain string, not parsed uri
-      options.url = rurl;
-      options.username = ntlmSecurity.username;
-      options.password = ntlmSecurity.password;
-      options.domain = ntlmSecurity.domain;
-      options.workstation = ntlmSecurity.workstation;
-      //httpntlm code uses lower case for method names - 'get', 'post' etc
-      var method = options.method.toLocaleLowerCase();
-      req = httpntlm['method'](method, options, function (err, res) {
         if (err) {
           return callback(err);
         }
-        var body = self.handleResponse(req, res, body);
+        body = self.handleResponse(body);
         callback(null, res, body);
       });
-    }
+    } else {
+        //httpntlm code needs 'url' in options{}. It should be plain string, not parsed uri
+        options.url = rurl;
+        options.username = ntlmSecurity.username;
+        options.password = ntlmSecurity.password;
+        options.domain = ntlmSecurity.domain;
+        options.workstation = ntlmSecurity.workstation;
+        //httpntlm code uses lower case for method names - 'get', 'post' etc
+        var method = options.method.toLocaleLowerCase();
+        req = httpntlm['method'](method, options, function (err, res) {
+          if (err) {
+            return callback(err);
+          }
+          var body = self.handleResponse(res.body);
+          callback(null, res, body);
+        });
+      }
 
     return req;
   }
