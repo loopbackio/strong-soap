@@ -83,11 +83,11 @@ describe('custom http client', function() {
           assert.equal(myOp.soapAction, 'tns#Dummy');
 
           var reqElement = myOp.input.body.elements[0].qname;
-          assert.equal(reqElement.nsURI, 'http://www.dummy.com');
+          assert.equal(reqElement.nsURI, 'http://www.dummy.com/Types');
           assert.equal(reqElement.name, 'DummyRequest');
 
           var resElement = myOp.output.body.elements[0].qname;
-          assert.equal(resElement.nsURI, 'http://www.dummy.com');
+          assert.equal(resElement.nsURI, 'http://www.dummy.com/Types');
           assert.equal(resElement.name, 'DummyResponse');
 
           done();

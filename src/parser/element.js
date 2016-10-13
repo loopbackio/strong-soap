@@ -86,7 +86,7 @@ class Element {
     if (ElementType) {
       child = new ElementType(nsName, attrs, options);
       child.nsURI = qname.nsURI;
-      child.targetNamespace = this.getTargetNamespace();
+      child.targetNamespace = attrs.targetNamespace || this.getTargetNamespace();
       debug('Element created: ', child);
       child.parent = parent;
       stack.push(child);

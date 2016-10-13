@@ -577,7 +577,7 @@ describe('Document style tests', function() {
           //check if fault exists with correct 'Detail' parameters in the response
           var index = body.indexOf('<soap:Detail>');
           assert.ok(index > -1);
-          var index = body.indexOf('ns1:myMethodFault2 xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.wsdl"');
+          var index = body.indexOf('ns1:myMethodFault2 xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.xsd"');
           assert.ok(index > -1);
           var index = body.indexOf('<errorMessage2>MyMethod Business Exception message</errorMessage2>');
           assert.ok(index > -1);

@@ -2,7 +2,7 @@
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 <soap:Header/>
 <soap:Body>
-    <ns1:TestMessage xmlns:ns1="http://example.com/testservice.wsdl">
+    <ns1:TestMessage xmlns:ns1="http://example.com/testservice.xsd">
       <message><![CDATA[Hello World! & Hello Me!]]></message>
     </ns1:TestMessage>
 </soap:Body>
