@@ -20,12 +20,13 @@ var requestArgs = {
   ZIP: '94306'
 };
 
+//FILL_IN
 var username = "fill_in";
 var password = "fill_in";
 var domain = "fill_in";
 var workstation = "fill_in";
 
-var ntlmSecurity = new NTLMSecurity(username);
+var ntlmSecurity = new NTLMSecurity(username, password, domain, workstation);
 var clientOptions = {};
 clientOptions.NTLMSecurity = ntlmSecurity;
 
