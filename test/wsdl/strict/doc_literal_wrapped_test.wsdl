@@ -85,6 +85,7 @@
         <wsdl:operation name="myMethod">
             <soap:operation soapAction="http://example.com/myMethod"/>
             <wsdl:input>
+                <soap:header message="tns:myMethodRequest" part="parameters" use="literal"></soap:header>
                 <soap:body use="literal"/>
             </wsdl:input>
             <wsdl:output>
