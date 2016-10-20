@@ -64,7 +64,7 @@ class Operation extends WSDLElement {
     this._processed = true;
   }
 
-  static describeHeaders(param) {
+  static describeHeaders(param, definitions) {
     if (param == null) return null;
     var headers = new descriptor.TypeDescriptor();
     if (!param.headers) return headers;
@@ -190,8 +190,8 @@ class Operation extends WSDLElement {
     }
 
     let faults = this.describeFaults(definitions);
-    let inputHeaders = Operation.describeHeaders(this.input);
-    let outputHeaders = Operation.describeHeaders(this.output);
+    let inputHeaders = Operation.describeHeaders(this.input, definitions);
+    let outputHeaders = Operation.describeHeaders(this.output, definitions);
 
     this.descriptor = {
       name: this.$name,
