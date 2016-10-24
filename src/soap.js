@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2011 Vinay Pulim <vinay@milewise.com>
- * MIT Licensed
- */
-
 "use strict";
 
 var Client = require('./client'),
