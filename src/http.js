@@ -126,13 +126,13 @@ class HttpClient {
     var ntlmSecurity = this.options.NTLMSecurity;
     var ntlmAuth = self.isNtlmAuthRequired(ntlmSecurity, options.method);
     if (!ntlmAuth) {
-      req = self._request(options, function (err, res, body) {
-        if (err) {
-          return callback(err);
-        }
-        body = self.handleResponse(body);
-        callback(null, res, body);
-      });
+        req = self._request(options, function (err, res, body) {
+          if (err) {
+            return callback(err);
+          }
+          body = self.handleResponse(body);
+          callback(null, res, body);
+        });
     } else {
         //httpntlm code needs 'url' in options{}. It should be plain string, not parsed uri
         options.url = rurl;
