@@ -126,12 +126,13 @@ class HttpClient {
       options.password = ntlmSecurity.password;
       options.domain = ntlmSecurity.domain;
       options.workstation = ntlmSecurity.workstation;
-      var method = options.method;
-      req = httpntlm['method'](method, options, function (err, res, body) {
+      //httpntlm code uses lower case for method names - 'get', 'post' etc
+      var method = options.method.toLocaleLowerCase();
+      req = httpntlm['method'](method, options, function (err, res) {
         if (err) {
           return callback(err);
         }
-        body = self.handleResponse(req, res, body);
+        var body = self.handleResponse(req, res, body);
         callback(null, res, body);
       });
     }
