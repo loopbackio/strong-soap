@@ -11,7 +11,6 @@ module.exports = {
   BasicAuthSecurity: require('./BasicAuthSecurity'),
   ClientSSLSecurity: require('./ClientSSLSecurity'),
   ClientSSLSecurityPFX: require('./ClientSSLSecurityPFX'),
-  CookieSecurity: require('./CookieSecurity'),
   WSSecurity: require('./WSSecurity'),
   BearerSecurity: require('./BearerSecurity'),
   WSSecurityCert: WSSecurityCert
