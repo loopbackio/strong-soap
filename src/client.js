@@ -301,7 +301,9 @@ class Client extends Base {
         var outputBodyDescriptor = operationDescriptor.output.body;
         var outputHeadersDescriptor = operationDescriptor.output.headers;
 
-        result = obj.Body[outputBodyDescriptor.elements[0].qname.name];
+        if (outputBodyDescriptor.elements.length) {
+          result = obj.Body[outputBodyDescriptor.elements[0].qname.name];
+        }
         // RPC/literal response body may contain elements with added suffixes I.E.
         // 'Response', or 'Output', or 'Out'
         // This doesn't necessarily equal the ouput message name. See WSDL 1.1 Section 2.4.5
