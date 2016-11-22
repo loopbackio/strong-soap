@@ -10,8 +10,7 @@ class CookieSecurity extends Security {
   constructor(cookie, options) {
     super(options);
 
-    cookie = _.isArray(cookie) ? cookie : [cookie]
-    var cookies = _.map(_.get(cookie, 'set-cookie', cookie), function (c) {
+    var cookies = _.map(_.get(cookie, 'set-cookie', _.isArray(cookie) ? cookie : [cookie]), function (c) {
       return c.split(';')[0];
     })
 
