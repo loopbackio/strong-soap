@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2011 Vinay Pulim <vinay@milewise.com>
- * MIT Licensed
- */
-
 'use strict';
 
 var g = require('./globalize');
@@ -326,7 +321,9 @@ class Client extends Base {
     }, headers, options, self);
 
     // Added mostly for testability, but possibly useful for debugging
-    self.lastRequestHeaders = req.headers;
+    if (req != null) {
+      self.lastRequestHeaders = req.headers;
+    }
     debug('client response. lastRequestHeaders: %j', self.lastRequestHeaders);
   }
 }

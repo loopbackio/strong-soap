@@ -9,7 +9,7 @@
     "compress": "^0.99.0",
     "debug": "^2.2.0",
     "lodash": "^4.13.1",
-    "node-uuid": "^1.4.7",
+    "uuid": "^3.0.0",
     "optional": "^0.1.3",
     "path": "^0.12.7",
     "request": "^2.72.0",
@@ -17,7 +17,8 @@
     "selectn": "^1.0.20",
     "strong-globalize": "^2.8.0",
     "xml-crypto": "^0.8.4",
-    "xmlbuilder": "^8.2.2"
+    "xmlbuilder": "^8.2.2",
+    "httpntlm": "^1.6.1"
   },
   "optionalDependencies": {
     "ursa": "^0.9.4"
