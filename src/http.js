@@ -87,7 +87,7 @@ class HttpClient {
    * @param {Object} body The http body
    * @param {Object} The parsed body
    */
-  handleResponse(body) {
+  handleResponse(req, res, body) {
     debug('Http response body: %j', body);
     if (typeof body === 'string') {
       // Remove any extra characters that appear before or after the SOAP
@@ -130,7 +130,7 @@ class HttpClient {
         if (err) {
           return callback(err);
         }
-        body = self.handleResponse(body);
+        body = self.handleResponse(req, res, body);
         callback(null, res, body);
       });
     } else {
@@ -146,7 +146,7 @@ class HttpClient {
           if (err) {
             return callback(err);
           }
-          var body = self.handleResponse(res.body);
+          var body = self.handleResponse(req, res, res.body);
           callback(null, res, body);
         });
       }
