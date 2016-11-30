@@ -6,7 +6,7 @@ var ursa = optional('ursa');
 var fs = require('fs');
 var path = require('path');
 var SignedXml = require('xml-crypto').SignedXml;
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 var Security = require('./security');
 var xmlHandler = require('../parser/xmlHandler');
 
