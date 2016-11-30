@@ -110,7 +110,7 @@ class HttpClient {
       //In some WebServices, getting remote WSDL is not NTLM authenticated. Only WebService invocation is NTLM authenticated.
       return false;
     }
-    //need NTLM authentication for both 'GET' (wsdl retrieval) and 'POST' (Web Service invocation)
+    //need NTLM authentication for both 'GET' (remote wsdl retrieval) and 'POST' (Web Service invocation)
     return true;
   }
 
@@ -126,13 +126,13 @@ class HttpClient {
     var ntlmSecurity = this.options.NTLMSecurity;
     var ntlmAuth = self.isNtlmAuthRequired(ntlmSecurity, options.method);
     if (!ntlmAuth) {
-        req = self._request(options, function (err, res, body) {
-          if (err) {
-            return callback(err);
-          }
-          body = self.handleResponse(body);
-          callback(null, res, body);
-        });
+      req = self._request(options, function (err, res, body) {
+        if (err) {
+          return callback(err);
+        }
+        body = self.handleResponse(body);
+        callback(null, res, body);
+      });
     } else {
         //httpntlm code needs 'url' in options{}. It should be plain string, not parsed uri
         options.url = rurl;

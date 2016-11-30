@@ -30,10 +30,7 @@ var domain = "fill_in";
 var workstation = "fill_in";
 //change it to 'false' or don't set this param, if you don't want WSDL 'GET' from remote NTLM webservice doesn't require NTLM authentication
 var wsdlAuthRequired = true;
-
-
 var ntlmSecurity = new NTLMSecurity(username, password, domain, workstation, wsdlAuthRequired);
-
 var clientOptions = {};
 clientOptions.NTLMSecurity = ntlmSecurity;
 
