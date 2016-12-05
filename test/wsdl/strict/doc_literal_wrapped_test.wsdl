@@ -20,6 +20,7 @@
                         <xsd:element name="x" type="xsd:int"/>
                         <xsd:element name="y" type="xsd:float"/>
                      </xsd:sequence>
+                     <xsd:attribute name="id" type="xsd:string" use="optional"/>
                 </xsd:complexType>
             </xsd:element>
 

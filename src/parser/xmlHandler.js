@@ -60,7 +60,7 @@ class XMLHandler {
           return node;
         }
       }
-      if(isSimple && val !== null && typeof val === "object"){
+      if(val !== null && typeof val === "object"){
         // check for $attributes field
         if (typeof val[this.options.attributesKey] !== "undefined"){
           attrs = val[this.options.attributesKey];
@@ -121,10 +121,8 @@ class XMLHandler {
         if (attrs !== null) {
           // add each field in $attributes object as xml element attribute
           if (typeof attrs === "object") {
-            for (let p in attrs) {
-              let child = attrs[p];
-              element.attribute(p, child);
-            }
+            //add $attributes. Attribute can be an attribute defined in XSD or an xsi:type
+            this.addAttributes(element, nsContext, descriptor, val, attrs);
           }
         }
         if (val == null) {
@@ -160,17 +158,22 @@ class XMLHandler {
           }
         }  
       }
-
+      //val is not an object - simple or date types
       if (val != null && ( typeof val !== 'object' || val instanceof Date)) {
         // for adding a field value nsContext.popContext() shouldnt be called
         element.text(val);
+        //add $attributes. Attribute can be an attribute defined in XSD or an xsi:type.
+        //e.g of xsi:type <name xmlns=".." xmlns:xsi="..." xmlns:ns="..." xsi:type="ns:string">some name</name>
+        if (attrs != null) {
+          this.addAttributes(element, nsContext, descriptor, val, attrs);
+        }
         if (nameSpaceContextCreated) {
           nsContext.popContext();
         }  
         return node;
       }
 
-      this.mapObject(element, nsContext, descriptor, val);
+      this.mapObject(element, nsContext, descriptor, val, attrs);
       if (nameSpaceContextCreated) {
         nsContext.popContext();
       }  
@@ -193,7 +196,7 @@ class XMLHandler {
    * @param {Object} val
    * @returns {*}
    */
-  mapObject(node, nsContext, descriptor, val) {
+  mapObject(node, nsContext, descriptor, val, attrs) {
     if (val == null) return node;
     if (typeof val !== 'object' || (val instanceof Date)) {
       node.text(val);
@@ -237,7 +240,13 @@ class XMLHandler {
 	    }
     }
 
-    var attrs = val[this.options.attributesKey];
+    this.addAttributes(node, nsContext, descriptor, val, attrs);
+
+    return node;
+  }
+
+  addAttributes(node, nsContext, descriptor, val, attrs) {
+    var elements = {}, attributes = {};
     if (attrs != null && typeof attrs === 'object') {
       for (let p in attrs) {
         let child = attrs[p];
@@ -269,7 +278,6 @@ class XMLHandler {
         this.jsonToXml(node, nsContext, childDescriptor, child);
       }
     }
-    return node;
   }
 
   static createSOAPEnvelope(prefix, nsURI) {
