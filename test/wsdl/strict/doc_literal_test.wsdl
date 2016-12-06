@@ -10,8 +10,8 @@
     <wsdl:types>
         <xsd:schema targetNamespace="http://example.com/doc_literal_test.xsd"
                     xmlns:xsd="http://www.w3.org/2000/10/XMLSchema">
-            <xsd:element name="xElement" type="xsd:boolean"/>
-            <xsd:element name="yElement" type="xsd:boolean"/>
+            <xsd:element name="xElement" type="xsd:anytype"/>
+            <xsd:element name="yElement" type="xsd:float"/>
             <xsd:element name="zElement" type="xsd:boolean"/>
         </xsd:schema>
     </wsdl:types>

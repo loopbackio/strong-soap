@@ -106,7 +106,118 @@ describe('Document style tests', function() {
 
   });
 
-  describe('Document/Literal wrapped with simple type params', function () {
+  describe('Document/Literal with simple types param with xsi type attribute', function () {
+
+    var test = {};
+    test.server = null;
+    test.service = {
+      DocLiteralService: {
+        DocLiteralPort: {
+          myMethod: function (args, cb, soapHeader) {
+            var jsonResponse = {"zElement": true};
+            return jsonResponse;
+          }
+        }
+      }
+    };
+
+    before(function (done) {
+      fs.readFile(__dirname + '/wsdl/strict/doc_literal_test.wsdl', 'utf8', function (err, data) {
+        assert.ok(!err);
+        test.wsdl = data;
+        done();
+      });
+    });
+
+    beforeEach(function (done) {
+      test.server = http.createServer(function (req, res) {
+        res.statusCode = 404;
+        res.end();
+      });
+
+      test.server.listen(15099, null, null, function () {
+        test.soapServer = soap.listen(test.server, '/doc_literal_test', test.service, test.wsdl);
+        test.baseUrl =
+          'http://' + test.server.address().address + ":" + test.server.address().port;
+
+        //windows return 0.0.0.0 as address and that is not
+        //valid to use in a request
+        if (test.server.address().address === '0.0.0.0' || test.server.address().address === '::') {
+          test.baseUrl =
+            'http://127.0.0.1:' + test.server.address().port;
+        }
+
+        done();
+      });
+    });
+
+    afterEach(function (done) {
+      test.server.close(function () {
+        test.server = null;
+        delete test.soapServer;
+        test.soapServer = null;
+        done();
+      });
+    });
+
+    //doc/literal with simpleType params test
+    /* In case of doc/literal, client request/response is NOT wrapped inside the operation name. Input and output params are
+     //defined in the schema/xsd. reference - https://www.ibm.com/developerworks/library/ws-whichwsdl/#listing6
+
+     Request
+     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+       <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+        <soap:Header/>
+        <soap:Body>
+          <ns1:xElement xmlns:ns1="http://example.com/doc_literal_test.xsd" xmlns="http://example.com/doc_literal_test.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://example.com/doc_literal_test.xsd" xsi:type="ns2:string">100</ns1:xElement>
+          <ns1:yElement xmlns:ns1="http://example.com/doc_literal_test.xsd">10.55</ns1:yElement>
+        </soap:Body>
+     </soap:Envelope>
+
+     server response
+     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Header/>
+          <soap:Body>
+            <zElement>true</zElement>
+          </soap:Body>
+      </soap:Envelope>
+     */
+
+    it('Document/literal test with simpleType params with xsi type attribute', function (done) {
+      soap.createClient(test.baseUrl + '/doc_literal_test?wsdl', function (err, client) {
+        assert.ok(!err);
+        var requestArgs = {
+          "xElement": {
+            "$attributes": {
+              "xmlns": "http://example.com/doc_literal_test.xsd",
+              //follow //{nsURI}prefix:name or //{nsURI}name format
+              "$xsiType": "{http://example.com/doc_literal_test.xsd}string"
+            },
+            "$value": 100
+          },
+          yElement: 10.55
+        };
+
+        //see doc_literal_test.wsdl. input message has 2 parts = xElement=int and yElement=float which gets passed as input prams in the client method.
+        client.myMethod(requestArgs, function (err, result, body) {
+          //check if the client request is created with correct xsi:type
+          var request = client.lastMessage;
+          var index = request.indexOf('<ns1:xElement xmlns:ns1="http://example.com/doc_literal_test.xsd" xmlns="http://example.com/doc_literal_test.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="http://example.com/doc_literal_test.xsd" xsi:type="ns2:string">100</ns1:xElement>');
+          assert.ok(index > -1);
+          //check server response
+          assert.ok(!err);
+          //result is output param which in this case is boolean(zElement) and the server sends 'true' for the value. Since it's wrapped inside the operatioName, result itself is the
+          //output param/output value.
+          assert.ok(result);
+          done();
+        });
+      });
+    });
+
+  });
+
+  describe('Document/Literal wrapped with simple type params with attribute($attribute)', function () {
 
     var test = {};
     test.server = null;
@@ -166,14 +277,14 @@ describe('Document style tests', function() {
 
      Client Request
      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
         <soap:Header/>
-        <soap:Body>
-          <myMethod>
-            <x>100</x>
-            <y>10.55</y>
-          </myMethod>
-        </soap:Body>
+          <soap:Body>
+            <ns1:myMethod xmlns:ns1="http://example.com/doc_literal_wrapped_test.xsd">
+                <xElement id="1">10.55</xElement>
+                <yElement>10.55</yElement>
+            </ns1:myMethod>
+          </soap:Body>
      </soap:Envelope>
 
      Server Response
@@ -193,11 +304,25 @@ describe('Document style tests', function() {
 
      */
 
-    it('Document/literal wrapped test with simpleType params', function (done) {
+    var requestArgs = {
+      xElement: {
+        "$value" : "10.55",
+        "$attributes": {"id": "1"}
+      },
+      yElement: "10.55"
+    };
+
+
+    it('Document/literal wrapped test with simpleType params with attribute($attribute)', function (done) {
       soap.createClient(test.baseUrl + '/doc_literal_wrapped_test?wsdl', function (err, client) {
         assert.ok(!err);
         //
-        client.myMethod({x: 100, y: 10.55}, function (err, result, body) {
+        client.myMethod(requestArgs, function (err, result, body) {
+          //check if the client request is created with correct attribute for xElement
+          var request = client.lastMessage;
+          var index = request.indexOf('<xElement id="1">10.55</xElement>');
+          assert.ok(index > -1);
+          //check server response
           assert.ok(!err);
           //result is the wrapper object which is myMethodResponse which has output param which is the child element. In this test case, server sends 'true' for the output param 'z'.
           assert.ok(result.z);
