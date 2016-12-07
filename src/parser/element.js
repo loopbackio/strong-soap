@@ -62,6 +62,7 @@ class Element {
       this.valueKey = options.valueKey || '$value';
       this.xmlKey = options.xmlKey || '$xml';
       this.ignoredNamespaces = options.ignoredNamespaces || [];
+      this.forceSoapVersion = options.forceSoapVersion;
     } else {
       this.valueKey = '$value';
       this.xmlKey = '$xml';

@@ -121,6 +121,8 @@ class WSDL {
       this.options.ignoredNamespaces = this.ignoredNamespaces;
     }
 
+    this.options.forceSoapVersion = options.forceSoapVersion;
+
     this.options.valueKey = options.valueKey || this.valueKey;
     this.options.xmlKey = options.xmlKey || this.xmlKey;
 
