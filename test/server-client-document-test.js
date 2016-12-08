@@ -788,39 +788,39 @@ describe('Document style tests', function() {
 
      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
      <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-        <soap:Header/>
-        <soap:Body>
-          <ns1:myMethod xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.xsd">
-            <x>200</x>
-            <y>10.55</y>
-          </ns1:myMethod>
-        </soap:Body>
+     <soap:Header/>
+     <soap:Body>
+     <ns1:myMethod xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.xsd">
+     <x>200</x>
+     <y>10.55</y>
+     </ns1:myMethod>
+     </soap:Body>
      </soap:Envelope>
 
      Server Response. Passing client option=forceSoapVersion=1.1 has no effect on server side response. The server will
      create a 1.1 or 1.2 response based on whether WSDL is 1.1 or 1.2
      //
      <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-      <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
-        <soap:Header/>
-        <soap:Body>
-          <soap:Fault>
-            <soap:Code>
-              <soap:Value>soap:Sender</soap:Value>
-              <soap:Subcode>
-              <soap:Value>rpc:BadArguments</soap:Value>
-              </soap:Subcode>
-            </soap:Code>
-            <soap:Reason>
-                <soap:Text>Processing Error</soap:Text>
-            </soap:Reason>
-            <soap:Detail>
-              <ns1:myMethodFault2 xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.wsdl">
-                <errorMessage2>MyMethod Business Exception message</errorMessage2>
-                <value2>10</value2>
-              </ns1:myMethodFault2>
-            </soap:Detail>
-          </soap:Fault>
+     <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+     <soap:Header/>
+     <soap:Body>
+     <soap:Fault>
+     <soap:Code>
+     <soap:Value>soap:Sender</soap:Value>
+     <soap:Subcode>
+     <soap:Value>rpc:BadArguments</soap:Value>
+     </soap:Subcode>
+     </soap:Code>
+     <soap:Reason>
+     <soap:Text>Processing Error</soap:Text>
+     </soap:Reason>
+     <soap:Detail>
+     <ns1:myMethodFault2 xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.wsdl">
+     <errorMessage2>MyMethod Business Exception message</errorMessage2>
+     <value2>10</value2>
+     </ns1:myMethodFault2>
+     </soap:Detail>
+     </soap:Fault>
      </soap:Body>
      </soap:Envelope>
 
@@ -835,12 +835,12 @@ describe('Document style tests', function() {
           assert.ok(err);
 
           //check if the client request has soap 1.1 namespace "http://schemas.xmlsoap.org/soap/envelope/"
-          var request = client.lastMessage;
-          var index = body.indexOf('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">');
+          var request = client.lastRequest;
+          var index = request.indexOf('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">');
           assert.ok(index > -1);
 
           //check  server response - should still contain soap 1.2 namespace "http://www.w3.org/2003/05/soap-envelope"
-          var index = body.indexOf(' <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">');
+          var index = body.indexOf('<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">');
           assert.ok(index > -1);
           done();
         });
@@ -848,6 +848,8 @@ describe('Document style tests', function() {
     });
 
   });
+
+
 });
 
 
