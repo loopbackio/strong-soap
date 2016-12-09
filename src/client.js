@@ -158,7 +158,7 @@ class Client extends Base {
     //Unlike other security objects, NTLMSecurity is passed in through client options rather than client.setSecurity(ntlmSecurity) as some
     //remote wsdl retrieval needs NTLM authentication before client object gets created. Hence, set NTLMSecurity instance to the client object
     //so that it will be similar to other security objects from this point onwards.
-    if (self.httpClient.options.NTLMSecurity != null) {
+    if (self.httpClient.options && self.httpClient.options.NTLMSecurity) {
       self.security = self.httpClient.options.NTLMSecurity;
     }
 
