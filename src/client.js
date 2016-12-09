@@ -119,8 +119,9 @@ class Client extends Base {
     var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
     var soapNsPrefix = this.wsdl.options.envelopeKey || 'soap';
 
+    var soapVersion = this.wsdl.options.forceSoapVersion || operation.soapVersion;
 
-    if (operation.soapVersion === '1.2') {
+    if (soapVersion === '1.2') {
       headers['Content-Type'] = 'application/soap+xml; charset=utf-8';
       soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
     }
@@ -135,7 +136,7 @@ class Client extends Base {
       soapAction = ((ns.lastIndexOf("/") !== ns.length - 1) ? ns + "/" : ns) + name;
     }
 
-    if (operation.soapVersion !== '1.2') {
+    if (soapVersion !== '1.2') {
       headers.SOAPAction = '"' + soapAction + '"';
     }
 
@@ -153,6 +154,13 @@ class Client extends Base {
     }
 
     debug('client request. headers: %j', headers);
+
+    //Unlike other security objects, NTLMSecurity is passed in through client options rather than client.setSecurity(ntlmSecurity) as some
+    //remote wsdl retrieval needs NTLM authentication before client object gets created. Hence, set NTLMSecurity instance to the client object
+    //so that it will be similar to other security objects from this point onwards.
+    if (self.httpClient.options && self.httpClient.options.NTLMSecurity) {
+      self.security = self.httpClient.options.NTLMSecurity;
+    }
 
     // Allow the security object to add headers
     if (self.security && self.security.addHttpHeaders) {

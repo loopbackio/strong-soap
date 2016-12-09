@@ -715,6 +715,140 @@ describe('Document style tests', function() {
 
   });
 
+  describe('forceSoapVersion=1.1 in client options', function () {
+
+    var test = {};
+    test.server = null;
+    test.service = {
+      DocLiteralWrappedService: {
+        DocLiteralWrappedPort: {
+          myMethod: function (args, cb, soapHeader) {
+            throw {
+              Fault: {
+                Code: {
+                  Value: "soap:Sender",
+                  Subcode: { Value: "rpc:BadArguments" }
+                },
+                Reason: { Text: "Processing Error" },
+                Detail:
+                {myMethodFault2:
+                {errorMessage2: 'MyMethod Business Exception message', value2: 10}
+                }
+              }
+            }
+          }
+        }
+      }
+    };
+
+    before(function (done) {
+      fs.readFile(__dirname + '/wsdl/strict/doc_literal_wrapped_test_soap12.wsdl', 'utf8', function (err, data) {
+        assert.ok(!err);
+        test.wsdl = data;
+        done();
+      });
+    });
+
+    beforeEach(function (done) {
+      test.server = http.createServer(function (req, res) {
+        res.statusCode = 404;
+        res.end();
+      });
+
+      test.server.listen(15099, null, null, function () {
+        test.soapServer = soap.listen(test.server, '/doc_literal_wrapped_test_soap12', test.service, test.wsdl);
+        test.baseUrl =
+          'http://' + test.server.address().address + ":" + test.server.address().port;
+
+        //windows return 0.0.0.0 as address and that is not
+        //valid to use in a request
+        if (test.server.address().address === '0.0.0.0' || test.server.address().address === '::') {
+          test.baseUrl =
+            'http://127.0.0.1:' + test.server.address().port;
+        }
+
+        done();
+      });
+    });
+
+    afterEach(function (done) {
+      test.server.close(function () {
+        test.server = null;
+        delete test.soapServer;
+        test.soapServer = null;
+        done();
+      });
+    });
+
+    //Even though WSDL is 1.2, this test case is passing client option as forceSoapVersion=1.1, the request created by
+    //client will be soap a 1.1 request
+    /*
+
+     Client Request
+
+     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+     <soap:Header/>
+     <soap:Body>
+     <ns1:myMethod xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.xsd">
+     <x>200</x>
+     <y>10.55</y>
+     </ns1:myMethod>
+     </soap:Body>
+     </soap:Envelope>
+
+     Server Response. Passing client option=forceSoapVersion=1.1 has no effect on server side response. The server will
+     create a 1.1 or 1.2 response based on whether WSDL is 1.1 or 1.2
+     //
+     <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+     <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">
+     <soap:Header/>
+     <soap:Body>
+     <soap:Fault>
+     <soap:Code>
+     <soap:Value>soap:Sender</soap:Value>
+     <soap:Subcode>
+     <soap:Value>rpc:BadArguments</soap:Value>
+     </soap:Subcode>
+     </soap:Code>
+     <soap:Reason>
+     <soap:Text>Processing Error</soap:Text>
+     </soap:Reason>
+     <soap:Detail>
+     <ns1:myMethodFault2 xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.wsdl">
+     <errorMessage2>MyMethod Business Exception message</errorMessage2>
+     <value2>10</value2>
+     </ns1:myMethodFault2>
+     </soap:Detail>
+     </soap:Fault>
+     </soap:Body>
+     </soap:Envelope>
+
+     */
+
+
+    it('Force 1.1 version onto SOAP 1.2 WSDL request', function (done) {
+      soap.createClient(test.baseUrl + '/doc_literal_wrapped_test_soap12?wsdl', {forceSoapVersion: '1.1'}, function (err, client) {
+        assert.ok(!err);
+        client.myMethod({x: 200, y: 10.55}, function (err, result, body) {
+          //this is fault response. hence err will be received
+          assert.ok(err);
+
+          //check if the client request has soap 1.1 namespace "http://schemas.xmlsoap.org/soap/envelope/"
+          var request = client.lastRequest;
+          var index = request.indexOf('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">');
+          assert.ok(index > -1);
+
+          //check  server response - should still contain soap 1.2 namespace "http://www.w3.org/2003/05/soap-envelope"
+          var index = body.indexOf('<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">');
+          assert.ok(index > -1);
+          done();
+        });
+      });
+    });
+
+  });
+
 
 });
 
