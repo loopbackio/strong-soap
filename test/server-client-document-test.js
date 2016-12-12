@@ -715,7 +715,7 @@ describe('Document style tests', function() {
 
   });
 
-  describe('forceSoapVersion=1.1 in client options', function () {
+  describe('client options tests', function () {
 
     var test = {};
     test.server = null;
@@ -828,12 +828,10 @@ describe('Document style tests', function() {
 
 
     it('Force 1.1 version onto SOAP 1.2 WSDL request', function (done) {
+      //pass client option {forceSoapVersion: '1.1'} to set the client request to be generated for soap 1.1
       soap.createClient(test.baseUrl + '/doc_literal_wrapped_test_soap12?wsdl', {forceSoapVersion: '1.1'}, function (err, client) {
         assert.ok(!err);
         client.myMethod({x: 200, y: 10.55}, function (err, result, body) {
-          //this is fault response. hence err will be received
-          assert.ok(err);
-
           //check if the client request has soap 1.1 namespace "http://schemas.xmlsoap.org/soap/envelope/"
           var request = client.lastRequest;
           var index = request.indexOf('<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">');
@@ -842,6 +840,32 @@ describe('Document style tests', function() {
           //check  server response - should still contain soap 1.2 namespace "http://www.w3.org/2003/05/soap-envelope"
           var index = body.indexOf('<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">');
           assert.ok(index > -1);
+          done();
+        });
+      });
+    });
+
+    it('Generate request envelope without newlines and white spaces', function (done) {
+      var expectedRequest = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header/><soap:Body><ns1:myMethod xmlns:ns1="http://example.com/doc_literal_wrapped_test_soap12.xsd"><x>200</x><y>10.55</y></ns1:myMethod></soap:Body></soap:Envelope>';
+      //passing client option as {prettyPrint: false} generates request envelope without newlines and white spaces
+      soap.createClient(test.baseUrl + '/doc_literal_wrapped_test_soap12?wsdl', {prettyPrint: false}, function (err, client) {
+        assert.ok(!err);
+        client.myMethod({x: 200, y: 10.55}, function (err, result, body) {
+          var request = client.lastRequest;
+          assert.equal(request, expectedRequest);
+          done();
+        });
+      });
+    });
+
+    it('Generate request envelope with newlines and white spaces', function (done) {
+      var expectedRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\">\n  <soap:Header/>\n  <soap:Body>\n    <ns1:myMethod xmlns:ns1=\"http://example.com/doc_literal_wrapped_test_soap12.xsd\">\n      <x>200</x>\n      <y>10.55</y>\n    </ns1:myMethod>\n  </soap:Body>\n</soap:Envelope>";
+      //passing client option as {prettyPrint: true} generates request envelope without newlines and white spaces. This is same as not passing {prettyPrint: } client option at all. By default 'prettyPrint' is true.
+      soap.createClient(test.baseUrl + '/doc_literal_wrapped_test_soap12?wsdl', {prettyPrint: true}, function (err, client) {
+        assert.ok(!err);
+        client.myMethod({x: 200, y: 10.55}, function (err, result, body) {
+          var request = client.lastRequest;
+          assert.equal(request, expectedRequest);
           done();
         });
       });

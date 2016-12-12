@@ -224,8 +224,16 @@ class Client extends Base {
       self.security.postProcess(envelope.header, envelope.body);
     }
 
-    message = envelope.body.toString({pretty: true});
-    xml = envelope.doc.end({pretty: true});
+    //Bydefault pretty print is true and request envelope is created with newlines and indentations
+    var prettyPrint = true;
+
+    //some web services don't accept request envelope with newlines and indentations in which case user has to set {prettyPrint: false} as client option
+    if (self.httpClient.options.prettyPrint != null) {
+      prettyPrint = self.httpClient.options.prettyPrint;
+    }
+
+    message = envelope.body.toString({pretty: prettyPrint});
+    xml = envelope.doc.end({pretty: prettyPrint});
 
     debug('Request envelope: %s', xml);
 
