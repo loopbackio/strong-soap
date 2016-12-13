@@ -226,9 +226,8 @@ class Client extends Base {
 
     //Bydefault pretty print is true and request envelope is created with newlines and indentations
     var prettyPrint = true;
-
     //some web services don't accept request envelope with newlines and indentations in which case user has to set {prettyPrint: false} as client option
-    if (self.httpClient.options.prettyPrint != null) {
+    if (self.httpClient.options && self.httpClient.options.prettyPrint !== undefined) {
       prettyPrint = self.httpClient.options.prettyPrint;
     }
 
