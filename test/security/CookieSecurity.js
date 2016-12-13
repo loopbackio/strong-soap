@@ -2,7 +2,7 @@
 
 describe('CookieSecurity', function() {
   var CookieSecurity = require('../../').CookieSecurity;
-  var cookie = "cookie-value";
+  var cookie = 'cookie-value';
   var headers = {
     'set-cookie': [
       cookie
@@ -18,11 +18,11 @@ describe('CookieSecurity', function() {
     var instance2 = new CookieSecurity(headers);
 
     it('is accepted with cookie string', function () {
-      instance1.should.have.property("cookie", cookie);
+      instance1.should.have.property('cookie', cookie);
     });
 
     it('is accepted with last header', function () {
-      instance2.should.have.property("cookie", cookie);
+      instance2.should.have.property('cookie', cookie);
     });
   });
 
@@ -36,7 +36,7 @@ describe('CookieSecurity', function() {
       var defaultOptions = { foo: 2 };
       var instance = new CookieSecurity(cookie, defaultOptions);
       instance.addOptions(options);
-      options.should.have.property("foo", 2);
+      options.should.have.property('foo', 2);
     });
   });
 });
