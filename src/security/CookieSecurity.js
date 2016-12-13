@@ -3,7 +3,7 @@
 var Security = require('./security');
 
 function hasCookieHeader (cookie) {
-  return typeof cookie === 'object' && cookie.hasOwnProperty('set-cookie')
+  return typeof cookie === 'object' && cookie.hasOwnProperty('set-cookie');
 }
 
 /*
@@ -13,7 +13,7 @@ class CookieSecurity extends Security {
   constructor(cookie, options) {
     super(options);
 
-    cookie = hasCookieHeader(cookie) ? cookie['set-cookie'] : cookie
+    cookie = hasCookieHeader(cookie) ? cookie['set-cookie'] : cookie;
 
     this.cookie = (Array.isArray(cookie) ? cookie : [cookie])
       .map(c => c.split(';')[0])
