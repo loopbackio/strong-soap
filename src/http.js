@@ -2,8 +2,10 @@
 
 var url = require('url');
 var req = require('request');
-var debug = require('debug')('st-soap:http');
+var debug = require('debug')('strong-soap:http');
+var debugSensitive = require('debug')('strong-soap:http:sensitive');
 var httpntlm = require('httpntlm');
+
 
 var VERSION = require('../package.json').version;
 
@@ -142,6 +144,8 @@ class HttpClient {
         options.workstation = ntlmSecurity.workstation;
         //httpntlm code uses lower case for method names - 'get', 'post' etc
         var method = options.method.toLocaleLowerCase();
+        debugSensitive('NTLM options: %j for method: %s', options, method);
+        debug('httpntlm method: %s', method);
         req = httpntlm['method'](method, options, function (err, res) {
           if (err) {
             return callback(err);
