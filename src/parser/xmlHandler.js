@@ -607,7 +607,7 @@ class XMLHandler {
     var merge = function(href, obj) {
       for (var j in obj) {
         if (obj.hasOwnProperty(j)) {
-          href.obj[j] = obj[j];
+          href.object[j] = obj[j];
         }
       }
     };
