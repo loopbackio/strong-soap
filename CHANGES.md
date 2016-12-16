@@ -1,4 +1,42 @@
-2016-10-07, Version 1.0.2
+2016-12-16, Version 1.1.0
+=========================
+
+ * fixed a CI failure in downstream (rashmihunt)
+
+ * updated debug statements (rashmihunt)
+
+ * add prettyPrint to client options (rashmihunt)
+
+ * fixed downstream failing test (rashmihunt)
+
+ * fixed a testcase failure (rashmihunt)
+
+ * support forcing soap version (rashmihunt)
+
+ * Update tr translation file (Candy)
+
+ * support  correctly (rashmihunt)
+
+ * Initial support for NTLM (#52) (Rashmi Hunt)
+
+ * Update translation files (Candy)
+
+ * removing CookieSecurity from this branch to keep PR's separate (Branden Horiuchi)
+
+ * adding check for element length on outputBodyDescriptor (Branden Horiuchi)
+
+ * * adding CookieSecurity to built-in security methods (Branden Horiuchi)
+
+ * Add translation files (Candy)
+
+ * added header to input operation (rashmihunt)
+
+ * fix for #31 (rashmihunt)
+
+ * Using targetNamespace of the attribute if present (#32) (Guatom)
+
+
+2016-10-06, Version 1.0.2
 =========================
 
  * fixed debug level (rashmihunt)
