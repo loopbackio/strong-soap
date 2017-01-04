@@ -36,7 +36,7 @@
     "_pretest": "jshint index.js lib test",
     "cover": "istanbul cover _mocha -- --timeout 10000 test/*-test.js test/security/*.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls -v",
-    "test": "mocha --timeout 10000 test/*-test.js test/security/*.js",
+    "test": "mocha --timeout 60000 test/*-test.js test/security/*.js",
     "pretest": "babel src -d lib",
     "prepublish": "babel src -d lib"
   },
