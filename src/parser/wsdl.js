@@ -140,6 +140,10 @@ class WSDL {
       this.options.ignoreBaseNameSpaces = ignoreBaseNameSpaces;
     else
       this.options.ignoreBaseNameSpaces = this.ignoreBaseNameSpaces;
+
+    if (options.NTLMSecurity) {
+      this.options.NTLMSecurity = options.NTLMSecurity;
+    }
   }
 
   _processNextInclude(includes, callback) {
