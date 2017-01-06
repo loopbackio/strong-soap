@@ -100,8 +100,7 @@ describe('SOAP Client', function() {
   describe('Headers in request and last response', function() {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = 15099;
-    var baseUrl = 'http://' + hostname + ':' + port;
+    var port = 0;
 
     before(function(done) {
       server = http.createServer(function (req, res) {
@@ -121,17 +120,17 @@ describe('SOAP Client', function() {
       done();
     });
 
-    it('should append `:' + port + '` to the Host header on for a request to a service on that port', function(done) {
+    it('should append port '   + 'to the Host header on for a request to a service on that port', function(done) {
       soap.createClient(__dirname+'/wsdl/default_namespace.wsdl', function(err, client) {
         assert.ok(client);
         assert.ok(!err);
 
         client.MyOperation({}, function(err, result) {
-          assert.notEqual(client.lastRequestHeaders.Host.indexOf(':' + port), -1);
+          assert.notEqual(client.lastRequestHeaders.Host.indexOf(':' + server.address().port ), -1);
 
           done();
         }, null, {'test-header': 'test'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port  );
     });
 
     it('should not append `:80` to the Host header on for a request to a service without a port explicitly defined', function(done) {
@@ -183,7 +182,7 @@ describe('SOAP Client', function() {
 
           done();
         }, null, {'test-header': 'test'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port  );
     });
 
     it('should have the wrong extra header in the request', function(done) {
@@ -198,7 +197,7 @@ describe('SOAP Client', function() {
 
           done();
         }, null, {'test-header': 'testBad'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port  );
     });
 
     it('should have lastResponse and lastResponseHeaders after the call', function(done) {
@@ -213,7 +212,7 @@ describe('SOAP Client', function() {
 
           done();
         }, null, {'test-header': 'test'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port  );
     });
 
     it('should have lastElapsedTime after a call with the time option passed', function(done) {
@@ -229,7 +228,7 @@ describe('SOAP Client', function() {
 
           done();
         }, {time: true}, {'test-header': 'test'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port  );
     });
 
     it('should add http headers in method call options', function(done) {
@@ -244,7 +243,7 @@ describe('SOAP Client', function() {
 
           done();
         }, {headers: {'options-test-header': 'test'}}, {'test-header': 'test'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port  );
     });
 
     it('should add soap headers', function (done) {
@@ -276,7 +275,7 @@ describe('SOAP Client', function() {
           assert.equal(client.lastRequest, lastRequest);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port  );
     });
 
     it('should add soap headers with a namespace', function(done) {
@@ -295,7 +294,7 @@ describe('SOAP Client', function() {
           assert.equal(client.lastRequest, lastRequest);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port  );
     });
 
     it('should not return error in the call and return the json in body', function(done) {
@@ -309,7 +308,7 @@ describe('SOAP Client', function() {
           assert.ok(body);
           done();
         }, null, {"test-header": 'test'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
 
     it('should add proper headers for soap12', function(done) {
@@ -326,7 +325,7 @@ describe('SOAP Client', function() {
           assert( !client.lastRequestHeaders.SOAPAction );
           done();
         }, null, {'test-header': 'test'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
 
     it('should allow calling the method with args, callback, options and extra headers', function(done) {
@@ -343,7 +342,7 @@ describe('SOAP Client', function() {
 
           done();
         }, {headers: {'options-test-header': 'test'}}, {'test-header': 'test'});
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
 
     it('should allow calling the method with only a callback', function(done) {
@@ -359,7 +358,7 @@ describe('SOAP Client', function() {
 
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
 
     it('should allow calling the method with args, options and callback last', function(done) {
@@ -376,7 +375,7 @@ describe('SOAP Client', function() {
 
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
 
     it('should allow calling the method with args, options, extra headers and callback last', function(done) {
@@ -393,7 +392,7 @@ describe('SOAP Client', function() {
 
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
   });
 
@@ -419,8 +418,7 @@ describe('SOAP Client', function() {
   describe('Namespace number', function() {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = 15099;
-    var baseUrl = 'http://' + hostname + ':' + port;
+    var port = 0;
 
     before(function(done) {
       server = http.createServer(function (req, res) {
@@ -476,7 +474,7 @@ describe('SOAP Client', function() {
             done();
           });
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
   });
 
@@ -533,8 +531,8 @@ describe('SOAP Client', function() {
   describe('Handle non-success http status codes', function() {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = 15099;
-    var baseUrl = 'http://' + hostname + ':' + port;
+    var port = 0;
+
 
     before(function(done) {
       server = http.createServer(function (req, res) {
@@ -558,7 +556,7 @@ describe('SOAP Client', function() {
           assert.ok(err.body);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
 
     it('should emit a \'soapError\' event', function (done) {
@@ -569,15 +567,15 @@ describe('SOAP Client', function() {
         client.MyOperation({}, function(err, result) {
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
   });
 
   describe('Handle HTML answer from non-SOAP server', function() {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = 15099;
-    var baseUrl = 'http://' + hostname + ':' + port;
+    var port = 0;
+
 
     before(function(done) {
       server = http.createServer(function (req, res) {
@@ -601,15 +599,15 @@ describe('SOAP Client', function() {
           assert.ok(err.body);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
   });
 
   describe('Client Events', function () {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = 15099;
-    var baseUrl = 'http://' + hostname + ":" + port;
+    var port = 0;
+
 
     before(function(done) {
       server = http.createServer(function (req, res) {
@@ -623,7 +621,6 @@ describe('SOAP Client', function() {
       server = null;
       done();
     });
-
 
     it('Should emit the "message" event with Soap Body string', function (done) {
       soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, client) {
@@ -639,7 +636,7 @@ describe('SOAP Client', function() {
           assert.ok(didEmitEvent);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ":" + server.address().port);
     });
 
     it('Should emit the "request" event with entire XML message', function (done) {
@@ -656,7 +653,7 @@ describe('SOAP Client', function() {
           assert.ok(didEmitEvent);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ":" + server.address().port);
     });
 
     it('Should emit the "response" event with Soap Body string and Response object', function (done) {
@@ -674,7 +671,7 @@ describe('SOAP Client', function() {
           assert.ok(didEmitEvent);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ":" + server.address().port);
     });
 
     it('should emit a \'soapError\' event', function (done) {
@@ -688,7 +685,7 @@ describe('SOAP Client', function() {
           assert.ok(didEmitEvent);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ":" + server.address().port);
     });
 
   });
@@ -717,7 +714,7 @@ describe('SOAP Client', function() {
           assert.ok(body);
           done();
         });
-      }, baseUrl);
+      }, 'http://' + hostname + ':' + server.address().port);
     });
 
   });
