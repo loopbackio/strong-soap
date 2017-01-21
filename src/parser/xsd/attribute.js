@@ -30,8 +30,8 @@ class Attribute extends XSDElement {
 
     if (this.ref) {
       // Ref to a global attribute
-      descriptor.form = 'qualified';
       this.descriptor = this.ref.describe(definitions);
+      this.descriptor.form = 'qualified';
     } else {
       var form = this.getForm();
       var qname = this.getQName();

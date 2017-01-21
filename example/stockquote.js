@@ -1,6 +1,6 @@
 "use strict";
 
-var soap = require('strong-soap').soap;
+var soap = require('..').soap;
 // wsdl of the web service this client is going to invoke. For local wsdl you can use, url = './wsdls/stockquote.wsdl'
 var url = 'http://www.webservicex.net/stockquote.asmx?WSDL';
 
