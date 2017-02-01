@@ -1,4 +1,4 @@
-# Soap 
+# Strong-soap 
 
 > A SOAP client and server for node.js.
 
