@@ -55,8 +55,8 @@ class Operation extends WSDLElement {
     if (this._processed) return; // Already processed
     if (this.input) this.input.postProcess(definitions);
     if (this.output) this.output.postProcess(definitions);
-    for (var f in this.faults) {
-      this.faults[f].postProcess(definitions);
+    for (let i = 0, n = this.faults.length; i < n; i++) {
+      this.faults[i].postProcess(definitions);
     }
     if (this.parent.name === 'binding') {
       this.getMode();
