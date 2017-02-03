@@ -219,7 +219,7 @@ The property that contains last full soap request for client logging.
 
 Overwrites the SOAP service endpoint address.
 
-### Client Events
+### Client events
 Client instances emit the following events:
 
 * request - Emitted before a request is sent. The event handler receives the
@@ -313,9 +313,9 @@ WS-Security X509 Certificate support.
 
 _Note_: Optional dependency 'ursa' is required to be installed successfully when WSSecurityCert is used.
 
-## XML Attributes
+## XML attributes
 
-### Handling XML Attributes, Value and XML (wsdlOptions)
+### Handling XML attributes, value, and XML (wsdlOptions)
 
 To override the default behavior of `strong-soap`, use the `wsdlOptions` object, passed in the
 `createClient()` method.  The `wsdlOptions` has the following properties:
@@ -382,7 +382,8 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 });
 ```
 
-### Overriding the `attributes` key
+### Overriding the attributes key
+
 You can achieve attributes like:
 
 ``` xml
@@ -456,32 +457,32 @@ To see it in practice, consider the sample in: [test/request-response-samples/ad
 
 ## XMLHandler
 
-XMLHandler provides capabilities for the user to convert JSON object to XML and XML to JSON object.  It also provides capability to Parse XML string or stream into the XMLBuilder tree.
+XMLHandler enables you to to convert a JSON object to XML and XML to a JSON object.  It can also parse an XML string or stream into the XMLBuilder tree.
 
 API to convert JSON object to XML and XML to JSON object:
 
 ```
-        var soap = require('..').soap;
-        var XMLHandler = soap.XMLHandler;
-        var xmlHandler = new XMLHandler();
-        var util = require('util');
+  var soap = require('..').soap;
+  var XMLHandler = soap.XMLHandler;
+  var xmlHandler = new XMLHandler();
+  var util = require('util');
 
-        //custom request header
-        var customRequestHeader = {customheader1: 'test1'};
-        var options = {};
-        client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope, soapHeader) {
-          //convert 'result' JSON object to XML
-          var node = xmlHandler.jsonToXml(null, null,
-            XMLHandler.createSOAPEnvelopeDescriptor('soap'), result);
-          var xml = node.end({pretty: true});
-          console.log(xml);
+  //custom request header
+  var customRequestHeader = {customheader1: 'test1'};
+  var options = {};
+  client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope, soapHeader) {
+    // Convert 'result' JSON object to XML
+    var node = xmlHandler.jsonToXml(null, null,
+      XMLHandler.createSOAPEnvelopeDescriptor('soap'), result);
+    var xml = node.end({pretty: true});
+    console.log(xml);
 
-          //convert XML to JSON object
-          var root = xmlHandler.xmlToJson(null, xml, null);
-          console.log('%s', util.inspect(root, {depth: null}));
+    // Convert XML to JSON object
+    var root = xmlHandler.xmlToJson(null, xml, null);
+    console.log('%s', util.inspect(root, {depth: null}));
 
-        }, options, customRequestHeader);
-      });
+  }, options, customRequestHeader);
+});
 ```
 
 Parse XML string or stream into the XMLBuilder tree:
@@ -498,16 +499,16 @@ Loads WSDL into a tree form. Traverse through WSDL tree to get to bindings, serv
 
 Parameters:
 
-  - `wsdlURL` WSDL url to load.
-  - `options` WSDL options
-  - `callback` Error and WSDL loaded into object tree.
+- `wsdlURL` WSDL url to load.
+- `options` WSDL options
+- `callback` Error and WSDL loaded into object tree.
 
 ```
 var soap = require('..').soap;
 var WSDL = soap.WSDL;
 var path = require('path');
 
-//pass in WSDL options if any
+// Pass in WSDL options if any
 
 var options = {};
 WSDL.open('./wsdls/weather.wsdl',options,
