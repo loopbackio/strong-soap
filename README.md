@@ -1,4 +1,4 @@
-# strong-soap 
+# strong-soap
 
 This module provides a Node.js SOAP client for invoking web services and a mock-up SOAP server capability to create and test your web service. This module is based on `node-soap` module.
 
@@ -7,51 +7,56 @@ This module provides a Node.js SOAP client for invoking web services and a mock-
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Features](#features)
+- [Overview](#overview)
 - [Install](#install)
 - [Client](#client)
-  - [Client.describe() - description of services, ports and methods as a JavaScript object](#clientdescribe---description-of-services-ports-and-methods-as-a-javascript-object)
-  - [Client.setSecurity(security) - use the specified security protocol](#clientsetsecuritysecurity---use-the-specified-security-protocol)
-  - [Client.*method*(args, callback) - call *method* on the SOAP service.](#clientmethodargs-callback---call-method-on-the-soap-service)
-  - [Client.*service*.*port*.*method*(args, callback[, options[, extraHeaders]]) - call a *method* using a specific *service* and *port*](#clientserviceportmethodargs-callback-options-extraheaders---call-a-method-using-a-specific-service-and-port)
+  - [Extra headers (optional)](#extra-headers-optional)
+  - [Client.describe()](#clientdescribe)
+  - [Client.setSecurity(security)](#clientsetsecuritysecurity)
+  - [Client.*method*(args, callback)](#clientmethodargs-callback)
+  - [Client.*service*.*port*.*method*(args, callback[, options[, extraHeaders]])](#clientserviceportmethodargs-callback-options-extraheaders)
   - [Client.*lastRequest*](#clientlastrequest)
   - [Client.setEndpoint(url)](#clientsetendpointurl)
   - [Client Events](#client-events)
-- [Security](#security)
+  - [Security](#security)
   - [BasicAuthSecurity](#basicauthsecurity)
   - [BearerSecurity](#bearersecurity)
   - [ClientSSLSecurity](#clientsslsecurity)
   - [WSSecurity](#wssecurity)
   - [WSSecurityCert](#wssecuritycert)
-- [SOAP Headers](#soap-headers)
-  - [Received SOAP Headers](#received-soap-headers)
-  - [Outgoing SOAP Headers](#outgoing-soap-headers)
 - [XML Attributes](#xml-attributes)
-  - [Handling XML Attributes](#handling-xml-attributes)
+  - [Handling XML Attributes, Value and XML (wsdlOptions)](#handling-xml-attributes-value-and-xml-wsdloptions)
   - [Overriding the value key](#overriding-the-value-key)
-  - [Overriding the xml key](#overriding-the-xml-key)  
+  - [Overriding the xml key](#overriding-the-xml-key)
+  - [Overriding the `attributes` key](#overriding-the-attributes-key)
 - [XMLHandler](#xmlhandler)
-- [WSDL](#wsdl)  
+- [WSDL](#wsdl)
+  - [wsdl.open(wsdlURL, options, callback(err, wsdl))](#wsdlopenwsdlurl-options-callbackerr-wsdl)
 - [Server](#server)
-  - [soap.listen(*server*, *path*, *services*, *wsdl*) - create a new SOAP server that listens on *path* and provides *services*.](#soaplistenserver-path-services-wsdl---create-a-new-soap-server-that-listens-on-path-and-provides-services)
+  - [soap.listen(*server*, *path*, *services*, *wsdl*)](#soaplistenserver-path-services-wsdl)
   - [Options](#options)
-  - [Server Logging](#server-logging)
-  - [Server Events](#server-events)
+  - [Server logging](#server-logging)
+  - [Server events](#server-events)
   - [SOAP Fault](#soap-fault)
   - [Server security example using PasswordDigest](#server-security-example-using-passworddigest)
   - [Server connection authorization](#server-connection-authorization)
+- [SOAP headers](#soap-headers)
+  - [Received SOAP headers](#received-soap-headers)
+  - [Outgoing SOAP headers](#outgoing-soap-headers)
 - [soap-stub](#soap-stub)
   - [Example](#example)
 - [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-## Features:
+## Overview
 
-* Full SOAP Client capability & mock up SOAP server capability
+Features:
+
+* Full SOAP Client capability and mock-up SOAP server capability
 * Handles both RPC and Document styles
 * Handles both SOAP 1.1 and SOAP 1.2 Fault
-* APIs to parse XML --> JSON and JSON --> XML
+* APIs to parse XML into JSON and JSON into XML
 * API to describe WSDL document
 * Support for both synchronous and asynchronous method handlers
 * WS-Security (currently only UsernameToken and PasswordText encoding is supported)
@@ -71,27 +76,28 @@ Start with the WSDL for the web service you want to invoke. For example, the wea
 Create a new SOAP client from WSDL URL using `soap.createClient(url[, options], callback)`. Also supports a local file system path. An instance of `Client` is passed to the `soap.createClient` callback.  It is used to execute methods on the soap service.
 
 ```
-      var soap = require('strong-soap').soap;
-      //wsdl of the Web Service this client is going to invoke. This can point to local wsdl as well.
-      var url = 'http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL';
-      var requestArgs = {
-        ZIP: '94306'
-      };
-      var options = {};
+var soap = require('strong-soap').soap;
+// WSDL of the web service this client will invoke. This can point to local WSDL as well.
+var url = 'http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL';
+var requestArgs = {
+  ZIP: '94306'
+};
+var options = {};
 
-      soap.createClient(url, options, function(err, client) {
-        client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope) {
-          //response envelope
-          console.log(envelope);
-          //result in SOAP envelope body which is the wrapper element. In this case, result object corresponds to GetCityForecastByZIPResponse
-          console.log(JSON.stringify(result));
-        });
-      });
+soap.createClient(url, options, function(err, client) {
+  client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope) {
+    // Response envelope
+    console.log(envelope);
+    // Result in SOAP envelope body which is the wrapper element.
+    // In this case, result object corresponds to GetCityForecastByZIPResponse
+    console.log(JSON.stringify(result));
+  });
+});
 ```
 
 The Request envelope created by above service invocation:
 
- ```
+```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Header/>
@@ -101,9 +107,10 @@ The Request envelope created by above service invocation:
     </ns1:GetCityWeatherByZIP>
   </soap:Body>
 </soap:Envelope>
- ```
-This WSDL operation is defined as document/literal-wrapped style. Hence the request in soap <Body> is wrapped in operation name. Refer to test cases [server-client-document-test](https://github.com/strongloop/strong-soap/blob/master/test/server-client-document-test.js) and  [server-client-rpc-test](https://github.com/strongloop/strong-soap/blob/master/test/server-client-rpc-test.js) to understand document and rpc styles and their 
-Request, Response and Fault samples. 
+```
+
+This WSDL operation is defined as document/literal-wrapped style. Hence the request in soap <Body> is wrapped in operation name. Refer to test cases [server-client-document-test](https://github.com/strongloop/strong-soap/blob/master/test/server-client-document-test.js) and  [server-client-rpc-test](https://github.com/strongloop/strong-soap/blob/master/test/server-client-rpc-test.js) to understand document and rpc styles and their
+Request, Response and Fault samples.
 
 The `options` argument allows you to customize the client with the following properties:
 
@@ -121,60 +128,61 @@ Note: for versions of node >0.10.X, you may need to specify `{connection: 'keep-
 User can define extra HTTP headers to be sent on the request.
 
 ```
-      soap.createClient(url, clientOptions, function(err, client) {
-        //custom request header
-        var customRequestHeader = {customheader1: 'test1'};
-        client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope) {
-          //result in SOAP envelope body which is the wrapper element. In this case, result object corresponds to GetCityForecastByZIPResponse
-          console.log(JSON.stringify(result));
-        }, null, customRequestHeader);
-      });
+soap.createClient(url, clientOptions, function(err, client) {
+  // Custom request header
+  var customRequestHeader = {customheader1: 'test1'};
+  client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope) {
+    // Result in SOAP envelope body which is the wrapper element.
+    // In this case, result object corresponds to GetCityForecastByZIPResponse.
+    console.log(JSON.stringify(result));
+  }, null, customRequestHeader);
+});
 ```
 
-### Client.describe() 
+### Client.describe()
 
 Describes services, ports and methods as a JavaScript object.
 
-``` javascript
-          //this describes the entire WSDL in a JSON tree object form.
-          var description = client.describe();
-          //inspect GetCityWeatherByZIP operation. You can inspect Service: {Port: {operation: {
-          console.log(JSON.stringify(description.Weather.WeatherSoap.GetCityWeatherByZIP));
+```javascript
+// Describes the entire WSDL in a JSON tree object form.
+var description = client.describe();
+// Inspect GetCityWeatherByZIP operation. You can inspect Service: {Port: {operation: {
+console.log(JSON.stringify(description.Weather.WeatherSoap.GetCityWeatherByZIP));
 ```
 
-### Client.setSecurity(security) 
+### Client.setSecurity(security)
 
 Use the specified security protocol.
 
-Refer to test case [ssl-test](https://github.com/strongloop/strong-soap/blob/master/test/ssl-test.js) for this API usage.
+Refer to test case [ssl-test](https://github.com/strongloop/strong-soap/blob/master/test/ssl-test.js) for an example of using this API.
 
-### Client.*method*(args, callback) 
+### Client.*method*(args, callback)
 
 Call *method* on the SOAP service.
 
 ``` javascript
   client.MyFunction({name: 'value'}, function(err, result, envelope, soapHeader) {
-      // result is a javascript object
-      // envelope is the response envelope from the Web Service
-      // soapHeader is the response soap header as a javascript object
+      // Result is a javascript object
+      // Envelope is the response envelope from the Web Service
+      // soapHeader is the response soap header as a JavaScript object
   })
 ```
-### Client.*service*.*port*.*method*(args, callback[, options[, extraHeaders]]) 
+### Client.*service*.*port*.*method*(args, callback[, options[, extraHeaders]])
 
 Call a *method* using a specific *service* and *port*.
 
 ``` javascript
   client.MyService.MyPort.MyFunction({name: 'value'}, function(err, result) {
-      // result is a javascript object
+      // Result is a JavaScript object
   })
 ```
 
 #### Options (optional)
 
  Accepts any option that the request module accepts, see [request](https://github.com/request/request) module.
- 
+
  For example, you could set a timeout of 5 seconds on the request like this:
- 
+
 ``` javascript
   client.MyService.MyPort.MyFunction({name: 'value'}, function(err, result) {
       // result is a javascript object
@@ -203,11 +211,11 @@ client.MyService.MyPort.MyFunction({name: 'value'}, options, extraHeaders, funct
 })
 ```
 
-### Client.*lastRequest* 
+### Client.*lastRequest*
 
 The property that contains last full soap request for client logging.
 
-### Client.setEndpoint(url) 
+### Client.setEndpoint(url)
 
 Overwrites the SOAP service endpoint address.
 
@@ -223,9 +231,10 @@ Soap body contents. Useful if you don't want to log /store Soap headers.
 * response - Emitted after a response is received. The event handler receives
 the SOAP response body as well as the entire `IncomingMessage` response object.
 This is emitted for all responses (both success and errors).
-```
 
-Refer to test case [ssl-test](https://github.com/strongloop/strong-soap/blob/master/test/client-test.js) for the usage. Here is an example of 'soapError' event
+For an example of using this API, see  [ssl-test](https://github.com/strongloop/strong-soap/blob/master/test/client-test.js).
+
+Here is an example of 'soapError' event
 
 ```
 soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, client) {
@@ -246,8 +255,8 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, cli
 `strong-soap` has several default security protocols.  You can easily add your own
 as well.  The interface is quite simple. Each protocol defines two methods:
 
-* `addOptions` - a method that accepts an options arg that is eventually passed directly to `request`
-* `toXML` - a method that returns a string of XML.
+* `addOptions` - Method that accepts an options arg that is eventually passed directly to `request`
+* `toXML` - Method that returns a string of XML.
 
 ### BasicAuthSecurity
 
@@ -323,7 +332,7 @@ If you call `createClient()` with no options (or an empty Object `{}`),  `strong
 to the following:
 
 - `attributesKey` : `'$attributes'`
-- `valueKey` : `'$value'` 
+- `valueKey` : `'$value'`
 - `xmlKey` : `'$xml'`
 
 ### Overriding the value key
@@ -435,7 +444,7 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
     parentnode: {
       childnode: {
         $attributes: {
-          
+
         }
       }
     }
@@ -456,7 +465,7 @@ API to convert JSON object to XML and XML to JSON object:
         var XMLHandler = soap.XMLHandler;
         var xmlHandler = new XMLHandler();
         var util = require('util');
-        
+
         //custom request header
         var customRequestHeader = {customheader1: 'test1'};
         var options = {};
@@ -466,7 +475,7 @@ API to convert JSON object to XML and XML to JSON object:
             XMLHandler.createSOAPEnvelopeDescriptor('soap'), result);
           var xml = node.end({pretty: true});
           console.log(xml);
-        
+
           //convert XML to JSON object
           var root = xmlHandler.xmlToJson(null, xml, null);
           console.log('%s', util.inspect(root, {depth: null}));
@@ -489,7 +498,7 @@ Loads WSDL into a tree form. Traverse through WSDL tree to get to bindings, serv
 
 Parameters:
 
-  - `wsdlURL` WSDL url to load. 
+  - `wsdlURL` WSDL url to load.
   - `options` WSDL options
   - `callback` Error and WSDL loaded into object tree.
 
@@ -506,19 +515,19 @@ WSDL.open('./wsdls/weather.wsdl',options,
     // You should be able to get to any information of this WSDL from this object. Traverse
     // the WSDL tree to get  bindings, operations, services, portTypes, messages,
     // parts, and XSD elements/Attributes.
-  
+
     var getCityForecastOp = wsdl.definitions.bindings.WeatherSoap.operations.GetCityForecastByZIP;
     // print operation name
     console.log(getCityForecastOp.name);
     var service = wsdl.definitions.services['Weather'];
-    print service name 
+    print service name
     console.log(service.name);;
 });
 ```
 
-## Server 
+## Server
 
-### soap.listen(*server*, *path*, *services*, *wsdl*) 
+### soap.listen(*server*, *path*, *services*, *wsdl*)
 
 Creates a new SOAP server that listens on *path* and provides *services*.
 
@@ -749,13 +758,13 @@ second parameter is the name of the SOAP method that will called
 Both client and server can define SOAP headers that will be added to what they send.
 They provide the following methods to manage the headers.
 
-#### addSoapHeader(value, qname) 
+#### addSoapHeader(value, qname)
 
 Adds soapHeader to soap:Header node.
 
 Parameters:
 
-- `value` JSON object representing {headerName: headerValue} or XML string. 
+- `value` JSON object representing {headerName: headerValue} or XML string.
 - `qname` qname used for the header
 
 ```
@@ -764,21 +773,21 @@ addSoapHeader(value, qname, options);
 
 Returns the index where the header is inserted.
 
-#### changeSoapHeader(index, value, qname) 
+#### changeSoapHeader(index, value, qname)
 
 Changes an existing soapHeader.
 
 Parameters:
 
 - `index` index of the header to replace with provided new value
-- `value` JSON object representing {headerName: headerValue} or XML string. 
+- `value` JSON object representing {headerName: headerValue} or XML string.
 - `qname` qname used for the header
 
-#### getSoapHeaders() 
+#### getSoapHeaders()
 
 Returns all defined headers.
 
-#### clearSoapHeaders() 
+#### clearSoapHeaders()
 
 Removes all defined headers.
 
