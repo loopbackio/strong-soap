@@ -1,4 +1,34 @@
-2016-12-16, Version 1.1.0
+2017-02-03, Version 1.2.0
+=========================
+
+ * more cleanup (crandmck)
+
+ * Regenerate TOC and other cleanup (crandmck)
+
+ * Create README.md (Rand McKinney)
+
+ * Delete Readme.md (Rand McKinney)
+
+ * Create docs.json (Rand McKinney)
+
+ * Fix array loop in operation (rashmihunt)
+
+ * Change capitalization of readme file (crandmck)
+
+ * fix undefined descriptor in attribute (rashmihunt)
+
+ * add stockquote example (rashmihunt)
+
+ * some formating fix (rashmihunt)
+
+ * assign http port dynamically in client-test.js (rashmihunt)
+
+ * incresed timeout for tests (rashmihunt)
+
+ * initialize NTLMSecurity option to wsdl option (rashmihunt)
+
+
+2016-12-15, Version 1.1.0
 =========================
 
  * fixed a CI failure in downstream (rashmihunt)
