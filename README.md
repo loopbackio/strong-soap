@@ -71,28 +71,32 @@ Install with [npm](http://github.com/isaacs/npm):
 
 ## Client
 
-Start with the WSDL for the web service you want to invoke. For example, the weather web service http://wsf.cdyne.com/WeatherWS/Weather.asmx and the WSDL is http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL
+Start with the WSDL for the web service you want to invoke. For example, the stock quote service http://www.webservicex.net/stockquote.asmx and the WSDL is http://www.webservicex.net/stockquote.asmx?WSDL
 
 Create a new SOAP client from WSDL URL using `soap.createClient(url[, options], callback)`. Also supports a local file system path. An instance of `Client` is passed to the `soap.createClient` callback.  It is used to execute methods on the soap service.
 
 ```
-var soap = require('strong-soap').soap;
-// WSDL of the web service this client will invoke. This can point to local WSDL as well.
-var url = 'http://wsf.cdyne.com/WeatherWS/Weather.asmx?WSDL';
-var requestArgs = {
-  ZIP: '94306'
-};
-var options = {};
+"use strict";
 
+var soap = require('strong-soap').soap;
+// wsdl of the web service this client is going to invoke. For local wsdl you can use, url = './wsdls/stockquote.wsdl'
+var url = 'http://www.webservicex.net/stockquote.asmx?WSDL';
+
+var requestArgs = {
+  symbol: 'IBM'
+};
+
+var options = {};
 soap.createClient(url, options, function(err, client) {
-  client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope) {
-    // Response envelope
-    console.log(envelope);
-    // Result in SOAP envelope body which is the wrapper element.
-    // In this case, result object corresponds to GetCityForecastByZIPResponse
-    console.log(JSON.stringify(result));
+  var method = client['StockQuote']['StockQuoteSoap']['GetQuote'];
+  method(requestArgs, function(err, result, envelope, soapHeader) {
+    //response envelope
+    console.log('Response Envelope: \n' + envelope);
+    //'result' is the response body
+    console.log('Result: \n' + JSON.stringify(result));
   });
 });
+
 ```
 
 The Request envelope created by above service invocation:
@@ -102,9 +106,9 @@ The Request envelope created by above service invocation:
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Header/>
   <soap:Body>
-    <ns1:GetCityWeatherByZIP xmlns:ns1="http://ws.cdyne.com/WeatherWS/">
-      <ns1:ZIP>94306</ns1:ZIP>
-    </ns1:GetCityWeatherByZIP>
+    <ns1:GetQuote xmlns:ns1="http://www.webserviceX.NET/">
+      <ns1:symbol>IBM</ns1:symbol>
+    </ns1:GetQuote>
   </soap:Body>
 </soap:Envelope>
 ```
@@ -128,10 +132,11 @@ Note: for versions of node >0.10.X, you may need to specify `{connection: 'keep-
 User can define extra HTTP headers to be sent on the request.
 
 ```
+var clientOptions = {};
 soap.createClient(url, clientOptions, function(err, client) {
-  // Custom request header
   var customRequestHeader = {customheader1: 'test1'};
-  client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope) {
+  // Custom request header
+  client.GetQuote(requestArgs, function(err, result, envelope) {
     // Result in SOAP envelope body which is the wrapper element.
     // In this case, result object corresponds to GetCityForecastByZIPResponse.
     console.log(JSON.stringify(result));
@@ -146,8 +151,8 @@ Describes services, ports and methods as a JavaScript object.
 ```javascript
 // Describes the entire WSDL in a JSON tree object form.
 var description = client.describe();
-// Inspect GetCityWeatherByZIP operation. You can inspect Service: {Port: {operation: {
-console.log(JSON.stringify(description.Weather.WeatherSoap.GetCityWeatherByZIP));
+// Inspect GetQuote operation. You can inspect Service: {Port: {operation: {
+console.log(JSON.stringify(description.StockQuote.StockQuoteSoap.GetQuote));
 ```
 
 ### Client.setSecurity(security)
@@ -463,14 +468,20 @@ API to convert JSON object to XML and XML to JSON object:
 
 ```
   var soap = require('..').soap;
-  var XMLHandler = soap.XMLHandler;
-  var xmlHandler = new XMLHandler();
-  var util = require('util');
+var XMLHandler = soap.XMLHandler;
+var xmlHandler = new XMLHandler();
+var util = require('util');
+var url = 'http://www.webservicex.net/stockquote.asmx?WSDL';
 
-  //custom request header
+var requestArgs = {
+  symbol: 'IBM'
+};
+
+var options = {};
+var clientOptions = {};
+soap.createClient(url, clientOptions, function(err, client) {
   var customRequestHeader = {customheader1: 'test1'};
-  var options = {};
-  client.GetCityWeatherByZIP(requestArgs, function(err, result, envelope, soapHeader) {
+  client.GetQuote(requestArgs, function(err, result, envelope, soapHeader) {
     // Convert 'result' JSON object to XML
     var node = xmlHandler.jsonToXml(null, null,
       XMLHandler.createSOAPEnvelopeDescriptor('soap'), result);
@@ -511,18 +522,18 @@ var path = require('path');
 // Pass in WSDL options if any
 
 var options = {};
-WSDL.open('./wsdls/weather.wsdl',options,
-    function(err, wsdl) {
+WSDL.open('./wsdls/stockquote.wsdl',options,
+  function(err, wsdl) {
     // You should be able to get to any information of this WSDL from this object. Traverse
     // the WSDL tree to get  bindings, operations, services, portTypes, messages,
     // parts, and XSD elements/Attributes.
 
-    var getCityForecastOp = wsdl.definitions.bindings.WeatherSoap.operations.GetCityForecastByZIP;
+    var getQuoteOp = wsdl.definitions.bindings.StockQuoteSoap.operations.GetQuote;
     // print operation name
-    console.log(getCityForecastOp.name);
-    var service = wsdl.definitions.services['Weather'];
-    print service name
-    console.log(service.name);;
+    console.log(getQuoteOp.$name);
+    var service = wsdl.definitions.services['StockQuote'];
+    //print service name
+    console.log(service.$name);
 });
 ```
 
@@ -803,22 +814,25 @@ your clients.
 ### Example
 
 ```javascript
-// test-initialization-script.js
 var sinon = require('sinon');
-var soapStub = require('soap/soap-stub');
+var soapStub = require('soap-stub');
 
-var urlMyApplicationWillUseWithCreateClient = 'http://path-to-my-wsdl';
+var urlMyApplicationWillUseWithCreateClient = './example/stockquote.wsdl';
 var clientStub = {
   SomeOperation: sinon.stub()
 };
 
-clientStub.SomeOperation.respondWithError = soapStub.createRespondingStub({..error json...});
-clientStub.SomeOperation.respondWithSuccess = soapStub.createRespondingStub({..success json...});
+clientStub.SomeOperation.respondWithError = soapStub.createRespondingStub({error: 'error'});
+clientStub.SomeOperation.respondWithSuccess = soapStub.createRespondingStub({success: 'success'});
 
 soapStub.registerClient('my client alias', urlMyApplicationWillUseWithCreateClient, clientStub);
 
-// test.js
-var soapStub = require('soap/soap-stub');
+
+var fs = require('fs'),
+  assert = require('assert'),
+  request = require('request'),
+  http = require('http'),
+  lastReqAddress;
 
 describe('myService', function() {
   var clientStub;
@@ -827,7 +841,7 @@ describe('myService', function() {
   beforeEach(function() {
     clientStub = soapStub.getStub('my client alias');
     soapStub.reset();
-    myService.init(clientStub);
+    myService = clientStub;
   });
 
   describe('failures', function() {
@@ -836,12 +850,13 @@ describe('myService', function() {
     });
 
     it('should handle error responses', function() {
-      myService.somethingThatCallsSomeOperation(function(err, response) {
+      myService.SomeOperation(function(err, response) {
         // handle the error response.
       });
     });
   });
 });
+
 ```
 
 ## Contributors
