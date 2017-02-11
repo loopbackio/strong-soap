@@ -1,4 +1,3 @@
-var g = require('./globalize');
 var _ = require('lodash');
 
 var aliasedClientStubs = {};
@@ -26,8 +25,7 @@ module.exports = {
   errOnCreateClient: false,
   getStub: getStub,
   registerClient: registerClient,
-  reset: reset,
-  security: require('./lib/security')
+  reset: reset
 };
 
 /**
