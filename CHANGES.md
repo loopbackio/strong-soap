@@ -1,3 +1,9 @@
+2017-03-20, Version 1.2.1
+=========================
+
+ * Readme changes to use stockquote (rashmihunt)
+
+
 2017-02-03, Version 1.2.0
 =========================
 
