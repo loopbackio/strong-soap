@@ -5,6 +5,7 @@ var ElementDescriptor = descriptor.ElementDescriptor;
 var TypeDescriptor = descriptor.TypeDescriptor;
 var QName = require('../qname');
 var helper = require('../helper');
+var SimpleType = require('../xsd/simpleType');
 
 var assert = require('assert');
 
@@ -157,7 +158,12 @@ class Operation extends WSDLElement {
             let part = this.input.body.parts[p];
             let type;
             if (part.type) {
-              type = part.type.qname;
+              if (part.type instanceof SimpleType) {
+                var qName = new QName(part.type.targetNamespace, part.type.$name, part.type.prefix);
+                type = qName;
+              } else {
+                type = part.type.qname;
+              }
               let element = new descriptor.ElementDescriptor(
                 new QName(nsURI, p), type, 'unqualified', false);
               inputParts.addElement(element);
@@ -172,7 +178,12 @@ class Operation extends WSDLElement {
             let part = this.output.body.parts[p];
             let type;
             if (part.type) {
-              type = part.type.qname;
+              if (part.type instanceof SimpleType) {
+                var qName = new QName(part.type.targetNamespace, part.type.$name, part.type.prefix);
+                type = qName;
+              } else {
+                type = part.type.qname;
+              }
               let element = new descriptor.ElementDescriptor(
                 new QName(nsURI, p), type, 'unqualified', false);
               outputParts.addElement(element);
