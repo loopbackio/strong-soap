@@ -1,3 +1,12 @@
+2017-03-28, Version 1.2.3
+=========================
+
+ * Add type information to simpletype (rashmihunt)
+
+
+2017-03-20, Version 1.2.2
+=========================
+
 
 
 2017-03-20, Version 1.2.1
