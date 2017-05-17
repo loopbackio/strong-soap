@@ -1,4 +1,5 @@
 var xmlBuilder = require('xmlbuilder');
+var _ = require('lodash')
 var sax = require('sax');
 var stream = require('stream');
 var assert = require('assert');
@@ -24,6 +25,9 @@ class XMLHandler {
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
+
+    const originalVals = typeof val === 'object' && !Array.isArray(val) ? Object.assign({}, val) : null
+
     if (node == null) {
       node = xmlBuilder.begin(
         {version: '1.0', encoding: 'UTF-8', standalone: true});
@@ -36,6 +40,9 @@ class XMLHandler {
     let nameSpaceContextCreated = false;
     if (descriptor instanceof AttributeDescriptor) {
       name = descriptor.qname.name;
+      // if (name === 'NegotiatedRateCode') {
+      //   throw new Error(`found it!`)
+      // }
       if (descriptor.form === 'unqualified') {
         node.attribute(name, val);
       } else if (descriptor.qname) {
@@ -50,6 +57,9 @@ class XMLHandler {
 
     if (descriptor instanceof ElementDescriptor) {
       name = descriptor.qname.name;
+      if (name === 'BookingTravelerName') {
+        //throw new Error(`hi ${require('util').inspect(descriptor)}`)
+      }
       let isSimple = descriptor.isSimple;
       let attrs = null;
       if (descriptor.isMany) {
@@ -68,6 +78,9 @@ class XMLHandler {
         // add any $value field as xml element value
         if (typeof val[this.options.valueKey] !== "undefined"){
           val = val[this.options.valueKey];
+          if (originalVals) {
+            attrs = Object.assign({}, attrs, _.omit(originalVals, [this.options.valueKey]))
+          }
         }
       }
       let element;
@@ -158,6 +171,7 @@ class XMLHandler {
           }
         }
       }
+
       //val is not an object - simple or date types
       if (val != null && ( typeof val !== 'object' || val instanceof Date)) {
         // for adding a field value nsContext.popContext() shouldnt be called
@@ -220,6 +234,9 @@ class XMLHandler {
         let attributeDescriptor = descriptor.attributes[a];
         let attributeName = attributeDescriptor.qname.name;
         attributes[attributeName] = attributeDescriptor;
+        // if (attributeName === 'Last') {
+        //   throw new Error('found it')
+        // }
       }
     }
 
@@ -237,6 +254,12 @@ class XMLHandler {
           if (handled[p] || p === this.options.attributesKey)
             continue;
   	      if (p === elementDescriptor.qname.name) {
+            // if (elementDescriptor.attributes.length) {
+            //   console.log('argh', p, elementDescriptor.attributes.map(x => x.qname.name).join('|'))
+            // }
+            // if (p === 'BookingTravelerName') {
+            //   throw new Error('dafuck attrs ' + elementDescriptor.attributes.length)
+            // }
             childNode = val[p];
             break;
           }
@@ -249,6 +272,7 @@ class XMLHandler {
       }
 
       for (let p in val) {
+        // if (p === 'NegotiatedRateCode') throw new Error(`found it...`)
         if (handled[p] || p === this.options.attributesKey)
           continue;
         let child = val[p];
