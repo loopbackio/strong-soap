@@ -79,7 +79,7 @@ class XMLHandler {
         if (typeof val[this.options.valueKey] !== "undefined"){
           val = val[this.options.valueKey];
           if (originalVals) {
-            attrs = Object.assign({}, attrs, _.omit(originalVals, [this.options.valueKey]))
+            attrs = Object.assign({}, attrs, _.omit(originalVals, [this.options.valueKey, this.options.attributesKey]))
           }
         }
       }
