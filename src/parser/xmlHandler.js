@@ -256,11 +256,10 @@ class XMLHandler {
         let attributeDescriptor = attributes[p];
 
         if (attributeDescriptor == null) {
-          continue;
           if (this.options.ignoreUnknownProperties)
             continue;
           else
-            attributeDescriptor = new ElementDescriptor(
+            attributeDescriptor = new AttributeDescriptor(
               QName.parse(p), null, 'unqualified', Array.isArray(child));
         }
         if (attributeDescriptor) {
