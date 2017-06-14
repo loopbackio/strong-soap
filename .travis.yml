@@ -15,8 +15,6 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
-before_install:
-  - npm -g install npm@latest
 script:
   - npm run cover
   - npm run coveralls
