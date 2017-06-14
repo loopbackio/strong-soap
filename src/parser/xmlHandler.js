@@ -117,19 +117,20 @@ class XMLHandler {
         element.attribute(xmlns, descriptor.qname.nsURI);
       }
 
+      if (val == null) {
+        if (descriptor.isNillable) {
+          // Set xsi:nil = true
+          declareNamespace(nsContext, element, 'xsi', helper.namespaces.xsi);
+          element.attribute('xsi:nil', true);
+        }
+      }
+
       if (isSimple) {
         if (attrs !== null) {
           // add each field in $attributes object as xml element attribute
           if (typeof attrs === "object") {
             //add $attributes. Attribute can be an attribute defined in XSD or an xsi:type
             this.addAttributes(element, nsContext, descriptor, val, attrs);
-          }
-        }
-        if (val == null) {
-          if (descriptor.isNillable) {
-            // Set xsi:nil = true
-            declareNamespace(nsContext, element, 'xsi', helper.namespaces.xsi);
-            element.attribute('xsi:nil', true);
           }
         }
         if (nameSpaceContextCreated) {
