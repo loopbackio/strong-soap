@@ -34,9 +34,10 @@
   "scripts": {
     "toc": "./node_modules/.bin/doctoc Readme.md --github --maxlevel 3",
     "_pretest": "jshint index.js lib test",
-    "cover": "nyc _mocha -- --timeout 10000 test/*-test.js test/security/*.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls -v",
-    "test": "mocha --timeout 60000 test/*-test.js test/security/*.js",
+    "test": "nyc mocha --timeout 60000 test/*-test.js test/security/*.js",
+    "citest": "npm test",
+    "postcitest": "npm run coveralls",
     "pretest": "babel src -d lib",
     "prepublish": "babel src -d lib"
   },

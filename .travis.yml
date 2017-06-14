@@ -16,5 +16,4 @@ addons:
     packages:
       - g++-4.8
 script:
-  - npm run cover
-  - npm run coveralls
+  - npm run citest
