@@ -1,3 +1,5 @@
+'use strict';
+
 var crypto = require('crypto');
 exports.passwordDigest = function passwordDigest(nonce, created, password) {
   // digest = base64 ( sha1 ( nonce + created + password ) )

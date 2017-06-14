@@ -1,3 +1,5 @@
+'use strict';
+
 var XSDElement = require('./xsdElement');
 var QName = require('../qname');
 var helper = require('../helper');

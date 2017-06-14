@@ -1,3 +1,5 @@
+'use strict';
+
 var WSDLElement = require('./wsdlElement');
 var descriptor = require('../xsd/descriptor');
 var helper = require('../helper');

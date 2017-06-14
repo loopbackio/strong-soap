@@ -1,3 +1,5 @@
+'use strict';
+
 var g = require('../globalize');
 var sax = require('sax');
 var HttpClient = require('./../http');

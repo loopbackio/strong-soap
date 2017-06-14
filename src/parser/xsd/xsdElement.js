@@ -1,3 +1,5 @@
+'use strict';
+
 var Element = require('../element');
 var helper = require('../helper');
 var descriptor = require('./descriptor');

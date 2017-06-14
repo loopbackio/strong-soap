@@ -1,3 +1,5 @@
+'use strict';
+
 var g = require('../../globalize');
 var XSDElement = require('./xsdElement');
 var helper = require('../helper');

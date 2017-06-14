@@ -1,3 +1,5 @@
+'use strict';
+
 var KeyBase = require('./keybase');
 var QName = require('../qname');
 

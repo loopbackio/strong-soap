@@ -1,3 +1,5 @@
+'use strict';
+
 var XSDElement = require('./xsdElement');
 var descriptor = require('./descriptor');
 var helper = require('../helper');

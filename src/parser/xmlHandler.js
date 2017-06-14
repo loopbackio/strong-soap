@@ -1,3 +1,5 @@
+'use strict';
+
 var xmlBuilder = require('xmlbuilder');
 var sax = require('sax');
 var stream = require('stream');

@@ -1,3 +1,5 @@
+'use strict';
+
 var XSDElement = require('./xsdElement');
 var Sequence = require('./sequence');
 var Choice = require('./choice');

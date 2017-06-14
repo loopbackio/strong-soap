@@ -1,3 +1,5 @@
+'use strict';
+
 var _ = require('lodash');
 var WSDLElement = require('./wsdlElement');
 var Schema = require('../xsd/schema');

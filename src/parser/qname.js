@@ -1,3 +1,5 @@
+'use strict';
+
 var g = require('../globalize');
 var assert = require('assert');
 var qnameExp = /^(?:\{([^\{\}]*)\})?(?:([^\{\}]+):)?([^\{\}\:]+)$/;

@@ -1,3 +1,5 @@
+'use strict';
+
 var Element = require('../element');
 
 class SOAPElement extends Element {

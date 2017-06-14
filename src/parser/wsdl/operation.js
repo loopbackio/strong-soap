@@ -1,3 +1,5 @@
+'use strict';
+
 var g = require('../../globalize');
 var WSDLElement = require('./wsdlElement');
 var descriptor = require('../xsd/descriptor');

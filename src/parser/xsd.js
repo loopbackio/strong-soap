@@ -1,3 +1,5 @@
+'use strict';
+
 var helper = require('./helper');
 var builtinTypes;
 
