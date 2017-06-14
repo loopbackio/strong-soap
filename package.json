@@ -34,8 +34,8 @@
   "scripts": {
     "toc": "./node_modules/.bin/doctoc Readme.md --github --maxlevel 3",
     "_pretest": "jshint index.js lib test",
-    "cover": "istanbul cover _mocha -- --timeout 10000 test/*-test.js test/security/*.js",
-    "coveralls": "cat ./coverage/lcov.info | coveralls -v",
+    "cover": "nyc _mocha -- --timeout 10000 test/*-test.js test/security/*.js",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls -v",
     "test": "mocha --timeout 60000 test/*-test.js test/security/*.js",
     "pretest": "babel src -d lib",
     "prepublish": "babel src -d lib"
@@ -56,9 +56,9 @@
     "eslint": "^3.4.0",
     "eslint-config-google": "^0.6.0",
     "glob": "^7.0.3",
-    "istanbul": "^0.4.3",
     "jshint": "2.9.2",
     "mocha": "^2.5.3",
+    "nyc": "^10.0.0",
     "readable-stream": "^2.1.4",
     "semver": "^5.1.0",
     "should": "^9.0.0",
