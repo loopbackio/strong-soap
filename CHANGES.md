@@ -1,3 +1,15 @@
+2017-06-14, Version 1.2.4
+=========================
+
+ * removed old npm-debug.log (rashmihunt)
+
+ * removed before_install (rashmihunt)
+
+ * nillable for complexType (rashmihunt)
+
+ * Remove .DS_Store (Tetsuo Seto)
+
+
 2017-03-28, Version 1.2.3
 =========================
 
