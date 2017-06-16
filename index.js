@@ -3,7 +3,7 @@
 var base = './lib/';
 var nodeVersion = process.versions.node;
 var major = Number(nodeVersion.split('.')[0]);
-if (major >= 5) {
+if (major >= 4) {
   base = './src/';
 }
 

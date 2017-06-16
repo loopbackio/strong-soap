@@ -1,3 +1,5 @@
+'use strict';
+
 var Parameter = require('./parameter');
 
 class Fault extends Parameter {

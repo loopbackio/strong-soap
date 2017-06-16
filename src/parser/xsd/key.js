@@ -1,3 +1,5 @@
+'use strict';
+
 var KeyBase = require('./keybase');
 
 class Key extends KeyBase {

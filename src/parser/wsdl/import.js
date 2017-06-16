@@ -1,3 +1,5 @@
+'use strict';
+
 var WSDLElement = require('./wsdlElement');
 
 class Import extends WSDLElement {

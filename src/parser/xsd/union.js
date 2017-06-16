@@ -1,3 +1,5 @@
+'use strict';
+
 var XSDElement = require('./xsdElement');
 var helper = require('../helper');
 var SimpleType = require('./simpleType');

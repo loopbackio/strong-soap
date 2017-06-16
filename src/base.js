@@ -1,3 +1,5 @@
+'use strict';
+
 var EventEmitter = require('events').EventEmitter;
 var NamespaceContext = require('./parser/nscontext');
 var SOAPElement = require('./soapModel').SOAPElement;

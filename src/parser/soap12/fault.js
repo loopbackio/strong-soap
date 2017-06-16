@@ -1,3 +1,5 @@
+'use strict';
+
 var SOAPElement = require('./soapElement');
 var helper = require('../helper');
 

@@ -1,3 +1,5 @@
+'use strict';
+
 // Primitive data types
 var primitiveDataTypes = {
   string: String,
