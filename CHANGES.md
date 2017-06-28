@@ -1,3 +1,26 @@
+2017-06-28, Version 1.2.6
+=========================
+
+ * removed process.env.PORT (rashmihunt)
+
+ * fix ports (rashmihunt)
+
+ * Fix multiRef merging (Daniel Escoz)
+
+ * travis: expand node version testing (Ryan Graham)
+
+ * test: always run tests with coverage (Ryan Graham)
+
+ * test: replace istanbul with nyc (Ryan Graham)
+
+ * pkg: use src for node 4 instead of transpiling (Ryan Graham)
+
+ * src: enforce strict-mode on all JS (Ryan Graham)
+
+
+2017-06-14, Version 1.2.5
+=========================
+
 
 
 2017-06-14, Version 1.2.4
