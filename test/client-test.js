@@ -100,7 +100,7 @@ describe('SOAP Client', function() {
   describe('Headers in request and last response', function() {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = process.env.PORT || 0;
+    var port = 0;
 
     before(function(done) {
       server = http.createServer(function (req, res) {
@@ -418,7 +418,7 @@ describe('SOAP Client', function() {
   describe('Namespace number', function() {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = process.env.PORT || 0;
+    var port = 0;
 
     before(function(done) {
       server = http.createServer(function (req, res) {
@@ -531,7 +531,7 @@ describe('SOAP Client', function() {
   describe('Handle non-success http status codes', function() {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = process.env.PORT || 0;
+    var port = 0;
 
 
     before(function(done) {
@@ -574,7 +574,7 @@ describe('SOAP Client', function() {
   describe('Handle HTML answer from non-SOAP server', function() {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = process.env.PORT || 0;
+    var port = 0;
 
 
     before(function(done) {
@@ -693,7 +693,7 @@ describe('SOAP Client', function() {
   it('should return error in the call when Fault was returned', function(done) {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = process.env.PORT || 0;
+    var port =  0;
 
     server = http.createServer(function (req, res) {
       res.statusCode = 200;
