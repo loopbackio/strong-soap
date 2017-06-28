@@ -693,8 +693,7 @@ describe('SOAP Client', function() {
   it('should return error in the call when Fault was returned', function(done) {
     var server = null;
     var hostname = '127.0.0.1';
-    var port = 15099;
-    var baseUrl = 'http://' + hostname + ':' + port;
+    var port =  0;
 
     server = http.createServer(function (req, res) {
       res.statusCode = 200;
