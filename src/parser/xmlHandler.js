@@ -742,8 +742,11 @@ function parseValue(text, descriptor) {
   var value = text;
   var jsType = descriptor && descriptor.jsType;
   if (jsType === Date) {
-    value = new Date(text);
-  } else if (jsType === Boolean) {
+      value = new Date(text);
+      	if (!value.getMonth()){
+            value = text;
+	}
+      else if (jsType === Boolean) {
     if (text === 'true') {
       value = true;
     } else {
