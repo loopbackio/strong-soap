@@ -39,7 +39,7 @@ class XSDElement extends Element {
    */
   isMany() {
     if (this.$maxOccurs === 'unbounded') return true;
-    return Number(this.$maxOccurs) > 0;
+    return Number(this.$maxOccurs) > 1;
   }
 }
 
