@@ -32,7 +32,7 @@ class Element extends XSDElement {
     var descriptor = this.descriptor =
       new XSDElement.ElementDescriptor(qname, typeQName, form, isMany);
 
-    if (this.$nillable) {
+    if (this.$nillable === true || this.$nillable === "true") {
       descriptor.isNillable = true;
     }
 
@@ -41,9 +41,6 @@ class Element extends XSDElement {
       var refDescriptor = this.ref.describe(definitions);
       if (refDescriptor) {
         this.descriptor = descriptor = refDescriptor.clone(isMany);
-        if (this.$nillable) {
-          descriptor.isNillable = true;
-        }
       }
     } else if (this.type) {
       if (this.type instanceof ComplexType) {
