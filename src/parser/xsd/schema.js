@@ -27,7 +27,10 @@ class Schema extends XSDElement {
       _.merge(this.groups, source.groups);
       _.merge(this.attributes, source.attributes);
       _.merge(this.attributeGroups, source.attributeGroups);
-      _.merge(this.xmlns, source.xmlns);
+      // Multiple files may contribute to the final schema definition, each of these may redfine various namespace
+      // aliases; this appears to cause problems with identifying types. Preventing the merge appears to give a more
+      // predictable result, but may introduce other issues.
+      // _.merge(this.xmlns, source.xmlns);
     }
     return this;
   }
