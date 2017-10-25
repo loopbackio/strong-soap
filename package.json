@@ -38,8 +38,9 @@
     "test": "nyc mocha --timeout 60000 test/*-test.js test/security/*.js",
     "citest": "npm test",
     "postcitest": "npm run coveralls",
-    "pretest": "babel src -d lib",
-    "prepublish": "babel src -d lib"
+    "pretest": "npm run build",
+    "prepublish": "npm run build",
+    "build": "babel src -d lib"
   },
   "keywords": [
     "soap"

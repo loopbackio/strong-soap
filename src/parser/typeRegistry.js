@@ -76,6 +76,14 @@ var elementTypes = [
   './wsdl/service',
   './wsdl/types',
   './wsdl/documentation',
+  './wadl/application',
+  './wadl/grammars',
+  './wadl/method',
+  './wadl/representation',
+  './wadl/request',
+  './wadl/resource',
+  './wadl/resources',
+  './wadl/response',
   './soap/body',
   './soap/header',
   './soap/headerFault',
@@ -97,9 +105,13 @@ function getRegistry() {
     elementTypesByName: {}
   };
   elementTypes.forEach(function(t) {
-    var type = require(t);
-    registry.elementTypes['{' + type.targetNamespace + '}' + type.elementName] = type;
-    registry.elementTypesByName[type.elementName] = type;
+    try {
+      var type = require(t);
+      registry.elementTypes['{' + type.targetNamespace + '}' + type.elementName] = type;
+      registry.elementTypesByName[type.elementName] = type;
+    } catch (error) {
+      console.error(error);
+    }
   });
   return registry;
 }
