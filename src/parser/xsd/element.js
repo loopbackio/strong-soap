@@ -22,6 +22,13 @@ class Element extends XSDElement {
     var qname = this.getQName();
     var isMany = this.isMany();
 
+    // Because of recursive import/includes, this is a better place to look up the types.
+    var schemas = definitions.schemas;
+    if (this.$ref) {
+      this.ref = this.resolveSchemaObject(schemas, 'element', this.$ref);
+    } else if (this.$type) {
+      this.type = this.resolveSchemaObject(schemas, 'type', this.$type);
+    }
     var type = this.type;
     var typeQName;
     if (type instanceof QName) {
@@ -32,7 +39,7 @@ class Element extends XSDElement {
     var descriptor = this.descriptor =
       new XSDElement.ElementDescriptor(qname, typeQName, form, isMany);
 
-    if (this.$nillable) {
+    if (this.$nillable === true || this.$nillable === "true") {
       descriptor.isNillable = true;
     }
 
@@ -41,9 +48,6 @@ class Element extends XSDElement {
       var refDescriptor = this.ref.describe(definitions);
       if (refDescriptor) {
         this.descriptor = descriptor = refDescriptor.clone(isMany);
-        if (this.$nillable) {
-          descriptor.isNillable = true;
-        }
       }
     } else if (this.type) {
       if (this.type instanceof ComplexType) {
@@ -86,12 +90,8 @@ class Element extends XSDElement {
   }
 
   postProcess(defintions) {
-    var schemas = defintions.schemas;
-    if (this.$ref) {
-      this.ref = this.resolveSchemaObject(schemas, 'element', this.$ref);
-    } else if (this.$type) {
-      this.type = this.resolveSchemaObject(schemas, 'type', this.$type);
-    }
+    // Because of recursive import/includes, this is not a good place to process types. In some
+    // cases the type lookup will fail because it has not been added to the schemas.
     if (this.substitutionGroup) {
       this.substitutionGroup = this.resolveSchemaObject(
         schemas, 'element', this.$substitutionGroup);
