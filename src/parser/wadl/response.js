@@ -2,7 +2,7 @@
 
 var WSDLElement = require('../wsdl/wsdlElement');
 var QName = require('../qname');
-var Request = require('./Request');
+var Request = require('./request');
 
 class Response extends Request {
 
