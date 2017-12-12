@@ -4,7 +4,6 @@ var fs = require('fs'),
   join = require('path').join;
 var XMLHandler = require('../../lib/parser/xmlHandler');
 
-var crypto = require("crypto");
 var passwordDigest = require('../../src/utils').passwordDigest;
 var passwordDigestOriginal = require('../../src/utils').passwordDigestOriginal;
 
@@ -17,11 +16,11 @@ function createNonce(created){
 describe('WSSecurity', function () {
   var WSSecurity = require('../../').WSSecurity;
 
-  it('is a function', function () {
+  it('is a function', function() {
     WSSecurity.should.be.type('function');
   });
 
-  it('should accept valid constructor variables', function () {
+  it('should accept valid constructor variables', function() {
     var username = 'myUser';
     var password = 'myPass';
     var options = {
@@ -37,7 +36,7 @@ describe('WSSecurity', function () {
     instance.should.have.property('_actor', options.actor);
   });
 
-  it('should accept passwordType as 3rd arg', function () {
+  it('should accept passwordType as 3rd arg', function() {
     var username = 'myUser';
     var password = 'myPass';
     var passwordType = 'PasswordText';
@@ -49,7 +48,7 @@ describe('WSSecurity', function () {
     instance.should.not.have.property('_actor');
   });
 
-  it('should insert a WSSecurity when postProcess is called', function () {
+  it('should insert a WSSecurity when postProcess is called', function() {
     var env = XMLHandler.createSOAPEnvelope();
     var username = 'myUser';
     var password = 'myPass';
@@ -60,10 +59,8 @@ describe('WSSecurity', function () {
     };
     var instance = new WSSecurity(username, password, options);
     instance.addSoapHeaders(env.header);
-    var xml = env.header.toString({
-      pretty: true
-    });
-
+    var xml = env.header.toString({pretty: true});
+    
     xml.should.containEql('<wsse:Security soap:actor="urn:sample" ');
     xml.should.containEql(
       'xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/' +
