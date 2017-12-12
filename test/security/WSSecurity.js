@@ -60,7 +60,7 @@ describe('WSSecurity', function () {
     var instance = new WSSecurity(username, password, options);
     instance.addSoapHeaders(env.header);
     var xml = env.header.toString({pretty: true});
-    
+
     xml.should.containEql('<wsse:Security soap:actor="urn:sample" ');
     xml.should.containEql(
       'xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/' +
@@ -148,7 +148,7 @@ describe('WSSecurity', function () {
     
 
   
-  it('Original WSSecurity digest method against SoapUI 5.4 output', function () {
+  it('Original WSSecurity digest method failing against SoapUI 5.4 output', function () {
     var username = 'myUser';
     var password = 'myPass';
     var created = '';
@@ -171,7 +171,7 @@ describe('WSSecurity', function () {
     nonce = 'hdk9vWPwQ37Y5O2hICiOgQ=='
     digest = 'yangN8zaHDO1j9wLGjwzWTaY/6o='
 
-    passwordDigestOriginal(nonce, created, password).should.containEql(digest);
+    passwordDigestOriginal(nonce, created, password).should.not.containEql(digest);
 
   });
 });
