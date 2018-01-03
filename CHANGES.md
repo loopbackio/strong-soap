@@ -1,3 +1,17 @@
+2018-01-03, Version 1.3.0
+=========================
+
+ * remove node 0.10/0.12 support (Raymond Feng)
+
+ * fix soap version detection (Raymond Feng)
+
+ * Create Issue and PR Templates (#124) (Sakib Hasan)
+
+ * Add CODEOWNER file (Diana Lau)
+
+ * update translation file (Diana Lau)
+
+
 2017-06-28, Version 1.2.6
 =========================
 
