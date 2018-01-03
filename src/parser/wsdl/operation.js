@@ -43,12 +43,12 @@ class Operation extends WSDLElement {
         this.soapAction = child.$soapAction || '';
         this.style = child.$style || '';
         //figure out from the binding operation soap version 1.1 or 1.2
-        if (child.$soapAction !== undefined){
-          if(child.nsURI === 'http://schemas.xmlsoap.org/wsdl/soap/'){
-            this.soapVersion ='1.1';
-          } else if(child.nsURI === 'http://schemas.xmlsoap.org/wsdl/soap12/') {
-            this.soapVersion ='1.2';
-          }
+        if (child.nsURI === 'http://schemas.xmlsoap.org/wsdl/soap/') {
+          this.soapVersion ='1.1';
+        } else if(child.nsURI === 'http://schemas.xmlsoap.org/wsdl/soap12/') {
+          this.soapVersion ='1.2';
+        } else {
+          this.soapVersion = '1.1';
         }
         break;
     }
