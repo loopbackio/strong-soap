@@ -12,6 +12,7 @@
                    elementFormDefault="qualified"
                    attributeFormDefault="unqualified">
             <xs:include schemaLocation="types.xsd"/>
+            <xs:include schemaLocation="types-without-tns.xsd"/>
             <xs:element name="DummyRequest">
                 <xs:complexType>
                     <xs:sequence>

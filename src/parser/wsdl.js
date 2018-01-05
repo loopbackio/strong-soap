@@ -176,8 +176,16 @@ class WSDL {
       self._includesWsdl.push(wsdl);
 
       if (wsdl.definitions instanceof Definitions) {
+        // Set namespace for included schema that does not have targetNamespace
+        if (undefined in wsdl.definitions.schemas) {
+          if (include.namespace != null) {
+            // If A includes B and B includes C, B & C can both have no targetNamespace
+            wsdl.definitions.schemas[include.namespace] = wsdl.definitions.schemas[undefined];
+            delete wsdl.definitions.schemas[undefined];
+          }
+        }
         _.mergeWith(self.definitions, wsdl.definitions, function(a, b) {
-          return (a instanceof Schema) ? a.merge(b) : undefined;
+          return (a instanceof Schema) ? a.merge(b, include.type === 'include') : undefined;
         });
       } else {
         self.definitions.schemas[include.namespace ||
