@@ -171,6 +171,15 @@ describe('wsdl-tests', function() {
       });
     });
 
+    it('handles xsd includes', function(done) {
+      soap.createClient(__dirname + '/wsdl/xsdinclude/xsd_include.wsdl', function(err, client) {
+        assert.ok(!err);
+        var schema = client.wsdl.definitions.schemas['http://www.dummy.com/Types'];
+        var simpleTypes = Object.keys(schema.simpleTypes);
+        simpleTypes.should.eql(['IdType', 'NameType', 'AnotherIdType'])
+        done();
+      });
+    });
   });
 });
 
