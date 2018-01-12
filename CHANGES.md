@@ -1,3 +1,9 @@
+2018-01-12, Version 1.4.0
+=========================
+
+ * allow xsd:include to include a schema without target namespace (Raymond Feng)
+
+
 2018-01-03, Version 1.3.0
 =========================
 
