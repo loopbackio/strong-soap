@@ -249,7 +249,12 @@ class XMLHandler {
   }
 
   addAttributes(node, nsContext, descriptor, val, attrs) {
-    var elements = {}, attributes = {};
+    var attrDescriptors = (descriptor && descriptor.attributes) || [];
+    var attributes = {};
+    for (var i = 0; i < attrDescriptors.length; i++) {
+      var qname = attrDescriptors[i].qname;
+      attributes[qname.name] = attrDescriptors[i];
+    }
     if (attrs != null && typeof attrs === 'object') {
       for (let p in attrs) {
         let child = attrs[p];

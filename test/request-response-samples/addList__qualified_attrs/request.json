@@ -1,0 +1,6 @@
+{
+  "record": ["r1", "r2"],
+  "$attributes": {
+    "discriptor": "d1"
+  }
+}
