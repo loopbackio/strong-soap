@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" >
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns1:addListResponse xmlns:ns1="urn:example" xmlns:ns2="urn:example" ns2:discriptor="d2">
+		    <ns1:record>r1</ns1:record>
+			<ns1:record>r2</ns1:record>
+		</ns1:addListResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
