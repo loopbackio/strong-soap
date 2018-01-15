@@ -1,3 +1,9 @@
+2018-01-15, Version 1.4.1
+=========================
+
+ * make sure attribute descriptors are honored to map json to xml (Raymond Feng)
+
+
 2018-01-12, Version 1.4.0
 =========================
 
