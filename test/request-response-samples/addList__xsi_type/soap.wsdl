@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:tns="urn:urn:example:ws"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:msgs="urn:example"
+    targetNamespace="urn:urn:example:ws">
+    <types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+            <xsd:import namespace="urn:example" schemaLocation="soap.messages.xsd"/>
+		</xsd:schema>
+    </types>
+    <message name="addListRequest">
+        <part name="parameters" element="msgs:addList"/>
+    </message>
+    <message name="addListResponse">
+        <part name="parameters" element="msgs:addListResponse"/>
+    </message>
+    <portType name="NetSuitePortType">
+        <operation name="addList">
+            <input name="addListRequest" message="tns:addListRequest"/>
+            <output name="addListResponse" message="tns:addListResponse"/>
+        </operation>
+    </portType>
+	<binding name="NetSuiteBinding" type="tns:NetSuitePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+       <operation name="addList">
+            <soap:operation soapAction="addList"/>
+            <input name="addListRequest">
+                 <soap:body use="literal"/>
+            </input>
+            <output name="addListResponse">
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="NetSuiteService">
+        <port name="NetSuitePort" binding="tns:NetSuiteBinding">
+            <soap:address location="http://localhost:1509"/>
+        </port>
+    </service>
+</definitions>

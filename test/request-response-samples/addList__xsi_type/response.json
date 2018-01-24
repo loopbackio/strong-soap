@@ -1,0 +1,9 @@
+{
+  "record": {
+    "$attributes": {
+      "$xsiType": { "type": "UserRecord", "xmlns": "urn:example" }
+    },
+    "id": "2",
+    "name": "Mary"
+  }
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:msgs="urn:example" 
+    targetNamespace="urn:example"
+    elementFormDefault="qualified" attributeFormDefault="qualified">
+    
+   	<complexType name="AddListResponse">
+        <sequence>
+            <element name="record" minOccurs="1" maxOccurs="unbounded" type="msgs:Record"/>
+        </sequence>
+    </complexType>
+
+    <element name="addListResponse" type="msgs:AddListResponse"/>
+    	
+    <complexType name="AddListRequest">
+        <sequence>
+            <element name="record" type="msgs:Record" minOccurs="1" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Record">
+        <sequence>
+            <element name="id" type="string"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="NameRecord">
+        <complexContent>
+            <extension base="msgs:Record">
+                <sequence>
+                    <element name="name" type="string"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <element name="addList" type="msgs:AddListRequest"/>
+</schema>

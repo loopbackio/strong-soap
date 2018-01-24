@@ -1,0 +1,11 @@
+{
+  "record": [
+    {
+      "id": "1",
+      "name": "John",
+      "$attributes": {
+        "$xsiType": "{urn:example}NameRecord"
+      }
+    }
+  ]
+}
