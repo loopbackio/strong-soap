@@ -1,3 +1,9 @@
+2018-01-24, Version 1.4.2
+=========================
+
+ * fix: handle xsi:type for subtype mappng from json to xml (Raymond Feng)
+
+
 2018-01-15, Version 1.4.1
 =========================
 
