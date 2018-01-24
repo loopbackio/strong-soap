@@ -17,7 +17,8 @@ var Set = helper.Set;
 
 
 class XMLHandler {
-  constructor(options) {
+  constructor(schemas, options) {
+    this.schemas = schemas || {};
     this.options = options || {};
     this.options.valueKey = this.options.valueKey || '$value';
     this.options.xmlKey = this.options.xmlKey || '$xml';
@@ -192,6 +193,41 @@ class XMLHandler {
   }
 
   /**
+   * Check if the attributes have xsi:type and return the xsi type descriptor if exists
+   * @param {*} descriptor The current descriptor
+   * @param {*} attrs An object of attribute values
+   */
+  getXsiType(descriptor, attrs) {
+    var xsiTypeDescriptor;
+    if (attrs != null && typeof attrs === "object") {
+      for (let p in attrs) {
+        let child = attrs[p];
+        // if field is $xsiType add xsi:type attribute
+        if (p === this.options.xsiTypeKey) {
+          let xsiType;
+          if (typeof child === "object" && typeof child.type !== "undefined") {
+            // $xsiType has two fields - type, xmlns
+            xsiType = QName.parse(child.type, child.xmlns);
+          } else {
+            xsiType = QName.parse(child);
+          }
+          var schema = this.schemas[xsiType.nsURI];
+          if (schema) {
+            var xsiTypeInfo =
+              schema.complexTypes[xsiType.name] ||
+              schema.simpleTypes[xsiType.name];
+            // The type might not be described  
+            // describe() takes wsdl definitions  
+            xsiTypeDescriptor = xsiTypeInfo && xsiTypeInfo.describe({schemas: this.schemas});
+          }
+          break;
+        }
+      }
+    }
+    return xsiTypeDescriptor;
+  }
+
+  /**
    * Map a JSON object into an XML type
    * @param {XMLElement} node The root node
    * @param {NamespaceContext} nsContext Namespace context
@@ -205,6 +241,10 @@ class XMLHandler {
       node.text(val);
       return node;
     }
+
+    // First try to see if a subtype should be used
+    var xsiType = this.getXsiType(descriptor, attrs);
+    descriptor = xsiType || descriptor;
 
     var elements = {}, attributes = {};
     if (descriptor != null) {

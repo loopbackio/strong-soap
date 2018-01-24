@@ -19,7 +19,7 @@ class Client extends Base {
   constructor(wsdl, endpoint, options) {
     super(wsdl, options);
     options = options || {};
-    this.xmlHandler = new XMLHandler(options);
+    this.xmlHandler = new XMLHandler(wsdl.definitions.schemas, options);
     this._initializeServices(endpoint);
     this.httpClient = options.httpClient || new HttpClient(options);
   }
@@ -175,7 +175,7 @@ class Client extends Base {
 
 
     var nsContext = this.createNamespaceContext(soapNsPrefix, soapNsURI);
-    var xmlHandler = this.xmlHandler || new XMLHandler(options);
+    var xmlHandler = this.xmlHandler || new XMLHandler(this.wsdl.schemas, options);
     var envelope = Client.createSOAPEnvelope(soapNsPrefix, soapNsURI);
 
     var soapHeaderElement = envelope.header;

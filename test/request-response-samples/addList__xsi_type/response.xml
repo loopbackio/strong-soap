@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" >
+    <soapenv:Header/>
+    <soapenv:Body>
+        <ns1:addListResponse xmlns:ns1="urn:example" xmlns:ns2="urn:example">
+        <ns1:record xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:UserRecord">
+            <ns1:id>2</ns1:id>
+            <ns1:name>Mary</ns1:name>
+        </ns1:record>
+		</ns1:addListResponse>
+    </soapenv:Body>
+</soapenv:Envelope>
