@@ -107,14 +107,14 @@ class XMLHandler {
         val = val.replace("<![CDATA[","");
         val = val.replace("]]>","");
         element.cdata(val);
-      }else if(isSimple && typeof val !== "undefined" && val !== null 
+      }else if(isSimple && typeof val !== "undefined" && val !== null
         && typeof val[this.options.xmlKey] !== "undefined") {
-        val = val[this.options.xmlKey];        
+        val = val[this.options.xmlKey];
         element = node.element(elementName);
         element.raw(val);
       }else {
         element = isSimple ? node.element(elementName, val) : node.element(elementName);
-      } 
+      }
 
       if (xmlns && descriptor.qname.nsURI) {
         element.attribute(xmlns, descriptor.qname.nsURI);
@@ -160,7 +160,7 @@ class XMLHandler {
               }
             }
           }
-        }  
+        }
       }
       //val is not an object - simple or date types
       if (val != null && ( typeof val !== 'object' || val instanceof Date)) {
@@ -173,14 +173,14 @@ class XMLHandler {
         }
         if (nameSpaceContextCreated) {
           nsContext.popContext();
-        }  
+        }
         return node;
       }
 
       this.mapObject(element, nsContext, descriptor, val, attrs);
       if (nameSpaceContextCreated) {
         nsContext.popContext();
-      }  
+      }
       return node;
     }
 
@@ -247,11 +247,14 @@ class XMLHandler {
     descriptor = xsiType || descriptor;
 
     var elements = {}, attributes = {};
+    var elementsOrder = [];
+
     if (descriptor != null) {
       for (let i = 0, n = descriptor.elements.length; i < n; i++) {
         let elementDescriptor = descriptor.elements[i];
         let elementName = elementDescriptor.qname.name;
         elements[elementName] = elementDescriptor;
+        elementsOrder.push(elementName);
       }
     }
 
@@ -263,24 +266,51 @@ class XMLHandler {
       }
     }
 
-    // handle later if value is an array 
+    let elementIndex = 0;
+
+    // handle later if value is an array
     if (!Array.isArray(val)) {
-      for (let p in val) {
-        if (p === this.options.attributesKey)
-          continue;
-	      let child = val[p];
-	      let childDescriptor = elements[p] || attributes[p];
-	      if (childDescriptor == null) {
-	        if (this.options.ignoreUnknownProperties) 
+      const handled = {};
+
+      for (let k = 0; k < elementsOrder.length; k++) {
+        let elementDescriptor = elements[elementsOrder[k]];
+        let childNode = null;
+
+        for (let p in val) {
+          if (handled[p] || p === this.options.attributesKey)
             continue;
-          else 
-            childDescriptor = new ElementDescriptor(
+  	      if (p === elementDescriptor.qname.name) {
+            childNode = val[p];
+            break;
+          }
+  	    }
+
+        if (childNode) {
+          this.jsonToXml(node, nsContext, elementDescriptor, childNode);
+          handled[elementDescriptor.qname.name] = true;
+        }
+      }
+
+      for (let p in val) {
+        if (handled[p] || p === this.options.attributesKey)
+          continue;
+        let child = val[p];
+
+        let attributeDescriptor = attributes[p];
+
+        if (attributeDescriptor == null) {
+          continue;
+          if (this.options.ignoreUnknownProperties)
+            continue;
+          else
+            attributeDescriptor = new ElementDescriptor(
               QName.parse(p), null, 'unqualified', Array.isArray(child));
         }
-        if (childDescriptor) {
-          this.jsonToXml(node, nsContext, childDescriptor, child);
-        }	
-	    }
+        if (attributeDescriptor) {
+          this.jsonToXml(node, nsContext, attributeDescriptor, child);
+          handled[p] = true;
+        }
+      }
     }
 
     this.addAttributes(node, nsContext, descriptor, val, attrs);
@@ -328,10 +358,10 @@ class XMLHandler {
     }
   }
 
-  static createSOAPEnvelope(prefix, nsURI) {
+  static createSOAPEnvelope(prefix, nsURI, xsd) {
     prefix = prefix || 'soap';
     var doc = xmlBuilder.create(prefix + ':Envelope',
-      {version: '1.0', encoding: 'UTF-8', standalone: true});
+      {version: '1.0', encoding: 'UTF-8', standalone: true, xsd: xsd });
     nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/'
     doc.attribute('xmlns:' + prefix,
       nsURI);
@@ -539,7 +569,7 @@ class XMLHandler {
             attrs[a] = xsiType.name;
             if(xsiType.prefix){
               xsiXmlns = nsContext.getNamespaceURI(xsiType.prefix);
-            }  
+            }
           }
         }
         let attrName = qname.name;
@@ -634,7 +664,7 @@ class XMLHandler {
       var top = stack[stack.length - 1];
       self._processText(top, text);
     };
-    
+
     p.ontext = function(text) {
       text = text && text.trim();
       if (!text.length)
@@ -778,7 +808,7 @@ function declareNamespace(nsContext, node, prefix, nsURI) {
   } else if (node) {
     node.attribute('xmlns:' + mapping.prefix, mapping.uri);
     return mapping;
-  } 
+  }
   return mapping;
 }
 
