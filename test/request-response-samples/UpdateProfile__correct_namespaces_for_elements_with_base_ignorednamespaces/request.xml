@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-<soap:Header/>
-<soap:Body>
-		<ns1:UpdateProfileRequest xmlns:ns1="http://www.bigdatacollect.or/Name/Types">
-			<Profile>
-				<IDs>
-					<UniqueID source="TESTSOURCE">100</UniqueID>
-				</IDs>
-				<Addresses>
-					<NameAddress>
-						<AddressLine>Another Address</AddressLine>
-					</NameAddress>
-					<NameAddress>
-						<AddressLine>My Address</AddressLine>
-					</NameAddress>
-				</Addresses>
-				<Phones>
-					<NamePhone primary="true">
-						<PhoneData>
-							<PhoneNumber>123</PhoneNumber>
-						</PhoneData>
-					</NamePhone>
-					<NamePhone primary="false">
-						<PhoneData>
-							<PhoneNumber>456</PhoneNumber>
-						</PhoneData>
-					</NamePhone>
-				</Phones>
-			</Profile>
-		</ns1:UpdateProfileRequest>
-</soap:Body>
+  <soap:Header/>
+  <soap:Body>
+    <ns1:UpdateProfileRequest xmlns:ns1="http://www.bigdatacollect.or/Name/Types">
+      <Profile>
+        <IDs>
+          <UniqueID source="TESTSOURCE">100</UniqueID>
+        </IDs>
+        <Phones>
+          <NamePhone primary="true">
+            <PhoneData>
+              <PhoneNumber>123</PhoneNumber>
+            </PhoneData>
+          </NamePhone>
+          <NamePhone primary="false">
+            <PhoneData>
+              <PhoneNumber>456</PhoneNumber>
+            </PhoneData>
+          </NamePhone>
+        </Phones>
+        <Addresses>
+          <NameAddress>
+            <AddressLine>Another Address</AddressLine>
+          </NameAddress>
+          <NameAddress>
+            <AddressLine>My Address</AddressLine>
+          </NameAddress>
+        </Addresses>
+      </Profile>
+    </ns1:UpdateProfileRequest>
+  </soap:Body>
 </soap:Envelope>
