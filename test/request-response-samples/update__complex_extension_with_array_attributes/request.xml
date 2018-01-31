@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-<soap:Header/>
-<soap:Body>
-		<ns1:update xmlns:ns1="urn:messages_2011_1.platform.webservices.netsuite.com">
-			<ns1:record internalId="42" externalId="Alex Dniprovskyy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns2:Contact">
-				<ns2:firstName xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">Allister</ns2:firstName>
-				<ns2:lastName xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">Sullivan</ns2:lastName>
-				<ns2:nullFieldList xmlns:ns2="urn:core_2011_1.platform.webservices.netsuite.com">
-					<ns2:name>officephone</ns2:name>
-					<ns2:name>mobilephone</ns2:name>
-				</ns2:nullFieldList>
-				<ns2:phone xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">800-555-2819</ns2:phone>
-				<ns2:subscriptionsList xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com" replaceAll="false">
-					<ns2:subscriptions tempId="34">
-						<ns2:subscribed>true</ns2:subscribed>
-						<ns2:subscription internalId="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="urn:core_2011_1.platform.webservices.netsuite.com" xsi:type="ns3:RecordRef">
-							<ns3:name xmlns:ns3="urn:core_2011_1.platform.webservices.netsuite.com">Billing Communication</ns3:name>
-						</ns2:subscription>
-					</ns2:subscriptions>
-					<ns2:subscriptions>
-						<ns2:subscribed>true</ns2:subscribed>
-						<ns2:subscription internalId="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns3="urn:core_2011_1.platform.webservices.netsuite.com" xsi:type="ns3:RecordRef">
-							<ns3:name xmlns:ns3="urn:core_2011_1.platform.webservices.netsuite.com">Marketing</ns3:name>
-						</ns2:subscription>
-					</ns2:subscriptions>
-				</ns2:subscriptionsList>
-			</ns1:record>
-		</ns1:update>
-</soap:Body>
+<soap:Envelope
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header/>
+    <soap:Body>
+        <ns1:update
+            xmlns:ns1="urn:messages_2011_1.platform.webservices.netsuite.com">
+            <ns1:record internalId="42" externalId="Alex Dniprovskyy"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com" xsi:type="ns2:Contact">
+                <ns2:nullFieldList
+                    xmlns:ns2="urn:core_2011_1.platform.webservices.netsuite.com">
+                    <ns2:name>officephone</ns2:name>
+                    <ns2:name>mobilephone</ns2:name>
+                </ns2:nullFieldList>
+                <ns2:firstName
+                    xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">Allister</ns2:firstName>
+                <ns2:lastName
+                    xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">Sullivan</ns2:lastName>
+                <ns2:phone
+                    xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com">800-555-2819</ns2:phone>
+                <ns2:subscriptionsList
+                    xmlns:ns2="urn:relationships_2011_1.lists.webservices.netsuite.com" replaceAll="false">
+                    <ns2:subscriptions tempId="34">
+                        <ns2:subscribed>true</ns2:subscribed>
+                        <ns2:subscription internalId="2"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xmlns:ns3="urn:core_2011_1.platform.webservices.netsuite.com" xsi:type="ns3:RecordRef">
+                            <ns3:name
+                                xmlns:ns3="urn:core_2011_1.platform.webservices.netsuite.com">Billing Communication</ns3:name>
+                        </ns2:subscription>
+                    </ns2:subscriptions>
+                    <ns2:subscriptions>
+                        <ns2:subscribed>true</ns2:subscribed>
+                        <ns2:subscription internalId="1"
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xmlns:ns3="urn:core_2011_1.platform.webservices.netsuite.com" xsi:type="ns3:RecordRef">
+                            <ns3:name
+                                xmlns:ns3="urn:core_2011_1.platform.webservices.netsuite.com">Marketing</ns3:name>
+                        </ns2:subscription>
+                    </ns2:subscriptions>
+                </ns2:subscriptionsList>
+            </ns1:record>
+        </ns1:update>
+    </soap:Body>
 </soap:Envelope>
