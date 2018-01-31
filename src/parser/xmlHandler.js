@@ -227,6 +227,25 @@ class XMLHandler {
     return xsiTypeDescriptor;
   }
 
+  _sortKeys(val, elementOrder) {
+    function compare(n1, n2, order) {
+      let i1 = order.indexOf(n1);
+      if (i1 === -1) i1 = order.length;
+      let i2 = order.indexOf(n2);
+      if (i2 === -1) i2 = order.length;
+      return i1 - i2;
+    }
+    const keys = Object.keys(val);
+    var names = [].concat(keys).sort((n1, n2) => {
+      let result = compare(n1, n2, elementOrder);
+      if (result ===0) {
+        result = compare(n1, n2, keys);
+      }
+      return result;
+    });
+    return names;
+  }
+
   /**
    * Map a JSON object into an XML type
    * @param {XMLElement} node The root node
@@ -247,11 +266,13 @@ class XMLHandler {
     descriptor = xsiType || descriptor;
 
     var elements = {}, attributes = {};
+    var elementOrder = [];
     if (descriptor != null) {
       for (let i = 0, n = descriptor.elements.length; i < n; i++) {
         let elementDescriptor = descriptor.elements[i];
         let elementName = elementDescriptor.qname.name;
         elements[elementName] = elementDescriptor;
+        elementOrder.push(elementName);
       }
     }
 
@@ -265,7 +286,8 @@ class XMLHandler {
 
     // handle later if value is an array 
     if (!Array.isArray(val)) {
-      for (let p in val) {
+      const names = this._sortKeys(val, elementOrder);
+      for (let p of names) {
         if (p === this.options.attributesKey)
           continue;
 	      let child = val[p];

@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-<soap:Header/>
-<soap:Body>
-		<ns1:UpdateProfileRequest xmlns:ns1="http://www.bigdatacollect.or/Name/Types">
-			<ns1:Profile>
-				<ns1:IDs>
-					<ns2:UniqueID xmlns:ns2="http://www.bigdatacollect.or/Common/Types" source="TESTSOURCE">100</ns2:UniqueID>
-					<ns2:UniqueID xmlns:ns2="http://www.bigdatacollect.or/Common/Types" source="TESTSOURCE2">100</ns2:UniqueID>
-					<ns2:UniqueID xmlns:ns2="http://www.bigdatacollect.or/Common/Types" source="TESTSOURCE3">100</ns2:UniqueID>
-				</ns1:IDs>
-				<ns1:Addresses>
-					<ns1:NameAddress>
-						<ns2:AddressLine xmlns:ns2="http://www.bigdatacollect.or/Common/Types">Another Address</ns2:AddressLine>
-					</ns1:NameAddress>
-					<ns1:NameAddress>
-						<ns2:AddressLine xmlns:ns2="http://www.bigdatacollect.or/Common/Types">My Address</ns2:AddressLine>
-					</ns1:NameAddress>
-				</ns1:Addresses>
-				<ns1:Phones>
-					<ns1:NamePhone primary="true">
-						<ns2:PhoneData xmlns:ns2="http://www.bigdatacollect.or/Common/Types">
-							<ns2:PhoneNumber>400123</ns2:PhoneNumber>
-						</ns2:PhoneData>
-						<ns1:details>
-						 <ns2:data xmlns:ns2="http://www.bigdatacollect.or/Common/Types" type="Extension">1001</ns2:data>
-						 <ns2:data xmlns:ns2="http://www.bigdatacollect.or/Common/Types" type="AreaCode">377</ns2:data>
-						</ns1:details>
-					</ns1:NamePhone>
-					<ns1:NamePhone primary="false">
-						<ns2:PhoneData xmlns:ns2="http://www.bigdatacollect.or/Common/Types">
-							<ns2:PhoneNumber>555010456</ns2:PhoneNumber>
-						</ns2:PhoneData>
-					</ns1:NamePhone>
-				</ns1:Phones>
-			</ns1:Profile>
-		</ns1:UpdateProfileRequest>
-</soap:Body>
+  <soap:Header/>
+  <soap:Body>
+    <ns1:UpdateProfileRequest xmlns:ns1="http://www.bigdatacollect.or/Name/Types">
+      <ns1:Profile>
+        <ns1:IDs>
+          <ns2:UniqueID xmlns:ns2="http://www.bigdatacollect.or/Common/Types" source="TESTSOURCE">100</ns2:UniqueID>
+          <ns2:UniqueID xmlns:ns2="http://www.bigdatacollect.or/Common/Types" source="TESTSOURCE2">100</ns2:UniqueID>
+          <ns2:UniqueID xmlns:ns2="http://www.bigdatacollect.or/Common/Types" source="TESTSOURCE3">100</ns2:UniqueID>
+        </ns1:IDs>
+        <ns1:Phones>
+          <ns1:NamePhone primary="true">
+            <ns2:PhoneData xmlns:ns2="http://www.bigdatacollect.or/Common/Types">
+              <ns2:PhoneNumber>400123</ns2:PhoneNumber>
+            </ns2:PhoneData>
+            <ns1:details>
+              <ns2:data xmlns:ns2="http://www.bigdatacollect.or/Common/Types" type="Extension">1001</ns2:data>
+              <ns2:data xmlns:ns2="http://www.bigdatacollect.or/Common/Types" type="AreaCode">377</ns2:data>
+            </ns1:details>
+          </ns1:NamePhone>
+          <ns1:NamePhone primary="false">
+            <ns2:PhoneData xmlns:ns2="http://www.bigdatacollect.or/Common/Types">
+              <ns2:PhoneNumber>555010456</ns2:PhoneNumber>
+            </ns2:PhoneData>
+          </ns1:NamePhone>
+        </ns1:Phones>
+        <ns1:Addresses>
+          <ns1:NameAddress>
+            <ns2:AddressLine xmlns:ns2="http://www.bigdatacollect.or/Common/Types">Another Address</ns2:AddressLine>
+          </ns1:NameAddress>
+          <ns1:NameAddress>
+            <ns2:AddressLine xmlns:ns2="http://www.bigdatacollect.or/Common/Types">My Address</ns2:AddressLine>
+          </ns1:NameAddress>
+        </ns1:Addresses>
+      </ns1:Profile>
+    </ns1:UpdateProfileRequest>
+  </soap:Body>
 </soap:Envelope>
