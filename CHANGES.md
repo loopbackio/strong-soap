@@ -1,3 +1,31 @@
+2018-01-31, Version 1.5.0
+=========================
+
+ * fix: upgrade deps (Raymond Feng)
+
+ * fix: make sure xml elements are mapped based the order of xsd (Raymond Feng)
+
+ * Fix Typo: RPC Literal (Thomas Richter)
+
+ * check the original passwordDigest method fails against SoapUI output (Tom Hodder)
+
+ * revert formatting changes by format on save in vscode (Tom Hodder)
+
+ * Updated passwordDigest method and related tests (Tom Hodder)
+
+ * missing semi colons (Branden Horiuchi)
+
+ * removed lodash dependency (Branden Horiuchi)
+
+ * added CookieSecurity test (Branden Horiuchi)
+
+ * better cookie parsing handle the case where the header for set-cookie is a string and not an array (Branden Horiuchi)
+
+ * fixing header parse objects would not have been parsed (Branden Horiuchi)
+
+ * added cookie security (Branden Horiuchi)
+
+
 2018-01-24, Version 1.4.2
 =========================
 
