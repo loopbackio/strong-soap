@@ -1,11 +1,23 @@
 'use strict';
 
 var crypto = require('crypto');
-exports.passwordDigest = function passwordDigest(nonce, created, password) {
+exports.passwordDigestOriginal = function passwordDigest(nonce, created, password) {
   // digest = base64 ( sha1 ( nonce + created + password ) )
   var pwHash = crypto.createHash('sha1');
   var rawNonce = new Buffer(nonce || '', 'base64').toString('binary');
   pwHash.update(rawNonce + created + password);
+  return pwHash.digest('base64');
+};
+
+exports.passwordDigest = function (nonce, created, password) {
+  // digest = base64 ( sha1 ( nonce + created + password ) )
+  var pwHash = crypto.createHash('sha1');
+  var rawNonce = new Buffer(nonce || '', 'base64');
+  pwHash.update(Buffer.concat([
+    rawNonce,
+    new Buffer(created),
+    new Buffer(password)
+  ]));
   return pwHash.digest('base64');
 };
 
