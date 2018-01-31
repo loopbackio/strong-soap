@@ -12,7 +12,7 @@ var fs = require('fs'),
 describe('RPC style tests', function() {
 
 
-  describe('RPC Lietral', function() {
+  describe('RPC Literal', function() {
     var test = {};
     test.server = null;
     test.service = {
