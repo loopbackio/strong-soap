@@ -21,7 +21,7 @@ class Schema extends XSDElement {
   merge(source, isInclude) {
     assert(source instanceof Schema);
     if (this.$targetNamespace === source.$targetNamespace ||
-      // xsd:include allows the target schema that does not have targetNamspace
+      // xsd:include allows the target schema that does not have targetNamespace
       (isInclude && source.$targetNamespace === undefined)) {
       _.merge(this.complexTypes, source.complexTypes);
       _.merge(this.simpleTypes, source.simpleTypes);
@@ -30,6 +30,7 @@ class Schema extends XSDElement {
       _.merge(this.attributes, source.attributes);
       _.merge(this.attributeGroups, source.attributeGroups);
       _.merge(this.xmlns, source.xmlns);
+      this.includes = this.includes.concat(source.includes);
     }
     return this;
   }

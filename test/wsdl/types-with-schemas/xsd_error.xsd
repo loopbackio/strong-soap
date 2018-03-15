@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1 (branches/2.1-6728; 2011-02-03T14:14:58+0000) JAXWS-RI/2.2.3 JAXWS/2.2. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://company.de/cake/synonymelisten/webservice/exceptions" elementFormDefault="qualified" version="1.0" targetNamespace="http://company.de/cake/synonymelisten/webservice/exceptions">
+  <xs:element name="ServiceBusinessFaultData" type="tns:ServiceBusinessFaultData" />
+  <xs:element name="ServiceTechnicalFaultData" type="tns:ServiceTechnicalFaultData" />
+  <xs:complexType name="ServiceBusinessFaultData">
+    <xs:sequence>
+      <xs:element name="servicebezeichnung" type="xs:string" />
+      <xs:element name="fehlernummer" type="xs:int" />
+      <xs:element name="fehlerbeschreibung" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ServiceTechnicalFaultData">
+    <xs:sequence>
+      <xs:element name="servicebezeichnung" type="xs:string" />
+      <xs:element name="fehlernummer" type="xs:int" />
+      <xs:element name="fehlerbeschreibung" type="xs:string" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

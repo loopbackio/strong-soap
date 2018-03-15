@@ -9,6 +9,7 @@ var path = require('path');
 var assert = require('assert');
 var stripBom = require('../strip-bom');
 var debug = require('debug')('strong-soap:wsdl');
+var debugInclude = require('debug')('strong-soap:wsdl:include');
 var _ = require('lodash');
 var selectn = require('selectn');
 var utils = require('./helper');
@@ -149,6 +150,7 @@ class WSDL {
   }
 
   _processNextInclude(includes, callback) {
+    debugInclude('includes/imports: ', includes);
     var self = this,
       include = includes.shift(),
       options;
@@ -162,6 +164,8 @@ class WSDL {
     } else {
       includePath = url.resolve(self.uri, include.location);
     }
+
+    debugInclude('Processing: ', include, includePath);
 
     options = _.assign({}, this.options);
     // follow supplied ignoredNamespaces option
