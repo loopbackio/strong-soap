@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1 (branches/2.1-6728; 2011-02-03T14:14:58+0000) JAXWS-RI/2.2.3 JAXWS/2.2. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://company.de/cake/synonymelisten" elementFormDefault="qualified" version="1.0" targetNamespace="http://company.de/cake/synonymelisten">
+  <xs:complexType name="Synonymeliste">
+    <xs:sequence>
+      <xs:element name="interneId" type="xs:long" minOccurs="0" />
+      <xs:element name="versionsNr" type="xs:int" minOccurs="0" />
+      <xs:element name="bearbeitungszeitpunkt" type="xs:dateTime" minOccurs="0" />
+      <xs:element name="technischeBezeichnung" type="xs:string" minOccurs="0" />
+      <xs:element name="bezeichnung" type="xs:string" minOccurs="0" />
+      <xs:element name="beschreibung" type="xs:string" minOccurs="0" />
+      <xs:element name="editierbar" type="xs:boolean" minOccurs="0" />
+      <xs:element name="technischerSynonymPflicht" type="xs:boolean" minOccurs="0" />
+      <xs:element name="synonyme" type="tns:Synonym" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Synonym">
+    <xs:sequence>
+      <xs:element name="technischerSynonym" type="xs:string" minOccurs="0" />
+      <xs:element name="synonym" type="xs:string" minOccurs="0" />
+      <xs:element name="synonymKurzform" type="xs:string" minOccurs="0" />
+      <xs:element name="beschreibung" type="xs:string" minOccurs="0" />
+      <xs:element name="ordnungsindex" type="xs:int" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SynonymlistenDelta">
+    <xs:sequence>
+      <xs:element name="abweichendeSynonymelisten" type="tns:Synonymeliste" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="neueSynonymelisten" type="tns:Synonymeliste" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="zuloeschendSynonymelisten" type="tns:Synonymeliste" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="sonstigeHinweise" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SynonymlistenUpdateErgebnis">
+    <xs:sequence>
+      <xs:element name="angepassteSynonymelisten" type="tns:Synonymeliste" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="hinzugefuegteSynonymelisten" type="tns:Synonymeliste" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="geloeschteSynonymelisten" type="tns:Synonymeliste" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="sonstigeHinweise" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

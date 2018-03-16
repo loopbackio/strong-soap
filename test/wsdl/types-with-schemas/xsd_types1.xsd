@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1 (branches/2.1-6728; 2011-02-03T14:14:58+0000) JAXWS-RI/2.2.3 JAXWS/2.2. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://company.de/cake/synonymelisten" xmlns:tns="http://company.de/cake/synonymelisten/webservice" elementFormDefault="qualified" version="1.0" targetNamespace="http://company.de/cake/synonymelisten/webservice">
+  <xs:import namespace="http://company.de/cake/synonymelisten" schemaLocation="./xsd_types2.xsd" />
+  <xs:element name="AlleSynonymelistenOhneSynonymeLadenOutput" type="tns:AlleSynonymelistenOhneSynonymeLadenOutput" />
+  <xs:element name="SynonymelisteLadenInput" type="tns:SynonymelisteLadenInput" />
+  <xs:element name="SynonymelisteLadenOutput" type="tns:SynonymelisteLadenOutput" />
+  <xs:element name="SynonymelisteSpeichernInput" type="tns:SynonymelisteSpeichernInput" />
+  <xs:element name="SynonymelisteSpeichernOutput" type="tns:SynonymelisteSpeichernOutput" />
+  <xs:element name="SynonymelistenLadenInput" type="tns:SynonymelistenLadenInput" />
+  <xs:element name="SynonymelistenLadenOutput" type="tns:SynonymelistenLadenOutput" />
+  <xs:complexType name="AlleSynonymelistenOhneSynonymeLadenOutput">
+    <xs:sequence>
+      <xs:element name="synonymelistenOhneSynonyme" type="ns1:Synonymeliste" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SynonymelisteLadenInput">
+    <xs:sequence>
+      <xs:element name="technischeBezeichnung" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SynonymelisteLadenOutput">
+    <xs:sequence>
+      <xs:element name="synonymeliste" type="ns1:Synonymeliste" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SynonymelisteSpeichernInput">
+    <xs:sequence>
+      <xs:element name="synonymeliste" type="ns1:Synonymeliste" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SynonymelisteSpeichernOutput">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SynonymelistenLadenInput">
+    <xs:sequence>
+      <xs:element name="technischeBezeichnungen" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SynonymelistenLadenOutput">
+    <xs:sequence>
+      <xs:element name="synonymelisten" type="ns1:Synonymeliste" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
