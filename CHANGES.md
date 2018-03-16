@@ -1,3 +1,11 @@
+2018-03-16, Version 1.6.0
+=========================
+
+ * fix: improve wsdl types processing for multiple schemas (Raymond Feng)
+
+ * chore: clean up deps (Raymond Feng)
+
+
 2018-01-31, Version 1.5.0
 =========================
 
