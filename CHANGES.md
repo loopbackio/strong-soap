@@ -1,3 +1,11 @@
+2018-03-19, Version 1.6.1
+=========================
+
+ * fix: add array check for concat (Raymond Feng)
+
+ * build: drop node 4.x support (Raymond Feng)
+
+
 2018-03-16, Version 1.6.0
 =========================
 
