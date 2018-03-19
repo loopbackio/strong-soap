@@ -30,7 +30,9 @@ class Schema extends XSDElement {
       _.merge(this.attributes, source.attributes);
       _.merge(this.attributeGroups, source.attributeGroups);
       _.merge(this.xmlns, source.xmlns);
-      this.includes = this.includes.concat(source.includes);
+      if (Array.isArray(source.includes)) {
+        this.includes = this.includes.concat(source.includes);
+      }
     }
     return this;
   }
