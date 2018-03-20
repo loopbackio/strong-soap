@@ -173,7 +173,7 @@ class Operation extends WSDLElement {
               var elementDescriptor = part.element.describe(definitions);
               inputParts.addElement(elementDescriptor);
             }
-          } 
+          }
         }
         if (this.output && this.output.body) {
           for (let p in this.output.body.parts) {
@@ -346,8 +346,10 @@ class Operation extends WSDLElement {
         for (let p in this.input.body.parts) {
           let part = this.input.body.parts[p];
           element = part.element;
-          assert(part.element && !part.type,
-            'Document/literal part should use element');
+          if (!(part.element && !part.type)) {
+            console.error('Document/literal part should use element', part);
+            throw new Error('Document/literal part should use element');
+          }
           count++;
         }
       }

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.example.com/Schema/TEST_Location"  xmlns:TEST_Location="http://www.example.com/Schema/TEST_Location"  xmlns:TEST_Common="http://www.example.com/Schema/TEST_Common"  xmlns:TEST="http://www.example.com/Schema/TEST"  xmlns:xsd="http://www.w3.org/2001/XMLSchema"  elementFormDefault="qualified"  attributeFormDefault="unqualified" >
+	<xsd:import namespace="http://www.example.com/Schema/TEST_Common" schemaLocation="Common.xsd"/>
+	<xsd:import namespace="http://www.example.com/Schema/TEST" schemaLocation="TEST.xsd" />
+	<xsd:simpleType name="LocationEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AAA"/>
+			<xsd:enumeration value="BBB"/>
+			<xsd:enumeration value="XYZ"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

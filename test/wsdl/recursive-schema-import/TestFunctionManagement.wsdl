@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="TEST_WS_DEF"  targetNamespace="http://www.example.com/Schema/TEST_TestFunctionManagement"  xmlns:TEST_WS="http://www.example.com/Schema/TEST_TestFunctionManagement"  xmlns:TEST_Common="http://www.example.com/Schema/TEST_Common"  xmlns:TEST_AccountingUnit="http://www.example.com/Schema/TEST_AccountingUnit"  xmlns:TEST_Location="http://www.example.com/Schema/TEST_Location"  xmlns:TEST_TestFunction="http://www.example.com/Schema/TEST_TestFunction"  xmlns:TEST_BusinessDirectionItem="http://www.example.com/Schema/TEST_BusinessDirectionItem"  xmlns:TEST_ResourceItem="http://www.example.com/Schema/TEST_ResourceItem"  xmlns:TEST_Channel="http://www.example.com/Schema/TEST_Channel"  xmlns:TEST_Product="http://www.example.com/Schema/TEST_Product"  xmlns:TEST_Event="http://www.example.com/Schema/TEST_Event"  xmlns:TEST_Arrangement="http://www.example.com/Schema/TEST_Arrangement"  xmlns:TEST_Authorization="http://www.example.com/Schema/TEST_Authorization"  xmlns:TEST_Communication="http://www.example.com/Schema/TEST_Communication"  xmlns:TEST_TestFunctionManagement="http://www.example.com/Schema/TEST_TestFunctionManagement"  xmlns:TEST="http://www.example.com/Schema/TEST"  xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns="http://schemas.xmlsoap.org/wsdl/"  xmlns:TEST-SOAP="http://www.example.com/Schema/Infrastructure/SOAP" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:TEST-Header="http://www.example.com/Schema/TEST">
+	<types>
+		<xsd:schema targetNamespace="http://www.example.com/Schema/TEST_TestFunctionManagement" >
+			<xsd:import namespace="http://www.example.com/Schema/TEST_Common" schemaLocation="Common.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_AccountingUnit" schemaLocation="AccountingUnit.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_Location" schemaLocation="Location.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_TestFunction" schemaLocation="TestFunction.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_BusinessDirectionItem" schemaLocation="BusinessDirectionItem.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_ResourceItem" schemaLocation="ResourceItem.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_Channel" schemaLocation="Channel.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_Product" schemaLocation="Product.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_Event" schemaLocation="Event.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_Arrangement" schemaLocation="Arrangement.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_Authorization" schemaLocation="Authorization.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/TEST_Communication" schemaLocation="Communication.xsd"/>
+			<xsd:include schemaLocation="TestFunctionManagement.xsd"/>
+			<xsd:import namespace="http://www.example.com/Schema/Infrastructure/SOAP" schemaLocation="InfrastructureSOAP.xsd" />
+			<xsd:import namespace="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" schemaLocation="InfrastructureSOAPSecurityHeader.xsd" />
+			<xsd:import namespace="http://www.example.com/Schema/TEST" schemaLocation="TESTAdditionalHeaders.xsd" />
+			<xsd:import namespace="http://www.example.com/Schema/TEST" schemaLocation="TEST.xsd" />
+		</xsd:schema>
+	</types>
+	<service name="TestFunctionService">
+		<port name="TestFunctionSOAPPort" binding="TEST_WS:TestFunctionSOAPBinding">
+			<soap:address location="http://"/>
+		</port>
+	</service>
+	<message name="TESTSOAPHeaderMessage">
+		<part name="requestHeader" element="TEST-SOAP:ServiceRequest"/>
+		<part name="securityHeader" element="wsse:Security"/>
+	</message>
+	<message name="testFunctionRequest">
+		<part name="testFunction"  element="TEST_WS:TestFunctionFunctionRequest" />
+	</message>
+	<message name="testFunctionResponse">
+		<part name="testFunction"  element="TEST_WS:TestFunctionFunctionResponse" />
+	</message>
+	<message name="errorInfo">
+		<part name="error"  element="TEST_WS:TestFunctionFunctionError" />
+	</message>
+	<portType name="TestFunction">
+		<operation name="testFunction">
+			<input message="TEST_WS:testFunctionRequest"/>
+			<output message="TEST_WS:testFunctionResponse"/>
+			<fault name="ErrorResponseType" message="TEST_WS:errorInfo"/>
+		</operation>
+	</portType>
+	<binding name="TestFunctionSOAPBinding" type="TEST_WS:TestFunction">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+		<operation name="testFunction">
+			<soap:operation soapAction="http://www.example.com/Schema/testFunction"/>
+			<input>
+				<soap:header message="TEST_WS:TESTSOAPHeaderMessage" part="requestHeader" use="literal"/>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:header message="TEST_WS:TESTSOAPHeaderMessage" part="requestHeader" use="literal"/>
+				<soap:body use="literal"/>
+			</output>
+			<fault name="ErrorResponseType">
+				<soap:fault name="ErrorResponseType" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+</definitions>

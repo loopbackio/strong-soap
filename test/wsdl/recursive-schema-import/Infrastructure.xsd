@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:TEST-INFR="http://www.example.com/Schema/Infrastructure" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.com/Schema/Infrastructure" elementFormDefault="qualified">
+	<xsd:simpleType name="Sample">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Customer"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
