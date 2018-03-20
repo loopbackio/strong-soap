@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.example.com/Schema/TEST_Channel"  xmlns:TEST_Channel="http://www.example.com/Schema/TEST_Channel"  xmlns:TEST_Common="http://www.example.com/Schema/TEST_Common"  xmlns:TEST_AccountingUnit="http://www.example.com/Schema/TEST_AccountingUnit"  xmlns:TEST_Location="http://www.example.com/Schema/TEST_Location"  xmlns:TEST_TestFunction="http://www.example.com/Schema/TEST_TestFunction"  xmlns:TEST_ResourceItem="http://www.example.com/Schema/TEST_ResourceItem"  xmlns:TEST="http://www.example.com/Schema/TEST"  xmlns:xsd="http://www.w3.org/2001/XMLSchema"  elementFormDefault="qualified"  attributeFormDefault="unqualified" >
+	<xsd:import namespace="http://www.example.com/Schema/TEST_Common" schemaLocation="Common.xsd"/>
+	<xsd:import namespace="http://www.example.com/Schema/TEST_AccountingUnit" schemaLocation="AccountingUnit.xsd"/>
+	<xsd:import namespace="http://www.example.com/Schema/TEST_Location" schemaLocation="Location.xsd"/>
+	<xsd:import namespace="http://www.example.com/Schema/TEST_TestFunction" schemaLocation="TestFunction.xsd"/>
+	<xsd:import namespace="http://www.example.com/Schema/TEST_ResourceItem" schemaLocation="ResourceItem.xsd"/>
+	<xsd:import namespace="http://www.example.com/Schema/TEST" schemaLocation="TEST.xsd" />
+	<xsd:simpleType name="ChannelEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AAA"/>
+			<xsd:enumeration value="BBB"/>
+			<xsd:enumeration value="XYZ"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
