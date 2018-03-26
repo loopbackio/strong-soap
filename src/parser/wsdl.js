@@ -189,6 +189,9 @@ class WSDL {
           }
         }
         _.mergeWith(self.definitions, wsdl.definitions, function(a, b) {
+          if (a === b) {
+            return a;
+          }
           return (a instanceof Schema) ? a.merge(b, include.type === 'include') : undefined;
         });
       } else {

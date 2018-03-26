@@ -19,6 +19,7 @@ class Schema extends XSDElement {
   }
 
   merge(source, isInclude) {
+    if (source === this) return this;
     assert(source instanceof Schema);
     if (this.$targetNamespace === source.$targetNamespace ||
       // xsd:include allows the target schema that does not have targetNamespace
@@ -31,7 +32,7 @@ class Schema extends XSDElement {
       _.merge(this.attributeGroups, source.attributeGroups);
       _.merge(this.xmlns, source.xmlns);
       if (Array.isArray(source.includes)) {
-        this.includes = this.includes.concat(source.includes);
+        this.includes = _.uniq(this.includes.concat(source.includes));
       }
     }
     return this;

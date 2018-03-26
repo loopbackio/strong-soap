@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns:TEST="http://www.example.com/Schema/TEST"  targetNamespace="http://www.example.com/Schema/TEST"  elementFormDefault="qualified"  attributeFormDefault="unqualified"  xmlns:TEST-SOAP="http://www.example.com/Schema/Infrastructure/SOAP">
+	<xsd:import namespace="http://www.example.com/Schema/Infrastructure/SOAP" schemaLocation="InfrastructureSOAP.xsd"/>
+	<xsd:simpleType name="TestFunctionEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="AAA"/>
+			<xsd:enumeration value="BBB"/>
+			<xsd:enumeration value="XYZ"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
