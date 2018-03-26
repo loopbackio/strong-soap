@@ -1,3 +1,9 @@
+2018-03-26, Version 1.6.2
+=========================
+
+ * fix xsd include/import recursive processing (Raymond Feng)
+
+
 2018-03-19, Version 1.6.1
 =========================
 
