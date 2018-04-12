@@ -237,15 +237,17 @@ class WSDL {
 
   _parse(xml) {
     var self = this,
-      p = sax.parser(true),
+      p = sax.parser(true, {trim: true}),
       stack = [],
       root = null,
       types = null,
       schema = null,
+      text = '',
       options = self.options;
 
     p.onopentag = function(node) {
       debug('Start element: %j', node);
+      text = ''; // reset text
       var nsName = node.name;
       var attrs = node.attributes;
 
@@ -287,8 +289,16 @@ class WSDL {
       var top = stack[stack.length - 1];
       assert(top, 'Unmatched close tag: ' + name);
 
+      if (text) {
+        top[self.options.valueKey] = text;
+        text = '';
+      }
       top.endElement(stack, name);
     };
+
+    p.ontext = function(str) {
+      text = text + str;
+    }
 
     debug('WSDL xml: %s', xml);
     p.write(xml).close();
