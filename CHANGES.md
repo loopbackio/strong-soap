@@ -1,3 +1,9 @@
+2018-04-12, Version 1.7.0
+=========================
+
+ * fix: add element text value (Raymond Feng)
+
+
 2018-03-26, Version 1.6.2
 =========================
 
