@@ -101,6 +101,7 @@ describe('SOAP Client', function() {
     var server = null;
     var hostname = '127.0.0.1';
     var port = 0;
+    var rawBody = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><Response>temp response</Response></soap:Body></soap:Envelope>';
 
     before(function(done) {
       server = http.createServer(function (req, res) {
@@ -109,7 +110,7 @@ describe('SOAP Client', function() {
         res.setHeader('status', status_value);
         res.statusCode = 200;
         //res.write(JSON.stringify({tempResponse: 'temp'}), 'utf8');
-        res.write('<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><Response>temp response</Response></soap:Body></soap:Envelope>');
+        res.write(rawBody);
         res.end();
       }).listen(port, hostname, done);
     });
@@ -392,6 +393,69 @@ describe('SOAP Client', function() {
 
           done();
         });
+      }, 'http://' + hostname + ':' + server.address().port);
+    });
+
+    it('should allow calling the method as a promise with no arguments', function(done) {
+      soap.createClient(__dirname+'/wsdl/json_response.wsdl', function(err, client) {
+        assert.ok(client);
+        assert.ok(!err);
+        client.MyOperation().then(({result, envelope}) => {
+          assert.ok(!err);
+          assert.ok(result);
+          assert.ok(result === 'temp response');
+          assert.ok(envelope === rawBody);
+          assert.ok(client.lastResponseHeaders.status === 'fail');
+          done();
+        }, done).catch(done);
+      }, 'http://' + hostname + ':' + server.address().port);
+    });
+
+    it('should allow calling the method as a promise with only args', function(done) {
+      soap.createClient(__dirname+'/wsdl/json_response.wsdl', function(err, client) {
+        assert.ok(client);
+        assert.ok(!err);
+        client.MyOperation({Request: 'temp request'}).then(({result, envelope}) => {
+          assert.ok(!err);
+          assert.ok(result);
+          assert.ok(result === 'temp response');
+          assert.ok(envelope === rawBody);
+          assert.ok(client.lastResponseHeaders.status === 'fail');
+          done();
+        }, done).catch(done);
+      }, 'http://' + hostname + ':' + server.address().port);
+    });
+
+    it('should allow calling the method as a promise with args and options', function(done) {
+      soap.createClient(__dirname+'/wsdl/json_response.wsdl', function(err, client) {
+        assert.ok(client);
+        assert.ok(!err);
+        client.MyOperation({Request: 'temp request'}, {headers: {'options-test-header': 'test'}}).then(({result, envelope}) => {
+          assert.ok(!err);
+          assert.ok(result);
+          assert.ok(result === 'temp response');
+          assert.ok(envelope === rawBody);
+          assert.ok(client.lastResponseHeaders.status === 'fail');
+          assert.ok(client.lastRequestHeaders['options-test-header'] === 'test');
+          done();
+        }, done).catch(done);
+      }, 'http://' + hostname + ':' + server.address().port);
+    });
+
+    it('should allow calling the method as a promise with args, options, and extra headers', function(done) {
+      soap.createClient(__dirname+'/wsdl/json_response.wsdl', function(err, client) {
+        assert.ok(client);
+        assert.ok(!err);
+        client.MyOperation({Request: 'temp request'}, {headers: {'options-test-header': 'test'}}, {'test-header': 'test'}).then(({result, envelope, soapHeader}) => {
+          assert.ok(!err);
+          assert.ok(result);
+          assert.ok(result === 'temp response');
+          assert.ok(envelope === rawBody);
+          assert.ok(client.lastResponseHeaders.status === 'pass');
+          assert.ok(client.lastRequestHeaders['options-test-header'] === 'test');
+          assert.ok(client.lastRequestHeaders['test-header'] === 'test');
+          done();
+        }, done).catch(done);
       }, 'http://' + hostname + ':' + server.address().port);
     });
   });

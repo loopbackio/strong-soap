@@ -64,3 +64,18 @@ exports.toXMLDate = function(d) {
     + pad(d.getUTCSeconds()) + 'Z';
 };
 
+exports.createPromiseCallback = function createPromiseCallback() {
+  var cb;
+  var promise = new Promise(function(resolve, reject) {
+    cb = function(err, result, envelope, soapHeader) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve({result, envelope, soapHeader});
+      }
+    }
+  });
+  cb.promise = promise;
+  return cb;
+}
+
