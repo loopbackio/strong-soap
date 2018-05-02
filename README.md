@@ -172,6 +172,24 @@ Call *method* on the SOAP service.
       // soapHeader is the response soap header as a JavaScript object
   })
 ```
+
+A *method* can also be called as a promise.
+
+``` javascript
+  client.MyFunction({name: 'value'}).then(function({result, envelope, soapHeader}){
+    // ...
+  }, function(err) {
+    // ...
+  });
+
+  // in async/await flavor
+  try {
+    const {result, envelope, soapHeader} = await client.MyFunction({name: 'value'});
+  } catch(err) {
+    // handle error
+  }
+```
+
 ### Client.*service*.*port*.*method*(args, callback[, options[, extraHeaders]])
 
 Call a *method* using a specific *service* and *port*.
