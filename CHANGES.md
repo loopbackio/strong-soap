@@ -1,3 +1,9 @@
+2018-05-07, Version 1.8.0
+=========================
+
+ * feat: add promise support for client operation (shimks)
+
+
 2018-04-12, Version 1.7.0
 =========================
 
