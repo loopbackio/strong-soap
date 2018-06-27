@@ -833,7 +833,7 @@ your clients.
 
 ```javascript
 var sinon = require('sinon');
-var soapStub = require('soap-stub');
+var soapStub = require('strong-soap/soap-stub');
 
 var urlMyApplicationWillUseWithCreateClient = './example/stockquote.wsdl';
 var clientStub = {
