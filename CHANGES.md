@@ -1,3 +1,14 @@
+2018-07-09, Version 1.10.0
+==========================
+
+ * [WebFM] cs/pl/ru translation (candytangnb)
+
+ * fix soap-stub example on README.md (Carlos Assis)
+
+
+2018-05-08, Version 1.9.0
+=========================
+
 
 
 2018-05-07, Version 1.8.0
