@@ -47,6 +47,9 @@ class WSDL {
       fromFunc = this._fromServices;
     }
 
+    // register that this WSDL has started loading
+    self.isLoaded = true;
+
     process.nextTick(function() {
       try {
         fromFunc.call(self, definition);
@@ -371,7 +374,14 @@ class WSDL {
     WSDL_CACHE = options.WSDL_CACHE;
 
     if (fromCache = WSDL_CACHE[uri]) {
-      return callback.call(fromCache, null, fromCache);
+      /**
+       * Only return from the cache is the document is fully (or partially)
+       * loaded. This allows the contents of a document to have been read
+       * into the cache, but with no processing performed on it yet.
+       */
+      if(fromCache.isLoaded){
+        return callback.call(fromCache, null, fromCache);
+      }
     }
 
     return WSDL.open(uri, options, callback);
@@ -390,7 +400,15 @@ class WSDL {
 
     debug('wsdl open. request_headers: %j request_options: %j', request_headers, request_options);
     var wsdl;
-    if (!/^https?:/.test(uri)) {
+    var fromCache = WSDL_CACHE[uri];
+    /**
+     * If the file is fully loaded in the cache, return it.
+     * Otherwise load it from the file system or URL.
+     */
+    if (fromCache && !fromCache.isLoaded) {
+      fromCache.load(callback);
+    }
+    else if (!/^https?:/.test(uri)) {
       debug('Reading file: %s', uri);
       fs.readFile(uri, 'utf8', function(err, definition) {
         if (err) {
