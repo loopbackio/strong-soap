@@ -1,3 +1,9 @@
+2018-07-10, Version 1.11.0
+==========================
+
+ * Load a wsdl with no imports from the cache (Jon Roberts)
+
+
 2018-07-09, Version 1.10.0
 ==========================
 
