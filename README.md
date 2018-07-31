@@ -99,6 +99,44 @@ soap.createClient(url, options, function(err, client) {
 
 ```
 
+As well as creating a client via a `url`, an existing [WSDL](#wsdl) object can be passed in via `options.WSDL_CACHE`.
+
+```
+var soap = require('strong-soap').soap;
+var WSDL = soap.WSDL;
+
+var url = 'http://www.webservicex.net/stockquote.asmx?WSDL';
+
+// Pass in WSDL options if any
+
+var options = {};
+WSDL.open(url,options,
+  function(err, wsdl) {
+    // You should be able to get to any information of this WSDL from this object. Traverse
+    // the WSDL tree to get  bindings, operations, services, portTypes, messages,
+    // parts, and XSD elements/Attributes.
+
+    // Set the wsdl object in the cache. The key (e.g. 'stockquotewsdl')
+    // can be anything, but needs to match the parameter passed into soap.createClient()
+    var clientOptions = {
+      WSDL_CACHE : {
+        stockquotewsdl: wsdl
+      }
+    };
+    soap.createClient('stockquotewsdl', clientOptions, function(err, client) {
+      var method = client['StockQuote']['StockQuoteSoap']['GetQuote'];
+      method(requestArgs, function(err, result, envelope, soapHeader) {
+
+      //response envelope
+      console.log('Response Envelope: \n' + envelope);
+      //'result' is the response body
+      console.log('Result: \n' + JSON.stringify(result));
+    });
+  });
+});
+```
+
+
 The Request envelope created by above service invocation:
 
 ```
