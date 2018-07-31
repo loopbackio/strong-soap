@@ -3,6 +3,7 @@
 var fs = require('fs'),
     soap = require('..').soap,
     http = require('http'),
+    WSDL = soap.WSDL,
     assert = require('assert'),
     QName = require('..').QName;
 
@@ -94,6 +95,67 @@ describe('SOAP Client', function() {
 
       assert.ok(client.wsdl.definitions.bindings.mySoapBinding.style === 'document');
       done();
+    });
+  });
+
+  describe('Create a client from a wsdl preloaded in the options', function() {
+
+    var defaultNamespaceWsdl;
+
+    beforeEach(function(done) {
+
+      // Read the contents of the WSDL from the file system
+      fs.readFile(__dirname + '/wsdl/default_namespace.wsdl', 'utf8', function (err, defaultNamespaceWsdlContents) {
+        if (err) {
+          done(err);
+        } else {
+
+          var options = {
+            WSDL_CACHE: {}
+          };
+          // Create the initial wsdl directly
+          defaultNamespaceWsdl = new WSDL(defaultNamespaceWsdlContents, undefined, {});
+
+          // Load the wsdl fully once its been created in memory
+          defaultNamespaceWsdl.load(function () {
+            assert.equal(defaultNamespaceWsdl.definitions.$name, "MyService");
+          });
+          done();
+        }
+      });
+    });
+
+    it('should successfully create a client based on the wsdl in the options', function(done) {
+
+      var options = {
+        WSDL_CACHE: {
+          preloadedCachedWsdl: defaultNamespaceWsdl
+        }
+      };
+      soap.createClient('preloadedCachedWsdl', options, function(err, client) {
+
+        assert.ok(client);
+        assert.ok(client.getSoapHeaders().length === 0);
+
+        // Preform the same tests from "should add and clear soap headers"
+        // to verify client was created ok.
+
+        var i1 = client.addSoapHeader('about-to-change-1');
+        var i2 = client.addSoapHeader('about-to-change-2');
+
+        assert.ok(i1 === 0);
+        assert.ok(i2 === 1);
+        assert.ok(client.getSoapHeaders().length === 2);
+
+        client.changeSoapHeader(0,'header1');
+        client.changeSoapHeader(1,'header2');
+        assert.ok(client.getSoapHeaders()[0].xml === 'header1');
+        assert.ok(client.getSoapHeaders()[1].xml === 'header2');
+
+        client.clearSoapHeaders();
+        assert.ok(client.getSoapHeaders().length === 0);
+        done();
+      });
     });
   });
 
@@ -268,8 +330,8 @@ describe('SOAP Client', function() {
 
         //lastRequest should have proper header value of above JSON header object serialized based on header schema defined
         //in default-namespace1.wsdl
-        var lastRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n    <ns1:MyHeaderElem xmlns:ns1=\"http://www.example.com/v1\">\n      <ns1:esnext>false</ns1:esnext>\n"      
-        + "      <ns1:moz>true</ns1:moz>\n      <ns1:boss>true</ns1:boss>\n      <ns1:node>true</ns1:node>\n      <ns1:validthis>true</ns1:validthis>\n      <ns1:globals>\n        <ns1:EventEmitter>true</ns1:EventEmitter>\n        <ns1:Promise>true</ns1:Promise>\n      </ns1:globals>\n" 
+        var lastRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n    <ns1:MyHeaderElem xmlns:ns1=\"http://www.example.com/v1\">\n      <ns1:esnext>false</ns1:esnext>\n"
+        + "      <ns1:moz>true</ns1:moz>\n      <ns1:boss>true</ns1:boss>\n      <ns1:node>true</ns1:node>\n      <ns1:validthis>true</ns1:validthis>\n      <ns1:globals>\n        <ns1:EventEmitter>true</ns1:EventEmitter>\n        <ns1:Promise>true</ns1:Promise>\n      </ns1:globals>\n"
         + "    </ns1:MyHeaderElem>\n  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>";
         client.MyOperation({}, function(err, result) {
           //using lastRequest instead of lastRequestHeaders() since this doesn't contain soap header which this test case needs to test.

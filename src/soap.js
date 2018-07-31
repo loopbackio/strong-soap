@@ -16,6 +16,7 @@ function _requestWSDL(url, options, callback) {
     callback = options;
     options = {};
   }
+  _wsdlCache = options.WSDL_CACHE || _wsdlCache;
 
   var wsdl = _wsdlCache[url];
   if (wsdl) {
