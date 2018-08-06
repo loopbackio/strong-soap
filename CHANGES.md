@@ -1,3 +1,11 @@
+2018-08-06, Version 1.12.0
+==========================
+
+ * Create client from cached wsdl (Jon Roberts)
+
+ * add forgotten options to soap.listen(...) (Vladimir Latyshev)
+
+
 2018-07-10, Version 1.11.0
 ==========================
 
