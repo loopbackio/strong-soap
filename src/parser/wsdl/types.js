@@ -3,6 +3,7 @@
 var WSDLElement = require('./wsdlElement');
 var assert = require('assert');
 var Schema = require('../xsd/schema');
+var Documentation = require('./documentation');
 
 class Types extends WSDLElement {
   constructor(nsName, attrs, options) {
@@ -11,16 +12,19 @@ class Types extends WSDLElement {
   }
 
   addChild(child) {
-    assert(child instanceof Schema);
+    assert(child instanceof Schema || child instanceof Documentation);
 
-    var targetNamespace = child.$targetNamespace;
+    if (child instanceof Schema) {
 
-    if (!this.schemas.hasOwnProperty(targetNamespace)) {
-      this.schemas[targetNamespace] = child;
-    } else {
-      // types might have multiple schemas with the same target namespace,
-      // including no target namespace
-      this.schemas[targetNamespace].merge(child, true);
+      var targetNamespace = child.$targetNamespace;
+
+      if (!this.schemas.hasOwnProperty(targetNamespace)) {
+        this.schemas[targetNamespace] = child;
+      } else {
+        // types might have multiple schemas with the same target namespace,
+        // including no target namespace
+        this.schemas[targetNamespace].merge(child, true);
+      }
     }
   };
 }
