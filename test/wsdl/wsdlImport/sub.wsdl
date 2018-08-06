@@ -5,6 +5,7 @@
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <wsdl:types>
+       <wsdl:documentation>Add some details about these types.</wsdl:documentation>
         <xs:schema elementFormDefault="unqualified"
                    targetNamespace="http://example.com/" version="1.0"
                    xmlns:tns="http://example.com/"
