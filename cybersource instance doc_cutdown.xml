@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<urn:requestMessage xmlns:urn="urn:schemas-cybersource-com:transaction-data-1.51">
+ <!--Optional:-->
+ <urn:merchantID>1234ID</urn:merchantID>
+ <!--Optional:-->
+ <urn:merchantReferenceCode>TESTRC</urn:merchantReferenceCode>
+ <!--Optional:-->
+ <urn:invoiceHeader>
+	<!--Optional:-->
+	<urn:merchantDescriptor>12321313descriptor</urn:merchantDescriptor>
+ </urn:invoiceHeader>
+ <!--Optional:-->
+ <urn:billTo>
+	<!--Optional:-->
+	<urn:title>MR</urn:title>
+	<!--Optional:-->
+	<urn:firstName>Test</urn:firstName>
+	<!--Optional:-->
+	<urn:middleName>X</urn:middleName>
+	<!--Optional:-->
+	<urn:lastName>ML</urn:lastName>
+ </urn:billTo>
+  <!--Optional:-->
+ <urn:shipFrom>
+	<!--Optional:-->
+	<urn:title>MRS</urn:title>
+	<!--Optional:-->
+	<urn:firstName>JSON</urn:firstName>
+	<!--Optional:-->
+	<urn:middleName>TEST</urn:middleName>
+	<!--Optional:-->
+	<urn:lastName>NAME</urn:lastName>
+ </urn:shipFrom>
+ <!--Zero or more repetitions:-->
+ <urn:item id="true">
+	<!--Optional:-->
+	<urn:unitPrice>12.67</urn:unitPrice>
+	<!--Optional:-->
+	<urn:quantity>56</urn:quantity>
+	<!--Optional:-->
+	<urn:productCode>SKUFDHJFD2133</urn:productCode>
+ </urn:item>
+ <!--Optional:-->
+ </urn:requestMessage>
