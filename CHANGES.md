@@ -1,3 +1,9 @@
+2018-08-08, Version 1.12.1
+==========================
+
+ * Allow documentation tag under types (Jon Roberts)
+
+
 2018-08-06, Version 1.12.0
 ==========================
 
