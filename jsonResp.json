@@ -1,0 +1,13 @@
+{
+  "$attributes": {
+    "$xsiType": {
+      "type": "Address",
+      "xmlns": "http://apimtest.org/AddressLookup/"
+    }
+  },
+  "street": "Anywhere Street",
+  "town": "Beyond",
+  "county": "Cupboardshire",
+  "country": "UK",
+  "postcode": "4321"
+}

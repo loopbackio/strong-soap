@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://apimtest.org/AddressLookup/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://apimtest.org/AddressLookup/" xmlns:intf="http://apimtest.org/AddressLookup/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://apimtest.org/AddressLookup/" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="postcode">
+    <complexType>
+     <sequence>
+      <element name="postcode" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="postcodeResponse">
+    <complexType>
+     <sequence>
+      <element name="address" type="impl:address"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="address">
+    <sequence>
+     <element maxOccurs="1" minOccurs="0" name="street" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="town" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="county" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="country" type="xsd:string"/>
+     <element maxOccurs="1" minOccurs="0" name="postcode" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="getRisk">
+    <complexType>
+     <sequence>
+      <element name="in" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getRiskResponse">
+    <complexType>
+     <sequence>
+      <element name="out" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="postcodeResponse">
+
+      <wsdl:part element="impl:postcodeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRiskRequest">
+
+      <wsdl:part element="impl:getRisk" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="postcodeRequest">
+
+      <wsdl:part element="impl:postcodeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRiskResponse">
+
+      <wsdl:part element="impl:getRiskResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="AddressLookup">
+
+      <wsdl:operation name="postcode">
+
+         <wsdl:input message="impl:postcodeRequest" name="postcodeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:postcodeResponse" name="postcodeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRisk">
+
+         <wsdl:input message="impl:getRiskRequest" name="getRiskRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getRiskResponse" name="getRiskResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="AddressLookupSOAPSoapBinding" type="impl:AddressLookup">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="postcode">
+
+         <wsdlsoap:operation soapAction="http://apimtest.org/AddressLookup/getAddress"/>
+
+         <wsdl:input name="postcodeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="postcodeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getRisk">
+
+         <wsdlsoap:operation soapAction="http://apimtest.org/AddressLookup/getRisk"/>
+
+         <wsdl:input name="getRiskRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getRiskResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="AddressLookup">
+
+      <wsdl:port binding="impl:AddressLookupSOAPSoapBinding" name="AddressLookupSOAP">
+
+         <wsdlsoap:address location="http://tomcat.suhr.firefly-test.com/services/AddressLookupSOAP"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
