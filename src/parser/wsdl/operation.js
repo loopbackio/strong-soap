@@ -42,7 +42,7 @@ class Operation extends WSDLElement {
       case 'operation': // soap:operation
         this.soapAction = child.$soapAction || '';
         this.style = child.$style || '';
-        this.soapActionRequired = child.$soapActionRequired || 'false';
+        this.soapActionRequired = child.$soapActionRequired === 'true' || child.$soapActionRequired === '1' || false;
         //figure out from the binding operation soap version 1.1 or 1.2
         if (child.nsURI === 'http://schemas.xmlsoap.org/wsdl/soap/') {
           this.soapVersion ='1.1';
