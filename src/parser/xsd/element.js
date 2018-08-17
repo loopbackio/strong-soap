@@ -52,7 +52,7 @@ class Element extends XSDElement {
         if (typeDescriptor) {
           descriptor.elements = typeDescriptor.elements;
           descriptor.attributes = typeDescriptor.attributes;
-          definitions.mixed = typeDescriptor.mixed;
+          descriptor.mixed = typeDescriptor.mixed;
           descriptor.extension = typeDescriptor.extension;
           if(descriptor.extension && descriptor.extension.isSimple === true) {
             descriptor.isSimple = true;
@@ -73,7 +73,7 @@ class Element extends XSDElement {
           if (childDescriptor) {
             descriptor.elements = childDescriptor.elements;
             descriptor.attributes = childDescriptor.attributes;
-            definitions.mixed = childDescriptor.mixed;
+            descriptor.mixed = childDescriptor.mixed;
           }
           break;
         } else if (child instanceof SimpleType) {
