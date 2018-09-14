@@ -34,8 +34,24 @@ class WSDL {
     this.WSDL_CACHE = (options || {}).WSDL_CACHE || {};
     this._initializeOptions(options);
   }
-
+  
   load(callback) {
+    this._loadAsyncOrSync(false, function (err, wsdl) {
+      callback(err,wsdl);
+    });
+  }
+
+  loadSync() {
+    var result;
+    this._loadAsyncOrSync(true, function (err, wsdl) {
+        result = wsdl;
+    });
+    // This is not intuitive but works as the load function and its callback all are executed before the
+    // loadSync function returns. The outcome here is that the following result is always set correctly.
+    return result;
+  }
+
+  _loadAsyncOrSync(syncLoad, callback) {
     var self = this;
     var definition = this.content;
     let fromFunc;
@@ -50,14 +66,14 @@ class WSDL {
     // register that this WSDL has started loading
     self.isLoaded = true;
 
-    process.nextTick(function() {
+    var loadUpSchemas = function(syncLoad) {
       try {
         fromFunc.call(self, definition);
       } catch (e) {
         return callback(e);
       }
 
-      self.processIncludes(function(err) {
+      self.processIncludes(syncLoad, function(err) {
         var name;
         if (err) {
           return callback(err);
@@ -104,8 +120,13 @@ class WSDL {
         self.xmlnsInEnvelope = self._xmlnsMap();
         callback(err, self);
       });
+    }
 
-    });
+    if (syncLoad) {
+      loadUpSchemas(true);
+    } else {
+      process.nextTick(loadUpSchemas);
+    }
   }
 
   _initializeOptions(options) {
@@ -152,7 +173,7 @@ class WSDL {
     }
   }
 
-  _processNextInclude(includes, callback) {
+  _processNextInclude(syncLoad, includes, callback) {
     debugInclude('includes/imports: ', includes);
     var self = this,
       include = includes.shift(),
@@ -160,6 +181,11 @@ class WSDL {
 
     if (!include)
       return callback();
+
+    // if undefined treat as "" to make path.dirname return '.' as errors on non string below
+    if (!self.uri) {
+      self.uri='';
+    }
 
     var includePath;
     if (!/^https?:/.test(self.uri) && !/^https?:/.test(include.location)) {
@@ -175,7 +201,7 @@ class WSDL {
     options.ignoredNamespaces = this._originalIgnoredNamespaces || this.options.ignoredNamespaces;
     options.WSDL_CACHE = this.WSDL_CACHE;
 
-    WSDL.load(includePath, options, function(err, wsdl) {
+    var staticLoad = function(syncLoad, err, wsdl) {
       if (err) {
         return callback(err);
       }
@@ -191,7 +217,7 @@ class WSDL {
             delete wsdl.definitions.schemas[undefined];
           }
         }
-        _.mergeWith(self.definitions, wsdl.definitions, function(a, b) {
+        _.mergeWith(self.definitions, wsdl.definitions, function (a, b) {
           if (a === b) {
             return a;
           }
@@ -203,13 +229,24 @@ class WSDL {
           deepMerge(self.definitions.schemas[include.namespace ||
           wsdl.definitions.$targetNamespace], wsdl.definitions);
       }
-      self._processNextInclude(includes, function(err) {
+      self._processNextInclude(syncLoad, includes, function (err) {
         callback(err);
       });
-    });
+    };
+
+    if (syncLoad) {
+      var wsdl = WSDL.loadSync(includePath, options);
+      staticLoad(true, null, wsdl);
+    } else {
+      WSDL.load(includePath, options, function (err, wsdl) {
+        staticLoad(false, err, wsdl);
+      });
+
+    }
+
   }
 
-  processIncludes(callback) {
+  processIncludes(syncLoad, callback) {
     var schemas = this.definitions.schemas,
       includes = [];
 
@@ -218,7 +255,7 @@ class WSDL {
       includes = includes.concat(schema.includes || []);
     }
 
-    this._processNextInclude(includes, callback);
+    this._processNextInclude(syncLoad, includes, callback);
   }
 
   describeServices() {
@@ -438,6 +475,57 @@ class WSDL {
               "\n\n\r Response Body: %j", uri, response.statusCode, response.body)));
           }
         }, request_headers, request_options);
+    }
+
+    return wsdl;
+  }
+
+  static loadSync(uri, options) {
+    var fromCache,
+      WSDL_CACHE;
+
+    if (!options) {
+      options = {};
+    }
+
+    WSDL_CACHE = options.WSDL_CACHE;
+
+    if (fromCache = WSDL_CACHE[uri]) {
+      /**
+       * Only return from the cache is the document is fully (or partially)
+       * loaded. This allows the contents of a document to have been read
+       * into the cache, but with no processing performed on it yet.
+       */
+      if(fromCache.isLoaded){
+        return fromCache;
+      }
+    }
+
+    return WSDL.openSync(uri, options);
+  }
+
+  static openSync(uri, options) {
+    if (!options) {
+      options = {};
+    }
+
+    // initialize cache when calling open directly
+    var WSDL_CACHE = options.WSDL_CACHE || {};
+    var request_headers = options.wsdl_headers;
+    var request_options = options.wsdl_options;
+
+    debug('wsdl open. request_headers: %j request_options: %j', request_headers, request_options);
+    var wsdl;
+    var fromCache = WSDL_CACHE[uri];
+    /**
+     * If the file is fully loaded in the cache, return it.
+     * Otherwise throw an error as we cannot load this in a sync way as we would need to perform IO
+     * either to the filesystem or http
+     */
+    if (fromCache && !fromCache.isLoaded) {
+      wsdl = fromCache.loadSync();
+    } else {
+      throw(uri+" was not found in the cache. For loadSync() calls all schemas must be preloaded into the cache");
     }
 
     return wsdl;
