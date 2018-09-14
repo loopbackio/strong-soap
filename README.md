@@ -593,6 +593,18 @@ WSDL.open('./wsdls/stockquote.wsdl',options,
 });
 ```
 
+### wsdl.openSync(wsdlURL, options)
+
+Loads WSDL into a tree form directly from memory. It traverses through WSDL tree to get to bindings, services, ports, operations, and so on as long as you have your dependent WSDLs and schemas are loaded and available in the `options.WSDL_CACHE`. If any I/O is required to retrieve any dependencies this call will throw an error.
+
+Parameters:
+
+- `wsdlURL` WSDL url to load as named in the cache.
+- `options` WSDL options
+
+An example of loading WSDLs into your `options.WSDL_CACHE` and calling `wsdl.loadSync()` can be found in the test [test/wsdl-load-from-memory-test](https://github.com/strongloop/strong-soap/tree/master/test/wsdl-load-from-memory-test.js)
+
+
 ## Server
 
 ### soap.listen(*server*, *path*, *services*, *wsdl*)
