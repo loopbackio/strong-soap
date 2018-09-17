@@ -2,7 +2,7 @@
 
 var g = require('../globalize');
 var optional = require('optional');
-var ursa = optional('ursa');
+var ursa = optional('strong-ursa');
 var fs = require('fs');
 var path = require('path');
 var SignedXml = require('xml-crypto').SignedXml;

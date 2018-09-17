@@ -21,7 +21,7 @@
     "xmlbuilder": "^9.0.4"
   },
   "optionalDependencies": {
-    "ursa": "^0.9.4"
+    "strong-ursa": "^0.10.1"
   },
   "repository": {
     "type": "git",
