@@ -1,3 +1,21 @@
+2018-09-17, Version 1.13.0
+==========================
+
+ * Update ssl key/cert to pass node 10 (Raymond Feng)
+
+ * Update` strong-globalize` to v4.1.1 (Runrioter Wung)
+
+ * Switch to strong-ursa to support Node 10 (Raymond Feng)
+
+ * Add ability to load in a sync way (DomStorey)
+
+ * Add the ability to loadSync (DomStorey)
+
+ * fix code blocks in readme.md with their type (Jiri Spac)
+
+ * fix: use proper variable names (biniam)
+
+
 2018-08-08, Version 1.12.1
 ==========================
 
