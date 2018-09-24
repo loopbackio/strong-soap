@@ -1,3 +1,11 @@
+2018-09-24, Version 1.13.1
+==========================
+
+ * Add tests to cover maxOccurs (Jon Roberts)
+
+ * Change to isMany logic (Jon Roberts)
+
+
 2018-09-17, Version 1.13.0
 ==========================
 
