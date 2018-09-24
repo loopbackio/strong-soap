@@ -8,7 +8,7 @@ class XSDElement extends Element {
   constructor(nsName, attrs, options) {
     super(nsName, attrs, options);
   }
-  
+
   describeChildren(definitions, descriptor) {
     var children = this.children || [];
     if (children.length === 0) return descriptor;
@@ -39,7 +39,7 @@ class XSDElement extends Element {
    */
   isMany() {
     if (this.$maxOccurs === 'unbounded') return true;
-    return Number(this.$maxOccurs) > 0;
+    return Number(this.$maxOccurs) > 1;
   }
 }
 
