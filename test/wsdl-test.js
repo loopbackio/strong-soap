@@ -6,7 +6,10 @@ var fs = require('fs'),
     should = require('should'),
     request = require('request'),
     http = require('http'),
-    async = require('async');
+    async = require('async'),
+    path = require('path');
+
+var openWSDL = require('..').WSDL.open;
 
 describe('wsdl-tests', function() {
 
@@ -177,6 +180,32 @@ describe('wsdl-tests', function() {
         var schema = client.wsdl.definitions.schemas['http://www.dummy.com/Types'];
         var simpleTypes = Object.keys(schema.simpleTypes);
         simpleTypes.should.eql(['IdType', 'NameType', 'AnotherIdType'])
+        done();
+      });
+    });
+
+    it('should map isMany values correctly', function(done) {
+      openWSDL(path.resolve(__dirname, 'wsdl/marketo.wsdl'), function(
+        err,
+        def
+      ) {
+        var operation = def.definitions.bindings.MktowsApiSoapBinding.operations.getLeadChanges;
+        var operationDesc = operation.describe(def);
+        assert(operationDesc.input.body.elements[0].elements);
+
+        // Check that an element with maxOccurs="1" maps to isMany = false
+        operationDesc.input.body.elements[0].elements.forEach(function(element){
+          if(element.qname.name === 'startPosition'){
+            assert.equal(element.isMany, false);
+          }
+
+          // Check that an element with maxOccurs="unbounded" maps to isMany = false
+          if(element.qname.name === 'activityNameFilter'){
+            assert(element.elements[0]);
+            assert.equal(element.elements[0].isMany, true);
+          }
+        });
+
         done();
       });
     });
