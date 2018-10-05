@@ -100,7 +100,7 @@ class Client extends Base {
     };
   }
 
-  
+
 
   _invoke(operation, args, location, callback, options, extraHeaders) {
     var self = this,
@@ -349,3 +349,4 @@ class Client extends Base {
 }
 
 module.exports = Client;
+
