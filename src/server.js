@@ -147,6 +147,15 @@ class Server extends Base {
       }
     }
 
+    if (typeof self.validateSignature === 'function') {
+      if (!obj.Header || !obj.Header.Security) {
+        throw new Error(g.f('No security header'));
+      }
+      if (!self.validateSignature(input)) {
+        throw new Error(g.f('Invalid signature'));
+      }
+    }
+
     if (typeof self.log === 'function') {
       self.log('info', 'Attempting to bind to ' + pathname);
     }
