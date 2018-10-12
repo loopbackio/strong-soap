@@ -1,3 +1,11 @@
+2018-10-12, Version 1.13.2
+==========================
+
+ * changed this.soapActionRequired to boolean (Vineet Jain)
+
+ * Support of sending soapAction in v1.2 (Vineet Jain)
+
+
 2018-09-24, Version 1.13.1
 ==========================
 
