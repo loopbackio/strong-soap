@@ -34,7 +34,7 @@ class WSDL {
     this.WSDL_CACHE = (options || {}).WSDL_CACHE || {};
     this._initializeOptions(options);
   }
-  
+
   load(callback) {
     this._loadAsyncOrSync(false, function (err, wsdl) {
       callback(err,wsdl);
@@ -86,7 +86,11 @@ class WSDL {
         var services = self.services = self.definitions.services;
         if (services) {
           for (let s in services) {
-            services[s].postProcess(self.definitions);
+            try {
+              services[s].postProcess(self.definitions);
+            } catch (err) {
+              return callback(err);
+            }
           }
         }
 
