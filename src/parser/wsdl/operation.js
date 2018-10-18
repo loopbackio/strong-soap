@@ -56,16 +56,20 @@ class Operation extends WSDLElement {
   }
 
   postProcess(definitions) {
-    if (this._processed) return; // Already processed
-    if (this.input) this.input.postProcess(definitions);
-    if (this.output) this.output.postProcess(definitions);
-    for (let i = 0, n = this.faults.length; i < n; i++) {
-      this.faults[i].postProcess(definitions);
+    try {
+      if (this._processed) return; // Already processed
+      if (this.input) this.input.postProcess(definitions);
+      if (this.output) this.output.postProcess(definitions);
+      for (let i = 0, n = this.faults.length; i < n; i++) {
+        this.faults[i].postProcess(definitions);
+      }
+      if (this.parent.name === 'binding') {
+        this.getMode();
+      }
+      this._processed = true;
+    } catch (err) {
+      throw err;
     }
-    if (this.parent.name === 'binding') {
-      this.getMode();
-    }
-    this._processed = true;
   }
 
   static describeHeaders(param, definitions) {
