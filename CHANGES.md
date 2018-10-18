@@ -1,3 +1,13 @@
+2018-10-18, Version 1.14.0
+==========================
+
+ * Update CODEOWNERS (Raymond Feng)
+
+ * Rename test so it gets run (Jon Roberts)
+
+ * Return error via callback (Jon Roberts)
+
+
 2018-10-12, Version 1.13.2
 ==========================
 
