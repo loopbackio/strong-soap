@@ -1,3 +1,9 @@
+2019-01-22, Version 1.15.0
+==========================
+
+ * Adding enforce restrictions option (Romeu Palos de Gouvea)
+
+
 2018-10-18, Version 1.14.0
 ==========================
 
