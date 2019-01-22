@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="http://www.Restrictions.com"
+                  xmlns:n="http://www.Restriction.com/Types"
+                  xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+                  targetNamespace="http://www.Restrictions.com">
+    <wsdl:types>
+        <xs:schema>
+            <xs:import namespace="http://www.Restriction.com/Types"
+                       schemaLocation="./restriction_types.xsd"/>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="RestrictionsRequest">
+        <wsdl:part name="RestrictionsRequest" element="n:RestrictionRequest"/>
+    </wsdl:message>
+    <wsdl:message name="RestrictionsResponse">
+        <wsdl:part name="RestrictionsResponse" element="n:RestrictionResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="RestrictionsPortType">
+        <wsdl:operation name="TestRestrictions">
+            <wsdl:input message="tns:RestrictionsRequest"/>
+            <wsdl:output message="tns:RestrictionsResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RestrictionsBinding" type="tns:RestrictionsPortType">
+        <soap:binding style="document"
+                      transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="TestRestrictions">
+            <soap:operation soapAction="http://www.Restrictions.com#Restrictions"
+                            style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="RestrictionsService">
+        <wsdl:port name="RestrictionsPortType" binding="tns:RestrictionsBinding">
+            <soap:address location="http://www.Restrictions.com/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+

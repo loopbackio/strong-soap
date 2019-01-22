@@ -1,0 +1,1387 @@
+{
+  "example/json2xml.js": {
+    "29": [
+      "XMLHandler.createSOAPEnvelopeDescriptor('soap')"
+    ]
+  },
+  "example/weather.js": {
+    "33": [
+      "console.log('Invoking operation: ')"
+    ],
+    "37": [
+      "console.log('Response envelope:')"
+    ],
+    "43": [
+      "console.log('Result:')"
+    ],
+    "52": [
+      "XMLHandler.createSOAPEnvelopeDescriptor('soap')"
+    ],
+    "55": [
+      "console.log('jsonToXml:')"
+    ],
+    "67": [
+      "console.log('parseXml:')"
+    ]
+  },
+  "example/ntlm.js": {
+    "48": [
+      "console.log('Response envelope:')"
+    ]
+  },
+  "example/stockquote.js": {
+    "16": [
+      "console.log('Response Envelope: \n')"
+    ],
+    "18": [
+      "console.log('Result: \n')"
+    ]
+  },
+  "example/xml2json.js": {
+    "36": [
+      "console.log('%s', ... )"
+    ]
+  },
+  "lib/base.js": {
+    "68": [
+      "xmlBuilder.create(':Envelope')"
+    ],
+    "69": [
+      "doc.attribute('xmlns:')"
+    ],
+    "70": [
+      "doc.element(':Header')"
+    ],
+    "71": [
+      "doc.element(':Body')"
+    ],
+    "103": [
+      "nsURI.indexOf('http://schemas.xmlsoap.org/')"
+    ],
+    "104": [
+      "nsURI.indexOf('http://www.w3.org/')"
+    ],
+    "105": [
+      "nsURI.indexOf('http://xml.apache.org/')"
+    ]
+  },
+  "lib/parser/xmlHandler.js": {
+    "103": [
+      "val.replace('<![CDATA[')"
+    ],
+    "104": [
+      "val.replace(']]>')"
+    ],
+    "135": [
+      "element.attribute('xsi:nil')"
+    ],
+    "359": [
+      "node.attribute('xsi:type')"
+    ],
+    "375": [
+      "xmlBuilder.create(':Envelope')"
+    ],
+    "377": [
+      "doc.attribute('xmlns:')"
+    ],
+    "378": [
+      "doc.element(':Header')"
+    ],
+    "379": [
+      "doc.element(':Body')"
+    ],
+    "437": [
+      "debug('XMLHandler parseXML. root: %j xml: %j', ... )"
+    ],
+    "726": [
+      "selectn('faultcode')",
+      "selectn('faultcode.$value')"
+    ],
+    "734": [
+      "selectn('faultstring')",
+      "selectn('faultstring.$value')"
+    ],
+    "738": [
+      "selectn('faultactor')",
+      "selectn('faultactor.$value')"
+    ],
+    "742": [
+      "selectn('detail')",
+      "selectn('detail.$value')"
+    ],
+    "758": [
+      "selectn('Code')",
+      "selectn('Code')"
+    ],
+    "763": [
+      "selectn('Value')",
+      "selectn('Value.$value')"
+    ],
+    "767": [
+      "selectn('Subcode')",
+      "selectn('Subcode.$value')"
+    ],
+    "771": [
+      "selectn('Reason')",
+      "selectn('reason.$value')"
+    ],
+    "775": [
+      "selectn('Node')",
+      "selectn('Node.$value')"
+    ],
+    "779": [
+      "selectn('Role')",
+      "selectn('Role.$value')"
+    ],
+    "783": [
+      "selectn('Detail')",
+      "selectn('Detail.$value')"
+    ],
+    "802": [
+      "node.attribute('xmlns:')"
+    ]
+  },
+  "src/base.js": {
+    "69": [
+      "xmlBuilder.create(':Envelope')"
+    ],
+    "71": [
+      "doc.attribute('xmlns:')"
+    ],
+    "72": [
+      "doc.element(':Header')"
+    ],
+    "73": [
+      "doc.element(':Body')"
+    ],
+    "105": [
+      "nsURI.indexOf('http://schemas.xmlsoap.org/')"
+    ],
+    "107": [
+      "nsURI.indexOf('http://www.w3.org/')"
+    ],
+    "109": [
+      "nsURI.indexOf('http://xml.apache.org/')"
+    ]
+  },
+  "src/parser/xmlHandler.js": {
+    "107": [
+      "val.replace('<![CDATA[')"
+    ],
+    "108": [
+      "val.replace(']]>')"
+    ],
+    "140": [
+      "element.attribute('xsi:nil')"
+    ],
+    "350": [
+      "node.attribute('xsi:type')"
+    ],
+    "369": [
+      "xmlBuilder.create(':Envelope')"
+    ],
+    "372": [
+      "doc.attribute('xmlns:')"
+    ],
+    "374": [
+      "doc.element(':Header')"
+    ],
+    "375": [
+      "doc.element(':Body')"
+    ],
+    "441": [
+      "debug('XMLHandler parseXML. root: %j xml: %j', ... )"
+    ],
+    "732": [
+      "selectn('faultcode.$value')"
+    ],
+    "733": [
+      "selectn('faultcode')"
+    ],
+    "740": [
+      "selectn('faultstring.$value')"
+    ],
+    "741": [
+      "selectn('faultstring')"
+    ],
+    "745": [
+      "selectn('faultactor.$value')"
+    ],
+    "746": [
+      "selectn('faultactor')"
+    ],
+    "750": [
+      "selectn('detail.$value')"
+    ],
+    "751": [
+      "selectn('detail')"
+    ],
+    "765": [
+      "selectn('Code')"
+    ],
+    "766": [
+      "selectn('Code')"
+    ],
+    "771": [
+      "selectn('Value.$value')"
+    ],
+    "772": [
+      "selectn('Value')"
+    ],
+    "776": [
+      "selectn('Subcode.$value')"
+    ],
+    "777": [
+      "selectn('Subcode')"
+    ],
+    "781": [
+      "selectn('reason.$value')"
+    ],
+    "782": [
+      "selectn('Reason')"
+    ],
+    "786": [
+      "selectn('Node.$value')"
+    ],
+    "787": [
+      "selectn('Node')"
+    ],
+    "791": [
+      "selectn('Role.$value')"
+    ],
+    "792": [
+      "selectn('Role')"
+    ],
+    "796": [
+      "selectn('Detail.$value')"
+    ],
+    "797": [
+      "selectn('Detail')"
+    ],
+    "815": [
+      "node.attribute('xmlns:')"
+    ]
+  },
+  "lib/parser/wsdl.js": {
+    "169": [
+      "debugInclude('includes/imports: ')"
+    ],
+    "188": [
+      "debugInclude('Processing: ')"
+    ],
+    "275": [
+      "debug('Start element: %j', ... )"
+    ],
+    "286": [
+      "debug('WSDL error: %s ', ... )"
+    ],
+    "301": [
+      "Definitions('definitions')"
+    ],
+    "302": [
+      "Types('types')"
+    ],
+    "308": [
+      "g.f('49569f279dd1e347fd90d448fdafbb93')"
+    ],
+    "314": [
+      "debug('End element: %s', ... )"
+    ],
+    "329": [
+      "debug('WSDL xml: %s', ... )"
+    ],
+    "358": [
+      "ns.indexOf('http://schemas.xmlsoap.org/')"
+    ],
+    "359": [
+      "ns.indexOf('http://www.w3.org/')"
+    ],
+    "360": [
+      "ns.indexOf('http://xml.apache.org/')"
+    ],
+    "419": [
+      "debug('wsdl open. request_headers: %j request_options: %j', ... )"
+    ],
+    "429": [
+      "debug('Reading file: %s', ... )"
+    ],
+    "452": [
+      "g.f('fab749587c48e724a661d77a44084214')"
+    ],
+    "493": [
+      "debug('wsdl open. request_headers: %j request_options: %j', ... )"
+    ]
+  },
+  "src/parser/wsdl.js": {
+    "181": [
+      "debugInclude('includes/imports: ')"
+    ],
+    "201": [
+      "debugInclude('Processing: ')"
+    ],
+    "293": [
+      "debug('Start element: %j', ... )"
+    ],
+    "304": [
+      "debug('WSDL error: %s ', ... )"
+    ],
+    "319": [
+      "Definitions('definitions')"
+    ],
+    "320": [
+      "Types('types')"
+    ],
+    "326": [
+      "g.f('49569f279dd1e347fd90d448fdafbb93')"
+    ],
+    "332": [
+      "debug('End element: %s', ... )"
+    ],
+    "347": [
+      "debug('WSDL xml: %s', ... )"
+    ],
+    "377": [
+      "ns.indexOf('http://schemas.xmlsoap.org/')"
+    ],
+    "379": [
+      "ns.indexOf('http://www.w3.org/')"
+    ],
+    "381": [
+      "ns.indexOf('http://xml.apache.org/')"
+    ],
+    "442": [
+      "debug('wsdl open. request_headers: %j request_options: %j', ... )"
+    ],
+    "453": [
+      "debug('Reading file: %s', ... )"
+    ],
+    "478": [
+      "g.f('fab749587c48e724a661d77a44084214')"
+    ],
+    "521": [
+      "debug('wsdl open. request_headers: %j request_options: %j', ... )"
+    ]
+  },
+  "lib/client.js": {
+    "119": [
+      "debug('client request. operation: %s args: %j options: %j extraHeaders: %j', ... )"
+    ],
+    "131": [
+      "debug('client request. soapNsURI: %s soapNsPrefix: %s ', ... )"
+    ],
+    "145": [
+      "debug('client request. soapAction: %s', ... )"
+    ],
+    "148": [
+      "debugSensitive('client request. options: %j', ... )"
+    ],
+    "158": [
+      "debug('client request. headers: %j', ... )"
+    ],
+    "170": [
+      "debugSensitive('client request. options: %j', ... )"
+    ],
+    "174": [
+      "debugSensitive('client request. options: %j', ... )"
+    ],
+    "211": [
+      "debugDetail('client request. operationDescriptor: %j', ... )"
+    ],
+    "214": [
+      "debug('client request. inputBodyDescriptor: %j', ... )"
+    ],
+    "218": [
+      "debug('client request, calling jsonToXml. args: %j', ... )"
+    ],
+    "235": [
+      "debug('Request envelope: %s', ... )"
+    ],
+    "241": [
+      "self.emit('message')"
+    ],
+    "242": [
+      "self.emit('request')"
+    ],
+    "258": [
+      "self.emit('response')"
+    ],
+    "260": [
+      "debug('client response. response: %j body: %j', ... )"
+    ],
+    "269": [
+      "body.indexOf('<Fault>')",
+      "body.indexOf('<soap:Fault>')"
+    ],
+    "275": [
+      "debugDetail('client response. outputEnvDescriptor: %j', ... )"
+    ],
+    "280": [
+      "debug('client response. error message: %s', ... )"
+    ],
+    "283": [
+      "debug('client response. output not present')"
+    ],
+    "293": [
+      "self.emit('soapError')"
+    ],
+    "302": [
+      "g.f('738cd872b93488bfd87f26224d09e26d')"
+    ],
+    "328": [
+      "debug('client response. result: %j body: %j obj.Header: %j', ... )"
+    ],
+    "338": [
+      "debug('client response. lastRequestHeaders: %j', ... )"
+    ]
+  },
+  "src/client.js": {
+    "122": [
+      "debug('client request. operation: %s args: %j options: %j extraHeaders: %j', ... )"
+    ],
+    "134": [
+      "debug('client request. soapNsURI: %s soapNsPrefix: %s ', ... )"
+    ],
+    "148": [
+      "debug('client request. soapAction: %s', ... )"
+    ],
+    "151": [
+      "debugSensitive('client request. options: %j', ... )"
+    ],
+    "161": [
+      "debug('client request. headers: %j', ... )"
+    ],
+    "173": [
+      "debugSensitive('client request. options: %j', ... )"
+    ],
+    "177": [
+      "debugSensitive('client request. options: %j', ... )"
+    ],
+    "217": [
+      "debugDetail('client request. operationDescriptor: %j', ... )"
+    ],
+    "220": [
+      "debug('client request. inputBodyDescriptor: %j', ... )"
+    ],
+    "225": [
+      "debug('client request, calling jsonToXml. args: %j', ... )"
+    ],
+    "242": [
+      "debug('Request envelope: %s', ... )"
+    ],
+    "248": [
+      "self.emit('message')"
+    ],
+    "249": [
+      "self.emit('request')"
+    ],
+    "266": [
+      "self.emit('response')"
+    ],
+    "268": [
+      "debug('client response. response: %j body: %j', ... )"
+    ],
+    "277": [
+      "body.indexOf('<Fault>')",
+      "body.indexOf('<soap:Fault>')"
+    ],
+    "283": [
+      "debugDetail('client response. outputEnvDescriptor: %j', ... )"
+    ],
+    "288": [
+      "debug('client response. error message: %s', ... )"
+    ],
+    "291": [
+      "debug('client response. output not present')"
+    ],
+    "301": [
+      "self.emit('soapError')"
+    ],
+    "310": [
+      "g.f('738cd872b93488bfd87f26224d09e26d')"
+    ],
+    "337": [
+      "debug('client response. result: %j body: %j obj.Header: %j', ... )"
+    ],
+    "347": [
+      "debug('client response. lastRequestHeaders: %j', ... )"
+    ]
+  },
+  "lib/server.js": {
+    "29": [
+      "debug('Server parameters: path: %s services: %j wsdl: %j', ... )"
+    ],
+    "34": [
+      "server.listeners('request')"
+    ],
+    "36": [
+      "server.removeAllListeners('request')"
+    ],
+    "37": [
+      "server.addListener('request')"
+    ],
+    "64": [
+      "self.log('info')"
+    ],
+    "70": [
+      "self.log('info')"
+    ],
+    "72": [
+      "res.setHeader('Content-Type')"
+    ],
+    "77": [
+      "res.setHeader('Content-Type')"
+    ],
+    "84": [
+      "req.on('data')"
+    ],
+    "88": [
+      "req.on('end')"
+    ],
+    "98": [
+      "self.log('received')"
+    ],
+    "107": [
+      "self.log('replied')"
+    ],
+    "116": [
+      "self.log('error')"
+    ],
+    "141": [
+      "g.f('d40b6f905bf039c4d627ecafb7fdcac5')"
+    ],
+    "144": [
+      "g.f('bcb4356ee2e7a196b9671acf3989741d')"
+    ],
+    "149": [
+      "self.log('info')"
+    ],
+    "167": [
+      "self.log('info')"
+    ],
+    "182": [
+      "g.f('e158dd1d250f1cc3df497728da556be1')"
+    ],
+    "189": [
+      "self.emit('request')"
+    ],
+    "190": [
+      "self.emit('headers')"
+    ],
+    "225": [
+      "self.emit('request')"
+    ],
+    "226": [
+      "self.emit('headers')"
+    ],
+    "264": [
+      "debug('Server operation: %s ', ... )"
+    ],
+    "266": [
+      "debug('Server executeMethod: error: %s ', ... )"
+    ],
+    "288": [
+      "debugDetail('Server handleResult. operationDescriptor: %j ', ... )"
+    ],
+    "291": [
+      "debugDetail('Server handleResult. outputBodyDescriptor: %j ', ... )"
+    ],
+    "300": [
+      "debug('Server soapNsURI: %s soapNsPrefix: %s', ... )"
+    ],
+    "311": [
+      "debug('Server handleResult. xml: %s ', ... )"
+    ],
+    "328": [
+      "headerElement.attribute('soap:mustUnderstand')",
+      "headerElement.element('wsse:Security')"
+    ],
+    "330": [
+      "secElement.attribute('xmlns:wsse')",
+      "secElement.attribute('xmlns:wsu')"
+    ],
+    "338": [
+      "secElement.attribute('wsu:Id')",
+      "secElement.element('wsu:Timestamp')"
+    ],
+    "339": [
+      "tsElement.element('wsu:Created')"
+    ],
+    "340": [
+      "tsElement.element('wsu:Expires')"
+    ],
+    "367": [
+      "debugDetail('Server sendError. operationDescriptor: %j ', ... )"
+    ],
+    "387": [
+      "debugDetail('Server sendError. faultDescriptor: %j ', ... )"
+    ],
+    "389": [
+      "debug('Server sendError.  error.Fault: %j ', ... )"
+    ],
+    "398": [
+      "debug('Server sendError. Response envelope: %s ', ... )"
+    ]
+  },
+  "src/server.js": {
+    "29": [
+      "debug('Server parameters: path: %s services: %j wsdl: %j', ... )"
+    ],
+    "35": [
+      "server.listeners('request')"
+    ],
+    "37": [
+      "server.removeAllListeners('request')"
+    ],
+    "38": [
+      "server.addListener('request')"
+    ],
+    "66": [
+      "self.log('info')"
+    ],
+    "72": [
+      "self.log('info')"
+    ],
+    "74": [
+      "res.setHeader('Content-Type')"
+    ],
+    "79": [
+      "res.setHeader('Content-Type')"
+    ],
+    "85": [
+      "req.on('data')"
+    ],
+    "90": [
+      "req.on('end')"
+    ],
+    "100": [
+      "self.log('received')"
+    ],
+    "109": [
+      "self.log('replied')"
+    ],
+    "119": [
+      "self.log('error')"
+    ],
+    "143": [
+      "g.f('d40b6f905bf039c4d627ecafb7fdcac5')"
+    ],
+    "146": [
+      "g.f('bcb4356ee2e7a196b9671acf3989741d')"
+    ],
+    "151": [
+      "self.log('info')"
+    ],
+    "169": [
+      "self.log('info')"
+    ],
+    "185": [
+      "g.f('e158dd1d250f1cc3df497728da556be1')"
+    ],
+    "192": [
+      "self.emit('request')"
+    ],
+    "194": [
+      "self.emit('headers')"
+    ],
+    "229": [
+      "self.emit('request')"
+    ],
+    "231": [
+      "self.emit('headers')"
+    ],
+    "268": [
+      "debug('Server operation: %s ', ... )"
+    ],
+    "270": [
+      "debug('Server executeMethod: error: %s ', ... )"
+    ],
+    "296": [
+      "debugDetail('Server handleResult. operationDescriptor: %j ', ... )"
+    ],
+    "299": [
+      "debugDetail('Server handleResult. outputBodyDescriptor: %j ', ... )"
+    ],
+    "308": [
+      "debug('Server soapNsURI: %s soapNsPrefix: %s', ... )"
+    ],
+    "320": [
+      "debug('Server handleResult. xml: %s ', ... )"
+    ],
+    "339": [
+      "headerElement.element('wsse:Security')"
+    ],
+    "340": [
+      "headerElement.attribute('soap:mustUnderstand')"
+    ],
+    "343": [
+      "secElement.attribute('xmlns:wsse')"
+    ],
+    "345": [
+      "secElement.attribute('xmlns:wsu')"
+    ],
+    "354": [
+      "secElement.element('wsu:Timestamp')"
+    ],
+    "355": [
+      "secElement.attribute('wsu:Id')"
+    ],
+    "356": [
+      "tsElement.element('wsu:Created')"
+    ],
+    "357": [
+      "tsElement.element('wsu:Expires')"
+    ],
+    "385": [
+      "debugDetail('Server sendError. operationDescriptor: %j ', ... )"
+    ],
+    "407": [
+      "debugDetail('Server sendError. faultDescriptor: %j ', ... )"
+    ],
+    "409": [
+      "debug('Server sendError.  error.Fault: %j ', ... )"
+    ],
+    "418": [
+      "debug('Server sendError. Response envelope: %s ', ... )"
+    ]
+  },
+  "lib/http.js": {
+    "80": [
+      "debug('Http request: %j', ... )"
+    ],
+    "92": [
+      "debug('Http response body: %j', ... )"
+    ],
+    "145": [
+      "debugSensitive('NTLM options: %j for method: %s', ... )"
+    ],
+    "146": [
+      "debug('httpntlm method: %s', ... )"
+    ]
+  },
+  "src/http.js": {
+    "81": [
+      "debug('Http request: %j', ... )"
+    ],
+    "93": [
+      "debug('Http response body: %j', ... )"
+    ],
+    "147": [
+      "debugSensitive('NTLM options: %j for method: %s', ... )"
+    ],
+    "148": [
+      "debug('httpntlm method: %s', ... )"
+    ]
+  },
+  "lib/parser/element.js": {
+    "81": [
+      "indexOf('any')"
+    ],
+    "82": [
+      "debug('Element %s is not allowed within %j', ... )"
+    ],
+    "89": [
+      "debug('Element created: ')"
+    ],
+    "126": [
+      "g.f('61b096fd390a169fc86698a3fe30387f')"
+    ],
+    "191": [
+      "debug('Schema not found: %s (%s)', ... )"
+    ],
+    "219": [
+      "debug('Schema %s not found: %s %s', ... )"
+    ],
+    "226": [
+      "debug('Unknown element: %s %s', ... )"
+    ]
+  },
+  "src/parser/element.js": {
+    "85": [
+      "indexOf('any')"
+    ],
+    "86": [
+      "debug('Element %s is not allowed within %j', ... )"
+    ],
+    "93": [
+      "debug('Element created: ')"
+    ],
+    "131": [
+      "g.f('61b096fd390a169fc86698a3fe30387f')"
+    ],
+    "198": [
+      "debug('Schema not found: %s (%s)', ... )"
+    ],
+    "226": [
+      "debug('Schema %s not found: %s %s', ... )"
+    ],
+    "233": [
+      "debug('Unknown element: %s %s', ... )"
+    ]
+  },
+  "lib/parser/helper.js": {
+    "95": [
+      "crypto.createHash('sha1')"
+    ],
+    "98": [
+      "pwHash.digest('base64')"
+    ]
+  },
+  "lib/security/WSSecurity.js": {
+    "46": [
+      "headerElement.element('wsse:Security')"
+    ],
+    "48": [
+      "secElement.attribute('soap:actor')"
+    ],
+    "51": [
+      "secElement.attribute('soap:mustUnderstand')"
+    ],
+    "54": [
+      "secElement.attribute('xmlns:wsse')",
+      "secElement.attribute('xmlns:wsu')"
+    ],
+    "62": [
+      "secElement.attribute('wsu:Id')",
+      "secElement.element('wsu:Timestamp')"
+    ],
+    "63": [
+      "tsElement.element('wsu:Created')"
+    ],
+    "64": [
+      "tsElement.element('wsu:Expires')"
+    ],
+    "67": [
+      "secElement.element('wsse:UsernameToken')",
+      "secElement.attribute('wsu:Id')"
+    ],
+    "69": [
+      "userNameElement.element('wsse:Username')"
+    ],
+    "71": [
+      "userNameElement.element('wsu:Created')"
+    ],
+    "77": [
+      "crypto.createHash('sha1')"
+    ],
+    "79": [
+      "nHash.digest('base64')"
+    ],
+    "84": [
+      "userNameElement.attribute('Type')",
+      "userNameElement.element('wsse:Password')"
+    ],
+    "87": [
+      "userNameElement.attribute('EncodingType')",
+      "userNameElement.element('wsse:Nonce')"
+    ],
+    "90": [
+      "userNameElement.attribute('Type')",
+      "userNameElement.element('wsse:Password')"
+    ],
+    "92": [
+      "userNameElement.attribute('EncodingType')",
+      "userNameElement.element('wsse:Nonce')"
+    ]
+  },
+  "lib/utils.js": {
+    "6": [
+      "crypto.createHash('sha1')"
+    ],
+    "9": [
+      "pwHash.digest('base64')"
+    ],
+    "14": [
+      "crypto.createHash('sha1')"
+    ],
+    "17": [
+      "pwHash.digest('base64')"
+    ]
+  },
+  "src/parser/helper.js": {
+    "99": [
+      "crypto.createHash('sha1')"
+    ],
+    "102": [
+      "pwHash.digest('base64')"
+    ]
+  },
+  "src/security/WSSecurity.js": {
+    "52": [
+      "headerElement.element('wsse:Security')"
+    ],
+    "54": [
+      "secElement.attribute('soap:actor')"
+    ],
+    "57": [
+      "secElement.attribute('soap:mustUnderstand')"
+    ],
+    "61": [
+      "secElement.attribute('xmlns:wsse')"
+    ],
+    "63": [
+      "secElement.attribute('xmlns:wsu')"
+    ],
+    "72": [
+      "secElement.element('wsu:Timestamp')"
+    ],
+    "73": [
+      "secElement.attribute('wsu:Id')"
+    ],
+    "74": [
+      "tsElement.element('wsu:Created')"
+    ],
+    "75": [
+      "tsElement.element('wsu:Expires')"
+    ],
+    "78": [
+      "secElement.element('wsse:UsernameToken')"
+    ],
+    "79": [
+      "secElement.attribute('wsu:Id')"
+    ],
+    "81": [
+      "userNameElement.element('wsse:Username')"
+    ],
+    "83": [
+      "userNameElement.element('wsu:Created')"
+    ],
+    "89": [
+      "crypto.createHash('sha1')"
+    ],
+    "91": [
+      "nHash.digest('base64')"
+    ],
+    "96": [
+      "userNameElement.element('wsse:Password')"
+    ],
+    "97": [
+      "userNameElement.attribute('Type')"
+    ],
+    "102": [
+      "userNameElement.element('wsse:Nonce')"
+    ],
+    "103": [
+      "userNameElement.attribute('EncodingType')"
+    ],
+    "108": [
+      "userNameElement.element('wsse:Password')"
+    ],
+    "109": [
+      "userNameElement.attribute('Type')"
+    ],
+    "113": [
+      "userNameElement.element('wsse:Nonce')"
+    ],
+    "114": [
+      "userNameElement.attribute('EncodingType')"
+    ]
+  },
+  "src/utils.js": {
+    "6": [
+      "crypto.createHash('sha1')"
+    ],
+    "9": [
+      "pwHash.digest('base64')"
+    ],
+    "14": [
+      "crypto.createHash('sha1')"
+    ],
+    "21": [
+      "pwHash.digest('base64')"
+    ]
+  },
+  "lib/parser/qname.js": {
+    "27": [
+      "g.f('39e07c5a6797c4923d6a924999b62f8c')"
+    ]
+  },
+  "src/parser/qname.js": {
+    "28": [
+      "g.f('39e07c5a6797c4923d6a924999b62f8c')"
+    ]
+  },
+  "lib/parser/wsdl/definitions.js": {
+    "32": [
+      "Schema('xs:schema')"
+    ]
+  },
+  "src/parser/wsdl/definitions.js": {
+    "34": [
+      "Schema('xs:schema')"
+    ]
+  },
+  "lib/parser/wsdl/operation.js": {
+    "85": [
+      "g.warn('da96ad47da6be6a613f921b260a33ce0')"
+    ],
+    "99": [
+      "g.warn('da96ad47da6be6a613f921b260a33ce0')"
+    ],
+    "199": [
+      "g.f('37e4bf66d90c313e7adb3317345be046')"
+    ],
+    "330": [
+      "console.error('Document/literal part should use element')"
+    ],
+    "331": [
+      "Error('Document/literal part should use element')"
+    ]
+  },
+  "src/parser/wsdl/operation.js": {
+    "84": [
+      "g.warn('da96ad47da6be6a613f921b260a33ce0')"
+    ],
+    "100": [
+      "g.warn('da96ad47da6be6a613f921b260a33ce0')"
+    ],
+    "207": [
+      "g.f('37e4bf66d90c313e7adb3317345be046')"
+    ],
+    "355": [
+      "console.error('Document/literal part should use element')"
+    ],
+    "356": [
+      "Error('Document/literal part should use element')"
+    ]
+  },
+  "lib/parser/wsdl/parameter.js": {
+    "36": [
+      "console.error('Unable to resolve message %s for', ... )"
+    ],
+    "37": [
+      "Error('Unable to resolve message ')"
+    ],
+    "68": [
+      "debug('Message not found: ')"
+    ],
+    "90": [
+      "debug('Message not found: ')"
+    ]
+  },
+  "src/parser/wsdl/parameter.js": {
+    "36": [
+      "console.error('Unable to resolve message %s for', ... )"
+    ],
+    "37": [
+      "Error('Unable to resolve message ')"
+    ],
+    "68": [
+      "debug('Message not found: ')"
+    ],
+    "90": [
+      "debug('Message not found: ')"
+    ]
+  },
+  "lib/parser/xsd/keybase.js": {
+    "16": [
+      "g.warn('1f2c65133b5bb463e7d1fceda5b31156')"
+    ],
+    "26": [
+      "g.warn('1f2c65133b5bb463e7d1fceda5b31156')"
+    ],
+    "29": [
+      "g.warn('46ad858fdf2e460aa3b626d6455362f2')"
+    ]
+  },
+  "src/parser/xsd/keybase.js": {
+    "16": [
+      "g.warn('1f2c65133b5bb463e7d1fceda5b31156')"
+    ],
+    "28": [
+      "g.warn('1f2c65133b5bb463e7d1fceda5b31156')"
+    ],
+    "33": [
+      "g.warn('46ad858fdf2e460aa3b626d6455362f2')"
+    ]
+  },
+  "lib/parser/xsd/list.js": {
+    "26": [
+      "g.warn('28c828192eb440b64b8efd7f08cc37b3')"
+    ],
+    "28": [
+      "g.warn('d7bda8e2c3faafdf0988f8cb4719a01d')"
+    ],
+    "34": [
+      "g.warn('97ed6b53b9b594fb90c6bfb2e0ba0286')"
+    ]
+  },
+  "src/parser/xsd/list.js": {
+    "27": [
+      "g.warn('28c828192eb440b64b8efd7f08cc37b3')"
+    ],
+    "30": [
+      "g.warn('d7bda8e2c3faafdf0988f8cb4719a01d')"
+    ],
+    "36": [
+      "g.warn('97ed6b53b9b594fb90c6bfb2e0ba0286')"
+    ]
+  },
+  "lib/parser/xsd/restriction.js": {
+    "107": [
+      "violations.push(' <= ')",
+      "violations.push('value is less or equal than minExclusive (')"
+    ],
+    "113": [
+      "violations.push(' < ')",
+      "violations.push('value is less than minInclusive (')"
+    ],
+    "119": [
+      "violations.push(' >= ')",
+      "violations.push('value is greater or equal than maxExclusive (')"
+    ],
+    "125": [
+      "violations.push(' > ')",
+      "violations.push('value is greater than maxInclusive (')"
+    ],
+    "133": [
+      "violations.push(' > ')",
+      "violations.push('value has more decimal places than allowed (')"
+    ],
+    "144": [
+      "violations.push(' > ')",
+      "violations.push('value has more digits than allowed (')"
+    ],
+    "149": [
+      "violations.push(' > ')",
+      "violations.push('value has more integer digits than allowed (')"
+    ],
+    "158": [
+      "violations.push(' != ')",
+      "violations.push('lengths don't match (')"
+    ],
+    "164": [
+      "violations.push(' > ')",
+      "violations.push('length is bigger than maxLength (')"
+    ],
+    "170": [
+      "violations.push(' < ')",
+      "violations.push('length is smaller than minLength (')"
+    ],
+    "182": [
+      "violations.push(' !match ')",
+      "violations.push('value doesn't match the required pattern (')"
+    ],
+    "188": [
+      "violations.push(' is not in ')",
+      "violations.push('value is not in the list of valid values (')"
+    ],
+    "193": [
+      "g.f('ad16b1c54d1a687cb4efc849e918816c')"
+    ]
+  },
+  "src/parser/xsd/restriction.js": {
+    "109": [
+      "violations.push(' <= ')",
+      "violations.push('value is less or equal than minExclusive (')"
+    ],
+    "115": [
+      "violations.push(' < ')",
+      "violations.push('value is less than minInclusive (')"
+    ],
+    "121": [
+      "violations.push(' >= ')",
+      "violations.push('value is greater or equal than maxExclusive (')"
+    ],
+    "127": [
+      "violations.push(' > ')",
+      "violations.push('value is greater than maxInclusive (')"
+    ],
+    "135": [
+      "violations.push(' > ')",
+      "violations.push('value has more decimal places than allowed (')"
+    ],
+    "146": [
+      "violations.push(' > ')",
+      "violations.push('value has more digits than allowed (')"
+    ],
+    "151": [
+      "violations.push(' > ')",
+      "violations.push('value has more integer digits than allowed (')"
+    ],
+    "160": [
+      "violations.push(' != ')",
+      "violations.push('lengths don't match (')"
+    ],
+    "166": [
+      "violations.push(' > ')",
+      "violations.push('length is bigger than maxLength (')"
+    ],
+    "172": [
+      "violations.push(' < ')",
+      "violations.push('length is smaller than minLength (')"
+    ],
+    "184": [
+      "violations.push(' !match ')",
+      "violations.push('value doesn't match the required pattern (')"
+    ],
+    "190": [
+      "violations.push(' is not in ')",
+      "violations.push('value is not in the list of valid values (')"
+    ],
+    "195": [
+      "g.f('ad16b1c54d1a687cb4efc849e918816c')"
+    ]
+  },
+  "lib/parser/xsd.js": {
+    "11": [
+      "SimpleType('xsd:simpleType')"
+    ]
+  },
+  "src/parser/xsd.js": {
+    "11": [
+      "SimpleType('xsd:simpleType')"
+    ]
+  },
+  "lib/security/ClientSSLSecurity.js": {
+    "29": [
+      "g.f('6623e372e766ea11d932836035404a2b')"
+    ],
+    "39": [
+      "g.f('7f7cb47259df769f2d3b3f7133f1a1ea')"
+    ]
+  },
+  "src/security/ClientSSLSecurity.js": {
+    "29": [
+      "g.f('6623e372e766ea11d932836035404a2b')"
+    ],
+    "39": [
+      "g.f('7f7cb47259df769f2d3b3f7133f1a1ea')"
+    ]
+  },
+  "lib/security/ClientSSLSecurityPFX.js": {
+    "31": [
+      "g.f('1b12432ead1b2b9902c4b9801aa0317b')"
+    ]
+  },
+  "src/security/ClientSSLSecurityPFX.js": {
+    "31": [
+      "g.f('1b12432ead1b2b9902c4b9801aa0317b')"
+    ]
+  },
+  "lib/security/CookieSecurity.js": {
+    "6": [
+      "cookie.hasOwnProperty('set-cookie')"
+    ]
+  },
+  "src/security/CookieSecurity.js": {
+    "6": [
+      "cookie.hasOwnProperty('set-cookie')"
+    ]
+  },
+  "lib/security/WSSecurityCert.js": {
+    "5": [
+      "optional('strong-ursa')"
+    ],
+    "41": [
+      "g.f('552f3502256707b8c5b12ddb64e3f74e')"
+    ],
+    "44": [
+      "publicP12PEM.replace('-----BEGIN CERTIFICATE-----')"
+    ],
+    "52": [
+      "addReference('//*[local-name(.)='Body']')"
+    ],
+    "53": [
+      "addReference('//*[local-name(.)='Timestamp']')"
+    ],
+    "75": [
+      "headerElement.element('wsse:Security')",
+      "headerElement.attribute('xmlns:wsse')"
+    ],
+    "76": [
+      "secElement.attribute('EncodingType')",
+      "secElement.element('wsse:BinarySecurityToken')"
+    ],
+    "77": [
+      "secElement.attribute('wsu:Id')",
+      "secElement.element('wsu:Timestamp')"
+    ],
+    "78": [
+      "tsElement.element('wsu:Created')"
+    ],
+    "79": [
+      "tsElement.element('wsu:Expires')"
+    ]
+  },
+  "src/security/WSSecurityCert.js": {
+    "5": [
+      "optional('strong-ursa')"
+    ],
+    "46": [
+      "g.f('552f3502256707b8c5b12ddb64e3f74e')"
+    ],
+    "50": [
+      "publicP12PEM.replace('-----BEGIN CERTIFICATE-----')"
+    ],
+    "61": [
+      "addReference('//*[local-name(.)='Body']')"
+    ],
+    "62": [
+      "addReference('//*[local-name(.)='Timestamp']')"
+    ],
+    "85": [
+      "headerElement.element('wsse:Security')"
+    ],
+    "86": [
+      "headerElement.attribute('xmlns:wsse')"
+    ],
+    "91": [
+      "secElement.element('wsse:BinarySecurityToken')"
+    ],
+    "92": [
+      "secElement.attribute('EncodingType')"
+    ],
+    "98": [
+      "secElement.element('wsu:Timestamp')"
+    ],
+    "99": [
+      "secElement.attribute('wsu:Id')"
+    ],
+    "100": [
+      "tsElement.element('wsu:Created')"
+    ],
+    "101": [
+      "tsElement.element('wsu:Expires')"
+    ]
+  },
+  "lib/soap.js": {
+    "23": [
+      "debug('_requestWSDL, wsdl in cache %s', ... )"
+    ],
+    "46": [
+      "debug('createClient params: wsdl url: %s client options: %j', ... )"
+    ],
+    "53": [
+      "debug('listen params: pathOrOptions: %j services: %j xml: %j', ... )"
+    ]
+  },
+  "src/soap.js": {
+    "23": [
+      "debug('_requestWSDL, wsdl in cache %s', ... )"
+    ],
+    "47": [
+      "debug('createClient params: wsdl url: %s client options: %j', ... )"
+    ],
+    "54": [
+      "debug('listen params: pathOrOptions: %j services: %j xml: %j', ... )"
+    ]
+  },
+  "lib/strip-bom.js": {
+    "13": [
+      "Error('Invalid input, only string allowed')"
+    ]
+  },
+  "src/strip-bom.js": {
+    "12": [
+      "Error('Invalid input, only string allowed')"
+    ]
+  },
+  "soap-stub.js": {
+    "48": [
+      "g.f('forced error on {{createClient}}')"
+    ],
+    "57": [
+      "g.f('no client stubbed for %s', ... )"
+    ]
+  }
+}
