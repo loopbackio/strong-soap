@@ -1,0 +1,813 @@
+{
+  "soap": [
+    "XMLHandler.createSOAPEnvelopeDescriptor:example/json2xml.js:29",
+    "XMLHandler.createSOAPEnvelopeDescriptor:example/weather.js:52"
+  ],
+  "Response envelope:": [
+    "console.log:example/ntlm.js:48",
+    "console.log:example/weather.js:37"
+  ],
+  "Response Envelope: \n": [
+    "console.log:example/stockquote.js:16"
+  ],
+  "Result: \n": [
+    "console.log:example/stockquote.js:18"
+  ],
+  "Invoking operation: ": [
+    "console.log:example/weather.js:33"
+  ],
+  "Result:": [
+    "console.log:example/weather.js:43"
+  ],
+  "jsonToXml:": [
+    "console.log:example/weather.js:55"
+  ],
+  "parseXml:": [
+    "console.log:example/weather.js:67"
+  ],
+  "%s": [
+    "console.log:example/xml2json.js:36"
+  ],
+  ":Body": [
+    "doc.element:lib/base.js:71",
+    "doc.element:lib/parser/xmlHandler.js:379",
+    "doc.element:src/base.js:73",
+    "doc.element:src/parser/xmlHandler.js:375"
+  ],
+  ":Envelope": [
+    "xmlBuilder.create:lib/base.js:68",
+    "xmlBuilder.create:lib/parser/xmlHandler.js:375",
+    "xmlBuilder.create:src/base.js:69",
+    "xmlBuilder.create:src/parser/xmlHandler.js:369"
+  ],
+  ":Header": [
+    "doc.element:lib/base.js:70",
+    "doc.element:lib/parser/xmlHandler.js:378",
+    "doc.element:src/base.js:72",
+    "doc.element:src/parser/xmlHandler.js:374"
+  ],
+  "http://schemas.xmlsoap.org/": [
+    "nsURI.indexOf:lib/base.js:103",
+    "ns.indexOf:lib/parser/wsdl.js:358",
+    "nsURI.indexOf:src/base.js:105",
+    "ns.indexOf:src/parser/wsdl.js:377"
+  ],
+  "http://www.w3.org/": [
+    "nsURI.indexOf:lib/base.js:104",
+    "ns.indexOf:lib/parser/wsdl.js:359",
+    "nsURI.indexOf:src/base.js:107",
+    "ns.indexOf:src/parser/wsdl.js:379"
+  ],
+  "http://xml.apache.org/": [
+    "nsURI.indexOf:lib/base.js:105",
+    "ns.indexOf:lib/parser/wsdl.js:360",
+    "nsURI.indexOf:src/base.js:109",
+    "ns.indexOf:src/parser/wsdl.js:381"
+  ],
+  "xmlns:": [
+    "doc.attribute:lib/base.js:69",
+    "doc.attribute:lib/parser/xmlHandler.js:377",
+    "node.attribute:lib/parser/xmlHandler.js:802",
+    "doc.attribute:src/base.js:71",
+    "doc.attribute:src/parser/xmlHandler.js:372",
+    "node.attribute:src/parser/xmlHandler.js:815"
+  ],
+  "738cd872b93488bfd87f26224d09e26d": [
+    "g.f:lib/client.js:302",
+    "g.f:src/client.js:310"
+  ],
+  "<Fault>": [
+    "body.indexOf:lib/client.js:269",
+    "body.indexOf:src/client.js:277"
+  ],
+  "<soap:Fault>": [
+    "body.indexOf:lib/client.js:269",
+    "body.indexOf:src/client.js:277"
+  ],
+  "Request envelope: %s": [
+    "debug:lib/client.js:235",
+    "debug:src/client.js:242"
+  ],
+  "client request, calling jsonToXml. args: %j": [
+    "debug:lib/client.js:218",
+    "debug:src/client.js:225"
+  ],
+  "client request. headers: %j": [
+    "debug:lib/client.js:158",
+    "debug:src/client.js:161"
+  ],
+  "client request. inputBodyDescriptor: %j": [
+    "debug:lib/client.js:214",
+    "debug:src/client.js:220"
+  ],
+  "client request. operation: %s args: %j options: %j extraHeaders: %j": [
+    "debug:lib/client.js:119",
+    "debug:src/client.js:122"
+  ],
+  "client request. operationDescriptor: %j": [
+    "debugDetail:lib/client.js:211",
+    "debugDetail:src/client.js:217"
+  ],
+  "client request. options: %j": [
+    "debugSensitive:lib/client.js:148",
+    "debugSensitive:lib/client.js:170",
+    "debugSensitive:lib/client.js:174",
+    "debugSensitive:src/client.js:151",
+    "debugSensitive:src/client.js:173",
+    "debugSensitive:src/client.js:177"
+  ],
+  "client request. soapAction: %s": [
+    "debug:lib/client.js:145",
+    "debug:src/client.js:148"
+  ],
+  "client request. soapNsURI: %s soapNsPrefix: %s ": [
+    "debug:lib/client.js:131",
+    "debug:src/client.js:134"
+  ],
+  "client response. error message: %s": [
+    "debug:lib/client.js:280",
+    "debug:src/client.js:288"
+  ],
+  "client response. lastRequestHeaders: %j": [
+    "debug:lib/client.js:338",
+    "debug:src/client.js:347"
+  ],
+  "client response. output not present": [
+    "debug:lib/client.js:283",
+    "debug:src/client.js:291"
+  ],
+  "client response. outputEnvDescriptor: %j": [
+    "debugDetail:lib/client.js:275",
+    "debugDetail:src/client.js:283"
+  ],
+  "client response. response: %j body: %j": [
+    "debug:lib/client.js:260",
+    "debug:src/client.js:268"
+  ],
+  "client response. result: %j body: %j obj.Header: %j": [
+    "debug:lib/client.js:328",
+    "debug:src/client.js:337"
+  ],
+  "message": [
+    "self.emit:lib/client.js:241",
+    "self.emit:src/client.js:248"
+  ],
+  "request": [
+    "self.emit:lib/client.js:242",
+    "server.listeners:lib/server.js:34",
+    "server.removeAllListeners:lib/server.js:36",
+    "server.addListener:lib/server.js:37",
+    "self.emit:lib/server.js:189",
+    "self.emit:lib/server.js:225",
+    "self.emit:src/client.js:249",
+    "server.listeners:src/server.js:35",
+    "server.removeAllListeners:src/server.js:37",
+    "server.addListener:src/server.js:38",
+    "self.emit:src/server.js:192",
+    "self.emit:src/server.js:229"
+  ],
+  "response": [
+    "self.emit:lib/client.js:258",
+    "self.emit:src/client.js:266"
+  ],
+  "soapError": [
+    "self.emit:lib/client.js:293",
+    "self.emit:src/client.js:301"
+  ],
+  "Http request: %j": [
+    "debug:lib/http.js:80",
+    "debug:src/http.js:81"
+  ],
+  "Http response body: %j": [
+    "debug:lib/http.js:92",
+    "debug:src/http.js:93"
+  ],
+  "NTLM options: %j for method: %s": [
+    "debugSensitive:lib/http.js:145",
+    "debugSensitive:src/http.js:147"
+  ],
+  "httpntlm method: %s": [
+    "debug:lib/http.js:146",
+    "debug:src/http.js:148"
+  ],
+  "61b096fd390a169fc86698a3fe30387f": [
+    "g.f:lib/parser/element.js:126",
+    "g.f:src/parser/element.js:131"
+  ],
+  "Element %s is not allowed within %j": [
+    "debug:lib/parser/element.js:82",
+    "debug:src/parser/element.js:86"
+  ],
+  "Element created: ": [
+    "debug:lib/parser/element.js:89",
+    "debug:src/parser/element.js:93"
+  ],
+  "Schema %s not found: %s %s": [
+    "debug:lib/parser/element.js:219",
+    "debug:src/parser/element.js:226"
+  ],
+  "Schema not found: %s (%s)": [
+    "debug:lib/parser/element.js:191",
+    "debug:src/parser/element.js:198"
+  ],
+  "Unknown element: %s %s": [
+    "debug:lib/parser/element.js:226",
+    "debug:src/parser/element.js:233"
+  ],
+  "any": [
+    "indexOf:lib/parser/element.js:81",
+    "indexOf:src/parser/element.js:85"
+  ],
+  "base64": [
+    "pwHash.digest:lib/parser/helper.js:98",
+    "nHash.digest:lib/security/WSSecurity.js:79",
+    "pwHash.digest:lib/utils.js:9",
+    "pwHash.digest:lib/utils.js:17",
+    "pwHash.digest:src/parser/helper.js:102",
+    "nHash.digest:src/security/WSSecurity.js:91",
+    "pwHash.digest:src/utils.js:9",
+    "pwHash.digest:src/utils.js:21"
+  ],
+  "sha1": [
+    "crypto.createHash:lib/parser/helper.js:95",
+    "crypto.createHash:lib/security/WSSecurity.js:77",
+    "crypto.createHash:lib/utils.js:6",
+    "crypto.createHash:lib/utils.js:14",
+    "crypto.createHash:src/parser/helper.js:99",
+    "crypto.createHash:src/security/WSSecurity.js:89",
+    "crypto.createHash:src/utils.js:6",
+    "crypto.createHash:src/utils.js:14"
+  ],
+  "39e07c5a6797c4923d6a924999b62f8c": [
+    "g.f:lib/parser/qname.js:27",
+    "g.f:src/parser/qname.js:28"
+  ],
+  "xs:schema": [
+    "Schema:lib/parser/wsdl/definitions.js:32",
+    "Schema:src/parser/wsdl/definitions.js:34"
+  ],
+  "37e4bf66d90c313e7adb3317345be046": [
+    "g.f:lib/parser/wsdl/operation.js:199",
+    "g.f:src/parser/wsdl/operation.js:207"
+  ],
+  "da96ad47da6be6a613f921b260a33ce0": [
+    "g.warn:lib/parser/wsdl/operation.js:85",
+    "g.warn:lib/parser/wsdl/operation.js:99",
+    "g.warn:src/parser/wsdl/operation.js:84",
+    "g.warn:src/parser/wsdl/operation.js:100"
+  ],
+  "Document/literal part should use element": [
+    "console.error:lib/parser/wsdl/operation.js:330",
+    "Error:lib/parser/wsdl/operation.js:331",
+    "console.error:src/parser/wsdl/operation.js:355",
+    "Error:src/parser/wsdl/operation.js:356"
+  ],
+  "Message not found: ": [
+    "debug:lib/parser/wsdl/parameter.js:68",
+    "debug:lib/parser/wsdl/parameter.js:90",
+    "debug:src/parser/wsdl/parameter.js:68",
+    "debug:src/parser/wsdl/parameter.js:90"
+  ],
+  "Unable to resolve message ": [
+    "Error:lib/parser/wsdl/parameter.js:37",
+    "Error:src/parser/wsdl/parameter.js:37"
+  ],
+  "Unable to resolve message %s for": [
+    "console.error:lib/parser/wsdl/parameter.js:36",
+    "console.error:src/parser/wsdl/parameter.js:36"
+  ],
+  "49569f279dd1e347fd90d448fdafbb93": [
+    "g.f:lib/parser/wsdl.js:308",
+    "g.f:src/parser/wsdl.js:326"
+  ],
+  "fab749587c48e724a661d77a44084214": [
+    "g.f:lib/parser/wsdl.js:452",
+    "g.f:src/parser/wsdl.js:478"
+  ],
+  "End element: %s": [
+    "debug:lib/parser/wsdl.js:314",
+    "debug:src/parser/wsdl.js:332"
+  ],
+  "Processing: ": [
+    "debugInclude:lib/parser/wsdl.js:188",
+    "debugInclude:src/parser/wsdl.js:201"
+  ],
+  "Reading file: %s": [
+    "debug:lib/parser/wsdl.js:429",
+    "debug:src/parser/wsdl.js:453"
+  ],
+  "Start element: %j": [
+    "debug:lib/parser/wsdl.js:275",
+    "debug:src/parser/wsdl.js:293"
+  ],
+  "WSDL error: %s ": [
+    "debug:lib/parser/wsdl.js:286",
+    "debug:src/parser/wsdl.js:304"
+  ],
+  "WSDL xml: %s": [
+    "debug:lib/parser/wsdl.js:329",
+    "debug:src/parser/wsdl.js:347"
+  ],
+  "definitions": [
+    "Definitions:lib/parser/wsdl.js:301",
+    "Definitions:src/parser/wsdl.js:319"
+  ],
+  "includes/imports: ": [
+    "debugInclude:lib/parser/wsdl.js:169",
+    "debugInclude:src/parser/wsdl.js:181"
+  ],
+  "types": [
+    "Types:lib/parser/wsdl.js:302",
+    "Types:src/parser/wsdl.js:320"
+  ],
+  "wsdl open. request_headers: %j request_options: %j": [
+    "debug:lib/parser/wsdl.js:419",
+    "debug:lib/parser/wsdl.js:493",
+    "debug:src/parser/wsdl.js:442",
+    "debug:src/parser/wsdl.js:521"
+  ],
+  "<![CDATA[": [
+    "val.replace:lib/parser/xmlHandler.js:103",
+    "val.replace:src/parser/xmlHandler.js:107"
+  ],
+  "Code": [
+    "selectn:lib/parser/xmlHandler.js:758",
+    "selectn:lib/parser/xmlHandler.js:758",
+    "selectn:src/parser/xmlHandler.js:765",
+    "selectn:src/parser/xmlHandler.js:766"
+  ],
+  "Detail": [
+    "selectn:lib/parser/xmlHandler.js:783",
+    "selectn:src/parser/xmlHandler.js:797"
+  ],
+  "Detail.$value": [
+    "selectn:lib/parser/xmlHandler.js:783",
+    "selectn:src/parser/xmlHandler.js:796"
+  ],
+  "Node": [
+    "selectn:lib/parser/xmlHandler.js:775",
+    "selectn:src/parser/xmlHandler.js:787"
+  ],
+  "Node.$value": [
+    "selectn:lib/parser/xmlHandler.js:775",
+    "selectn:src/parser/xmlHandler.js:786"
+  ],
+  "Reason": [
+    "selectn:lib/parser/xmlHandler.js:771",
+    "selectn:src/parser/xmlHandler.js:782"
+  ],
+  "Role": [
+    "selectn:lib/parser/xmlHandler.js:779",
+    "selectn:src/parser/xmlHandler.js:792"
+  ],
+  "Role.$value": [
+    "selectn:lib/parser/xmlHandler.js:779",
+    "selectn:src/parser/xmlHandler.js:791"
+  ],
+  "Subcode": [
+    "selectn:lib/parser/xmlHandler.js:767",
+    "selectn:src/parser/xmlHandler.js:777"
+  ],
+  "Subcode.$value": [
+    "selectn:lib/parser/xmlHandler.js:767",
+    "selectn:src/parser/xmlHandler.js:776"
+  ],
+  "Value": [
+    "selectn:lib/parser/xmlHandler.js:763",
+    "selectn:src/parser/xmlHandler.js:772"
+  ],
+  "Value.$value": [
+    "selectn:lib/parser/xmlHandler.js:763",
+    "selectn:src/parser/xmlHandler.js:771"
+  ],
+  "XMLHandler parseXML. root: %j xml: %j": [
+    "debug:lib/parser/xmlHandler.js:437",
+    "debug:src/parser/xmlHandler.js:441"
+  ],
+  "]]>": [
+    "val.replace:lib/parser/xmlHandler.js:104",
+    "val.replace:src/parser/xmlHandler.js:108"
+  ],
+  "detail": [
+    "selectn:lib/parser/xmlHandler.js:742",
+    "selectn:src/parser/xmlHandler.js:751"
+  ],
+  "detail.$value": [
+    "selectn:lib/parser/xmlHandler.js:742",
+    "selectn:src/parser/xmlHandler.js:750"
+  ],
+  "faultactor": [
+    "selectn:lib/parser/xmlHandler.js:738",
+    "selectn:src/parser/xmlHandler.js:746"
+  ],
+  "faultactor.$value": [
+    "selectn:lib/parser/xmlHandler.js:738",
+    "selectn:src/parser/xmlHandler.js:745"
+  ],
+  "faultcode": [
+    "selectn:lib/parser/xmlHandler.js:726",
+    "selectn:src/parser/xmlHandler.js:733"
+  ],
+  "faultcode.$value": [
+    "selectn:lib/parser/xmlHandler.js:726",
+    "selectn:src/parser/xmlHandler.js:732"
+  ],
+  "faultstring": [
+    "selectn:lib/parser/xmlHandler.js:734",
+    "selectn:src/parser/xmlHandler.js:741"
+  ],
+  "faultstring.$value": [
+    "selectn:lib/parser/xmlHandler.js:734",
+    "selectn:src/parser/xmlHandler.js:740"
+  ],
+  "reason.$value": [
+    "selectn:lib/parser/xmlHandler.js:771",
+    "selectn:src/parser/xmlHandler.js:781"
+  ],
+  "xsi:nil": [
+    "element.attribute:lib/parser/xmlHandler.js:135",
+    "element.attribute:src/parser/xmlHandler.js:140"
+  ],
+  "xsi:type": [
+    "node.attribute:lib/parser/xmlHandler.js:359",
+    "node.attribute:src/parser/xmlHandler.js:350"
+  ],
+  "1f2c65133b5bb463e7d1fceda5b31156": [
+    "g.warn:lib/parser/xsd/keybase.js:16",
+    "g.warn:lib/parser/xsd/keybase.js:26",
+    "g.warn:src/parser/xsd/keybase.js:16",
+    "g.warn:src/parser/xsd/keybase.js:28"
+  ],
+  "46ad858fdf2e460aa3b626d6455362f2": [
+    "g.warn:lib/parser/xsd/keybase.js:29",
+    "g.warn:src/parser/xsd/keybase.js:33"
+  ],
+  "28c828192eb440b64b8efd7f08cc37b3": [
+    "g.warn:lib/parser/xsd/list.js:26",
+    "g.warn:src/parser/xsd/list.js:27"
+  ],
+  "97ed6b53b9b594fb90c6bfb2e0ba0286": [
+    "g.warn:lib/parser/xsd/list.js:34",
+    "g.warn:src/parser/xsd/list.js:36"
+  ],
+  "d7bda8e2c3faafdf0988f8cb4719a01d": [
+    "g.warn:lib/parser/xsd/list.js:28",
+    "g.warn:src/parser/xsd/list.js:30"
+  ],
+  "ad16b1c54d1a687cb4efc849e918816c": [
+    "g.f:lib/parser/xsd/restriction.js:193",
+    "g.f:src/parser/xsd/restriction.js:195"
+  ],
+  " != ": [
+    "violations.push:lib/parser/xsd/restriction.js:158",
+    "violations.push:src/parser/xsd/restriction.js:160"
+  ],
+  " !match ": [
+    "violations.push:lib/parser/xsd/restriction.js:182",
+    "violations.push:src/parser/xsd/restriction.js:184"
+  ],
+  " < ": [
+    "violations.push:lib/parser/xsd/restriction.js:113",
+    "violations.push:lib/parser/xsd/restriction.js:170",
+    "violations.push:src/parser/xsd/restriction.js:115",
+    "violations.push:src/parser/xsd/restriction.js:172"
+  ],
+  " <= ": [
+    "violations.push:lib/parser/xsd/restriction.js:107",
+    "violations.push:src/parser/xsd/restriction.js:109"
+  ],
+  " > ": [
+    "violations.push:lib/parser/xsd/restriction.js:125",
+    "violations.push:lib/parser/xsd/restriction.js:133",
+    "violations.push:lib/parser/xsd/restriction.js:144",
+    "violations.push:lib/parser/xsd/restriction.js:149",
+    "violations.push:lib/parser/xsd/restriction.js:164",
+    "violations.push:src/parser/xsd/restriction.js:127",
+    "violations.push:src/parser/xsd/restriction.js:135",
+    "violations.push:src/parser/xsd/restriction.js:146",
+    "violations.push:src/parser/xsd/restriction.js:151",
+    "violations.push:src/parser/xsd/restriction.js:166"
+  ],
+  " >= ": [
+    "violations.push:lib/parser/xsd/restriction.js:119",
+    "violations.push:src/parser/xsd/restriction.js:121"
+  ],
+  " is not in ": [
+    "violations.push:lib/parser/xsd/restriction.js:188",
+    "violations.push:src/parser/xsd/restriction.js:190"
+  ],
+  "length is bigger than maxLength (": [
+    "violations.push:lib/parser/xsd/restriction.js:164",
+    "violations.push:src/parser/xsd/restriction.js:166"
+  ],
+  "length is smaller than minLength (": [
+    "violations.push:lib/parser/xsd/restriction.js:170",
+    "violations.push:src/parser/xsd/restriction.js:172"
+  ],
+  "lengths don't match (": [
+    "violations.push:lib/parser/xsd/restriction.js:158",
+    "violations.push:src/parser/xsd/restriction.js:160"
+  ],
+  "value doesn't match the required pattern (": [
+    "violations.push:lib/parser/xsd/restriction.js:182",
+    "violations.push:src/parser/xsd/restriction.js:184"
+  ],
+  "value has more decimal places than allowed (": [
+    "violations.push:lib/parser/xsd/restriction.js:133",
+    "violations.push:src/parser/xsd/restriction.js:135"
+  ],
+  "value has more digits than allowed (": [
+    "violations.push:lib/parser/xsd/restriction.js:144",
+    "violations.push:src/parser/xsd/restriction.js:146"
+  ],
+  "value has more integer digits than allowed (": [
+    "violations.push:lib/parser/xsd/restriction.js:149",
+    "violations.push:src/parser/xsd/restriction.js:151"
+  ],
+  "value is greater or equal than maxExclusive (": [
+    "violations.push:lib/parser/xsd/restriction.js:119",
+    "violations.push:src/parser/xsd/restriction.js:121"
+  ],
+  "value is greater than maxInclusive (": [
+    "violations.push:lib/parser/xsd/restriction.js:125",
+    "violations.push:src/parser/xsd/restriction.js:127"
+  ],
+  "value is less or equal than minExclusive (": [
+    "violations.push:lib/parser/xsd/restriction.js:107",
+    "violations.push:src/parser/xsd/restriction.js:109"
+  ],
+  "value is less than minInclusive (": [
+    "violations.push:lib/parser/xsd/restriction.js:113",
+    "violations.push:src/parser/xsd/restriction.js:115"
+  ],
+  "value is not in the list of valid values (": [
+    "violations.push:lib/parser/xsd/restriction.js:188",
+    "violations.push:src/parser/xsd/restriction.js:190"
+  ],
+  "xsd:simpleType": [
+    "SimpleType:lib/parser/xsd.js:11",
+    "SimpleType:src/parser/xsd.js:11"
+  ],
+  "6623e372e766ea11d932836035404a2b": [
+    "g.f:lib/security/ClientSSLSecurity.js:29",
+    "g.f:src/security/ClientSSLSecurity.js:29"
+  ],
+  "7f7cb47259df769f2d3b3f7133f1a1ea": [
+    "g.f:lib/security/ClientSSLSecurity.js:39",
+    "g.f:src/security/ClientSSLSecurity.js:39"
+  ],
+  "1b12432ead1b2b9902c4b9801aa0317b": [
+    "g.f:lib/security/ClientSSLSecurityPFX.js:31",
+    "g.f:src/security/ClientSSLSecurityPFX.js:31"
+  ],
+  "set-cookie": [
+    "cookie.hasOwnProperty:lib/security/CookieSecurity.js:6",
+    "cookie.hasOwnProperty:src/security/CookieSecurity.js:6"
+  ],
+  "EncodingType": [
+    "userNameElement.attribute:lib/security/WSSecurity.js:87",
+    "userNameElement.attribute:lib/security/WSSecurity.js:92",
+    "secElement.attribute:lib/security/WSSecurityCert.js:76",
+    "userNameElement.attribute:src/security/WSSecurity.js:103",
+    "userNameElement.attribute:src/security/WSSecurity.js:114",
+    "secElement.attribute:src/security/WSSecurityCert.js:92"
+  ],
+  "Type": [
+    "userNameElement.attribute:lib/security/WSSecurity.js:84",
+    "userNameElement.attribute:lib/security/WSSecurity.js:90",
+    "userNameElement.attribute:src/security/WSSecurity.js:97",
+    "userNameElement.attribute:src/security/WSSecurity.js:109"
+  ],
+  "soap:actor": [
+    "secElement.attribute:lib/security/WSSecurity.js:48",
+    "secElement.attribute:src/security/WSSecurity.js:54"
+  ],
+  "soap:mustUnderstand": [
+    "secElement.attribute:lib/security/WSSecurity.js:51",
+    "headerElement.attribute:lib/server.js:328",
+    "secElement.attribute:src/security/WSSecurity.js:57",
+    "headerElement.attribute:src/server.js:340"
+  ],
+  "wsse:Nonce": [
+    "userNameElement.element:lib/security/WSSecurity.js:87",
+    "userNameElement.element:lib/security/WSSecurity.js:92",
+    "userNameElement.element:src/security/WSSecurity.js:102",
+    "userNameElement.element:src/security/WSSecurity.js:113"
+  ],
+  "wsse:Password": [
+    "userNameElement.element:lib/security/WSSecurity.js:84",
+    "userNameElement.element:lib/security/WSSecurity.js:90",
+    "userNameElement.element:src/security/WSSecurity.js:96",
+    "userNameElement.element:src/security/WSSecurity.js:108"
+  ],
+  "wsse:Security": [
+    "headerElement.element:lib/security/WSSecurity.js:46",
+    "headerElement.element:lib/security/WSSecurityCert.js:75",
+    "headerElement.element:lib/server.js:328",
+    "headerElement.element:src/security/WSSecurity.js:52",
+    "headerElement.element:src/security/WSSecurityCert.js:85",
+    "headerElement.element:src/server.js:339"
+  ],
+  "wsse:Username": [
+    "userNameElement.element:lib/security/WSSecurity.js:69",
+    "userNameElement.element:src/security/WSSecurity.js:81"
+  ],
+  "wsse:UsernameToken": [
+    "secElement.element:lib/security/WSSecurity.js:67",
+    "secElement.element:src/security/WSSecurity.js:78"
+  ],
+  "wsu:Created": [
+    "tsElement.element:lib/security/WSSecurity.js:63",
+    "userNameElement.element:lib/security/WSSecurity.js:71",
+    "tsElement.element:lib/security/WSSecurityCert.js:78",
+    "tsElement.element:lib/server.js:339",
+    "tsElement.element:src/security/WSSecurity.js:74",
+    "userNameElement.element:src/security/WSSecurity.js:83",
+    "tsElement.element:src/security/WSSecurityCert.js:100",
+    "tsElement.element:src/server.js:356"
+  ],
+  "wsu:Expires": [
+    "tsElement.element:lib/security/WSSecurity.js:64",
+    "tsElement.element:lib/security/WSSecurityCert.js:79",
+    "tsElement.element:lib/server.js:340",
+    "tsElement.element:src/security/WSSecurity.js:75",
+    "tsElement.element:src/security/WSSecurityCert.js:101",
+    "tsElement.element:src/server.js:357"
+  ],
+  "wsu:Id": [
+    "secElement.attribute:lib/security/WSSecurity.js:62",
+    "secElement.attribute:lib/security/WSSecurity.js:67",
+    "secElement.attribute:lib/security/WSSecurityCert.js:77",
+    "secElement.attribute:lib/server.js:338",
+    "secElement.attribute:src/security/WSSecurity.js:73",
+    "secElement.attribute:src/security/WSSecurity.js:79",
+    "secElement.attribute:src/security/WSSecurityCert.js:99",
+    "secElement.attribute:src/server.js:355"
+  ],
+  "wsu:Timestamp": [
+    "secElement.element:lib/security/WSSecurity.js:62",
+    "secElement.element:lib/security/WSSecurityCert.js:77",
+    "secElement.element:lib/server.js:338",
+    "secElement.element:src/security/WSSecurity.js:72",
+    "secElement.element:src/security/WSSecurityCert.js:98",
+    "secElement.element:src/server.js:354"
+  ],
+  "xmlns:wsse": [
+    "secElement.attribute:lib/security/WSSecurity.js:54",
+    "headerElement.attribute:lib/security/WSSecurityCert.js:75",
+    "secElement.attribute:lib/server.js:330",
+    "secElement.attribute:src/security/WSSecurity.js:61",
+    "headerElement.attribute:src/security/WSSecurityCert.js:86",
+    "secElement.attribute:src/server.js:343"
+  ],
+  "xmlns:wsu": [
+    "secElement.attribute:lib/security/WSSecurity.js:54",
+    "secElement.attribute:lib/server.js:330",
+    "secElement.attribute:src/security/WSSecurity.js:63",
+    "secElement.attribute:src/server.js:345"
+  ],
+  "552f3502256707b8c5b12ddb64e3f74e": [
+    "g.f:lib/security/WSSecurityCert.js:41",
+    "g.f:src/security/WSSecurityCert.js:46"
+  ],
+  "-----BEGIN CERTIFICATE-----": [
+    "publicP12PEM.replace:lib/security/WSSecurityCert.js:44",
+    "publicP12PEM.replace:src/security/WSSecurityCert.js:50"
+  ],
+  "//*[local-name(.)='Body']": [
+    "addReference:lib/security/WSSecurityCert.js:52",
+    "addReference:src/security/WSSecurityCert.js:61"
+  ],
+  "//*[local-name(.)='Timestamp']": [
+    "addReference:lib/security/WSSecurityCert.js:53",
+    "addReference:src/security/WSSecurityCert.js:62"
+  ],
+  "strong-ursa": [
+    "optional:lib/security/WSSecurityCert.js:5",
+    "optional:src/security/WSSecurityCert.js:5"
+  ],
+  "wsse:BinarySecurityToken": [
+    "secElement.element:lib/security/WSSecurityCert.js:76",
+    "secElement.element:src/security/WSSecurityCert.js:91"
+  ],
+  "bcb4356ee2e7a196b9671acf3989741d": [
+    "g.f:lib/server.js:144",
+    "g.f:src/server.js:146"
+  ],
+  "d40b6f905bf039c4d627ecafb7fdcac5": [
+    "g.f:lib/server.js:141",
+    "g.f:src/server.js:143"
+  ],
+  "e158dd1d250f1cc3df497728da556be1": [
+    "g.f:lib/server.js:182",
+    "g.f:src/server.js:185"
+  ],
+  "Content-Type": [
+    "res.setHeader:lib/server.js:72",
+    "res.setHeader:lib/server.js:77",
+    "res.setHeader:src/server.js:74",
+    "res.setHeader:src/server.js:79"
+  ],
+  "Server executeMethod: error: %s ": [
+    "debug:lib/server.js:266",
+    "debug:src/server.js:270"
+  ],
+  "Server handleResult. operationDescriptor: %j ": [
+    "debugDetail:lib/server.js:288",
+    "debugDetail:src/server.js:296"
+  ],
+  "Server handleResult. outputBodyDescriptor: %j ": [
+    "debugDetail:lib/server.js:291",
+    "debugDetail:src/server.js:299"
+  ],
+  "Server handleResult. xml: %s ": [
+    "debug:lib/server.js:311",
+    "debug:src/server.js:320"
+  ],
+  "Server operation: %s ": [
+    "debug:lib/server.js:264",
+    "debug:src/server.js:268"
+  ],
+  "Server parameters: path: %s services: %j wsdl: %j": [
+    "debug:lib/server.js:29",
+    "debug:src/server.js:29"
+  ],
+  "Server sendError.  error.Fault: %j ": [
+    "debug:lib/server.js:389",
+    "debug:src/server.js:409"
+  ],
+  "Server sendError. Response envelope: %s ": [
+    "debug:lib/server.js:398",
+    "debug:src/server.js:418"
+  ],
+  "Server sendError. faultDescriptor: %j ": [
+    "debugDetail:lib/server.js:387",
+    "debugDetail:src/server.js:407"
+  ],
+  "Server sendError. operationDescriptor: %j ": [
+    "debugDetail:lib/server.js:367",
+    "debugDetail:src/server.js:385"
+  ],
+  "Server soapNsURI: %s soapNsPrefix: %s": [
+    "debug:lib/server.js:300",
+    "debug:src/server.js:308"
+  ],
+  "data": [
+    "req.on:lib/server.js:84",
+    "req.on:src/server.js:85"
+  ],
+  "end": [
+    "req.on:lib/server.js:88",
+    "req.on:src/server.js:90"
+  ],
+  "error": [
+    "self.log:lib/server.js:116",
+    "self.log:src/server.js:119"
+  ],
+  "headers": [
+    "self.emit:lib/server.js:190",
+    "self.emit:lib/server.js:226",
+    "self.emit:src/server.js:194",
+    "self.emit:src/server.js:231"
+  ],
+  "info": [
+    "self.log:lib/server.js:64",
+    "self.log:lib/server.js:70",
+    "self.log:lib/server.js:149",
+    "self.log:lib/server.js:167",
+    "self.log:src/server.js:66",
+    "self.log:src/server.js:72",
+    "self.log:src/server.js:151",
+    "self.log:src/server.js:169"
+  ],
+  "received": [
+    "self.log:lib/server.js:98",
+    "self.log:src/server.js:100"
+  ],
+  "replied": [
+    "self.log:lib/server.js:107",
+    "self.log:src/server.js:109"
+  ],
+  "_requestWSDL, wsdl in cache %s": [
+    "debug:lib/soap.js:23",
+    "debug:src/soap.js:23"
+  ],
+  "createClient params: wsdl url: %s client options: %j": [
+    "debug:lib/soap.js:46",
+    "debug:src/soap.js:47"
+  ],
+  "listen params: pathOrOptions: %j services: %j xml: %j": [
+    "debug:lib/soap.js:53",
+    "debug:src/soap.js:54"
+  ],
+  "Invalid input, only string allowed": [
+    "Error:lib/strip-bom.js:13",
+    "Error:src/strip-bom.js:12"
+  ],
+  "forced error on {{createClient}}": [
+    "g.f:soap-stub.js:48"
+  ],
+  "no client stubbed for %s": [
+    "g.f:soap-stub.js:57"
+  ]
+}

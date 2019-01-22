@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://www.Restriction.com/Types"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.Restriction.com/Types"
+           elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:simpleType name="BooleanType">
+        <xs:restriction base="xs:boolean">
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MinExclusiveType">
+        <xs:restriction base="xs:integer">
+            <xs:minExclusive value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MinInclusiveType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MaxExclusiveType">
+        <xs:restriction base="xs:integer">
+            <xs:maxExclusive value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MaxInclusiveType">
+        <xs:restriction base="xs:integer">
+            <xs:maxInclusive value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="FractionDigitsType">
+        <xs:restriction base="xs:decimal">
+            <xs:fractionDigits value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TotalDigitsType">
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="LengthType">
+        <xs:restriction base="xs:string">
+            <xs:length value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MaxLengthType">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MinLengthType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="WhiteSpaceReplaceType">
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="replace"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="WhiteSpaceCollapseType">
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PatternType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{8}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EnumerationType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="validValue1"/>
+            <xs:enumeration value="validValue2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="RestrictionRequestType">
+        <xs:sequence>
+            <xs:element name="boolean" type="BooleanType"/>
+            <xs:element name="boolean2" type="BooleanType"/>
+            <xs:element name="minExclusive" type="MinExclusiveType"/>
+            <xs:element name="minInclusive" type="MinInclusiveType"/>
+            <xs:element name="maxExclusive" type="MaxExclusiveType"/>
+            <xs:element name="maxInclusive" type="MaxInclusiveType"/>
+            <xs:element name="fractionDigits" type="FractionDigitsType"/>
+            <xs:element name="fractionDigits2" type="FractionDigitsType"/>
+            <xs:element name="totalDigits" type="TotalDigitsType"/>
+            <xs:element name="totalDigits2" type="TotalDigitsType"/>
+            <xs:element name="length" type="LengthType"/>
+            <xs:element name="maxLength" type="MaxLengthType"/>
+            <xs:element name="minLength" type="MinLengthType"/>
+            <xs:element name="whiteSpaceReplace" type="WhiteSpaceReplaceType"/>
+            <xs:element name="whiteSpaceCollapse" type="WhiteSpaceCollapseType"/>
+            <xs:element name="pattern" type="PatternType"/>
+            <xs:element name="enumeration1" type="EnumerationType"/>
+            <xs:element name="enumeration2" type="EnumerationType"/>
+            <xs:element name="enumeration3" type="EnumerationType"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="RestrictionRequest" type="RestrictionRequestType"/>
+    <xs:element name="RestrictionResponse" type="RestrictionRequestType"/>
+</xs:schema>
+
