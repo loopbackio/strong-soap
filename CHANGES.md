@@ -1,3 +1,9 @@
+2019-02-14, Version 1.16.0
+==========================
+
+ * Update version of httpntlm (Jon Roberts)
+
+
 2019-01-22, Version 1.15.0
 ==========================
 
