@@ -164,6 +164,10 @@ class WSDL {
     if (options.httpClient) {
       this.options.httpClient = options.httpClient;
     }
+    
+    if (options.request) {
+      this.options.request = options.request;
+    }
 
     var ignoreBaseNameSpaces = options ? options.ignoreBaseNameSpaces : null;
     if (ignoreBaseNameSpaces !== null &&
