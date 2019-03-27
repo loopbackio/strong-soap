@@ -823,7 +823,13 @@ function parseValue(text, descriptor) {
   var value = text;
   var jsType = descriptor && descriptor.jsType;
   if (jsType === Date) {
-    value = new Date(text);
+    var dateText = text;
+    // Checks for xs:date with tz 
+    // (examples: 2019-03-26Z or 2019-03-26-06:00)
+    if(dateText.endsWith('Z') || dateText.length === 16){
+      dateText = text.substr(0, 10);
+    }
+    value = new Date(dateText);
   } else if (jsType === Boolean) {
     if (text === 'true') {
       value = true;
