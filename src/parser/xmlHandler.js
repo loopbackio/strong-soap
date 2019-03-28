@@ -823,7 +823,14 @@ function parseValue(text, descriptor) {
   var value = text;
   var jsType = descriptor && descriptor.jsType;
   if (jsType === Date) {
-    value = new Date(text);
+    var dateText = text;
+    // Checks for xs:date with tz, drops the tz 
+    // because xs:date doesn't have a time to offset
+    // and JS Date object doesn't store an arbitrary tz
+    if(dateText.length === 16){
+      dateText = text.substr(0, 10);
+    }
+    value = new Date(dateText);
   } else if (jsType === Boolean) {
     if (text === 'true') {
       value = true;
@@ -837,3 +844,5 @@ function parseValue(text, descriptor) {
 }
 
 module.exports = XMLHandler;
+// Exported function for testing
+module.exports.parseValue = parseValue;
