@@ -1,3 +1,13 @@
+2019-03-28, Version 1.18.0
+==========================
+
+ * chore: upgrade deps (Raymond Feng)
+
+ * Tests for parseValue with xsd date dateTime (arthmoeros)
+
+ * Fix for xs:date with tz format (arthmoeros)
+
+
 2019-02-21, Version 1.17.0
 ==========================
 
