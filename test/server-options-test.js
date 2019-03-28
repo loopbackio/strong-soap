@@ -124,7 +124,7 @@ describe('SOAP Server with Options', function() {
       // console.log(test.baseUrl);
       request(test.baseUrl, function(err, res, body) {
         assert.ok(!err);
-        console.log(body);
+        // console.log(body);
         done();
       });
     });
@@ -150,7 +150,7 @@ describe('SOAP Server with Options', function() {
       }
       request(test.baseUrl, function(err, res, body) {
         assert.ok(!err);
-        console.log(body);
+        // console.log(body);
         done();
       });
     });

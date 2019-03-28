@@ -13,7 +13,6 @@ var TypeDescriptor = descriptor.TypeDescriptor;
 var QName = require('./qname');
 var helper = require('./helper');
 var NamespaceContext = require('./nscontext');
-var Set = helper.Set;
 
 
 class XMLHandler {
@@ -130,14 +129,18 @@ class XMLHandler {
       }
 
       if (xmlns && descriptor.qname.nsURI) {
-        element.attribute(xmlns, descriptor.qname.nsURI);
+        if (typeof element.attribute === 'function') {
+          element.attribute(xmlns, descriptor.qname.nsURI);
+        }
       }
 
       if (val == null) {
         if (descriptor.isNillable) {
           // Set xsi:nil = true
           declareNamespace(nsContext, element, 'xsi', helper.namespaces.xsi);
-          element.attribute('xsi:nil', true);
+          if (typeof element.attribute === 'function') {
+            element.attribute('xsi:nil', true);
+          }
         }
       }
 
@@ -812,7 +815,10 @@ function declareNamespace(nsContext, node, prefix, nsURI) {
   if (!mapping) {
     return false;
   } else if (node) {
-    node.attribute('xmlns:' + mapping.prefix, mapping.uri);
+    if (typeof node.attribute === 'function') {
+      // Some types of node such as XMLDummy does not allow attribute
+      node.attribute('xmlns:' + mapping.prefix, mapping.uri);
+    }
     return mapping;
   }
   return mapping;
