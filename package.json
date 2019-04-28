@@ -31,6 +31,12 @@
   "directories": {
     "lib": "./lib"
   },
+  "files": [
+    "src/",
+    "lib/",
+    "intl/",
+    "xsds/"
+  ],
   "scripts": {
     "toc": "doctoc Readme.md --github --maxlevel 3",
     "_pretest": "jshint index.js lib test",
