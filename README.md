@@ -892,6 +892,10 @@ var clientStub = {
 
 clientStub.SomeOperation.respondWithError = soapStub.createRespondingStub({error: 'error'});
 clientStub.SomeOperation.respondWithSuccess = soapStub.createRespondingStub({success: 'success'});
+// or if you are using promises
+clientStub.SomeOperation.respondWithError = soapStub.createRespondingStubAsync({error: 'error'});
+clientStub.SomeOperation.respondWithSuccess = soapStub.createRespondingStubAsync({success: 'success'});
+
 
 soapStub.registerClient('my client alias', urlMyApplicationWillUseWithCreateClient, clientStub);
 
