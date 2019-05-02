@@ -4,7 +4,7 @@ var crypto = require('crypto');
 exports.passwordDigestOriginal = function passwordDigest(nonce, created, password) {
   // digest = base64 ( sha1 ( nonce + created + password ) )
   var pwHash = crypto.createHash('sha1');
-  var rawNonce = new Buffer(nonce || '', 'base64').toString('binary');
+  var rawNonce = Buffer.from(nonce || '', 'base64').toString('binary');
   pwHash.update(rawNonce + created + password);
   return pwHash.digest('base64');
 };
@@ -12,11 +12,11 @@ exports.passwordDigestOriginal = function passwordDigest(nonce, created, passwor
 exports.passwordDigest = function (nonce, created, password) {
   // digest = base64 ( sha1 ( nonce + created + password ) )
   var pwHash = crypto.createHash('sha1');
-  var rawNonce = new Buffer(nonce || '', 'base64');
+  var rawNonce = Buffer.from(nonce || '', 'base64');
   pwHash.update(Buffer.concat([
     rawNonce,
-    new Buffer(created),
-    new Buffer(password)
+    Buffer.from(created),
+    Buffer.from(password)
   ]));
   return pwHash.digest('base64');
 };
