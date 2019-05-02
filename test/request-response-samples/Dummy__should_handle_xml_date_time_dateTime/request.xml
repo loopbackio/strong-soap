@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+     <soap:Header/>
+     <soap:Body>
+          <ns1:DummyRequest xmlns:ns1="http://www.Dummy.com/Name/Types">
+               <ns1:DummyFilter>
+                    <ns2:DummyDateFilter xmlns:ns2="http://www.Dummy.com/Common/Types">2018-09-01Z</ns2:DummyDateFilter>
+                    <ns2:DummyTimeFilter xmlns:ns2="http://www.Dummy.com/Common/Types">10:20:09.000Z</ns2:DummyTimeFilter>
+               </ns1:DummyFilter>
+               <ns1:DummyList>
+                    <ns2:DummyElement xmlns:ns2="http://www.Dummy.com/Common/Types"
+                         created="2018-09-01T10:20:09.000Z"
+                         updated="2018-09-01T10:20:09.000Z">123</ns2:DummyElement>
+               </ns1:DummyList>
+          </ns1:DummyRequest>
+     </soap:Body>
+</soap:Envelope>

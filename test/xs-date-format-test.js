@@ -39,5 +39,41 @@ describe('xs-date-format-tests', function() {
     var parsed = xmlHandler.parseValue(inputDate, {jsType: Date});
     assert.equal(parsed.toISOString(), new Date(inputDate).toISOString(), 'expected parsed date');
   });
+
+  describe('xml date/time/dateTime', function () {
+    // 2019-03-27T04:01:01.000Z
+    var inputDate = new Date('2019-03-27T01:01:01-03:00');
+    var inputDateStr = new Date('2019-03-27T01:01:01-03:00');
+
+    it('converts date to xml date', function () {
+      var xmlDate = xmlHandler.toXmlDate(inputDate);
+      assert.equal(xmlDate, '2019-03-27Z');
+    });
+
+    it('converts date to xml time', function () {
+      var xmlTime = xmlHandler.toXmlTime(inputDate);
+      assert.equal(xmlTime, '04:01:01.000Z');
+    });
+
+    it('converts date to xml dateTime', function () {
+      var xmlDateTime = xmlHandler.toXmlDateTime(inputDate);
+      assert.equal(xmlDateTime, '2019-03-27T04:01:01.000Z');
+    });
+
+    it('converts string to xml date', function () {
+      var xmlDate = xmlHandler.toXmlDate(inputDateStr);
+      assert.equal(xmlDate, '2019-03-27Z');
+    });
+
+    it('converts string to xml time', function () {
+      var xmlTime = xmlHandler.toXmlTime(inputDateStr);
+      assert.equal(xmlTime, '04:01:01.000Z');
+    });
+
+    it('converts string to xml dateTime', function () {
+      var xmlDateTime = xmlHandler.toXmlDateTime(inputDateStr);
+      assert.equal(xmlDateTime, '2019-03-27T04:01:01.000Z');
+    });
+  });
   
 });
