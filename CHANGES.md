@@ -1,3 +1,15 @@
+2019-05-02, Version 1.19.1
+==========================
+
+ * Use Buffer.from to replace depreated new Buffer (Raymond Feng)
+
+ * Fix xml date/time/dateTime conversion (Raymond Feng)
+
+ * Replace deprecated Buffer api (Raymond Feng)
+
+ * Add promise based stubs for testing (Rijnhard Hessel)
+
+
 2019-04-29, Version 1.19.0
 ==========================
 
