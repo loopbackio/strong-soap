@@ -11,7 +11,7 @@ class BasicAuthSecurity extends Security {
   }
 
   addHttpHeaders(headers) {
-    var cred = new Buffer((this.username + ':' + this.password) || '')
+    var cred = Buffer.from((this.username + ':' + this.password) || '')
       .toString('base64');
     headers.Authorization = 'Basic ' + cred;
   };
