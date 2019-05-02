@@ -1,0 +1,17 @@
+{
+  "DummyRequest": {
+      "DummyFilter": {
+        "DummyTimeFilter": "2018-09-01T10:20:09Z",
+        "DummyDateFilter": "2018-09-01T10:20:09Z"
+      },
+      "DummyList": {
+        "DummyElement": {
+          "$attributes": {
+            "created": "2018-09-01T10:20:09Z",
+            "updated": "2018-09-01T10:20:09Z"
+          },
+          "$value": "123"
+        }
+      }
+  }
+}

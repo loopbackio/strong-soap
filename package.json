@@ -35,7 +35,7 @@
     "toc": "doctoc Readme.md --github --maxlevel 3",
     "_pretest": "jshint index.js lib test",
     "coveralls": "nyc report --reporter=text-lcov | coveralls -v",
-    "test": "nyc mocha --exit --timeout 60000 test/*-test.js test/security/*.js",
+    "test": "nyc --reporter=html mocha --exit --timeout 60000 test/*-test.js test/security/*.js",
     "citest": "npm test",
     "postcitest": "npm run coveralls",
     "pretest": "babel src -d lib",
