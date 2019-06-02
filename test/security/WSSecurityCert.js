@@ -22,7 +22,7 @@ describe('WSSecurityCert', function() {
     if(process.platform === 'win32'){
       return true;
     }
-    var instance = new WSSecurityCert(key, cert, '', 'utf8');
+    var instance = new WSSecurityCert(key, cert, '');
     instance.should.have.property('privateKey');
     instance.should.have.property('publicP12PEM');
     instance.should.have.property('signer');
@@ -36,7 +36,7 @@ describe('WSSecurityCert', function() {
     var passed = true;
 
     try {
-      new WSSecurityCert('*****', cert, '', 'utf8');
+      new WSSecurityCert('*****', cert, '');
     } catch(e) {
       passed = false;
     }
@@ -46,16 +46,6 @@ describe('WSSecurityCert', function() {
     }
 
     passed = true;
-
-    try {
-      new WSSecurityCert(key, cert, '', 'bob');
-    } catch(e) {
-      passed = false;
-    }
-
-    if (passed) {
-      throw new Error('bad encoding');
-    }
   });
 
   it('should insert a WSSecurity signing block when postProcess is called',
@@ -63,7 +53,7 @@ describe('WSSecurityCert', function() {
     if(process.platform === 'win32'){
       return true;
     }
-    var instance = new WSSecurityCert(key, cert, '', 'utf8');
+    var instance = new WSSecurityCert(key, cert, '');
     var env = XMLHandler.createSOAPEnvelope();
     instance.postProcess(env.header, env.body);
     var xml = env.header.toString({pretty: false});

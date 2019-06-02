@@ -5,15 +5,13 @@
 
 'use strict';
 
-var g = require('../globalize');
-var optional = require('optional');
-var ursa = optional('strong-ursa');
-var fs = require('fs');
-var path = require('path');
+var NodeRsa = require('node-rsa');
 var SignedXml = require('xml-crypto').SignedXml;
 var uuid = require('uuid');
 var Security = require('./security');
 var xmlHandler = require('../parser/xmlHandler');
+
+var crypto = require('crypto');
 
 function addMinutes(date, minutes) {
   return new Date(date.getTime() + minutes * 60000);
@@ -36,28 +34,21 @@ function generateExpires() {
   return dateStringForSOAP(addMinutes(new Date(), 10));
 }
 
-function insertStr(src, dst, pos) {
-  return [dst.slice(0, pos), src, dst.slice(pos)].join('');
-}
-
 function generateId() {
   return uuid.v4().replace(/-/gm, '');
 }
 
 class WSSecurityCert extends Security {
-  constructor(privatePEM, publicP12PEM, password, encoding) {
+  constructor(privatePEM, publicP12PEM, password) {
     super();
-    if (!ursa) {
-      throw new Error(g.f('Module {{ursa}} must be installed to use {{WSSecurityCert}}'));
-    }
-    this.privateKey = ursa.createPrivateKey(privatePEM, password, encoding);
+    
     this.publicP12PEM = publicP12PEM.toString()
       .replace('-----BEGIN CERTIFICATE-----', '')
       .replace('-----END CERTIFICATE-----', '')
       .replace(/(\r\n|\n|\r)/gm, '');
 
     this.signer = new SignedXml();
-    this.signer.signingKey = this.privateKey.toPrivatePem();
+    this.signer.signingKey = this.getSigningKey(privatePEM, password);
     this.x509Id = 'x509-' + generateId();
 
     var references = ['http://www.w3.org/2000/09/xmldsig#enveloped-signature',
@@ -76,6 +67,19 @@ class WSSecurityCert extends Security {
     </wsse:SecurityTokenReference>`;
       return xml;
     };
+  }
+
+  getSigningKey(privatePEM, password) {
+    if (typeof crypto.createPrivateKey === 'function') {
+      // Node 11 or above
+      this.privateKey = crypto.createPrivateKey({key: privatePEM, passphrase: password});
+      return this.privateKey.export({type: 'pkcs1', format: 'pem'});
+    } else {
+      // Node 10 or below, fall back to https://github.com/rzcoder/node-rsa
+      if (password) throw new Error('Passphrase is not supported by node-rsa.');
+      this.privateKey = new NodeRsa(privatePEM);
+      return this.privateKey.exportKey('private');
+    }
   }
 
   postProcess(headerElement, bodyElement) {

@@ -3,15 +3,14 @@
   "version": "1.19.1",
   "description": "A minimal node SOAP client",
   "engines": {
-    "node": ">=6.0"
+    "node": ">=8.11.1"
   },
   "dependencies": {
     "compress": "^0.99.0",
     "debug": "^4.1.1",
     "httpntlm": "^1.7.6",
     "lodash": "^4.17.11",
-    "optional": "^0.1.3",
-    "path": "^0.12.7",
+    "node-rsa": "^1.0.5",
     "request": "^2.72.0",
     "sax": "^1.2",
     "selectn": "^1.0.20",
@@ -19,9 +18,6 @@
     "uuid": "^3.2.1",
     "xml-crypto": "^1.4.0",
     "xmlbuilder": "^10.1.1"
-  },
-  "optionalDependencies": {
-    "strong-ursa": "^0.11.0"
   },
   "repository": {
     "type": "git",
