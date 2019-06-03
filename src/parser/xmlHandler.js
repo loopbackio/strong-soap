@@ -848,7 +848,7 @@ function parseValue(text, descriptor) {
     }
     value = new Date(dateText);
   } else if (jsType === Boolean) {
-    if (text === 'true') {
+    if (text === 'true' || text === '1') {
       value = true;
     } else {
       value = false;
