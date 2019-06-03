@@ -1,3 +1,15 @@
+2019-06-03, Version 1.20.0
+==========================
+
+ * Replace ursa with node 12 core crypto or node-rsa (Raymond Feng)
+
+ * chore: update copyrights years (Agnes Lin)
+
+ * Add support for 1/0 booleans (Stefano Marotta)
+
+ * fix: update lodash (jannyHou)
+
+
 2019-05-02, Version 1.19.1
 ==========================
 
