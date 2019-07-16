@@ -10,6 +10,7 @@ var req = require('request');
 var debug = require('debug')('strong-soap:http');
 var debugSensitive = require('debug')('strong-soap:http:sensitive');
 var httpntlm = require('httpntlm');
+var uuid = require('uuid/v4')
 
 
 var VERSION = require('../package.json').version;
@@ -52,9 +53,13 @@ class HttpClient {
     };
     var attr;
     var header;
+    var attachments = []
     var mergeOptions = ['headers'];
+    if (exoptions) {
+      attachments = exoptions.attachments || [];
+    }
 
-    if (typeof data === 'string') {
+    if (typeof data === 'string' && attachments.length === 0) {
       headers['Content-Length'] = Buffer.byteLength(data, 'utf8');
       headers['Content-Type'] = 'application/x-www-form-urlencoded';
     }
@@ -71,7 +76,30 @@ class HttpClient {
       followAllRedirects: true
     };
 
-    options.body = data;
+    if (attachments.length > 0) {
+      const start = uuid();
+      headers['Content-Type'] =
+        'multipart/related; type="application/xop+xml"; start="<' + start + '>"; start-info="text/xml"; boundary=' + uuid();
+      const multipart = [{
+        'Content-Type': 'application/xop+xml; charset=UTF-8; type="text/xml"',
+        'Content-ID': '<' + start + '>',
+        'body': data,
+      }];
+
+      attachments.forEach((attachment) => {
+        multipart.push({
+          'Content-Type': attachment.mimetype,
+          'Content-Transfer-Encoding': 'binary',
+          'Content-ID': '<' + attachment.contentId + '>',
+          'Content-Disposition': 'attachment; filename="' + attachment.name + '"',
+          'body': attachment.body,
+        });
+      });
+      options.multipart = multipart;
+    } else {
+      options.body = data;
+    }
+
 
     exoptions = exoptions || {};
     for (attr in exoptions) {
