@@ -1,3 +1,9 @@
+2019-07-19, Version 1.21.0
+==========================
+
+ * add support attachments (Allan Marques)
+
+
 2019-06-03, Version 1.20.0
 ==========================
 
