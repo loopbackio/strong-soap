@@ -329,6 +329,10 @@ class Client extends Base {
         }
         if (!result) {
           ['Response', 'Out', 'Output', 'Result'].forEach(function(term) {
+            if (name.startsWith('Auto')) {
+              name = name.replace('Auto', '');
+            }
+
             if (obj.Body.hasOwnProperty(name + term)) {
               return result = obj.Body[name + term];
             }
