@@ -32,8 +32,8 @@ describe(__filename, function() {
       var complexType = schema.complexTypes['ContactMedium'];
       var doc = complexType.children[0].children[0];
       assert.equal(doc.name, 'documentation');
-      assert.equal(doc.$value, 'Defines the method of contact to reach a ' +
-        'party (in\n                their specified role)');
+      assert.equal(doc.$value.replace('\r', ''), 'Defines the method of ' +
+        'contact to reach a party (in\n                their specified role)');
       // If we get here then we succeeded
       done(err);
     });
