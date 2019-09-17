@@ -548,6 +548,41 @@ class XMLHandler {
     var stack = [{name: null, object: root, descriptor: descriptor}];
     var options = this.options;
 
+    // Function to check, if nsName is a complex type
+    var isComplexType = function(nsName) {
+      // Only if below body
+      if (stack.length <= 3) return false;
+
+      var qname = QName.parse(nsName),
+          nsURI = nsContext.getNamespaceURI(qname.prefix),
+          schema = self.schemas[nsURI],
+          schemaElement = schema.elements[stack[3].name],
+          schemaNode = null,
+          findSchemaNode = function(child, qname) {
+            if (child.$name === qname.name && 
+                child.targetNamespace === qname.nsURI) {
+              return child;
+            } else if (child.children) {
+              var found = null;
+              for (var i = 0; i < child.children.length; i++)
+                if (found === null)
+                  found = findSchemaNode(child.children[i], qname);
+              return found;
+            } else {
+              return null;
+            }
+          };
+      
+      qname.nsURI = nsURI;
+
+      for (var i = 0; i < schemaElement.children.length; i++)
+        if (schemaNode === null)
+          schemaNode = findSchemaNode(schemaElement.children[i], qname);
+
+      return schemaNode && schemaNode.type && 
+             schemaNode.type.name === 'complexType';
+    };
+    
     p.onopentag = function(node) {
       nsContext.pushContext();
       var top = stack[stack.length - 1];
@@ -610,6 +645,9 @@ class XMLHandler {
       if (elementAttributes) {
         obj = {};
         obj[self.options.attributesKey] = elementAttributes;
+      } else if (isComplexType(nsName)) {
+        obj = {};
+        obj[self.options.attributesKey] = {};
       }
 
       var elementQName = QName.parse(nsName);
