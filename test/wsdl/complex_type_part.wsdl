@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" name="ITPAPIPOSservice" targetNamespace="http://tpapipos.com/" xmlns:tns="http://tpapipos.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:ns1="urn:TPAPIPosTypesU" xmlns:ns2="urn:TPAPIPosIntfU">
+  <types>
+    <xs:schema targetNamespace="urn:TPAPIPosTypesU" xmlns="urn:TPAPIPosTypesU">
+      <xs:complexType name="TTPApiPosRequest">
+        <xs:sequence>
+          <xs:element name="Password" type="xs:string"/>
+          <xs:element name="UserName" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TTPApiPosResponse">
+        <xs:sequence>
+          <xs:element name="ReturnCode" type="xs:int"/>
+          <xs:element name="ReturnMessage" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TArticleInfoArray">
+        <xs:complexContent>
+          <xs:restriction base="soapenc:Array">
+            <xs:sequence>
+                <!--<xs:element name="Articles" type="ns1:TArticleInfo" 
+                minOccurs="0" maxOccurs="unbounded"/> -->
+            </xs:sequence>
+            <xs:attribute ref="soapenc:arrayType" n1:arrayType="ns1:TArticleInfo[]" xmlns:n1="http://schemas.xmlsoap.org/wsdl/"/>
+          </xs:restriction>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TArticleInfo">
+        <xs:sequence>
+          <xs:element name="ArticleId" type="xs:long"/>
+          <xs:element name="ArticleName" type="xs:string"/>
+          <xs:element name="ArticleNumber" type="xs:int"/>
+          <xs:element name="Available" type="ns1:TInt64Array"/>
+          <xs:element name="DepartmentId" type="xs:long"/>
+          <xs:element name="FreeOption" type="xs:long"/>
+          <xs:element name="Options" type="ns1:TInt64Array"/>
+          <xs:element name="IsMenu" type="xs:boolean"/>
+          <xs:element name="IsManualPrice" type="xs:boolean"/>
+          <xs:element name="IsActive" type="xs:boolean"/>
+          <xs:element name="Promo" type="xs:boolean"/>
+          <xs:element name="HqId" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="TInt64Array">
+        <xs:complexContent>
+          <xs:restriction base="soapenc:Array">
+            <xs:sequence/>
+            <xs:attribute ref="soapenc:arrayType" n1:arrayType="xs:long[]" xmlns:n1="http://schemas.xmlsoap.org/wsdl/"/>
+          </xs:restriction>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="urn:TPAPIPosIntfU" xmlns="urn:TPAPIPosIntfU">
+      <xs:complexType name="TGetArticlesInfoRequest">
+        <xs:complexContent>
+          <xs:extension base="ns1:TTPApiPosRequest">
+            <xs:sequence>
+              <xs:element name="ArticleId" type="xs:long"/>
+              <xs:element name="SalesAreaId" type="xs:long"/>
+              <xs:element name="GetInactive" type="xs:boolean"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="TGetArticlesInfoResponse">
+        <xs:complexContent>
+          <xs:extension base="ns1:TTPApiPosResponse">
+            <xs:sequence>
+              <xs:element name="Articles" type="ns1:TArticleInfoArray"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="GetArticlesInfo2Request">
+    <part name="Request" type="ns2:TGetArticlesInfoRequest"/>
+  </message>
+  <message name="GetArticlesInfo2Response">
+    <part name="return" type="ns2:TGetArticlesInfoResponse"/>
+  </message>
+  <portType name="ITPAPIPOS">
+    <operation name="GetArticlesInfo">
+      <input message="tns:GetArticlesInfo2Request"/>
+      <output message="tns:GetArticlesInfo2Response"/>
+    </operation>
+  </portType>
+  <binding name="ITPAPIPOSbinding" type="tns:ITPAPIPOS">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="GetArticlesInfo">
+      <soap:operation soapAction="urn:TPAPIPosIntfU-ITPAPIPOS#GetArticlesInfo" style="rpc"/>
+      <input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:TPAPIPosIntfU-ITPAPIPOS"/>
+      </input>
+      <output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:TPAPIPosIntfU-ITPAPIPOS"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ITPAPIPOSservice">
+    <port name="ITPAPIPOSPort" binding="tns:ITPAPIPOSbinding">
+      <soap:address location="http://213.125.56.34:3063/soap/ITPAPIPOS"/>
+    </port>
+  </service>
+</definitions>
+

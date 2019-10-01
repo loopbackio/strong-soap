@@ -13,6 +13,7 @@ var TypeDescriptor = descriptor.TypeDescriptor;
 var QName = require('../qname');
 var helper = require('../helper');
 var SimpleType = require('../xsd/simpleType');
+var ComplexType = require('../xsd/complexType');
 
 var assert = require('assert');
 
@@ -178,6 +179,12 @@ class Operation extends WSDLElement {
               }
               let element = new descriptor.ElementDescriptor(
                 new QName(nsURI, p), type, 'unqualified', false);
+              if (part.type instanceof ComplexType) {
+                let typeDescription = part.type.describe(definitions);
+                for (let e in typeDescription.elements) {
+                  element.addElement(typeDescription.elements[e]);
+                }
+              }
               inputParts.addElement(element);
             } else if (part.element) {
               var elementDescriptor = part.element.describe(definitions);
@@ -198,6 +205,12 @@ class Operation extends WSDLElement {
               }
               let element = new descriptor.ElementDescriptor(
                 new QName(nsURI, p), type, 'unqualified', false);
+              if (part.type instanceof ComplexType) {
+                let typeDescription = part.type.describe(definitions);
+                for (let e in typeDescription.elements) {
+                  element.addElement(typeDescription.elements[e]);
+                }
+              }
               outputParts.addElement(element);
             } else if (part.element) {
               let elementDescriptor = part.element.describe(definitions);

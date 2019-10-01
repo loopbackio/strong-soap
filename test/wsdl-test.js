@@ -214,6 +214,30 @@ describe('wsdl-tests', function() {
         done();
       });
     });
+
+    it('should describe the part when it is a complex type', function(done) {
+      openWSDL(path.resolve(__dirname, 'wsdl/complex_type_part.wsdl'), function(
+        err,
+        def
+      ) {
+        var operation = def.definitions.bindings.ITPAPIPOSbinding.operations.GetArticlesInfo;
+        var operationDesc = operation.describe(def);
+
+        assert(operationDesc.input.body.elements);
+
+        assert.equal(operationDesc.input.body.elements[0].qname.name, 'Request');
+        // Check that the element with name 'Password' is inside the Request element description.
+        assert.equal(operationDesc.input.body.elements[0].elements[0].qname.name, 'Password');
+
+        assert(operationDesc.output.body.elements);
+
+        // Check that the element with name 'ReturnCode' is inside the return element description.
+        assert.equal(operationDesc.output.body.elements[0].qname.name, 'return');
+        assert.equal(operationDesc.output.body.elements[0].elements[0].qname.name, 'ReturnCode');
+
+        done();
+      });
+    });
   });
 });
 
