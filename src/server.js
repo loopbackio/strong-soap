@@ -104,6 +104,7 @@ class Server extends Base {
           if (typeof self.log === 'function') {
             self.log('received', xml);
           }
+          req.originalXml = xml;
           self._process(xml, req, function(result, statusCode) {
             if (statusCode) {
               res.statusCode = statusCode;
