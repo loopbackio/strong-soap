@@ -156,7 +156,7 @@ Request, Response and Fault samples.
 
 The `options` argument allows you to customize the client with the following properties:
 
-- `endpoint``: to override the SOAP service's host specified in the `.wsdl` file.
+- `endpoint`: to override the SOAP service's host specified in the `.wsdl` file.
 - `request`: to override the [request](https://github.com/request/request) module.
 - `httpClient`: to provide your own http client that implements `request(rurl, data, callback, exheaders, exoptions)`.
 - `envelopeKey`: to set specific key instead of <pre><<b>soap</b>:Body></<b>soap</b>:Body></pre>
