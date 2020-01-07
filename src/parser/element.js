@@ -8,7 +8,6 @@
 var g = require('../globalize');
 var assert = require('assert');
 var QName = require('./qname');
-var typeRegistry = require('./typeRegistry');
 var helper = require('./helper');
 var xsd = require('./xsd');
 var debug = require('debug')('strong-soap:wsdl:element');
@@ -77,7 +76,7 @@ class Element {
     }
   }
 
-  startElement(stack, nsName, attrs, options) {
+  startElement(stack, nsName, attrs, options, typeRegistry) {
     if (!this.constructor.allowedChildren)
       return;
 

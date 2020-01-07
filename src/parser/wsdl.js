@@ -18,6 +18,7 @@ var debugInclude = require('debug')('strong-soap:wsdl:include');
 var _ = require('lodash');
 var selectn = require('selectn');
 var utils = require('./helper');
+var typeRegistry = require('./typeRegistry');
 var EMPTY_PREFIX = utils.EMPTY_PREFIX;
 
 var QName = require('./qname');
@@ -308,7 +309,7 @@ class WSDL {
       var name;
       if (top) {
         try {
-          top.startElement(stack, nsName, attrs, options);
+          top.startElement(stack, nsName, attrs, options, typeRegistry);
         } catch (e) {
           debug("WSDL error: %s ", e.message);
           if (self.options.strict) {
