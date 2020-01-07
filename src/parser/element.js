@@ -90,16 +90,12 @@ class Element {
       debug('Element %s is not allowed within %j', qname, this.nsName);
     }
     
-    if (ElementType) {
-      child = new ElementType(nsName, attrs, options);
-      child.nsURI = qname.nsURI;
-      child.targetNamespace = attrs.targetNamespace || this.getTargetNamespace();
-      debug('Element created: ', child);
-      child.parent = parent;
-      stack.push(child);
-    } else {
-      this.unexpected(nsName);
-    }
+    child = new ElementType(nsName, attrs, options);
+    child.nsURI = qname.nsURI;
+    child.targetNamespace = attrs.targetNamespace || this.getTargetNamespace();
+    debug('Element created: ', child);
+    child.parent = parent;
+    stack.push(child);
   }
 
   endElement(stack, nsName) {
