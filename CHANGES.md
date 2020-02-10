@@ -1,3 +1,17 @@
+2020-02-10, Version 1.22.0
+==========================
+
+ * chore: add package-lock.json (Raymond Feng)
+
+ * Remove unnecessary files from npm packages (Avindra Goolcharan)
+
+ * fixed formating in README (Christopher Wade)
+
+ * chore: add stalebot (Diana Lau)
+
+ * Avoid line feed problems (Win/Linux) (Christian Herzog)
+
+
 2019-07-19, Version 1.21.0
 ==========================
 
