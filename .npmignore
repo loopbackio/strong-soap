@@ -2,3 +2,7 @@
 .idea
 test
 .travis.yml
+coverage
+.nyc_output
+.github
+.vscode
