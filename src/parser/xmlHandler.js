@@ -437,7 +437,12 @@ class XMLHandler {
       if (value !== undefined) {
         top.object[this.options.valueKey] = value + val;
       } else {
-        top.object[this.options.valueKey] = val;
+        if (top.object["$attributes"].lang){
+          top.object = val;
+        }
+        else {
+          top.object[this.options.valueKey] = val;
+        }
       }
     } else {
       // Top object is other simple types, such as string or date
