@@ -9,8 +9,6 @@ var fs = require('fs'),
     soap = require('..').soap,
     assert = require('assert'),
     should = require('should'),
-    request = require('request'),
-    http = require('http'),
     async = require('async'),
     path = require('path');
 

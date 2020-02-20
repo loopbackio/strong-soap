@@ -8,11 +8,7 @@
 var fs = require('fs'),
     soap = require('..').soap,
     assert = require('assert'),
-    request = require('request'),
-    http = require('http'),
-    lastReqAddress;
-
-
+    http = require('http');
 
 describe('Document style tests', function() {
 

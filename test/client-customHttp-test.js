@@ -7,10 +7,8 @@
 
 var fs = require('fs'),
   soap = require('..').soap,
-  http = require('http'),
   assert = require('assert'),
   duplexer = require('duplexer'),
-  req = require('request'),
   httpClient = require('..').http,
 // stream = require('stream'),
   stream = require('readable-stream'),
