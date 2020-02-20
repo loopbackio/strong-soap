@@ -5,14 +5,8 @@
 
 "use strict";
 
-var fs = require('fs'),
-    soap = require('..').soap,
-    assert = require('assert'),
-    request = require('request'),
-    http = require('http'),
-    lastReqAddress;
-
-
+var soap = require('..').soap,
+    assert = require('assert');
 
 describe('Nillable tests ', function() {
 

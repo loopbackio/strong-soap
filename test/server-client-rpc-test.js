@@ -8,14 +8,9 @@
 var fs = require('fs'),
     soap = require('..').soap,
     assert = require('assert'),
-    request = require('request'),
-    http = require('http'),
-    lastReqAddress;
-
-
+    http = require('http');
 
 describe('RPC style tests', function() {
-
 
   describe('RPC Literal', function() {
     var test = {};

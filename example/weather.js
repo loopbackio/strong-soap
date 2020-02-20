@@ -5,11 +5,6 @@
 
 "use strict";
 
-var fs = require('fs'),
-  assert = require('assert'),
-  request = require('request'),
-  http = require('http'),
-  lastReqAddress;
 var soap = require('..').soap;
 var XMLHandler = soap.XMLHandler;
 var xmlHandler = new XMLHandler();
