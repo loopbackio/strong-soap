@@ -2,7 +2,8 @@
   "DummyRequest": {
       "DummyField1": "Humpty",
       "DummyFilter": {
-        "DummyStringFilter": null
+        "DummyStringFilter": null,
+        "DummyDateFilter": null
       }
   }
 }
