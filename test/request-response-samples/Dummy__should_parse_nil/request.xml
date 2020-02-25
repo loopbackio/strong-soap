@@ -6,6 +6,7 @@
             <ns1:DummyField1>Humpty</ns1:DummyField1>
             <ns1:DummyFilter>
                  <ns2:DummyStringFilter xmlns:ns2="http://www.Dummy.com/Common/Types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+                 <ns2:DummyDateFilter xmlns:ns2="http://www.Dummy.com/Common/Types" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
             </ns1:DummyFilter>
         </ns1:DummyRequest>
 </soap:Body>
