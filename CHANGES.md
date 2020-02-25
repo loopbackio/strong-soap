@@ -1,3 +1,11 @@
+2020-02-25, Version 1.22.1
+==========================
+
+ * Allow nillable date to be null (Richard Sunbury)
+
+ * chore: remove unused require statements (Raymond Feng)
+
+
 2020-02-10, Version 1.22.0
 ==========================
 
