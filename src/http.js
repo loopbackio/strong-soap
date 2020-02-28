@@ -6,7 +6,8 @@
 'use strict';
 
 var url = require('url');
-var req = require('request');
+var axios = require('axios');
+var request = require('request');
 var debug = require('debug')('strong-soap:http');
 var debugSensitive = require('debug')('strong-soap:http:sensitive');
 var httpntlm = require('httpntlm');
@@ -25,7 +26,22 @@ var VERSION = require('../package.json').version;
 class HttpClient {
   constructor(options) {
     this.options = options || {};
-    this._request = options.request || req;
+    if (options.request) {
+      this._request = options.request;
+    } else if (options.axios) {
+      this.axios = new options.axios(options);
+      this._request = (req, callback) => {
+        req.data = req.body;
+        req.url = req.uri;
+        this.axios(req).then((res) => {
+          callback(null, res, res.data);
+        }).catch((err) => {
+          callback(err);
+        });
+      };
+    } else {
+      this._request = request;
+    }
   }
 
   /**
