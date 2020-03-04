@@ -1,25 +1,27 @@
 {
   "result": {
-    "records": {
-      "$attributes": {
-        "$xsiType": {
-          "type": "CustomObject",
-          "xmlns": "http://soap.sforce.com/2006/04/metadata"
-        }
-      },
-      "fullName": "Opportunity",
-      "businessProcesses": [
-        {
-          "fullName": "Some Process",
-          "isActive": "true"
+    "records": [
+      {
+        "$attributes": {
+          "$xsiType": {
+            "type": "CustomObject",
+            "xmlns": "http://soap.sforce.com/2006/04/metadata"
+          }
         },
-        {
-          "fullName": "Another Process",
-          "isActive": "false"
-        }
-      ],
-      "enableFeeds": "false",
-      "enableHistory": "true"
-    }
+        "fullName": "Opportunity",
+        "businessProcesses": [
+          {
+            "fullName": "Some Process",
+            "isActive": "true"
+          },
+          {
+            "fullName": "Another Process",
+            "isActive": "false"
+          }
+        ],
+        "enableFeeds": "false",
+        "enableHistory": "true"
+      }
+    ]
   }
 }
