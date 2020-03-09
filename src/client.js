@@ -333,7 +333,7 @@ class Client extends Base {
           result = obj.Body[outputName];
         }
         if (!result) {
-          ['Response', 'Out', 'Output'].forEach(function(term) {
+          ['Response', 'Out', 'Output', '.Response', '.Out', '.Output'].forEach(function(term) {
             if (obj.Body.hasOwnProperty(name + term)) {
               return result = obj.Body[name + term];
             }
