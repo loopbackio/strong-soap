@@ -1,0 +1,11 @@
+{
+  "DummyResult": {
+    "DummyList": {
+      "DummyElement": [
+        "Dummy Element Entry 1",
+        "Dummy Element Entry 2",
+        "Dummy Element Entry 3"
+      ]
+    }
+  }
+}

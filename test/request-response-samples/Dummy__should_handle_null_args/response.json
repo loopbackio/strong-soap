@@ -1,7 +1,9 @@
 {
   "DummyResult": {
     "DummyList": {
-      "DummyElement": "Dummy Element Entry"
+      "DummyElement": [
+        "Dummy Element Entry"
+      ]
     }
   }
 }

@@ -381,7 +381,7 @@ class XMLHandler {
     prefix = prefix || 'soap';
     var doc = xmlBuilder.create(prefix + ':Envelope',
       {version: '1.0', encoding: 'UTF-8', standalone: true});
-    nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/'
+    nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/';
     doc.attribute('xmlns:' + prefix,
       nsURI);
     let header = doc.element(prefix + ':Header');
@@ -395,7 +395,7 @@ class XMLHandler {
 
   static createSOAPEnvelopeDescriptor(prefix, nsURI, parameterDescriptor) {
     prefix = prefix || 'soap';
-    nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/'
+    nsURI = nsURI || 'http://schemas.xmlsoap.org/soap/envelope/';
     var descriptor = new TypeDescriptor();
 
     var envelopeDescriptor = new ElementDescriptor(
@@ -659,7 +659,11 @@ class XMLHandler {
             top.object[elementName] = [val, current.object];
           }
         } else {
-          top.object[elementName] = current.object;
+          if (current.descriptor && current.descriptor.isMany) {
+            top.object[elementName] = [current.object];
+          } else {
+            top.object[elementName] = current.object;
+          }
         }
       }
       if (current.id != null) {
@@ -766,7 +770,7 @@ function getSoap11FaultErrorMessage(faultBody) {
       if (typeof detail == 'string') { //plain text
         errorMessage = errorMessage + ' detail: ' + detail;
       } else { //XML type defined in wsdl
-        errorMessage = errorMessage + ' detail: ' + JSON.stringify(detail)
+        errorMessage = errorMessage + ' detail: ' + JSON.stringify(detail);
       }
     }
   }
@@ -812,7 +816,7 @@ function getSoap12FaultErrorMessage(faultBody) {
       if (typeof detail == 'string') { //plain text
         errorMessage = errorMessage + ' Detail: ' + detail;
       } else { //XML type defined in wsdl
-        errorMessage = errorMessage + ' Detail: ' + JSON.stringify(detail)
+        errorMessage = errorMessage + ' Detail: ' + JSON.stringify(detail);
       }
     }
   }
