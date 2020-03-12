@@ -648,14 +648,7 @@ class XMLHandler {
         top.object = {};
       }
       if (top.object !== null) {
-        if (current.descriptor && current.descriptor.isMany) {
-          // Schema enforces array
-          if (!(elementName in top.object)) {
-            top.object[elementName] = [];
-          }
-          let val = top.object[elementName];
-          val.push(current.object);
-        } else if (typeof top.object === 'object' && elementName in top.object) {
+        if (typeof top.object === 'object' && elementName in top.object) {
           // The element exist already, let's create an array
           let val = top.object[elementName];
           if (Array.isArray(val)) {
@@ -666,7 +659,11 @@ class XMLHandler {
             top.object[elementName] = [val, current.object];
           }
         } else {
-          top.object[elementName] = current.object;
+          if (current.descriptor && current.descriptor.isMany) {
+            top.object[elementName] = [current.object];
+          } else {
+            top.object[elementName] = current.object;
+          }
         }
       }
       if (current.id != null) {
