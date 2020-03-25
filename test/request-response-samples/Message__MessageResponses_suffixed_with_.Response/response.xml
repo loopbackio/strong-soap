@@ -1,0 +1,8 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body>
+		<snp:Message.Response xmlns:snp="urn:MessageService">
+			<return>-1</return>
+			<bstrError xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:nil="true"/>
+		</snp:Message.Response>
+	</soap:Body>
+</soap:Envelope>
