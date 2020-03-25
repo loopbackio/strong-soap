@@ -1,3 +1,17 @@
+2020-03-25, Version 2.0.0
+=========================
+
+ * Update client.js: add RPC suffixes (kimveasna)
+
+ * In light of review, check isMany in existing block (LoneRifle)
+
+ * Add tests for responses when maxOccurs=1 (LoneRifle)
+
+ * xmlToJson: honor maxOccurs > 1 (LoneRifle)
+
+ * De-lint - missing semicolons (LoneRifle)
+
+
 2020-02-25, Version 1.22.1
 ==========================
 
