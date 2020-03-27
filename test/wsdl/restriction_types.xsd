@@ -99,4 +99,3 @@
     <xs:element name="RestrictionRequest" type="RestrictionRequestType"/>
     <xs:element name="RestrictionResponse" type="RestrictionRequestType"/>
 </xs:schema>
-

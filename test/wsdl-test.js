@@ -187,6 +187,36 @@ describe('wsdl-tests', function() {
       });
     });
 
+    it('should return type data about anonymous simple types within elements', function(done) {
+      openWSDL(path.resolve(__dirname, 'wsdl/restriction_anonymous_types.wsdl'), function(
+        err,
+        def
+      ) {
+        var operation = def.definitions.bindings.RestrictionsBinding.operations.TestRestrictions;
+        var operationDesc = operation.describe(def);
+  
+        var requestElements = operationDesc.input.body.elements[0].elements;
+
+        // second element in the operation request is an element with anonymous type
+        // , hence pick array[1]
+        let elementWithAnonymousType = requestElements[1];
+        assert(elementWithAnonymousType.isSimple);
+        assert.equal(elementWithAnonymousType.qname.name, "elementWithAnonymousType");
+        // anonymous types have same name as parent element
+        assert.equal(elementWithAnonymousType.type.name, elementWithAnonymousType.qname.name);
+        // Check if anonymous type restriction is embedded in the parent element
+        assert.equal(elementWithAnonymousType.type.anonymous.name, "simpleType");
+        assert.equal(elementWithAnonymousType.type.anonymous.type.$name, "string");
+
+        // also check element with type for regression
+        assert.equal(requestElements[0].qname.name, "stringElement");
+        assert(requestElements[0].isSimple);
+        assert.equal(requestElements[0].type.name, "string");
+
+        done();
+      });
+    });
+
     it('should map isMany values correctly', function(done) {
       openWSDL(path.resolve(__dirname, 'wsdl/marketo.wsdl'), function(
         err,
