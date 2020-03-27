@@ -187,6 +187,32 @@ describe('wsdl-tests', function() {
       });
     });
 
+    it('should return type data about simpleTypes within elements', function(done) {
+      openWSDL(path.resolve(__dirname, 'wsdl/simpleTypeTest.wsdl'), function(
+        err,
+        def
+      ) {
+        var operation = def.definitions.bindings.SimpleTypeExampleBinding.operations.SimpleTypeExample;
+        var operationDesc = operation.describe(def);
+
+        assert(operationDesc.input.body.elements[0].qname);
+        assert.equal(operationDesc.input.body.elements[0].qname.name, "elementWithType");
+        assert(operationDesc.input.body.elements[0].isSimple);
+        assert(operationDesc.input.body.elements[0].type);
+        assert.equal(operationDesc.input.body.elements[0].type.name, "string");
+
+
+        assert(operationDesc.input.body.elements[1].qname);
+        assert.equal(operationDesc.input.body.elements[1].qname.name, "elementWithSimpleType1");
+        assert(operationDesc.input.body.elements[1].isSimple);
+        assert(operationDesc.input.body.elements[1].type);
+        assert.equal(operationDesc.input.body.elements[1].type.name, "simpleType");
+        assert.equal(operationDesc.input.body.elements[1].type.$name, "string");
+
+        done();
+      });
+    });
+
     it('should map isMany values correctly', function(done) {
       openWSDL(path.resolve(__dirname, 'wsdl/marketo.wsdl'), function(
         err,

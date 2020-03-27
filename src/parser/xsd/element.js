@@ -84,6 +84,7 @@ class Element extends XSDElement {
         } else if (child instanceof SimpleType) {
           descriptor.isSimple = true;
           descriptor.jsType = child.jsType;
+          descriptor.type = child.type;
         }
       }
     }

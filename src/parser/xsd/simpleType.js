@@ -38,7 +38,7 @@ class SimpleType extends XSDElement {
       this.restriction.postProcess(definitions);
       if (this.restriction.base) {
         // Use the base type
-        this.type = this.restriction.base.type;
+        this.type = this.restriction.base;
       }
     } else if (this.list) {
       this.list.postProcess(definitions);
