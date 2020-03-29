@@ -195,13 +195,14 @@ describe('wsdl-tests', function() {
         var operation = def.definitions.bindings.SimpleTypeExampleBinding.operations.SimpleTypeExample;
         var operationDesc = operation.describe(def);
 
+        // Check that specified as '<xsd:element type="xsd:string"' is present
         assert(operationDesc.input.body.elements[0].qname);
         assert.equal(operationDesc.input.body.elements[0].qname.name, "elementWithType");
         assert(operationDesc.input.body.elements[0].isSimple);
         assert(operationDesc.input.body.elements[0].type);
         assert.equal(operationDesc.input.body.elements[0].type.name, "string");
 
-
+        // Check that a type specified as a restriction is present
         assert(operationDesc.input.body.elements[1].qname);
         assert.equal(operationDesc.input.body.elements[1].qname.name, "elementWithSimpleType1");
         assert(operationDesc.input.body.elements[1].isSimple);
