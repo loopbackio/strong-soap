@@ -107,6 +107,24 @@ describe('SOAP Client', function() {
       }, 'http://' + hostname + ":" + server.address().port);
     });
 
+    it('should throw error if the type doesn\'t match its restriction of number', function (done) {
+      soap.createClient(__dirname + '/wsdl/restrictions.wsdl', { enforceRestrictions: true }, function (err, client) {
+        assert.equal(err, null);
+        try {
+          client.TestRestrictions({
+            RestrictionRequest: {
+              minExclusive: "five"
+            }
+          }, function () {
+            done('It should have thrown error');
+          });
+        } catch (err) {
+          assert.equal(err.message, 'The field MinExclusiveType cannot have value five due to the violations: ["value is not a number (five)"]');
+          done();
+        }
+      }, 'http://' + hostname + ":" + server.address().port);
+    });
+
     it('should throw if the minInclusive doesn\'t match its restriction', function (done) {
       soap.createClient(__dirname + '/wsdl/restrictions.wsdl', { enforceRestrictions: true }, function (err, client) {
         assert.equal(err, null);
