@@ -94,9 +94,15 @@
             <xs:element name="enumeration1" type="EnumerationType"/>
             <xs:element name="enumeration2" type="EnumerationType"/>
             <xs:element name="enumeration3" type="EnumerationType"/>
+            <xs:element name="elementWithAnonymousType">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:maxLength value="3"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
         </xs:sequence>
     </xs:complexType>
     <xs:element name="RestrictionRequest" type="RestrictionRequestType"/>
     <xs:element name="RestrictionResponse" type="RestrictionRequestType"/>
 </xs:schema>
-

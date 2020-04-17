@@ -374,6 +374,24 @@ describe('SOAP Client', function() {
       }, 'http://' + hostname + ":" + server.address().port);
     });
 
+    it('should throw if the maxLength doesn\'t match its restriction in a private simple type', function (done) {
+      soap.createClient(__dirname + '/wsdl/restriction_anonymous_types.wsdl', { enforceRestrictions: true }, function (err, client) {
+        assert.equal(err, null);
+        try {
+          client.TestRestrictions({
+            RestrictionRequest: {
+              elementWithAnonymousType: 'abcdef'
+            }
+          }, function () {
+            done('It should have thrown error');
+          });
+        } catch (err) {
+          assert.equal(err.message, 'The field elementWithAnonymousType cannot have value abcdef due to the violations: ["length is bigger than maxLength (6 > 3)"]');
+          done();
+        }
+
+      }, 'http://' + hostname + ":" + server.address().port);
+    });
   });
 
 });

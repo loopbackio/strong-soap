@@ -123,7 +123,10 @@ class XMLHandler {
         if (this.options.enforceRestrictions && descriptor.type) {
           const schema = this.schemas[descriptor.type.nsURI];
           if (schema) {
-            const type = schema.simpleTypes[descriptor.type.name];
+            let type = schema.simpleTypes[descriptor.type.name];
+            if (!type && descriptor.type.anonymous) {
+              type = descriptor.type.anonymous;
+            }
             if (type) {
               const restriction = type.restriction;
               if (restriction) {
