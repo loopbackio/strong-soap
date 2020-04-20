@@ -107,6 +107,12 @@ class Restriction extends XSDElement {
       } else if (typeof this.base.jsType === 'function' && this.base.jsType !== Date && this.base.jsType !== Number) {
         val = this.base.jsType(val);
       }
+
+      if(this.base.jsType === Number) {
+        if(isNaN(val)){
+          violations.push('value is not a number (' + val + ')');
+        }
+      }
     }
 
     if (this.minExclusive !== undefined) {

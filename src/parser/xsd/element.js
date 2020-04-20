@@ -82,8 +82,21 @@ class Element extends XSDElement {
           }
           break;
         } else if (child instanceof SimpleType) {
+          // name of the parent element is the anonymous type's name
+          child.$name = this.$name;
+          let typeQName = child.getQName();
+          // regenerate descriptor with new type qname
+          descriptor = this.descriptor =
+            new XSDElement.ElementDescriptor(qname, typeQName, form, isMany);
           descriptor.isSimple = true;
-          descriptor.jsType = child.jsType;
+          if (child.type && child.type.jsType) {
+            descriptor.jsType = child.type.jsType;
+          } else if (child.jsType) {
+            descriptor.jsType = child.jsType;
+          }
+          descriptor.type = typeQName;
+          // embed anonymous type inside the descriptor
+          descriptor.type.anonymous = child;
         }
       }
     }
