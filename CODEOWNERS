@@ -2,5 +2,8 @@
 # Each line is a file pattern followed by one or more owners,
 # the last matching pattern has the most precendence.
 
+# Alumni members
+# @b-admike 
+
 # Core team members from IBM
-* @b-admike @raymondfeng
+* @raymondfeng @deepakrkris
