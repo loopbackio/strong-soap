@@ -347,6 +347,26 @@ describe('SOAP Server', function() {
     });
   });
 
+  it('should emit \'headers\' event from options', function(done) {
+    test.soapServer.on('headers', function headersManager(headers, methodName) {
+      assert.equal(methodName, 'GetLastTradePrice');
+      headers.SomeToken = 0;
+    });
+    soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
+      assert.ok(!err);
+     // client.addSoapHeader('<SomeToken>123.45</SomeToken>');
+      client.GetLastTradePrice({TradePriceRequest: { tickerSymbol: 'AAPL'}}, function(err, result) {
+        assert.ok(!err);
+        assert.equal(0, parseFloat(result.price));
+        done();
+      }, {
+        soapHeaders: { 
+          SomeToken: 123.45
+        }
+      });
+    });
+  });
+
   it('should not emit the \'headers\' event when there are no headers', function(done) {
     test.soapServer.on('headers', function headersManager(headers, methodName) {
       assert.ok(false);
