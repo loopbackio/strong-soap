@@ -9,7 +9,7 @@
     "compress": "^0.99.0",
     "debug": "^4.1.1",
     "httpntlm": "^1.7.6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.16",
     "node-rsa": "^1.0.5",
     "request": "^2.72.0",
     "sax": "^1.2",
@@ -17,7 +17,8 @@
     "strong-globalize": "^4.1.3",
     "uuid": "^3.2.1",
     "xml-crypto": "^1.4.0",
-    "xmlbuilder": "^10.1.1"
+    "xmlbuilder": "^10.1.1",
+    "snyk": "^1.364.2"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,8 @@
     "citest": "npm test",
     "postcitest": "npm run coveralls",
     "pretest": "babel src -d lib",
-    "prepare": "babel src -d lib"
+    "prepare": "npm run snyk-protect && babel src -d lib",
+    "snyk-protect": "snyk protect"
   },
   "keywords": [
     "soap"
@@ -61,5 +63,6 @@
     "should": "^13.2.1",
     "timekeeper": "^2.2.0"
   },
-  "author": "IBM Corp."
+  "author": "IBM Corp.",
+  "snyk": true
 }
