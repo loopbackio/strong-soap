@@ -155,6 +155,11 @@ class HttpClient {
     var headers = options.headers;
     var req;
 
+    // check if there is a cookie jar in options
+    if (this.options.jar) {
+      options.jar = this.options.jar;
+    }
+
     //typically clint.js would do addOptions() if security is set in order to get all security options added to options{}. But client.js
     //addOptions() code runs after this code is trying to contact server to load remote WSDL, hence we have NTLM authentication
     //object passed in as option to createClient() call for now. Revisit.
