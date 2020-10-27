@@ -10,7 +10,7 @@ var req = require('request');
 var debug = require('debug')('strong-soap:http');
 var debugSensitive = require('debug')('strong-soap:http:sensitive');
 var httpntlm = require('httpntlm');
-var uuid = require('uuid/v4')
+var uuid = require('uuid').v4;
 
 
 var VERSION = require('../package.json').version;

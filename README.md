@@ -63,10 +63,13 @@ Features:
 
 ## Install
 
+Node.js version 10, 12, and 14 are officially supported. We dropped version 8
+support in 3.0.0.
+
 Install with [npm](http://github.com/isaacs/npm):
 
-```
-  npm install strong-soap
+```sh
+npm install strong-soap
 ```
 
 ## Client
