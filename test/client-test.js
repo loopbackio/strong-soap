@@ -314,6 +314,62 @@ describe('SOAP Client', function() {
       }, 'http://' + hostname + ':' + server.address().port  );
     });
 
+    it('should add soap headers from options', function (done) {
+      soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, client) {
+        assert.ok(client);
+        assert.ok(client.getSoapHeaders().length === 0);
+        var soapheader = {
+          'esnext': false,
+          'moz': true,
+          'boss': true,
+          'node': true,
+          'validthis': true,
+          'globals': {
+            'EventEmitter': true,
+            'Promise': true
+          }
+        };      
+        var lastRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n"
+        + "    <esnext>false</esnext>\n    <moz>true</moz>\n    <boss>true</boss>\n    <node>true</node>\n    <validthis>true</validthis>\n    <globals>\n      <EventEmitter>true</EventEmitter>\n      <Promise>true</Promise>\n    </globals>\n"
+        + "  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>";
+        client.MyOperation({}, function(err, result) {
+          //using lastRequest instead of lastRequestHeaders() since this doesn't contain soap header which this test case needs to test.
+          assert.equal(client.lastRequest, lastRequest);
+          done();
+        }, {
+          soapHeaders: soapheader
+        });
+      }, 'http://' + hostname + ':' + server.address().port  );
+    });
+
+    it('should add soap headers from extraHeaders', function (done) {
+      soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, client) {
+        assert.ok(client);
+        assert.ok(client.getSoapHeaders().length === 0);
+        var soapheader = {
+          'esnext': false,
+          'moz': true,
+          'boss': true,
+          'node': true,
+          'validthis': true,
+          'globals': {
+            'EventEmitter': true,
+            'Promise': true
+          }
+        };      
+        var lastRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n"
+        + "    <esnext>false</esnext>\n    <moz>true</moz>\n    <boss>true</boss>\n    <node>true</node>\n    <validthis>true</validthis>\n    <globals>\n      <EventEmitter>true</EventEmitter>\n      <Promise>true</Promise>\n    </globals>\n"
+        + "  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>";
+        client.MyOperation({}, function(err, result) {
+          //using lastRequest instead of lastRequestHeaders() since this doesn't contain soap header which this test case needs to test.
+          assert.equal(client.lastRequest, lastRequest);
+          done();
+        }, undefined, {
+          soapHeaders: soapheader
+        });
+      }, 'http://' + hostname + ':' + server.address().port  );
+    });
+
     it('should add soap headers', function (done) {
       soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', function (err, client) {
         assert.ok(client);

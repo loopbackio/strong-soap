@@ -122,7 +122,9 @@ class Client extends Base {
       soapAction,
       headers = {
         'Content-Type': 'text/xml; charset=utf-8'
-      };
+      },
+      dynamicSoapHeaderProperty = ['soapHeaders'],
+      dynamicSoapHeaders = {};
 
     debug('client request. operation: %s args: %j options: %j extraHeaders: %j', operation.name, args, options, extraHeaders);
 
@@ -155,7 +157,15 @@ class Client extends Base {
     options = options || {};
     debugSensitive('client request. options: %j', options);
 
-    //Add extra headers
+    dynamicSoapHeaders = _.merge(_.pick(extraHeaders, dynamicSoapHeaderProperty),
+	                       _.pick(options, dynamicSoapHeaderProperty));
+
+    debug('Soap xml payload extra headers: %j', dynamicSoapHeaders);
+
+    extraHeaders = _.omit(extraHeaders, dynamicSoapHeaderProperty);
+    options = _.omit(options, dynamicSoapHeaderProperty);
+
+    //Add extra headers to http request
     for (var header in this.httpHeaders) {
       headers[header] = this.httpHeaders[header];
     }
@@ -163,6 +173,14 @@ class Client extends Base {
       headers[attr] = extraHeaders[attr];
     }
 
+    // Clear and Add new SOAP Headers
+     if (!_.isEmpty(dynamicSoapHeaders)) {             
+        this.clearSoapHeaders();
+        for (var attr in dynamicSoapHeaders) {
+           this.addSoapHeader(dynamicSoapHeaders[attr]);
+        }
+    }
+    
     debug('client request. headers: %j', headers);
 
     //Unlike other security objects, NTLMSecurity is passed in through client options rather than client.setSecurity(ntlmSecurity) as some
