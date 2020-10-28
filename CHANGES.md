@@ -1,3 +1,17 @@
+2020-10-28, Version 3.0.0
+=========================
+
+ * feat: update dependencies (Raymond Feng)
+
+ * chore: update lodash (jannyHou)
+
+ * chore: update CODEOWNERS (Diana Lau)
+
+ * feat(client) add soapHeaders at run time (Mario Estrada)
+
+ * Handle restrictions in anonymous simple types (Jonathan Roberts)
+
+
 2020-03-25, Version 2.0.0
 =========================
 
