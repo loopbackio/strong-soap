@@ -1,3 +1,10 @@
+2020-12-30, Version 1.23.0
+==========================
+
+ * Update `xml-crypto` dependency to `2.0.0` (Marco Reyes)
+
+ * chore: Update `package-lock.json` (Marco Reyes)
+
 2020-02-25, Version 1.22.1
 ==========================
 
