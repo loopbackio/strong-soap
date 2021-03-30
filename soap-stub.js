@@ -52,7 +52,7 @@ function createClient(wsdlUrl, options, cb) {
   }
 
   if (this.errOnCreateClient) {
-    return setTimeout(cb.bind(null, new Error(g.f('forced error on {{createClient}}'))));
+    return setTimeout(cb.bind(null, new Error('forced error on createClient')));
   }
 
   var client = getStub(wsdlUrl);
@@ -61,7 +61,7 @@ function createClient(wsdlUrl, options, cb) {
     resetStubbedMethods(client);
     setTimeout(cb.bind(null, null, client));
   } else {
-    setTimeout(cb.bind(null, new Error(g.f('no client stubbed for %s', wsdlUrl))));
+    setTimeout(cb.bind(null, new Error(`no client stubbed for ${wsdlUrl}`)));
   }
 }
 
