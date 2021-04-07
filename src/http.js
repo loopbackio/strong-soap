@@ -9,7 +9,7 @@ var url = require('url');
 var req = require('request');
 var debug = require('debug')('strong-soap:http');
 var debugSensitive = require('debug')('strong-soap:http:sensitive');
-var httpntlm = require('httpntlm');
+var httpntlm = require('httpntlm-maa');
 var uuid = require('uuid').v4;
 
 
