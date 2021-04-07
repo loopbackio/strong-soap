@@ -1,3 +1,11 @@
+2021-04-07, Version 3.1.0
+=========================
+
+ * chore: update dependencies (Diana Lau)
+
+ * add require globalize to fix broken call to g.f() (Stefan Seide)
+
+
 2021-03-29, Version 3.0.1
 =========================
 
