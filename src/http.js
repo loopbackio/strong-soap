@@ -6,7 +6,7 @@
 'use strict';
 
 var url = require('url');
-var req = require('request');
+var requestModule = require('request');
 var debug = require('debug')('strong-soap:http');
 var debugSensitive = require('debug')('strong-soap:http:sensitive');
 var httpntlm = require('httpntlm-maa');
@@ -25,7 +25,7 @@ var VERSION = require('../package.json').version;
 class HttpClient {
   constructor(options) {
     this.options = options || {};
-    this._request = options.request || req;
+    this._request = options.request || requestModule;
   }
 
   /**
@@ -175,6 +175,8 @@ class HttpClient {
         options.password = ntlmSecurity.password;
         options.domain = ntlmSecurity.domain;
         options.workstation = ntlmSecurity.workstation;
+        options.request = requestModule;
+        options.ntlm = { strict: true };
         //httpntlm code uses lower case for method names - 'get', 'post' etc
         var method = options.method.toLocaleLowerCase();
         debugSensitive('NTLM options: %j for method: %s', options, method);
