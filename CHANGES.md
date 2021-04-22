@@ -1,3 +1,14 @@
+2021-04-22, Version 3.2.1
+=========================
+
+ * Update pakcage lock (Jonathan Roberts)
+
+ * NTLM fixes and new tests (Jonathan Roberts)
+
+
+2021-04-07, Version 3.2.0
+=========================
+
 
 
 2021-04-07, Version 3.1.0
