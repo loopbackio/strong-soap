@@ -9,7 +9,7 @@
     "compress": "^0.99.0",
     "debug": "^4.1.1",
     "httpntlm-maa": "^2.0.6",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "node-rsa": "^1.1.1",
     "request": "^2.72.0",
     "sax": "^1.2",
