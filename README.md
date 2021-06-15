@@ -377,6 +377,13 @@ WS-Security X509 Certificate support.
 
 _Note_: Optional dependency 'ursa' is required to be installed successfully when WSSecurityCert is used.
 
+### ClientSSLSecurityPFX
+
+```js
+  const pfxSecurity = new soap.ClientSSLSecurityPFX(pathToPfxOrFileBuffer, passphrase)
+  client.setSecurity(pfxSecurity)
+```
+
 ## XML attributes
 
 ### Handling XML attributes, value, and XML (wsdlOptions)
