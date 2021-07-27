@@ -2,9 +2,6 @@
 Questions:
   https://groups.google.com/forum/#!forum/loopbackjs
   https://gitter.im/strongloop/loopback
-Immediate support:
-  https://strongloop.com/api-connect-faqs/
-  https://strongloop.com/node-js/subscription-plans/
 -->
 
 # Description/Steps to reproduce

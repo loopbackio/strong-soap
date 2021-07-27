@@ -154,7 +154,7 @@ The Request envelope created by above service invocation:
 </soap:Envelope>
 ```
 
-This WSDL operation is defined as document/literal-wrapped style. Hence the request in soap <Body> is wrapped in operation name. Refer to test cases [server-client-document-test](https://github.com/strongloop/strong-soap/blob/master/test/server-client-document-test.js) and  [server-client-rpc-test](https://github.com/strongloop/strong-soap/blob/master/test/server-client-rpc-test.js) to understand document and rpc styles and their
+This WSDL operation is defined as document/literal-wrapped style. Hence the request in soap <Body> is wrapped in operation name. Refer to test cases [server-client-document-test](https://github.com/loopbackio/strong-soap/blob/master/test/server-client-document-test.js) and  [server-client-rpc-test](https://github.com/loopbackio/strong-soap/blob/master/test/server-client-rpc-test.js) to understand document and rpc styles and their
 Request, Response and Fault samples.
 
 The `options` argument allows you to customize the client with the following properties:
@@ -200,7 +200,7 @@ console.log(JSON.stringify(description.StockQuote.StockQuoteSoap.GetQuote));
 
 Use the specified security protocol.
 
-Refer to test case [ssl-test](https://github.com/strongloop/strong-soap/blob/master/test/ssl-test.js) for an example of using this API.
+Refer to test case [ssl-test](https://github.com/loopbackio/strong-soap/blob/master/test/ssl-test.js) for an example of using this API.
 
 ### Client.*method*(args, callback)
 
@@ -296,7 +296,7 @@ Soap body contents. Useful if you don't want to log /store Soap headers.
 the SOAP response body as well as the entire `IncomingMessage` response object.
 This is emitted for all responses (both success and errors).
 
-For an example of using this API, see  [ssl-test](https://github.com/strongloop/strong-soap/blob/master/test/client-test.js).
+For an example of using this API, see  [ssl-test](https://github.com/loopbackio/strong-soap/blob/master/test/client-test.js).
 
 Here is an example of 'soapError' event
 
@@ -517,7 +517,7 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 });
 ```
 
-To see it in practice, consider the sample in: [test/request-response-samples/addPets__force_namespaces](https://github.com/strongloop/strong-soap/tree/master/test/request-response-samples/addPets__force_namespaces)
+To see it in practice, consider the sample in: [test/request-response-samples/addPets__force_namespaces](https://github.com/loopbackio/strong-soap/tree/master/test/request-response-samples/addPets__force_namespaces)
 
 ## XMLHandler
 
@@ -605,7 +605,7 @@ Parameters:
 - `wsdlURL` WSDL url to load as named in the cache.
 - `options` WSDL options
 
-An example of loading WSDLs into your `options.WSDL_CACHE` and calling `wsdl.loadSync()` can be found in the test [test/wsdl-load-from-memory-test](https://github.com/strongloop/strong-soap/tree/master/test/wsdl-load-from-memory-test.js)
+An example of loading WSDLs into your `options.WSDL_CACHE` and calling `wsdl.loadSync()` can be found in the test [test/wsdl-load-from-memory-test](https://github.com/loopbackio/strong-soap/tree/master/test/wsdl-load-from-memory-test.js)
 
 
 ## Server
@@ -661,7 +661,7 @@ Creates a new SOAP server that listens on *path* and provides *services*.
   soap.listen(server, '/wsdl', myService, xml);
 ```
 
-An example of using the SOAP server is in [test/server-client-document-test](https://github.com/strongloop/strong-soap/tree/master/test/server-client-document-test.js)
+An example of using the SOAP server is in [test/server-client-document-test](https://github.com/loopbackio/strong-soap/tree/master/test/server-client-document-test.js)
 
 ### Options
 
@@ -716,7 +716,7 @@ service method.
 
 ```
 
-An example of using the SOAP server is in [test/server-test](https://github.com/strongloop/strong-soap/tree/master/test/server-test.js)
+An example of using the SOAP server is in [test/server-test](https://github.com/loopbackio/strong-soap/tree/master/test/server-test.js)
 
 ### SOAP Fault
 
@@ -773,7 +773,7 @@ SOAP 1.2 Fault:
 ```
 
 
-Examples of  SOAP 1.1/SOAP 1.2 Fault response can be found in test [test/server-client-document-test](https://github.com/strongloop/strong-soap/tree/master/test/server-client-document-test.js)
+Examples of  SOAP 1.1/SOAP 1.2 Fault response can be found in test [test/server-client-document-test](https://github.com/loopbackio/strong-soap/tree/master/test/server-client-document-test.js)
 
 ### Server security example using PasswordDigest
 
@@ -874,7 +874,7 @@ Returns all defined headers.
 
 Removes all defined headers.
 
-Examples of using SOAP header API are in: [test/server-test](https://github.com/strongloop/strong-soap/tree/master/test/server-test.js) and  [test/server-test](https://github.com/strongloop/strong-soap/tree/master/test/client-test.js)
+Examples of using SOAP header API are in: [test/server-test](https://github.com/loopbackio/strong-soap/tree/master/test/server-test.js) and  [test/server-test](https://github.com/loopbackio/strong-soap/tree/master/test/client-test.js)
 
 ## soap-stub
 
@@ -936,4 +936,4 @@ describe('myService', function() {
 
 ## Contributors
 
- * [All Contributors](https://github.com/strongloop/strong-soap/graphs/contributors)
+ * [All Contributors](https://github.com/loopbackio/strong-soap/graphs/contributors)
