@@ -1,3 +1,12 @@
+# Changes
+This fork adds the ability to add attributes to soap envelope and header elements.
+
+###Add attributes
+Define your attributes as an array of type `{ns:String, nsUri:String}`.
+`client.addEnvelopeAttributes([{ns:'xmlns:mha',nsUri:'https://my.uri.value'])`
+`client.addHeaderAttributes([{ns:'xmlns:mha',nsUri:'https://my.uri.value'])`
+
+
 # strong-soap
 
 This module provides a Node.js SOAP client for invoking web services and a mock-up SOAP server capability to create and test your web service. This module is based on `node-soap` module.
