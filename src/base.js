@@ -10,7 +10,7 @@ var NamespaceContext = require('./parser/nscontext');
 var SOAPElement = require('./soapModel').SOAPElement;
 var xmlBuilder = require('xmlbuilder');
 var XMLHandler = require('./parser/xmlHandler');
-  
+
 class Base extends EventEmitter {
   constructor(wsdl, options) {
     super();
@@ -19,6 +19,8 @@ class Base extends EventEmitter {
     this.soapHeaders = [];
     this.httpHeaders = {};
     this.bodyAttributes = [];
+    this.envelopeAttributes = [];
+    this.headerAttributes = [];
   }
 
   addSoapHeader(value, qname) {
@@ -53,6 +55,22 @@ class Base extends EventEmitter {
     }
   }
 
+  /**
+   * Set the attributes for the envelope element
+   * @param {{ns:String, nsUri:String}[]} envelopeAttributes
+   */
+  setEnvelopAttributes(envelopeAttributes) {
+    this.envelopeAttributes = envelopeAttributes;
+  }
+
+  /**
+   * Set the attributes for header element.
+   * @param {{ns:String, nsUri:String}[]} headerAttributes
+   */
+  setHeaderAttributes(headerAttributes) {
+    this.headerAttributes = headerAttributes;
+  }
+
   getHttpHeaders() {
     return this.httpHeaders;
   }
@@ -76,6 +94,8 @@ class Base extends EventEmitter {
     doc.attribute('xmlns:' + prefix, nsURI);
     let header = doc.element(prefix + ':Header');
     let body = doc.element(prefix + ':Body');
+    envelopeAttr.forEach(({ns,nsUri})=>doc.attribute(ns,nsUri))
+    headerAttr.forEach(({ns,nsUri})=>header.attribute(ns,nsUri))
     return {
       body: body,
       header: header,
