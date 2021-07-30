@@ -642,8 +642,8 @@ Creates a new SOAP server that listens on *path* and provides *services*.
               },
 
               // You can also inspect the original `req`
-              reallyDeatailedFunction: function(args, cb, headers, req) {
-                  console.log('SOAP `reallyDeatailedFunction` request from ' + req.connection.remoteAddress);
+              reallyDetailedFunction: function(args, cb, headers, req) {
+                  console.log('SOAP `reallyDetailedFunction` request from ' + req.connection.remoteAddress);
                   return {
                       name: headers.Token
                   };
