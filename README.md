@@ -1,5 +1,9 @@
 # strong-soap
 
+[![CI](https://github.com/loopbackio/strong-soap/actions/workflows/continuous-integration.yaml/badge.svg)](https://github.com/loopbackio/strong-soap/actions/workflows/continuous-integration.yaml)
+[![Build Status](https://app.travis-ci.com/loopbackio/strong-soap.svg?branch=master)](https://app.travis-ci.com/loopbackio/strong-soap)
+[![Coverage Status](https://coveralls.io/repos/github/loopbackio/strong-soap/badge.svg?branch=master)](https://coveralls.io/github/loopbackio/strong-soap?branch=master)
+
 This module provides a Node.js SOAP client for invoking web services and a mock-up SOAP server capability to create and test your web service. This module is based on `node-soap` module.
 
 <!-- Run `npm run toc` to update below section -->

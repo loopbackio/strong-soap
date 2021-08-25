@@ -28,20 +28,20 @@
     "lib": "./lib"
   },
   "scripts": {
+    "postinstall": "husky install",
+    "build": "babel src -d lib",
+    "prepublishOnly": "npm run build",
     "toc": "doctoc Readme.md --github --maxlevel 3",
     "_pretest": "jshint index.js lib test",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls -v",
-    "test": "nyc --reporter=html mocha --exit --timeout 60000 test/*-test.js test/security/*.js",
-    "citest": "npm test",
-    "postcitest": "npm run coveralls",
-    "pretest": "babel src -d lib",
-    "prepare": "babel src -d lib"
+    "test": "nyc --reporter=lcov mocha --exit --timeout 60000 test/*-test.js test/security/*.js"
   },
   "keywords": [
     "soap"
   ],
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "async": "^3.2.0",
     "babel-cli": "^6.9.0",
     "babel-preset-env": "^1.6.1",
@@ -55,6 +55,7 @@
     "express": "^4.16.4",
     "express-ntlm": "2.4.0",
     "glob": "^7.0.3",
+    "husky": "^7.0.2",
     "jshint": "^2.12.0",
     "mocha": "^8.2.0",
     "nyc": "^15.1.0",
