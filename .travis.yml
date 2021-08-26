@@ -2,6 +2,9 @@ arch:
   - ard64
   - ppc64le
   - s390x
+branches:
+  only:
+    - master
 language: node_js
 env:
   NODE_OPTIONS: --max-old-space-size=4096
