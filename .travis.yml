@@ -1,19 +1,17 @@
 arch:
-  - ard64
+  - arm64
   - ppc64le
   - s390x
 branches:
   only:
     - master
 language: node_js
-env:
-  NODE_OPTIONS: --max-old-space-size=4096
 node_js:
-  - '10'
-  - '12'
-  - '14'
-  - '16'
-before_install: npm install -g npm
+  - 10
+  - 12
+  - 14
+  - 16
+before_install: npm install --global npm
 script:
   - npm run --ignore-scripts build
   - npm test --ignore-scripts
