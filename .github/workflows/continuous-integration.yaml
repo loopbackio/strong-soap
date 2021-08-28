@@ -10,9 +10,6 @@ on:
   schedule:
     - cron: '0 2 * * 1' # At 02:00 on Monday
 
-env:
-  NODE_OPTIONS: --max-old-space-size=4096
-
 jobs:
   test:
     name: Test
@@ -37,7 +34,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Update NPM
-        run: npm install -g npm
+        run: npm install --global npm
       - name: Bootstrap project
         if: ${{ matrix.node-version != '8.11.1' }}
         run: npm ci --ignore-scripts
