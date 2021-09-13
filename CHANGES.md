@@ -1,3 +1,8 @@
+2021-09-13, Version 3.3.1
+=========================
+
+ * fix: fixed installing the library from npm (Aliaksandr Krasitski)
+
 2021-09-13, Version 3.3.0
 =========================
 
