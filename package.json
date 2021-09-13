@@ -33,7 +33,8 @@
   "scripts": {
     "postinstall": "husky install",
     "build": "babel src --source-maps --out-dir=lib",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "pinst --disable && npm run build",
+    "postpublish": "pinst --enable",
     "toc": "doctoc Readme.md --github --maxlevel 3",
     "_pretest": "jshint index.js lib test",
     "test": "nyc --reporter=lcov mocha --exit --timeout 60000 test/*-test.js test/security/*.js"
@@ -60,6 +61,7 @@
     "jshint": "^2.12.0",
     "mocha": "^8.2.0",
     "nyc": "^15.1.0",
+    "pinst": "^2.1.6",
     "readable-stream": "^3.6.0",
     "semver": "^7.3.2",
     "should": "^13.2.1",
