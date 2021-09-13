@@ -1,3 +1,14 @@
+2021-09-13, Version 3.3.0
+=========================
+
+ * Typo in example server code. (Sam Graham)
+ 
+ * chore: enable sourcemaps (Rifa Achrinza)
+
+ * docs: add `ClientSSLSecurityPFX` to readme (Luan Raithz Machado)
+
+ * chore: bump xml-crypto 2.1.3 (Aliaksandr Krasitski)
+
 2021-04-22, Version 3.2.1
 =========================
 
