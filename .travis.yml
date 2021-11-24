@@ -11,7 +11,13 @@ node_js:
   - 12
   - 14
   - 16
-before_install: npm install --global npm
+before_install: |
+  NODEJS_VERSION=$(node --version)
+  if  ['v10' == $(NODEJS_VERSION%%.* ]
+  then
+    npm install --global npm@7
+  else
+    npm install --global npm@8
 script:
   - npm run --ignore-scripts build
   - npm test --ignore-scripts
