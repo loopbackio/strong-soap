@@ -57,4 +57,3 @@ XSDElement.AttributeDescriptor = descriptor.AttributeDescriptor;
 XSDElement.TypeDescriptor = descriptor.TypeDescriptor;
 
 module.exports = XSDElement;
-

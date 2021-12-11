@@ -3,7 +3,11 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
+type NamespaceMapping = {
+  uri: string;
+  prefix: string;
+  declared: boolean;
+};
 
 /**
  * Scope for XML namespaces
@@ -12,11 +16,10 @@
  * @constructor
  */
 class NamespaceScope {
-  constructor(parent) {
-    this.parent = parent;
-    this.namespaces = {};
-    this.prefixCount = 0;
-  }
+  namespaces: Record<string, NamespaceMapping> = {};
+  prefixCount = 0;
+
+  constructor(public parent: NamespaceScope) { }
 
   /**
    * Look up the namespace URI by prefix
@@ -24,7 +27,7 @@ class NamespaceScope {
    * @param {Boolean} [localOnly] Search current scope only
    * @returns {String} Namespace URI
    */
-  getNamespaceURI(prefix, localOnly) {
+  getNamespaceURI(prefix: string, localOnly?: boolean): string {
     switch (prefix) {
       case 'xml':
         return 'http://www.w3.org/XML/1998/namespace';
@@ -41,9 +44,10 @@ class NamespaceScope {
           return null;
         }
     }
+    'use strict';
   }
 
-  getNamespaceMapping(prefix) {
+  getNamespaceMapping(prefix: string | number): NamespaceMapping {
     switch (prefix) {
       case 'xml':
         return {
@@ -76,7 +80,7 @@ class NamespaceScope {
    * @param {Boolean} [localOnly] Search current scope only
    * @returns {String} Namespace prefix
    */
-  getPrefix(nsURI, localOnly) {
+  getPrefix(nsURI: string, localOnly?: boolean): string | null {
     switch (nsURI) {
       case 'http://www.w3.org/XML/1998/namespace':
         return 'xml';
@@ -102,7 +106,7 @@ class NamespaceScope {
    * @param {Boolean} [localOnly] Search current scope only
    * @returns {String} Namespace prefix
    */
-  getPrefixMapping(nsURI, localOnly) {
+  getPrefixMapping(nsURI: string, localOnly?: boolean): string | NamespaceMapping | null {
     switch (nsURI) {
       case 'http://www.w3.org/XML/1998/namespace':
         return 'xml';
@@ -127,7 +131,7 @@ class NamespaceScope {
    * @param base {string} The base for prefix
    * @returns {string}
    */
-  generatePrefix(base) {
+  generatePrefix(base: string): string {
     base = base || 'ns';
     while (true) {
       let prefix = 'ns' + (++this.prefixCount);
@@ -145,8 +149,10 @@ class NamespaceScope {
  * @constructor
  */
 class NamespaceContext {
+  scopes: NamespaceScope[] = [];
+  currentScope: NamespaceScope | null;
+
   constructor() {
-    this.scopes = [];
     this.pushContext();
   }
 
@@ -158,7 +164,7 @@ class NamespaceContext {
    * @returns {boolean} true if the mapping is added or false if the mapping
    * already exists
    */
-  addNamespace(prefix, nsURI, localOnly) {
+  addNamespace(prefix: string, nsURI: string, localOnly?: boolean): boolean {
     if (this.getNamespaceURI(prefix, localOnly) === nsURI) {
       return false;
     }
@@ -188,7 +194,7 @@ class NamespaceContext {
    * Pop a scope out of the context
    * @returns {NamespaceScope} The removed scope
    */
-  popContext() {
+  popContext(): NamespaceScope {
     var scope = this.scopes.pop();
     if (scope) {
       this.currentScope = scope.parent;
@@ -204,7 +210,7 @@ class NamespaceContext {
    * @param {Boolean} [localOnly] Search current scope only
    * @returns {String} Namespace URI
    */
-  getNamespaceURI(prefix, localOnly) {
+  getNamespaceURI(prefix: string, localOnly?: boolean) {
     return this.currentScope &&
       this.currentScope.getNamespaceURI(prefix, localOnly);
   }
@@ -215,7 +221,7 @@ class NamespaceContext {
    * @param {Boolean} [localOnly] Search current scope only
    * @returns {String} Namespace prefix
    */
-  getPrefix(nsURI, localOnly) {
+  getPrefix(nsURI: string, localOnly?: boolean): string | null {
     return this.currentScope &&
       this.currentScope.getPrefix(nsURI, localOnly);
   }
@@ -225,7 +231,7 @@ class NamespaceContext {
    * @param {String} nsURI Namespace URI
    * @returns {String} Namespace mapping
    */
-  getPrefixMapping(nsURI) {
+  getPrefixMapping(nsURI: string): string | NamespaceMapping | null {
     return this.currentScope &&
       this.currentScope.getPrefixMapping(nsURI);
   }
@@ -235,7 +241,7 @@ class NamespaceContext {
    * @param base {string} The base for prefix
    * @returns {string}
    */
-  generatePrefix(base) {
+  generatePrefix(base?: string): string {
     return this.currentScope &&
       this.currentScope.generatePrefix(base);
   }
@@ -246,8 +252,8 @@ class NamespaceContext {
    * @param {String} nsURI Namespace URI
    * @returns {Object} The matching or generated namespace mapping
    */
-  registerNamespace(prefix, nsURI) {
-    var mapping;
+  registerNamespace(prefix: string | undefined, nsURI: string): NamespaceMapping {
+    var mapping: NamespaceMapping;
     if (!prefix) {
       prefix = this.generatePrefix();
     } else {
@@ -279,7 +285,7 @@ class NamespaceContext {
    * @param {String} nsURI Namespace URI
    * @returns {Boolean} true if the declaration is created
    */
-  declareNamespace(prefix, nsURI) {
+  declareNamespace(prefix?: string, nsURI?: string): NamespaceMapping | null {
     var mapping = this.registerNamespace(prefix, nsURI);
     if (!mapping) return null;
     if (mapping.declared) {
@@ -301,6 +307,3 @@ class NamespaceContext {
 }
 
 module.exports = NamespaceContext;
-
-
-

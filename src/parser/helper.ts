@@ -3,10 +3,10 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
+import crypto from 'crypto';
 
 // Primitive data types
-var primitiveDataTypes = {
+var primitiveDataTypes: Record<string, object> = {
   string: String,
   boolean: Boolean,
   decimal: Number,
@@ -29,7 +29,7 @@ var primitiveDataTypes = {
 };
 
 // Derived data types
-var derivedDataTypes = {
+var derivedDataTypes: Record<string, object> = {
   normalizedString: String,
   token: String,
   language: String,
@@ -58,7 +58,7 @@ var derivedDataTypes = {
 };
 
 // Built-in data types
-var schemaTypes = {};
+export var schemaTypes = {};
 
 for (let s in primitiveDataTypes) {
   schemaTypes[s] = primitiveDataTypes[s];
@@ -67,7 +67,7 @@ for (let s in derivedDataTypes) {
   schemaTypes[s] = derivedDataTypes[s];
 }
 
-var namespaces = {
+export var namespaces: Record<string, string> = {
   wsdl: 'http://schemas.xmlsoap.org/wsdl/',
   soap: 'http://schemas.xmlsoap.org/wsdl/soap/',
   soap12: 'http://schemas.xmlsoap.org/wsdl/soap12/',
@@ -82,7 +82,7 @@ var namespaces = {
   xml: 'http://www.w3.org/XML/1998/namespace'
 };
 
-function xmlEscape(obj) {
+export function xmlEscape(obj: string): string {
   if (typeof obj === 'string') {
     if (obj.substr(0, 9) === '<![CDATA[' && obj.substr(-3) === "]]>") {
       return obj;
@@ -98,8 +98,7 @@ function xmlEscape(obj) {
   return obj;
 }
 
-var crypto = require('crypto');
-exports.passwordDigest = function passwordDigest(nonce, created, password) {
+export function passwordDigest(nonce: string, created: string, password: string) {
   // digest = base64 ( sha1 ( nonce + created + password ) )
   var pwHash = crypto.createHash('sha1');
   var rawNonce = Buffer.from(nonce || '', 'base64').toString('binary');
@@ -107,9 +106,7 @@ exports.passwordDigest = function passwordDigest(nonce, created, password) {
   return pwHash.digest('base64');
 };
 
-var EMPTY_PREFIX = ''; // Prefix for targetNamespace
-
-exports.EMPTY_PREFIX = EMPTY_PREFIX;
+export var EMPTY_PREFIX = ''; // Prefix for targetNamespace
 
 /**
  * Find a key from an object based on the value
@@ -117,7 +114,7 @@ exports.EMPTY_PREFIX = EMPTY_PREFIX;
  * @param {*} nsURI value
  * @returns {String} The matching key
  */
-exports.findPrefix = function(xmlnsMapping, nsURI) {
+export function findPrefix<T extends Record<string, string>>(xmlnsMapping: T, nsURI: string): keyof T {
   for (var n in xmlnsMapping) {
     if (n === EMPTY_PREFIX) continue;
     if (xmlnsMapping[n] === nsURI)
@@ -125,7 +122,7 @@ exports.findPrefix = function(xmlnsMapping, nsURI) {
   }
 };
 
-exports.extend = function extend(base, obj) {
+export function extend<T extends object>(base: T, obj: object): T {
   if (base !== null && typeof base === "object" &&
     obj !== null && typeof obj === "object") {
     Object.keys(obj).forEach(function(key) {
@@ -136,16 +133,14 @@ exports.extend = function extend(base, obj) {
   return base;
 };
 
-exports.schemaTypes = schemaTypes;
-exports.xmlEscape = xmlEscape;
-exports.namespaces = namespaces;
+class _Set<T> {
+  set: Set<T> | T[];
 
-class _Set {
   constructor() {
     this.set = typeof Set === 'function' ? new Set() : [];
   }
 
-  add(val) {
+  add(val: T) {
     if (Array.isArray(this.set)) {
       if (this.set.indexOf(val) === -1) {
         this.set.push(val);
@@ -156,7 +151,7 @@ class _Set {
     return this;
   }
 
-  has(val) {
+  has(val: T) {
     if (Array.isArray(this.set)) {
       return this.set.indexOf(val) !== -1;
     } else {

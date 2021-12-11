@@ -3,15 +3,13 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
-
-var helper = require('./helper');
+import * as helper from './helper';
+import SimpleType from './xsd/simpleType'
 var builtinTypes;
 
-function getBuiltinTypes() {
+export function getBuiltinTypes(): SimpleType[] {
   if (builtinTypes) return builtinTypes;
   builtinTypes = {};
-  var SimpleType = require('./xsd/simpleType');
   for (let t in helper.schemaTypes) {
     let type = new SimpleType('xsd:simpleType',
       {name: t, 'xmlns:xsd': helper.namespaces.xsd}, {});
@@ -22,9 +20,7 @@ function getBuiltinTypes() {
   return builtinTypes;
 }
 
-exports.getBuiltinTypes = getBuiltinTypes;
-
-exports.getBuiltinType = function(name) {
+export function getBuiltinType(name) {
   return getBuiltinTypes()[name];
 };
 

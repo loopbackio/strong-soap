@@ -3,14 +3,12 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
-
 var g = require('../globalize');
-var assert = require('assert');
-var QName = require('./qname');
-var typeRegistry = require('./typeRegistry');
-var helper = require('./helper');
-var xsd = require('./xsd');
+import assert from 'assert';
+import * as QName from './qname';
+import typeRegistry from './typeRegistry';
+import * as helper from './helper';
+import * as xsd from './xsd';
 var debug = require('debug')('strong-soap:wsdl:element');
 
 var EMPTY_PREFIX = helper.EMPTY_PREFIX;
@@ -19,8 +17,30 @@ var namespaces = helper.namespaces;
 /**
  * Base class for all elements of WSDL/XSD
  */
-class Element {
-  constructor(nsName, attrs, options) {
+export = class Element {
+  static EMPTY_PREFIX = EMPTY_PREFIX;
+  static namespaces = namespaces
+
+  prefix: string;
+  $name: string;
+  name: string;
+  nsURI: string;
+  parent: Element | null;
+  children: Element[]
+  xmlns: object
+  $targetNamespace: string;
+  targetNamespace: string;
+
+  valueKey: string;
+  xmlKey: string;
+  ignoredNamespaces: string[];
+  forceSoapVersion?: string;
+
+  constructor(
+    public nsName: string,
+    attrs,
+    options
+  ) {
     var qname = QName.parse(nsName);
 
     this.nsName = nsName;
@@ -162,7 +182,7 @@ class Element {
    * Get the target namespace URI
    * @returns {string} Target namespace URI
    */
-  getTargetNamespace() {
+  getTargetNamespace(): string {
     if (this.targetNamespace) {
       return this.targetNamespace;
     } else if (this.parent) {
@@ -175,7 +195,7 @@ class Element {
    * Get the qualified name
    * @returns {QName} Qualified name
    */
-  getQName() {
+  getQName(): QName {
     return new QName(this.targetNamespace, this.$name);
   }
 
@@ -238,8 +258,3 @@ class Element {
     debug('Unknown element: %s %s', this.nsURI, this.nsName)
   }
 }
-
-Element.EMPTY_PREFIX = EMPTY_PREFIX;
-Element.namespaces = namespaces;
-
-module.exports = Element;

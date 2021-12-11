@@ -3,13 +3,17 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
+import NamespaceContext from "./nscontext";
 
 var g = require('../globalize');
-var assert = require('assert');
+import assert from 'assert';
 var qnameExp = /^(?:\{([^\{\}]*)\})?(?:([^\{\}]+):)?([^\{\}\:]+)$/;
 
-class QName {
+export = class QName {
+  nsURI: string;
+  prefix: string;
+  name: string;
+
   /**
    * Create a new QName
    * - new QName(name)
@@ -20,7 +24,7 @@ class QName {
    * @param {string} name Local name
    * @param {string} prefix Namespace prefix
    */
-  constructor(nsURI, name, prefix) {
+  constructor(nsURI: string, name?: string, prefix?: string) {
     if (arguments.length === 1) {
       assert.equal(typeof nsURI, 'string',
         'The qname must be string in form of {nsURI}prefix:name');
@@ -49,7 +53,7 @@ class QName {
    * {nsURI}prefix:name
    * @returns {string}
    */
-  toString() {
+  toString(): string {
     var str = '';
     if (this.nsURI) {
       str = '{' + this.nsURI + '}';
@@ -67,7 +71,7 @@ class QName {
    * @param {string|NamespaceContext} nsURI
    * @returns {QName}
    */
-  static parse(qname, nsURI) {
+  static parse(qname?: string, nsURI?: string | NamespaceContext): QName {
     qname = qname || '';
     var result = new QName(qname);
     var uri;
@@ -86,6 +90,3 @@ class QName {
     return result;
   }
 }
-
-module.exports = QName;
-

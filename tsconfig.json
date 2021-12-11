@@ -1,0 +1,15 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+        "module": "CommonJS",
+        "allowJs": true,
+        "lib": ["es2017"],
+        "target": "es2017",
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "incremental": true,
+        "outDir": "dist",
+        "esModuleInterop": true
+    },
+    "include": ["src"]
+}

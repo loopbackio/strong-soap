@@ -3,10 +3,9 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
+import crypto from 'crypto';
 
-var crypto = require('crypto');
-exports.passwordDigestOriginal = function passwordDigest(nonce, created, password) {
+export const passwordDigestOriginal = function passwordDigest(nonce: string, created: string, password: string) {
   // digest = base64 ( sha1 ( nonce + created + password ) )
   var pwHash = crypto.createHash('sha1');
   var rawNonce = Buffer.from(nonce || '', 'base64').toString('binary');
@@ -14,7 +13,7 @@ exports.passwordDigestOriginal = function passwordDigest(nonce, created, passwor
   return pwHash.digest('base64');
 };
 
-exports.passwordDigest = function (nonce, created, password) {
+export function passwordDigest(nonce: string, created: string, password: string): string {
   // digest = base64 ( sha1 ( nonce + created + password ) )
   var pwHash = crypto.createHash('sha1');
   var rawNonce = Buffer.from(nonce || '', 'base64');
@@ -26,9 +25,7 @@ exports.passwordDigest = function (nonce, created, password) {
   return pwHash.digest('base64');
 };
 
-var TNS_PREFIX = ''; // Prefix for targetNamespace
-
-exports.TNS_PREFIX = TNS_PREFIX;
+export const TNS_PREFIX = '' // Prefix for targetNamespace
 
 /**
  * Find a key from an object based on the value
@@ -36,7 +33,7 @@ exports.TNS_PREFIX = TNS_PREFIX;
  * @param {*} nsURI value
  * @returns {String} The matching key
  */
-exports.findPrefix = function(xmlnsMapping, nsURI) {
+export function findPrefix<T extends Record<string, string>>(xmlnsMapping: T, nsURI: string): keyof T | void {
   for (var n in xmlnsMapping) {
     if (n === TNS_PREFIX) continue;
     if (xmlnsMapping[n] === nsURI) {
@@ -45,7 +42,7 @@ exports.findPrefix = function(xmlnsMapping, nsURI) {
   }
 };
 
-exports.extend = function extend(base, obj) {
+export function extend(base, obj) {
   if (base !== null && typeof base === "object" &&
     obj !== null && typeof obj === "object") {
     Object.keys(obj).forEach(function(key) {
@@ -56,7 +53,7 @@ exports.extend = function extend(base, obj) {
   return base;
 };
 
-exports.toXMLDate = function(d) {
+export function toXMLDate(d: Date): string {
   function pad(n) {
     return n < 10 ? '0' + n : n;
   }
@@ -69,7 +66,7 @@ exports.toXMLDate = function(d) {
     + pad(d.getUTCSeconds()) + 'Z';
 };
 
-exports.createPromiseCallback = function createPromiseCallback() {
+export function createPromiseCallback() {
   var cb;
   var promise = new Promise(function(resolve, reject) {
     cb = function(err, result, envelope, soapHeader) {

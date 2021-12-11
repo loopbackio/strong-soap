@@ -3,23 +3,21 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
-
-var assert = require('assert');
-var QName = require('../qname');
+import assert from 'assert';
+import QName from '../qname';
 
 /**
  * Descriptor for an XML attribute
  */
 class AttributeDescriptor {
-  constructor(qname, type, form) {
+  constructor(
+    public qname: QName | null,
+    public type,
+    public form: 'qualified' | 'unqualified' = 'qualified'
+  ) {
     assert(qname == null || qname instanceof QName, 'Invalid qname: ' + qname);
-    this.qname = qname;
-    this.type = type;
-    form = form || 'qualified';
     assert(form === 'qualified' || form === 'unqualified',
       'Invalid form: ' + form);
-    this.form = form;
   }
 }
 
@@ -27,24 +25,28 @@ class AttributeDescriptor {
  * Descriptor for an XML type
  */
 class TypeDescriptor {
-  constructor(qname) {
+  elements: ElementDescriptor[];
+  attributes: AttributeDescriptor[];
+  extension?: unknown;
+
+  constructor(qname?: QName) {
     this.elements = [];
     this.attributes = [];
   }
 
-  addElement(element) {
+  addElement(element: ElementDescriptor): ElementDescriptor {
     assert(element instanceof ElementDescriptor);
     this.elements.push(element);
     return element;
   }
 
-  addAttribute(attribute) {
+  addAttribute(attribute: AttributeDescriptor): AttributeDescriptor {
     assert(attribute instanceof AttributeDescriptor);
     this.attributes.push(attribute);
     return attribute;
   }
 
-  add(item, isMany) {
+  add(item: TypeDescriptor, isMany: boolean) {
     if (item instanceof ElementDescriptor) {
       this.addElement(item.clone(isMany));
     } else if (item instanceof AttributeDescriptor) {
@@ -93,20 +95,24 @@ class TypeDescriptor {
  * Descriptor for an XML element
  */
 class ElementDescriptor extends TypeDescriptor {
-  constructor(qname, type, form, isMany) {
+  isSimple = false;
+  isMany: boolean;
+
+  constructor(
+    public qname: QName,
+    public type: unknown,
+    public form: 'qualified' | 'unqualified',
+    isMany: boolean
+    ) {
     super();
     assert(qname == null || qname instanceof QName, 'Invalid qname: ' + qname);
-    this.qname = qname;
-    this.type = type;
     form = form || 'qualified';
     assert(form === 'qualified' || form === 'unqualified',
       'Invalid form: ' + form);
-    this.form = form;
     this.isMany = !!isMany;
-    this.isSimple = false;
   }
 
-  clone(isMany) {
+  clone(isMany: boolean) {
     // Check if the referencing element or this element has 'maxOccurs>1'
     isMany = (!!isMany) || this.isMany;
     var copy = new ElementDescriptor(this.qname, this.type, this.form, isMany);

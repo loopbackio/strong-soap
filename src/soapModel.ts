@@ -3,15 +3,18 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
-
-var assert = require('assert');
-var QName = require('./parser/qname');
+import assert from 'assert';
+import QName from './parser/qname';
 
 /**
  * Representation for soap elements
  */
 class SOAPElement {
+  options?: Record<string, unknown>;
+  qname?: QName;
+  value?: unknown;
+  xml?: string;
+
   constructor(value, qname, options) {
     if (typeof value === 'string' && !qname) {
       this.xml = value;
@@ -28,6 +31,9 @@ class SOAPElement {
  * Representation for soap attributes
  */
 class SOAPAttribute {
+  value: string;
+  qname: QName;
+
   constructor(value, qname) {
     assert(qname, 'qname is required');
     this.value = String(value);

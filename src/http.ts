@@ -5,12 +5,12 @@
 
 'use strict';
 
-var url = require('url');
-var requestModule = require('request');
+import url, { UrlWithStringQuery } from 'url';
+import requestModule from 'request';
 var debug = require('debug')('strong-soap:http');
 var debugSensitive = require('debug')('strong-soap:http:sensitive');
-var httpntlm = require('httpntlm-maa');
-var uuid = require('uuid').v4;
+import httpntlm from 'httpntlm-maa';
+import {v4 as uuid} from 'uuid'
 
 
 var VERSION = require('../package.json').version;
@@ -22,9 +22,10 @@ var VERSION = require('../package.json').version;
  *
  * @constructor
  */
-class HttpClient {
-  constructor(options) {
-    this.options = options || {};
+export = class HttpClient {
+  private _request: requestModule;
+  
+  constructor(public options: Record<string, unknown> & {request?: requestModule} = {}) {
     this._request = options.request || requestModule;
   }
 
@@ -36,7 +37,7 @@ class HttpClient {
    * @param {Object} exoptions Extra options
    * @returns {Object} The http request object for the `request` module
    */
-  buildRequest(rurl, data, exheaders, exoptions) {
+  buildRequest(rurl: string, data?: string | object, exheaders?: Record<string, string>, exoptions?: {attachments?: string[]}) {
     var curl = url.parse(rurl);
     var secure = curl.protocol === 'https:';
     var host = curl.hostname;
@@ -69,18 +70,25 @@ class HttpClient {
       headers[attr] = exheaders[attr];
     }
 
-    var options = {
+    var options: {
+      uri?: UrlWithStringQuery,
+      method?: string,
+      headers?: Record<string, string>,
+      followAllRedirects?: boolean,
+      multipart?: Record<string, unknown>[],
+      body?: string | object,
+    } = {
       uri: curl,
       method: method,
       headers: headers,
-      followAllRedirects: true
+      followAllRedirects: true,
     };
 
     if (attachments.length > 0) {
       const start = uuid();
       headers['Content-Type'] =
         'multipart/related; type="application/xop+xml"; start="<' + start + '>"; start-info="text/xml"; boundary=' + uuid();
-      const multipart = [{
+      const multipart: Record<string, unknown>[] = [{
         'Content-Type': 'application/xop+xml; charset=UTF-8; type="text/xml"',
         'Content-ID': '<' + start + '>',
         'body': data,
@@ -99,7 +107,6 @@ class HttpClient {
     } else {
       options.body = data;
     }
-
 
     exoptions = exoptions || {};
     for (attr in exoptions) {
@@ -122,7 +129,7 @@ class HttpClient {
    * @param {Object} body The http body
    * @param {Object} The parsed body
    */
-  handleResponse(req, res, body) {
+  handleResponse(req, res, body: string) {
     debug('Http response body: %j', body);
     if (typeof body === 'string') {
       // Remove any extra characters that appear before or after the SOAP
@@ -136,8 +143,12 @@ class HttpClient {
     return body;
   }
 
-  //check if NTLM authentication needed
-  isNtlmAuthRequired(ntlmSecurity, methodName) {
+  /**
+   * Check if NTLM authentication needed
+   */
+  isNtlmAuthRequired(ntlmSecurity: {
+    wsdlAuthRequired?: boolean | null,
+  } | null, methodName: string): boolean {
     //if ntlmSecurity is not set, then remote web service is not NTLM authenticated Web Service
     if (ntlmSecurity == null) {
       return false;
@@ -149,7 +160,7 @@ class HttpClient {
     return true;
   }
 
-  request(rurl, data, callback, exheaders, exoptions) {
+  request(rurl: string, data: string | object, callback: Function, exheaders: Record<string, string>, exoptions: Parameters<this['buildRequest']>[3]) {
     var self = this;
     var options = self.buildRequest(rurl, data, exheaders, exoptions);
     var headers = options.headers;
@@ -193,5 +204,3 @@ class HttpClient {
     return req;
   }
 }
-
-module.exports = HttpClient;

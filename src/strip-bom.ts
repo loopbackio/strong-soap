@@ -3,21 +3,18 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-/*
-strip the BOM characters in the beginning of UTF-8 
-or other unicode encoded strings
-http://en.wikipedia.org/wiki/Byte_order_mark 
-*/
-'use strict';
-module.exports = stripBom;
-
-function stripBom(str){
+/**
+  * strip the BOM characters in the beginning of UTF-8 
+  * or other unicode encoded strings
+  * http://en.wikipedia.org/wiki/Byte_order_mark 
+ */
+export = function stripBom(str: string): string {
 
 	if (typeof str !== 'string') {
 		throw new Error('Invalid input, only string allowed');
 	}
 	var chunk = Buffer.from(str);
-	var transformed;
+	var transformed: Buffer;
 	var value = str;
 	if (chunk[0] === 0xFE && chunk[1] === 0XFF) {
 		transformed = chunk.slice(2);
