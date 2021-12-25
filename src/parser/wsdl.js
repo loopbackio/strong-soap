@@ -479,8 +479,9 @@ class WSDL {
           if (err) {
             callback(err);
           } else if (response && response.statusCode === 200) {
-            wsdl = new WSDL(definition, uri, options);
-            WSDL_CACHE[uri] = wsdl;
+            const wsdlUri = _.get(response, 'request.uri.href', uri);
+            wsdl = new WSDL(definition, wsdlUri, options);
+            WSDL_CACHE[wsdlUri] = wsdl;
             wsdl.WSDL_CACHE = WSDL_CACHE;
             wsdl.load(callback);
           } else {
