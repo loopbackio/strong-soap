@@ -1,18 +1,32 @@
 2021-09-13, Version 3.3.1
 =========================
 
- * fix: fixed installing the library from npm (Aliaksandr Krasitski)
+ * fix: fixed installing the library from npm (push1st1k)
+
 
 2021-09-13, Version 3.3.0
 =========================
 
- * Typo in example server code. (Sam Graham)
- 
+ * chore: bump xml-crypto 2.1.3 (push1st1k)
+
+ * ci: restrict GITHUB_TOKEN permissions (Rifa Achrinza)
+
+ * ci: fix travis ci arch (Rifa Achrinza)
+
+ * docs: add `ClientSSLSecurityPFX` to readme (luanraithz)
+
+ * ci: enable windows testing (Rifa Achrinza)
+
+ * ci: restrict branch builds to master (Rifa Achrinza)
+
  * chore: enable sourcemaps (Rifa Achrinza)
 
- * docs: add `ClientSSLSecurityPFX` to readme (Luan Raithz Machado)
+ * ci: migrate to new CI (Rifa Achrinza)
 
- * chore: bump xml-crypto 2.1.3 (Aliaksandr Krasitski)
+ * Typo in example server code. (Sam Graham)
+
+ * chore: move repo to loopbackio org (Diana Lau)
+
 
 2021-04-22, Version 3.2.1
 =========================
