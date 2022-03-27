@@ -1,0 +1,2 @@
+schema: https://docs.renovatebot.com/renovate-schema.json
+extends: github>loopbackio/cicd//shared-configs/renovate/base
