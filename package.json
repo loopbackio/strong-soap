@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "compress": "^0.99.0",
-    "debug": "^4.1.1",
+    "debug": "^4.3.4",
     "httpntlm-maa": "^2.0.6",
     "lodash": "^4.17.20",
     "node-rsa": "^1.1.1",
