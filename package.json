@@ -52,7 +52,7 @@
     "diff": "^4.0.2",
     "doctoc": "^2.1.0",
     "duplexer": "^0.1.2",
-    "eslint": "^7.12.1",
+    "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "express": "^4.17.3",
     "express-ntlm": "2.4.0",
