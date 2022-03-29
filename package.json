@@ -55,7 +55,7 @@
     "eslint": "^7.32.0",
     "eslint-config-google": "^0.14.0",
     "express": "^4.17.3",
-    "express-ntlm": "2.4.0",
+    "express-ntlm": "2.6.1",
     "glob": "^7.2.0",
     "husky": "^7.0.4",
     "jshint": "^2.12.0",
