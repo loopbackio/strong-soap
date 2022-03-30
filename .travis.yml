@@ -7,18 +7,12 @@ branches:
     - master
 language: node_js
 node_js:
+  - 8.11.1
   - 10
   - 12
   - 14
   - 16
-before_install: |
-  NODEJS_VERSION=$(node --version)
-  if [ 'v10' == ${NODEJS_VERSION%%.*} ]
-  then
-    npm install --global npm@7
-  else
-    npm install --global npm@8
-  fi
+  - 17
 script:
-  - npm run --ignore-scripts build
-  - npm test --ignore-scripts
+  - npm run-script build
+  - npm test
