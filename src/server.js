@@ -81,50 +81,56 @@ class Server extends Base {
       }
       res.end();
     } else if (req.method === 'POST') {
-      res.setHeader('Content-Type', req.headers['content-type']);
-      var chunks = [], gunzip;
-      if (compress && req.headers['content-encoding'] === 'gzip') {
-        gunzip = new compress.Gunzip();
-        gunzip.init();
-      }
-      req.on('data', function(chunk) {
-        if (gunzip)
-          chunk = gunzip.inflate(chunk, 'binary');
-        chunks.push(chunk);
-      });
-      req.on('end', function() {
-        var xml = chunks.join('');
-        var result;
-        var error;
-        if (gunzip) {
-          gunzip.end();
-          gunzip = null;
+      if (!req.headers['content-type']) {
+        res.statusCode = 415;
+        res.write('The Content-Type is expected in the headers');
+        res.end();
+      } else {
+        res.setHeader('Content-Type', req.headers['content-type']);
+        var chunks = [], gunzip;
+        if (compress && req.headers['content-encoding'] === 'gzip') {
+          gunzip = new compress.Gunzip();
+          gunzip.init();
         }
-        try {
-          if (typeof self.log === 'function') {
-            self.log('received', xml);
+        req.on('data', function(chunk) {
+          if (gunzip)
+            chunk = gunzip.inflate(chunk, 'binary');
+          chunks.push(chunk);
+        });
+        req.on('end', function() {
+          var xml = chunks.join('');
+          var result;
+          var error;
+          if (gunzip) {
+            gunzip.end();
+            gunzip = null;
           }
-          self._process(xml, req, function(result, statusCode) {
-            if (statusCode) {
-              res.statusCode = statusCode;
+          try {
+            if (typeof self.log === 'function') {
+              self.log('received', xml);
             }
-            res.write(result);
+            self._process(xml, req, function(result, statusCode) {
+              if (statusCode) {
+                res.statusCode = statusCode;
+              }
+              res.write(result);
+              res.end();
+              if (typeof self.log === 'function') {
+                self.log('replied', result);
+              }
+            });
+          }
+          catch (err) {
+            error = err.stack || err;
+            res.statusCode = 500;
+            res.write(error);
             res.end();
             if (typeof self.log === 'function') {
-              self.log('replied', result);
+              self.log('error', error);
             }
-          });
-        }
-        catch (err) {
-          error = err.stack || err;
-          res.statusCode = 500;
-          res.write(error);
-          res.end();
-          if (typeof self.log === 'function') {
-            self.log('error', error);
           }
-        }
-      });
+        });
+      }
     }
     else {
       res.end();
