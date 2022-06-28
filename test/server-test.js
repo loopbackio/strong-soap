@@ -202,14 +202,33 @@ describe('SOAP Server', function() {
         body : '<soapenv:Envelope' +
                     ' xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"' +
                     ' xmlns:soap="http://service.applicationsnet.com/soap/">' +
-                '  <soapenv:Header/>' +
                 '  <soapenv:Body>' +
+      '  <soapenv:Header/>' +
                 '</soapenv:Envelope>',
         headers: {'Content-Type': 'text/xml'}
       }, function(err, res, body) {
         assert.ok(!err);
         assert.equal(res.statusCode, 500);
         assert.ok(body.length);
+        done();
+      }
+    );
+  });
+
+  it('should 415 on missing Content-type header', function(done) {
+    request.post({
+        url: test.baseUrl + '/stockquote?wsdl',
+        body : '<soapenv:Envelope' +
+                    ' xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"' +
+                    ' xmlns:soap="http://service.applicationsnet.com/soap/">' +
+                '  <soapenv:Header/>' +
+                '  <soapenv:Body>' +
+                '</soapenv:Envelope>',
+        headers: {}
+      }, function(err, res, body) {
+        assert.ok(!err);
+        assert.equal(res.statusCode, 415);
+        assert.equal(body, 'The Content-Type is expected in the headers');
         done();
       }
     );
@@ -360,7 +379,7 @@ describe('SOAP Server', function() {
         assert.equal(0, parseFloat(result.price));
         done();
       }, {
-        soapHeaders: { 
+        soapHeaders: {
           SomeToken: 123.45
         }
       });
