@@ -50,7 +50,7 @@
     "colors": "^1.4.0",
     "coveralls": "^3.1.1",
     "diff": "^5.1.0",
-    "doctoc": "^2.2.0",
+    "doctoc": "^2.2.1",
     "duplexer": "^0.1.2",
     "eslint": "^8.23.1",
     "eslint-config-google": "^0.14.0",
