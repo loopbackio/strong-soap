@@ -15,7 +15,7 @@
     "sax": "^1.2",
     "selectn": "^1.1.2",
     "strong-globalize": "^6.0.5",
-    "uuid": "^8.3.2",
+    "uuid": "^9.0.0",
     "xml-crypto": "^3.0.1",
     "xmlbuilder": "^10.1.1"
   },
