@@ -1,3 +1,45 @@
+2023-01-30, Version 3.4.2
+=========================
+
+ * chore: update dependency eslint to ^8.33.0 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^8.32.0 (renovate[bot])
+
+ * chore: update dependency glob to ^8.1.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.4.2 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^17.4.1 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.20.12 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.4.0 (renovate[bot])
+
+ * chore: update dependency husky to ^8.0.3 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.31.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.20.7 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.30.0 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.29.0 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.28.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.3.0 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.20.5 (renovate[bot])
+
+ * chore: use node.js 16 for commit lint GH action (dhmlau)
+
+ * chore: update dependency jshint to ^2.13.6 (renovate[bot])
+
+ * chore: update dependency husky to ^8.0.2 (renovate[bot])
+
+
 2022-11-07, Version 3.4.1
 =========================
 
