@@ -1,6 +1,6 @@
 {
-  "name": "strong-soap",
-  "version": "3.4.2",
+  "name": "strong-soap-without-parser",
+  "version": "1.0.0",
   "description": "A minimal node SOAP client",
   "engines": {
     "node": ">=8.11.1"
