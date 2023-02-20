@@ -3,21 +3,21 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-'use strict';
+"use strict";
 
-var WSDLElement = require('./wsdlElement');
-var QName = require('../qname');
+var WSDLElement = require("./wsdlElement");
+var QName = require("../qname");
 
 class Binding extends WSDLElement {
   constructor(nsName, attrs, options) {
     super(nsName, attrs, options);
-    this.transport = '';
-    this.style = '';
+    this.transport = "";
+    this.style = "";
   }
 
   addChild(child) {
     // soap:binding
-    if (child.name === 'binding') {
+    if (child.name === "binding") {
       this.transport = child.$transport;
       this.style = child.$style;
     }
@@ -35,9 +35,8 @@ class Binding extends WSDLElement {
         portType.postProcess(definitions);
         this.portType = portType;
 
-        for (var i = 0, child; child = children[i]; i++) {
-          if (child.name !== 'operation')
-            continue;
+        for (var i = 0, child; (child = children[i]); i++) {
+          if (child.name !== "operation") continue;
           var operation = this.portType.operations[child.$name];
           if (operation) {
             this.operations[child.$name] = child;
@@ -62,7 +61,7 @@ class Binding extends WSDLElement {
               // For RPC style
               child.parameterOrder = operation.$parameterOrder.split(/\s+/);
             }
-            child.style = child.style || style;
+            child.style = child.style || style || "document";
             child.postProcess(definitions);
           }
         }
@@ -74,17 +73,21 @@ class Binding extends WSDLElement {
 
   describe(definitions) {
     if (this.descriptor) return this.descriptor;
-    var operations = this.descriptor = {};
+    var operations = (this.descriptor = {});
     for (var name in this.operations) {
       var operation = this.operations[name];
       operations[name] = operation.describe(definitions);
     }
     return operations;
-  };
+  }
 }
 
-Binding.elementName = 'binding';
-Binding.allowedChildren = ['binding', 'SecuritySpec', 'operation',
-  'documentation'];
+Binding.elementName = "binding";
+Binding.allowedChildren = [
+  "binding",
+  "SecuritySpec",
+  "operation",
+  "documentation",
+];
 
 module.exports = Binding;
