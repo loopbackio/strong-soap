@@ -30,6 +30,10 @@ class XMLHandler {
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
+    if (val === null) {
+      return node;
+    }
+
     if (node == null) {
       node = xmlBuilder.begin({
         version: "1.0",
@@ -743,9 +747,6 @@ class XMLHandler {
     };
 
     p.oncdata = function (text) {
-      text = text && text.trim();
-      if (!text.length) return;
-
       if (/<\?xml[\s\S]+\?>/.test(text)) {
         text = self.xmlToJson(null, text);
       }
@@ -759,9 +760,6 @@ class XMLHandler {
     };
 
     p.ontext = function (text) {
-      text = text && text.trim();
-      if (!text.length) return;
-
       var top = stack[stack.length - 1];
       var descriptor = top.descriptor;
       var value = parseValue(text, descriptor);
