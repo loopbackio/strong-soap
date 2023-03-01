@@ -42,7 +42,7 @@ class XMLHandler {
     this.options.xsiTypeKey = this.options.xsiTypeKey || '$xsiType';
     this.options.date = this.options.date || {};
     this.options.date.timezone = this.options.date.timezone || {};
-    this.options.date.timezone.enabled = typeof this.options.date.timezone.enabled === 'boolean' ? this.options.date.timezone.enabled : false;
+    this.options.date.timezone.enabled = typeof this.options.date.timezone.enabled === 'boolean' ? this.options.date.timezone.enabled : true;
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
@@ -893,7 +893,8 @@ function parseValue(text, descriptor) {
  * @returns 
  */
 function toXmlDate(date, options) {
-  const isoStr = new Date(date).toISOString();
+  date = new Date(date);
+  const isoStr = date.toISOString();
   const formattedDate = isoStr.split('T')[0];
   const withTimezone = (options && options.date && options.date.timezone) && typeof options.date.timezone.enabled === 'boolean' ? options.date.timezone.enabled : true;
   if (!withTimezone) {
@@ -903,12 +904,14 @@ function toXmlDate(date, options) {
 }
 
 function toXmlTime(date) {
-  const isoStr = new Date(date).toISOString();
+  date = new Date(date);
+  const isoStr = date.toISOString();
   return isoStr.split('T')[1];
 }
 
 function toXmlDateTime(date) {
-  return new Date(date).toISOString();
+  date = new Date(date);
+  return date.toISOString();
 }
 
 /**
