@@ -19,6 +19,9 @@ class AttributeGroup extends XSDElement {
   }
 
   describe(definitions) {
+    if (!this.ref && this.$ref) {
+      this.resolve(definitions.schemas);
+    }
     if (this.descriptor) return this.descriptor;
     if (this.ref) {
       this.descriptor = this.ref.describe(definitions);

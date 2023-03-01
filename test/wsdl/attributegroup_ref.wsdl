@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="MyService"
+    targetNamespace="http://www.dummy.example.org/dummy.wsdl"
+          xmlns:tns="http://www.dummy.example.org/dummy.wsdl"
+          xmlns:xsd1="http://www.dummy.example.org/dummy.xsd"
+          xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+          xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.dummy.example.org/dummy.xsd"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+      <xsd:element name="DummyRequest" type="xsd1:DummyRequestType"/>
+      <xsd:element name="DummyResponse" type="xsd1:DummyResponseType"/>
+
+      <xsd:complexType name="DummyRequestType">
+        <xsd:sequence>
+          <xsd:element ref="xsd1:Id"    minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="Option" type="xsd1:DummyOptionType" minOccurs="1" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="DummyResponseType">
+      </xsd:complexType>
+
+      <xsd:complexType name="DummyOptionType">
+        <xsd:sequence>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="xsd1:DummyRequestOptionAttribGroup"/>
+      </xsd:complexType>
+
+      <xsd:element name="Id"          type="xsd:string"/>
+
+      <xsd:attributeGroup name="DummyRequestOptionAttribGroup">
+        <xsd:attribute ref ="xsd1:toBeNamespaced" use="required"/>
+      </xsd:attributeGroup>
+
+      <xsd:attribute name="toBeNamespaced"   type="xsd:integer"/>
+
+    </xsd:schema>
+  </wsdl:types>
+
+  <wsdl:message name="DummyRequestMsg">
+    <wsdl:part name="body" element="xsd1:DummyRequest"/>
+  </wsdl:message>
+  <wsdl:message name="DummyResponseMsg">
+    <wsdl:part name="body" element="xsd1:DummyResponse"/>
+  </wsdl:message>
+
+  <wsdl:portType name ="MyServicePortType">
+    <wsdl:operation name ="GetDummy">
+      <wsdl:input message="tns:DummyRequestMsg" name="GetDummyRequest"/>
+      <wsdl:output message="tns:DummyResponseMsg" name="GetDummyResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="MyServiceBinding" type="tns:MyServicePortType">
+
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <wsdl:operation name="GetDummy">
+      <soap:operation soapAction="GetDummy"/>
+      <wsdl:input name="GetDummyRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetDummyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+
+  </wsdl:binding>
+
+  <wsdl:service name="MyService">
+    <wsdl:port name="MyServicePort" binding="tns:MyServiceBinding">
+      <soap:address location="http://www.example.com/v1"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>
