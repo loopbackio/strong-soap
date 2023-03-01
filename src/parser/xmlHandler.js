@@ -886,16 +886,17 @@ function parseValue(text, descriptor) {
 /**
  * 
  * @param {string | Date} date 
- * @param {Object} options 
- * @param {Object} options.date
- * @param {Object} options.date.timezone
- * @param {boolean} options.date.timezone.enabled
+ * @param {Object} [options] 
+ * @param {Object} [options.date]
+ * @param {Object} [options.date.timezone]
+ * @param {boolean} [options.date.timezone.enabled]
  * @returns 
  */
 function toXmlDate(date, options) {
   const isoStr = new Date(date).toISOString();
   const formattedDate = isoStr.split('T')[0];
-  if (!options.date.timezone.enabled) {
+  const withTimezone = (options && options.date && options.date.timezone) && typeof options.date.timezone.enabled === 'boolean' ? options.date.timezone.enabled : true;
+  if (!withTimezone) {
     return formattedDate;
   }
   return formattedDate + 'Z';
