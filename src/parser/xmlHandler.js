@@ -21,6 +21,18 @@ var NamespaceContext = require('./nscontext');
 
 
 class XMLHandler {
+  /**
+   * @param {Object} [schemas] 
+   * @param {Object} [options]
+   * @param {boolean} [options.enforceRestrictions]
+   * @param {string} [options.valueKey]
+   * @param {string} [options.xmlKey]
+   * @param {string} [options.attributesKey]
+   * @param {string} [options.xsiTypeKey]
+   * @param {Object} [options.date]
+   * @param {Object} [options.date.timezone]
+   * @param {boolean} [options.date.timezone.enabled]
+   */
   constructor(schemas, options) {
     this.schemas = schemas || {};
     this.options = options || {};
@@ -28,6 +40,9 @@ class XMLHandler {
     this.options.xmlKey = this.options.xmlKey || '$xml';
     this.options.attributesKey = this.options.attributesKey || '$attributes';
     this.options.xsiTypeKey = this.options.xsiTypeKey || '$xsiType';
+    this.options.date = this.options.date || {};
+    this.options.date.timezone = this.options.date.timezone || {};
+    this.options.date.timezone.enabled = typeof this.options.date.timezone.enabled === 'boolean' ? this.options.date.timezone.enabled : false;
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
@@ -42,7 +57,7 @@ class XMLHandler {
     var name;
     let nameSpaceContextCreated = false;
     if (descriptor instanceof AttributeDescriptor) {
-      val = toXmlDateOrTime(descriptor, val);
+      val = toXmlDateOrTime(descriptor, val, this.options);
       name = descriptor.qname.name;
       if (descriptor.form === 'unqualified') {
         node.attribute(name, val);
@@ -116,7 +131,7 @@ class XMLHandler {
         && typeof val[this.options.xmlKey] !== "undefined") {
         val = val[this.options.xmlKey];
         element = node.element(elementName);
-        val = toXmlDateOrTime(descriptor, val);
+        val = toXmlDateOrTime(descriptor, val, this.options);
         element.raw(val);
       } else {
         // Enforce the type restrictions if configured for such
@@ -137,7 +152,7 @@ class XMLHandler {
             }
           }
         }
-        val = toXmlDateOrTime(descriptor, val);
+        val = toXmlDateOrTime(descriptor, val, this.options);
         element = isSimple ? node.element(elementName, val) : node.element(elementName);
       }
 
@@ -195,7 +210,7 @@ class XMLHandler {
       //val is not an object - simple or date types
       if (val != null && ( typeof val !== 'object' || val instanceof Date)) {
         // for adding a field value nsContext.popContext() shouldnt be called
-        val = toXmlDateOrTime(descriptor, val);
+        val = toXmlDateOrTime(descriptor, val, this.options);
         element.text(val);
         //add $attributes. Attribute can be an attribute defined in XSD or an xsi:type.
         //e.g of xsi:type <name xmlns=".." xmlns:xsi="..." xmlns:ns="..." xsi:type="ns:string">some name</name>
@@ -288,7 +303,7 @@ class XMLHandler {
   mapObject(node, nsContext, descriptor, val, attrs) {
     if (val == null) return node;
     if (typeof val !== 'object' || (val instanceof Date)) {
-      val = toXmlDateOrTime(descriptor, val);
+      val = toXmlDateOrTime(descriptor, val, this.options);
       node.text(val);
       return node;
     }
@@ -868,32 +883,51 @@ function parseValue(text, descriptor) {
   return value;
 }
 
-function toXmlDate(date) {
-  date = new Date(date);
-  var isoStr = date.toISOString();
-  return isoStr.split('T')[0] + 'Z';
+/**
+ * 
+ * @param {string | Date} date 
+ * @param {Object} options 
+ * @param {Object} options.date
+ * @param {Object} options.date.timezone
+ * @param {boolean} options.date.timezone.enabled
+ * @returns 
+ */
+function toXmlDate(date, options) {
+  const isoStr = new Date(date).toISOString();
+  const formattedDate = isoStr.split('T')[0];
+  if (!options.date.timezone.enabled) {
+    return formattedDate;
+  }
+  return formattedDate + 'Z';
 }
 
 function toXmlTime(date) {
-  date = new Date(date);
-  var isoStr = date.toISOString();
+  const isoStr = new Date(date).toISOString();
   return isoStr.split('T')[1];
 }
 
 function toXmlDateTime(date) {
-  date = new Date(date);
-  var isoStr = date.toISOString();
-  return isoStr;
+  return new Date(date).toISOString();
 }
 
-function toXmlDateOrTime(descriptor, val) {
+/**
+ * 
+ * @param {object} descriptor 
+ * @param {* | null} val 
+ * @param {Object} options
+ * @param {Object} options.date
+ * @param {Object} options.date.timezone
+ * @param {boolean} options.date.timezone.enabled
+ * @returns {string}
+ */
+function toXmlDateOrTime(descriptor, val, options) {
   if (!descriptor || !descriptor.type || val === null) return val;
   if (descriptor.type.name === 'date') {
-    val = toXmlDate(val);
+    return toXmlDate(val, options);
   } else if (descriptor.type.name === 'time') {
-    val = toXmlTime(val);
+    return toXmlTime(val);
   } else if (descriptor.type.name === 'dateTime') {
-    val = toXmlDateTime(val);
+    return toXmlDateTime(val);
   }
   return val;
 }
