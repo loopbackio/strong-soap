@@ -57,10 +57,8 @@ describe('xs-date-format-tests', function() {
 
     it('converts date to xml date without Z', function() {
       var xmlDate = xmlHandler.toXmlDate(inputDate, {
-        date: {
-          timezone: {
-            enabled: false,
-          },
+        timezone: {
+          enabled: false,
         },
       });
       assert.equal(xmlDate, '2019-03-27');
@@ -83,10 +81,8 @@ describe('xs-date-format-tests', function() {
 
     it('converts string to xml date without Z', function() {
       var xmlDate = xmlHandler.toXmlDate(inputDateStr, {
-        date: {
-          timezone: {
-            enabled: false,
-          },
+        timezone: {
+          enabled: false,
         },
       });
       assert.equal(xmlDate, '2019-03-27');
