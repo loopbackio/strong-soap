@@ -892,8 +892,7 @@ function parseValue(text, descriptor) {
  * @returns 
  */
 function toXmlDate(date, options) {
-  date = new Date(date);
-  const isoStr = date.toISOString();
+  const isoStr = new Date(date).toISOString();
   const formattedDate = isoStr.split('T')[0];
   const withTimezone = (options && options.timezone) && typeof options.timezone.enabled === 'boolean' ? options.timezone.enabled : true;
   if (!withTimezone) {
@@ -903,14 +902,12 @@ function toXmlDate(date, options) {
 }
 
 function toXmlTime(date) {
-  date = new Date(date);
-  const isoStr = date.toISOString();
+  const isoStr = new Date(date).toISOString();
   return isoStr.split('T')[1];
 }
 
 function toXmlDateTime(date) {
-  date = new Date(date);
-  return date.toISOString();
+  return new Date(date).toISOString();
 }
 
 /**
