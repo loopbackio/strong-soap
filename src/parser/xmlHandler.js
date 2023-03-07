@@ -30,7 +30,7 @@ class XMLHandler {
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
-    if (val === null) {
+    if (val === null || val === "") {
       return node;
     }
 
@@ -613,6 +613,8 @@ class XMLHandler {
   }
 
   xmlToJson(nsContext, xml, descriptor) {
+    if (xml.includes("An error occurred while processing the service request."))
+      xml = xml.replace(/\n/g, "");
     var self = this;
     var p = sax.parser(true);
     nsContext = nsContext || new NamespaceContext();
@@ -909,28 +911,6 @@ function declareNamespace(nsContext, node, prefix, nsURI) {
 
 function parseValue(text, descriptor) {
   return text;
-  // if (typeof text !== "string") return text;
-  // var value = text;
-  // var jsType = descriptor && descriptor.jsType;
-  // if (jsType === Date) {
-  //   var dateText = text;
-  //   // Checks for xs:date with tz, drops the tz
-  //   // because xs:date doesn't have a time to offset
-  //   // and JS Date object doesn't store an arbitrary tz
-  //   if (dateText.length === 16) {
-  //     dateText = text.substr(0, 10);
-  //   }
-  //   value = dateText;
-  // } else if (jsType === Boolean) {
-  //   if (text === "true" || text === "1") {
-  //     value = true;
-  //   } else {
-  //     value = false;
-  //   }
-  // } else if (typeof jsType === "function") {
-  //   value = jsType(text);
-  // }
-  // return value;
 }
 
 function toXmlDate(date) {
