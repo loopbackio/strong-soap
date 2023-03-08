@@ -1,3 +1,23 @@
+2023-03-08, Version 3.4.3
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * fix: ref in attributeGroup not working (Mateusz Stawecki)
+
+ * chore: update dependency eslint to ^8.35.0 (renovate[bot])
+
+ * chore: update dependency readable-stream to ^3.6.1 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.21.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.4.4 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.4.3 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.34.0 (renovate[bot])
+
+
 2023-01-30, Version 3.4.2
 =========================
 
