@@ -62,7 +62,7 @@
     "mocha": "^9.2.2",
     "nyc": "^15.1.0",
     "pinst": "^3.0.0",
-    "readable-stream": "^3.6.1",
+    "readable-stream": "^4.3.0",
     "semver": "^7.3.8",
     "should": "^13.2.3",
     "timekeeper": "^2.2.0"
