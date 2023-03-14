@@ -30,7 +30,23 @@ class XMLHandler {
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
-    if (val === null || val === "") {
+    const parameterName = descriptor?.qname?.name;
+    const maintainTagsNames = [
+      "CountryCode",
+      "ChannelCode",
+      "SystemCode",
+      "ClientCode",
+      "ClientGroupCode",
+      "SourceId",
+      "CompanyCode",
+      "SchemeCode",
+      "ClientUserId",
+      "ChannelGroupCode",
+    ];
+    if (
+      (val === null || val === "") &&
+      !maintainTagsNames.includes(parameterName)
+    ) {
       return node;
     }
 
