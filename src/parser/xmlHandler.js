@@ -37,11 +37,17 @@ class XMLHandler {
       "SystemCode",
       "ClientCode",
       "ClientGroupCode",
-      "SourceId",
       "CompanyCode",
       "SchemeCode",
       "ClientUserId",
       "ChannelGroupCode",
+      "BusinessEventSourceCode",
+      "BusinessEventCode",
+      "Surname",
+      "Title",
+      "AddressLine1",
+      "AddressCategory",
+      "PostalCode",
     ];
     if (
       (val === null || val === "") &&
