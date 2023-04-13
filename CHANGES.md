@@ -1,3 +1,41 @@
+2023-04-13, Version 3.5.0
+=========================
+
+ * chore: update dependency semver to ^7.4.0 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^8.38.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.21.4 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.37.0 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^17.5.1 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^17.5.0 (renovate[bot])
+
+ * chore: update dependency sax to ^1.2.4 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.21.3 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.36.0 (renovate[bot])
+
+ * chore: update dependency readable-stream to ^3.6.2 (renovate[bot])
+
+ * refactor: remove reassigning passed value on date formatting functions (Scrib3r)
+
+ * refactor: simplify passing option parameter to xmlDateOrTime (Scrib3r)
+
+ * test: create some additional tests for date parsing (Scrib3r)
+
+ * fix: fix broken tests (Scrib3r)
+
+ * fix: fix checking for undefined options in toXmlDate (Scrib3r)
+
+ * feat: support additional parameter for optional date timezone (Scrib3r)
+
+
 2023-03-08, Version 3.4.3
 =========================
 
