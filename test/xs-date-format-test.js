@@ -98,6 +98,11 @@ describe('xs-date-format-tests', function() {
       var xmlDateTime = xmlHandler.toXmlDateTime(inputDateStr);
       assert.equal(xmlDateTime, '2019-03-27T04:01:01.000Z');
     });
+    
+    it('returns invalid date string as is', function () {
+      var xmlDateTime = xmlHandler.toXmlDateTime('23091990');
+      assert.equal(xmlDateTime, '23091990');
+    });
   });
   
 });
