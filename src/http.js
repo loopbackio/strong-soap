@@ -6,11 +6,16 @@
 'use strict'
 
 var url = require('url')
-var requestModule = require('request')
+var requestModule = require('needle')
 var debug = require('debug')('strong-soap:http')
 var debugSensitive = require('debug')('strong-soap:http:sensitive')
 var httpntlm = require('httpntlm-maa')
 var uuid = require('uuid').v4
+
+requestModule.defaults({
+  parse_response: false,
+  follow_max: 5,
+})
 
 var VERSION = require('../package.json').version
 
@@ -72,7 +77,7 @@ class HttpClient {
     }
 
     var options = {
-      uri: curl,
+      uri: curl.href,
       method: method,
       headers: headers,
       followAllRedirects: true,
@@ -161,6 +166,17 @@ class HttpClient {
     return true
   }
 
+  requestCallback(req, callback) {
+    const self = this
+    return function (err, res, body) {
+      if (err) {
+        return callback(err)
+      }
+      body = self.handleResponse(req, res, body)
+      callback(null, res, body)
+    }
+  }
+
   request(rurl, data, callback, exheaders, exoptions) {
     var self = this
     var options = self.buildRequest(rurl, data, exheaders, exoptions)
@@ -173,13 +189,21 @@ class HttpClient {
     var ntlmSecurity = this.options.NTLMSecurity
     var ntlmAuth = self.isNtlmAuthRequired(ntlmSecurity, options.method)
     if (!ntlmAuth) {
-      req = self._request(options, function (err, res, body) {
-        if (err) {
-          return callback(err)
-        }
-        body = self.handleResponse(req, res, body)
-        callback(null, res, body)
-      })
+      if (options.method === 'POST') {
+        const isMultipart = !!options.multipart
+        req = self._request.post(
+          options.uri,
+          isMultipart ? options.multipart : options.body,
+          { ...options, multipart: isMultipart },
+          self.requestCallback(req, callback),
+        )
+      } else if (options.method === 'GET') {
+        req = self._request.get(
+          options.uri,
+          options,
+          self.requestCallback(req, callback),
+        )
+      }
     } else {
       //httpntlm code needs 'url' in options{}. It should be plain string, not parsed uri
       options.url = rurl
