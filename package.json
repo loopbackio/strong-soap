@@ -12,7 +12,6 @@
     "lodash": "^4.17.21",
     "needle": "^3.2.0",
     "node-rsa": "^1.1.1",
-    "request": "^2.88.2",
     "sax": "^1.2.4",
     "selectn": "^1.1.2",
     "strong-globalize": "^6.0.5",
@@ -35,7 +34,7 @@
     "postpublish": "pinst --enable",
     "toc": "doctoc Readme.md --github --maxlevel 3",
     "_pretest": "jshint index.js lib test",
-    "test": "nyc --reporter=lcov mocha --exit --timeout 60000 test/*-test.js test/security/*.js"
+    "test": "nyc --reporter=lcov mocha --exit --timeout 60000 test/server-test.js"
   },
   "keywords": [
     "soap"

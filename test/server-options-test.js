@@ -8,7 +8,7 @@
 var fs = require('fs'),
   soap = require('..').soap,
   assert = require('assert'),
-  request = require('request'),
+  needle = require('needle'),
   http = require('http')
 
 var test = {}
@@ -140,9 +140,8 @@ describe('SOAP Server with Options', function () {
         test.baseUrl = 'http://127.0.0.1:' + test.server.address().port
       }
       // console.log(test.baseUrl);
-      request(test.baseUrl, function (err, res, body) {
+      needle.get(test.baseUrl, function (err) {
         assert.ok(!err)
-        // console.log(body);
         done()
       })
     })
@@ -176,9 +175,8 @@ describe('SOAP Server with Options', function () {
       ) {
         test.baseUrl = 'http://127.0.0.1:' + test.server.address().port
       }
-      request(test.baseUrl, function (err, res, body) {
+      needle.get(test.baseUrl, function (err) {
         assert.ok(!err)
-        // console.log(body);
         done()
       })
     })
