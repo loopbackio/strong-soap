@@ -365,7 +365,7 @@ class Client extends Base {
 
     // Added mostly for testability, but possibly useful for debugging
     if (req != null) {
-      self.lastRequestHeaders = req.headers;
+      self.lastRequestHeaders = req && req.request ? req.request.getHeaders() : undefined
     }
     debug('client response. lastRequestHeaders: %j', self.lastRequestHeaders);
   }
