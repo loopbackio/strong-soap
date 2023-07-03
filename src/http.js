@@ -6,7 +6,7 @@
 'use strict';
 
 var url = require('url');
-var requestModule = require('request');
+var requestModule = require('needle');
 var debug = require('debug')('strong-soap:http');
 var debugSensitive = require('debug')('strong-soap:http:sensitive');
 var httpntlm = require('httpntlm-maa');
@@ -14,6 +14,11 @@ var uuid = require('uuid').v4;
 
 
 var VERSION = require('../package.json').version;
+
+requestModule.defaults({
+  parse_response: false,
+  follow_max: 5,
+})
 
 /**
  * A class representing the http client
@@ -70,7 +75,7 @@ class HttpClient {
     }
 
     var options = {
-      uri: curl,
+      uri: curl.href,
       method: method,
       headers: headers,
       followAllRedirects: true
@@ -113,6 +118,39 @@ class HttpClient {
     }
     debug('Http request: %j', options);
     return options;
+  }
+
+
+  requestCallback(req, callback) {
+    const self = this
+    return function (err, res, body) {
+      if (err) {
+        return callback(err)
+      }
+      body = self.handleResponse(req, res, body)
+      callback(null, res, body)
+    }
+  }
+
+  makeHttpRequest(options, callback) {
+    let req
+    if (options.method === 'POST') {
+      const isMultipart = !!options.multipart
+      req = this._request.post(
+        options.uri,
+        isMultipart ? options.multipart : options.body,
+        { ...options, multipart: isMultipart },
+        this.requestCallback(req, callback),
+      )
+    } else if (options.method === 'GET') {
+      req = this._request.get(
+        options.uri,
+        options,
+        this.requestCallback(req, callback),
+      )
+    }
+
+    return req
   }
 
   /**
@@ -161,13 +199,7 @@ class HttpClient {
     var ntlmSecurity = this.options.NTLMSecurity;
     var ntlmAuth = self.isNtlmAuthRequired(ntlmSecurity, options.method);
     if (!ntlmAuth) {
-      req = self._request(options, function (err, res, body) {
-        if (err) {
-          return callback(err);
-        }
-        body = self.handleResponse(req, res, body);
-        callback(null, res, body);
-      });
+      req = self.makeHttpRequest(options, callback)
     } else {
         //httpntlm code needs 'url' in options{}. It should be plain string, not parsed uri
         options.url = rurl;

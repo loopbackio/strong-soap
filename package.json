@@ -1,5 +1,5 @@
 {
-  "name": "strong-soap",
+  "name": "@cashy/strong-soap",
   "version": "3.5.2",
   "description": "A minimal node SOAP client",
   "engines": {
@@ -11,7 +11,7 @@
     "httpntlm-maa": "^2.0.6",
     "lodash": "^4.17.21",
     "node-rsa": "^1.1.1",
-    "request": "^2.88.2",
+    "needle": "^3.2.0",
     "sax": "^1.2.4",
     "selectn": "^1.1.2",
     "strong-globalize": "^6.0.5",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/loopbackio/strong-soap.git"
+    "url": "git+https://github.com/cashy-at/strong-soap.git"
   },
   "main": "./index.js",
   "directories": {
@@ -67,5 +67,9 @@
     "should": "^13.2.3",
     "timekeeper": "^2.2.0"
   },
-  "author": "IBM Corp."
+  "author": "IBM Corp.",
+  "bugs": {
+    "url": "https://github.com/cashy-at/strong-soap/issues"
+  },
+  "homepage": "https://github.com/cashy-at/strong-soap#readme"
 }

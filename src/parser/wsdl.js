@@ -28,7 +28,7 @@ var Element = require('./element');
 
 class WSDL {
   constructor(definition, uri, options) {
-    this.content = definition;
+    this.content = definition ? definition.toString() : undefined
     assert(this.content != null && (typeof this.content === 'string' ||
       typeof this.content === 'object'),
       'WSDL constructor takes either an XML string or definitions object');
@@ -479,7 +479,7 @@ class WSDL {
           if (err) {
             callback(err);
           } else if (response && response.statusCode === 200) {
-            const wsdlUri = _.get(response, 'request.uri.href', uri);
+            const wsdlUri = getWsdlUri(response) || uri
             wsdl = new WSDL(definition, wsdlUri, options);
             WSDL_CACHE[wsdlUri] = wsdl;
             wsdl.WSDL_CACHE = WSDL_CACHE;
@@ -579,6 +579,21 @@ WSDL.prototype.valueKey = '$value';
 WSDL.prototype.xmlKey = '$xml';
 
 module.exports = WSDL;
+
+function getWsdlUri(response) {
+  const { protocol, path, getHeaders } = response.req || {}
+
+  if (!protocol || !path || typeof getHeaders !== 'function') {
+    return null
+  }
+
+  const reqHost = response.req.getHeaders().host
+  if (!reqHost) {
+    return null
+  }
+
+  return `${protocol}//${reqHost}${path}`
+}
 
 function deepMerge(destination, source) {
   return _.mergeWith(destination || {}, source, function(a, b) {

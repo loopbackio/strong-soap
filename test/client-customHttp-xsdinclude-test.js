@@ -52,18 +52,7 @@ describe('custom http client', function() {
           var options = self.buildRequest(rurl, data, exheaders, exoptions);
           //Specify agent to use
           options.agent = this.agent;
-          var headers = options.headers;
-          var req = this.httpCl._request(options, function(err, res, body) {
-            if (err) {
-              return callback(err);
-            }
-            body = self.handleResponse(req, res, body);
-            callback(null, res, body);
-          });
-          if (headers.Connection !== 'keep-alive') {
-            req.end(data);
-          }
-          return req;
+          return this.httpCl.makeHttpRequest(options, callback)
         };
 
       var httpCustomClient = new MyHttpClient({},
