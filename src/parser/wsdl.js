@@ -440,23 +440,7 @@ class WSDL {
     return WSDL.open(uri, options, callback)
   }
 
-  _getWsdlUri(response) {
-    const { protocol, path, getHeaders } = response.req || {}
-
-    if (!protocol || !path || !getHeaders || typeof getHeaders !== 'function') {
-      return null
-    }
-
-    const reqHost = response.req.getHeaders().host
-    if (!reqHost) {
-      return null
-    }
-
-    return `${protocol}//${reqHost}${path}`
-  }
-
   static open(uri, options, callback) {
-    const self = this
     if (typeof options === 'function') {
       callback = options
       options = {}
@@ -501,7 +485,7 @@ class WSDL {
           if (err) {
             callback(err)
           } else if (response && response.statusCode === 200) {
-            const wsdlUri = self._getWsdlUri(response) || uri
+            const wsdlUri = getWsdlUri(response) || uri
 
             wsdl = new WSDL(definition, wsdlUri, options)
             WSDL_CACHE[wsdlUri] = wsdl
@@ -620,6 +604,21 @@ WSDL.prototype.valueKey = '$value'
 WSDL.prototype.xmlKey = '$xml'
 
 module.exports = WSDL
+
+function getWsdlUri(response) {
+  const { protocol, path, getHeaders } = response.req || {}
+
+  if (!protocol || !path || typeof getHeaders !== 'function') {
+    return null
+  }
+
+  const reqHost = response.req.getHeaders().host
+  if (!reqHost) {
+    return null
+  }
+
+  return `${protocol}//${reqHost}${path}`
+}
 
 function deepMerge(destination, source) {
   return _.mergeWith(destination || {}, source, function (a, b) {

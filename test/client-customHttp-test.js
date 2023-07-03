@@ -70,24 +70,8 @@ describe('custom http client', function () {
       var options = self.buildRequest(rurl, data, exheaders, exoptions)
       //Specify agent to use
       options.agent = this.agent
-      var headers = options.headers
 
-      var req
-      if (options.method === 'POST') {
-        const isMultipart = !!options.multipart
-        req = this.httpCl._request.post(
-          options.uri,
-          isMultipart ? options.multipart : options.body,
-          { multipart: isMultipart, headers: options.headers },
-          self.requestCallback(req, callback),
-        )
-      } else if (options.method === 'GET') {
-        req = this.httpCl._request.get(
-          options.uri,
-          { headers: options.headers, agent: options.agent },
-          self.requestCallback(req, callback),
-        )
-      }
+      this.httpCl.makeHttpRequest(options, callback)
 
       util.inherits(CustomAgent, events.EventEmitter)
 
@@ -127,25 +111,7 @@ describe('custom http client', function () {
         var options = self.buildRequest(rurl, data, exheaders, exoptions)
         //Specify agent to use
         options.agent = this.agent
-        var headers = options.headers
-        var req
-        if (options.method === 'POST') {
-          const isMultipart = !!options.multipart
-          req = this.httpCl._request.post(
-            options.uri,
-            isMultipart ? options.multipart : options.body,
-            { multipart: isMultipart, headers: options.headers },
-            self.requestCallback(req, callback),
-          )
-        } else if (options.method === 'GET') {
-          req = this.httpCl._request.get(
-            options.uri,
-            { headers: options.headers, agent: options.agent },
-            self.requestCallback(req, callback),
-          )
-        }
-
-        return req
+        return this.httpCl.makeHttpRequest(options, callback)
       }
     }
 

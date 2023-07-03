@@ -177,6 +177,27 @@ class HttpClient {
     }
   }
 
+  makeHttpRequest(options, callback) {
+    let req
+    if (options.method === 'POST') {
+      const isMultipart = !!options.multipart
+      req = this._request.post(
+        options.uri,
+        isMultipart ? options.multipart : options.body,
+        { ...options, multipart: isMultipart },
+        this.requestCallback(req, callback),
+      )
+    } else if (options.method === 'GET') {
+      req = this._request.get(
+        options.uri,
+        options,
+        this.requestCallback(req, callback),
+      )
+    }
+
+    return req
+  }
+
   request(rurl, data, callback, exheaders, exoptions) {
     var self = this
     var options = self.buildRequest(rurl, data, exheaders, exoptions)
@@ -189,21 +210,7 @@ class HttpClient {
     var ntlmSecurity = this.options.NTLMSecurity
     var ntlmAuth = self.isNtlmAuthRequired(ntlmSecurity, options.method)
     if (!ntlmAuth) {
-      if (options.method === 'POST') {
-        const isMultipart = !!options.multipart
-        req = self._request.post(
-          options.uri,
-          isMultipart ? options.multipart : options.body,
-          { ...options, multipart: isMultipart },
-          self.requestCallback(req, callback),
-        )
-      } else if (options.method === 'GET') {
-        req = self._request.get(
-          options.uri,
-          options,
-          self.requestCallback(req, callback),
-        )
-      }
+      req = self.makeHttpRequest(options, callback)
     } else {
       //httpntlm code needs 'url' in options{}. It should be plain string, not parsed uri
       options.url = rurl
