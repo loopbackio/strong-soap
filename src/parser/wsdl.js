@@ -28,7 +28,7 @@ var Element = require('./element')
 
 class WSDL {
   constructor(definition, uri, options) {
-    this.content = definition
+    this.content = definition ? definition.toString() : undefined
     assert(
       this.content != null &&
         (typeof this.content === 'string' || typeof this.content === 'object'),
@@ -440,7 +440,23 @@ class WSDL {
     return WSDL.open(uri, options, callback)
   }
 
+  _getWsdlUri(response) {
+    const { protocol, path, getHeaders } = response.req || {}
+
+    if (!protocol || !path || !getHeaders || typeof getHeaders !== 'function') {
+      return null
+    }
+
+    const reqHost = response.req.getHeaders().host
+    if (!reqHost) {
+      return null
+    }
+
+    return `${protocol}//${reqHost}${path}`
+  }
+
   static open(uri, options, callback) {
+    const self = this
     if (typeof options === 'function') {
       callback = options
       options = {}
@@ -485,7 +501,8 @@ class WSDL {
           if (err) {
             callback(err)
           } else if (response && response.statusCode === 200) {
-            const wsdlUri = _.get(response, 'request.uri.href', uri)
+            const wsdlUri = self._getWsdlUri(response) || uri
+
             wsdl = new WSDL(definition, wsdlUri, options)
             WSDL_CACHE[wsdlUri] = wsdl
             wsdl.WSDL_CACHE = WSDL_CACHE

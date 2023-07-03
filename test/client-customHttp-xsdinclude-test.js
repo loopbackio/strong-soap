@@ -56,15 +56,21 @@ describe('custom http client', function () {
       //Specify agent to use
       options.agent = this.agent
       var headers = options.headers
-      var req = this.httpCl._request(options, function (err, res, body) {
-        if (err) {
-          return callback(err)
-        }
-        body = self.handleResponse(req, res, body)
-        callback(null, res, body)
-      })
-      if (headers.Connection !== 'keep-alive') {
-        req.end(data)
+      var req
+      if (options.method === 'POST') {
+        const isMultipart = !!options.multipart
+        req = this.httpCl._request.post(
+          options.uri,
+          isMultipart ? options.multipart : options.body,
+          { multipart: isMultipart, headers: options.headers },
+          self.requestCallback(req, callback),
+        )
+      } else if (options.method === 'GET') {
+        req = this.httpCl._request.get(
+          options.uri,
+          { headers: options.headers, agent: options.agent },
+          self.requestCallback(req, callback),
+        )
       }
       return req
     }

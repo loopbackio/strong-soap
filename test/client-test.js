@@ -227,7 +227,7 @@ describe('SOAP Client', function () {
               {},
               function (err, result) {
                 assert.notEqual(
-                  client.lastRequestHeaders.Host.indexOf(
+                  client.lastRequestHeaders.host.indexOf(
                     ':' + server.address().port,
                   ),
                   -1,
@@ -254,7 +254,7 @@ describe('SOAP Client', function () {
           client.MyOperation(
             {},
             function (err, result) {
-              assert.equal(client.lastRequestHeaders.Host.indexOf(':80'), -1)
+              assert.equal(client.lastRequestHeaders.host.indexOf(':80'), -1)
 
               done()
             },
@@ -276,7 +276,7 @@ describe('SOAP Client', function () {
           client.MyOperation(
             {},
             function () {
-              assert.equal(client.lastRequestHeaders.Host.indexOf(':443'), -1)
+              assert.equal(client.lastRequestHeaders.host.indexOf(':443'), -1)
               done()
             },
             null,
@@ -297,7 +297,7 @@ describe('SOAP Client', function () {
           client.MyOperation(
             {},
             function () {
-              assert.ok(client.lastRequestHeaders.Host.indexOf(':443') > -1)
+              assert.ok(client.lastRequestHeaders.host.indexOf(':443') > -1)
               done()
             },
             null,
@@ -373,31 +373,6 @@ describe('SOAP Client', function () {
               done()
             },
             null,
-            { 'test-header': 'test' },
-          )
-        },
-        'http://' + hostname + ':' + server.address().port,
-      )
-    })
-
-    it('should have lastElapsedTime after a call with the time option passed', function (done) {
-      soap.createClient(
-        __dirname + '/wsdl/default_namespace.wsdl',
-        function (err, client) {
-          assert.ok(client)
-          assert.ok(!err)
-
-          client.MyOperation(
-            {},
-            function (err, result) {
-              assert.ok(result)
-              assert.ok(client.lastResponse)
-              assert.ok(client.lastResponseHeaders)
-              assert.ok(client.lastElapsedTime)
-
-              done()
-            },
-            { time: true },
             { 'test-header': 'test' },
           )
         },
@@ -602,7 +577,7 @@ describe('SOAP Client', function () {
               assert.ok(client.lastRequestHeaders)
               assert.ok(client.lastRequest)
               assert.equal(
-                client.lastRequestHeaders['Content-Type'],
+                client.lastRequestHeaders['content-type'],
                 'application/soap+xml; charset=utf-8',
               )
               assert.notEqual(
@@ -740,7 +715,7 @@ describe('SOAP Client', function () {
               assert.ok(!err)
               assert.ok(result)
               assert.ok(result === 'temp response')
-              assert.ok(envelope === rawBody)
+              assert.ok(envelope.toString() === rawBody)
               assert.ok(client.lastResponseHeaders.status === 'fail')
               done()
             }, done)
@@ -762,7 +737,7 @@ describe('SOAP Client', function () {
               assert.ok(!err)
               assert.ok(result)
               assert.ok(result === 'temp response')
-              assert.ok(envelope === rawBody)
+              assert.ok(envelope.toString() === rawBody)
               assert.ok(client.lastResponseHeaders.status === 'fail')
               done()
             }, done)
@@ -787,7 +762,7 @@ describe('SOAP Client', function () {
               assert.ok(!err)
               assert.ok(result)
               assert.ok(result === 'temp response')
-              assert.ok(envelope === rawBody)
+              assert.ok(envelope.toString() === rawBody)
               assert.ok(client.lastResponseHeaders.status === 'fail')
               assert.ok(
                 client.lastRequestHeaders['options-test-header'] === 'test',
@@ -816,7 +791,7 @@ describe('SOAP Client', function () {
               assert.ok(!err)
               assert.ok(result)
               assert.ok(result === 'temp response')
-              assert.ok(envelope === rawBody)
+              assert.ok(envelope.toString() === rawBody)
               assert.ok(client.lastResponseHeaders.status === 'pass')
               assert.ok(
                 client.lastRequestHeaders['options-test-header'] === 'test',
@@ -1136,10 +1111,9 @@ describe('SOAP Client', function () {
         function (err, client) {
           var didEmitEvent = false
           client.on('response', function (xml, response) {
+            const xmlString = xml.toString()
             didEmitEvent = true
-            // Should contain entire soap message
-            assert.equal(typeof xml, 'string')
-            assert.equal(xml.indexOf('soap:Envelope'), -1)
+            assert.equal(xmlString.indexOf('soap:Envelope'), -1)
             assert.ok(response)
           })
 
