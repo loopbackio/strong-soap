@@ -34,7 +34,7 @@
     "postpublish": "pinst --enable",
     "toc": "doctoc Readme.md --github --maxlevel 3",
     "_pretest": "jshint index.js lib test",
-    "test": "nyc --reporter=lcov mocha --exit --timeout 60000 test/server-test.js"
+    "test": "nyc --reporter=lcov mocha --exit --timeout 60000 test/*-test.js test/security/*.js"
   },
   "keywords": [
     "soap"
