@@ -42,8 +42,8 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/cli": "^7.22.6",
-    "@babel/core": "^7.22.6",
-    "@babel/preset-env": "^7.22.6",
+    "@babel/core": "^7.22.8",
+    "@babel/preset-env": "^7.22.7",
     "@commitlint/cli": "^17.6.6",
     "@commitlint/config-conventional": "^17.6.6",
     "async": "^3.2.4",
