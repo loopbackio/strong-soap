@@ -1,4 +1,26 @@
-2023-06-14, Version 3.5.2
+2023-07-11, Version 3.5.3
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update babel monorepo (renovate[bot])
+
+ * chore: update dependency semver to ^7.5.4 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.22.6 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.44.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.6.6 (renovate[bot])
+
+ * chore: update dependency semver to ^7.5.3 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.43.0 (renovate[bot])
+
+ * chore: update dependency semver to ^7.5.2 (renovate[bot])
+
+
+2023-06-13, Version 3.5.2
 =========================
 
  * chore: lock file maintenance (renovate[bot])
