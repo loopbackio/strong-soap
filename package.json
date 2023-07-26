@@ -65,7 +65,7 @@
     "readable-stream": "^3.6.2",
     "semver": "^7.5.4",
     "should": "^13.2.3",
-    "timekeeper": "^2.2.0"
+    "timekeeper": "^2.3.1"
   },
   "author": "IBM Corp."
 }
