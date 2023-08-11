@@ -1,3 +1,27 @@
+2023-08-11, Version 3.5.4
+=========================
+
+ * chore: update dependency @commitlint/cli to ^17.7.1 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.7.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.22.10 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^8.46.0 (renovate[bot])
+
+ * chore: update dependency timekeeper to ^2.3.1 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.6.7 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.45.0 (renovate[bot])
+
+ * chore: update dependency xml-crypto to ^3.2.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.22.9 (renovate[bot])
+
+
 2023-07-11, Version 3.5.3
 =========================
 
