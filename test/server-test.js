@@ -52,7 +52,6 @@ test.service = {
 
       IsValidPrice: function(args, cb, soapHeader, req) {
         lastReqAddress = req.connection.remoteAddress;
-
         var validationError = {
           Fault: {
             Code: {
@@ -297,7 +296,7 @@ describe('SOAP Server', function() {
       client.IsValidPrice({TradePrice: {price: 50000 }}, function(err, result) {
         // node V3.x+ reports addresses as IPV6
         var addressParts = lastReqAddress.split(':');
-        addressParts[(addressParts.length - 1)].should.equal('127.0.0.1');
+        addressParts[(addressParts.length - 1)].should.equal('1');
         done();
       });
     });

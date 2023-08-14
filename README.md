@@ -67,8 +67,7 @@ Features:
 
 ## Install
 
-Node.js version 10, 12, and 14 are officially supported. We dropped version 8
-support in 3.0.0.
+Node.js version 16 and 18 are officially supported. 
 
 Install with [npm](http://github.com/isaacs/npm):
 

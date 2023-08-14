@@ -3,7 +3,7 @@
   "version": "3.5.5",
   "description": "A minimal node SOAP client",
   "engines": {
-    "node": ">=8.11.1"
+    "node": ">=18"
   },
   "dependencies": {
     "compress": "^0.99.0",

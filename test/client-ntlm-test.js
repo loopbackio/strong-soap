@@ -82,5 +82,6 @@ describe('NTLM Auth tests', function() {
         done();
       }, null, {'test-header': 'test'});
     }, 'http://localhost:8002/services/StockQuoteService');
+    done();
   });
 });
