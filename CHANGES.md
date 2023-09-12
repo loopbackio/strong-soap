@@ -1,3 +1,45 @@
+2023-09-12, Version 3.5.5
+=========================
+
+ * chore: update dependency uuid to ^9.0.1 (renovate[bot])
+
+ * chore: update actions/checkout action to v4 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^8.49.0 (renovate[bot])
+
+ * chore: update babel monorepo (renovate[bot])
+
+ * chore: update dependency @babel/preset-env to ^7.22.14 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.48.0 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.22.11 (renovate[bot])
+
+ * chore: update dependency strong-globalize to ^6.0.6 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.47.0 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^17.7.1 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.7.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.22.10 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.46.0 (renovate[bot])
+
+ * chore: update dependency timekeeper to ^2.3.1 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.6.7 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.45.0 (renovate[bot])
+
+ * chore: update dependency xml-crypto to ^3.2.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.22.9 (renovate[bot])
+
+
 2023-07-11, Version 3.5.3
 =========================
 
