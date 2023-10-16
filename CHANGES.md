@@ -1,3 +1,27 @@
+2023-10-16, Version 3.5.6
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.8.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.23.2 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.51.0 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^17.7.2 (renovate[bot])
+
+ * chore: update dependency sax to ^1.3.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.23.0 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.50.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.22.20 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.22.19 (renovate[bot])
+
+
 2023-09-12, Version 3.5.5
 =========================
 
