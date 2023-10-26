@@ -28,11 +28,11 @@ jobs:
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # tag=v4.1.1
         with:
           fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # tag=v4.0.0
         with:
           node-version: ${{ matrix.node-version }}
       - name: Update NPM (Node.js v10)
@@ -56,7 +56,7 @@ jobs:
           ls
           ls ./coverage
       - name: Coveralls Parallel
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@3dfc5567390f6fa9267c0ee9c251e4c8c3f18949 # tag=v2.2.3
         with:
           github-token: ${{ secrets.github_token }}
           flag-name: run-${{ matrix.os }}-node@${{ matrix.node-version }}
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finish
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@3dfc5567390f6fa9267c0ee9c251e4c8c3f18949 # tag=v2.2.3
         with:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
@@ -79,11 +79,11 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # tag=v4.1.1
         with:
           fetch-depth: 0
       - name: Use Node.js 16
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # tag=v4.0.0
         with:
           node-version: 16
       - name: Bootstrap project
@@ -98,11 +98,11 @@ jobs:
       # See: https://github.com/github/codeql-action/blob/008b2cc71c4cf3401f45919d8eede44a65b4a322/README.md#usage
       security-events: write
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # tag=v4.1.1
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@49abf0ba24d0b7953cb586944e918a0b92074c80 # tag=v2.22.4
       with:
         languages: 'javascript'
         config-file: ./.github/codeql/codeql-config.yaml
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@49abf0ba24d0b7953cb586944e918a0b92074c80 # tag=v2.22.4
