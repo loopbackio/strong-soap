@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [10, 12, 14, 16, 18, 20, 21]
+        node-version: [16, 18, 20, 21]
         include:
           - os: macos-latest
             node-version: 18 # LTS
@@ -35,26 +35,12 @@ jobs:
         uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 # tag=v4.0.0
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Update NPM (Node.js v10)
-        if: matrix.node-version == 10
-        run: npm install --global npm@7
-      - name: Update NPM
-        if: matrix.node-version != 10
-        run: npm install --global npm@8
       - name: Bootstrap project
-        if: ${{ matrix.node-version != '8.11.1' }}
         run: npm ci --ignore-scripts
-      - name: Bootstrap project (Node v8.11.1)
-        if: ${{ matrix.node-version == '8.11.1' }}
-        run: npm install --ignore-scripts
       - name: Build project
         run: npm run --ignore-scripts build
       - name: Run tests
         run: npm test --ignore-scripts
-      - name: troubleshooting
-        run: |
-          ls
-          ls ./coverage
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@3dfc5567390f6fa9267c0ee9c251e4c8c3f18949 # tag=v2.2.3
         with:
