@@ -80,7 +80,11 @@ describe('wsdl-tests', function() {
 
     it('should not parse connection error', function (done) {
       soap.createClient(__dirname+'/wsdl/connection/econnrefused.wsdl', function(err, client) {
-        assert.ok(/EADDRNOTAVAIL|ECONNREFUSED/.test(err), err);
+        if (err.message != '') {
+          err.message.should.containEql('ECONNREFUSED');
+        } else {
+          assert.ok(/ECONNREFUSED/.test(err.errors[0]), err);
+        }
         done();
       });
     });

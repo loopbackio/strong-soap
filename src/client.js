@@ -325,7 +325,8 @@ class Client extends Base {
           return callback(error, response, body);
         }
 
-        if (!output) {
+        if (!output || !obj.Body) {
+          // for issue 671
           // one-way, no output expected
           return callback(null, null, body, obj.Header);
         }
