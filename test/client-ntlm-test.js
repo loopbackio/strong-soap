@@ -65,7 +65,7 @@ describe('NTLM Auth tests', function() {
     done();
   });
 
-  it('should call ntlm endpoint', function(done) {
+  it('should call ntlm endpoint', function() {
     var ntlmSec = new NTLMSecurity(clientNTLMUsername,
       clientNTLMPassword,
       clientNTLMDomain,
@@ -79,7 +79,6 @@ describe('NTLM Auth tests', function() {
 
       client.GetLastTradePrice({}, function(err, result) {
         assert.deepEqual(result, {price: 19.56})
-        done();
       }, null, {'test-header': 'test'});
     }, 'http://localhost:8002/services/StockQuoteService');
   });
