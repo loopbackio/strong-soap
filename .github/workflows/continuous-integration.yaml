@@ -86,9 +86,9 @@ jobs:
     steps:
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # tag=v4.1.1
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@8b7fcbfac2aae0e6c24d9f9ebd5830b1290b18e4 # v2.23.0
+      uses: github/codeql-action/init@4759df8df70c5ebe7042c3029bbace20eee13edd # v2.23.1
       with:
         languages: 'javascript'
         config-file: ./.github/codeql/codeql-config.yaml
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@8b7fcbfac2aae0e6c24d9f9ebd5830b1290b18e4 # v2.23.0
+      uses: github/codeql-action/analyze@4759df8df70c5ebe7042c3029bbace20eee13edd # v2.23.1
