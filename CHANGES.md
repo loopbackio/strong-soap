@@ -1,3 +1,57 @@
+2024-01-17, Version 4.0.0
+=========================
+
+ * chore: update dependency mocha to v10 (renovate[bot])
+
+ * chore: update dependency async to ^3.2.5 (renovate[bot])
+
+ * chore: update dependency express-ntlm to v2.7.0 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.56.0 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update commitlint monorepo to ^18.4.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v2.23.0 (renovate[bot])
+
+ * chore: drop Node.js 16 in CI (dhmlau)
+
+ * chore: update actions/setup-node action to v4.0.1 (renovate[bot])
+
+ * chore: drop Node.js 16 support (dhmlau)
+
+ * fix: allow empty response body (braj1999)
+
+ * chore: update github/codeql-action action to v2.22.9 (renovate[bot])
+
+ * chore: update github/codeql-action action to v2.22.7 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.54.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v2.22.6 (renovate[bot])
+
+ * chore: update commitlint monorepo (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^18.2.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v2.22.5 (renovate[bot])
+
+ * chore!: drop support for Node.js < v16 (Rifa Achrinza)
+
+ * ci: update Node.js test versions (Rifa Achrinza)
+
+ * ci: pin GHA Actions (Rifa Achrinza)
+
+ * chore: update commitlint monorepo to v18 (renovate[bot])
+
+ * chore: update actions/setup-node action to v4 (renovate[bot])
+
+ * chore: update dependency eslint to ^8.52.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^17.8.1 (renovate[bot])
+
+
 2023-10-16, Version 3.5.6
 =========================
 
