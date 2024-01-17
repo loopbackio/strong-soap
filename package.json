@@ -46,7 +46,7 @@
     "@babel/preset-env": "^7.23.2",
     "@commitlint/cli": "^18.4.4",
     "@commitlint/config-conventional": "^18.4.4",
-    "async": "^3.2.4",
+    "async": "^3.2.5",
     "colors": "^1.4.0",
     "coveralls": "^3.1.1",
     "diff": "^5.1.0",
