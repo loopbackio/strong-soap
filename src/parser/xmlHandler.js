@@ -32,6 +32,7 @@ class XMLHandler {
    * @param {Object} [options.date]
    * @param {Object} [options.date.timezone]
    * @param {boolean} [options.date.timezone.enabled]
+     @param {boolean} [options.trimText]
    */
   constructor(schemas, options) {
     this.schemas = schemas || {};
@@ -709,7 +710,9 @@ class XMLHandler {
     };
 
     p.ontext = function(text) {
-      text = text && text.trim();
+      if (self.options.trimText) {
+        text = text && text.trim();
+      }
       if (!text.length)
         return;
 
