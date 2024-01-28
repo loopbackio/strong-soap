@@ -44,6 +44,7 @@ class XMLHandler {
     this.options.date = this.options.date || {};
     this.options.date.timezone = this.options.date.timezone || {};
     this.options.date.timezone.enabled = typeof this.options.date.timezone.enabled === 'boolean' ? this.options.date.timezone.enabled : true;
+    this.options.trimText = typeof this.options.trimText === 'boolean' ? this.options.trimText : true;
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
