@@ -1,3 +1,33 @@
+2024-02-12, Version 4.0.1
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update actions/setup-node action to v4.0.2 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.3.0 (renovate[bot])
+
+ * chore: update dependency semver to ^7.6.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.24.0 (renovate[bot])
+
+ * chore: update dependency husky to ^9.0.10 (renovate[bot])
+
+ * chore: update dependency husky to v9 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.23.9 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.23.2 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^18.6.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^18.5.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v2.23.1 (renovate[bot])
+
+
 2024-01-17, Version 4.0.0
 =========================
 
