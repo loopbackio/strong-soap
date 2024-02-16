@@ -916,7 +916,7 @@ soapStub.registerClient('my client alias', urlMyApplicationWillUseWithCreateClie
 
 var fs = require('fs'),
   assert = require('assert'),
-  request = require('request'),
+  request = require('@cypress/request'),
   http = require('http'),
   lastReqAddress;
 
