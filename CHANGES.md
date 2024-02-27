@@ -1,3 +1,23 @@
+2024-02-27, Version 4.0.2
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^8.57.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to v19 (renovate[bot])
+
+ * chore: update commitlint monorepo (renovate[bot])
+
+ * chore: update dependency husky to ^9.0.11 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.24.5 (renovate[bot])
+
+ * fix: resolve CVE-2023-26136 (Todd Tarsi)
+
+ * chore: update dependency diff to ^5.2.0 (renovate[bot])
+
+
 2024-02-12, Version 4.0.1
 =========================
 
