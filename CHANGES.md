@@ -1,3 +1,19 @@
+2024-03-07, Version 4.0.3
+=========================
+
+ * chore: update babel monorepo to ^7.24.0 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update commitlint monorepo to ^19.0.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.24.6 (renovate[bot])
+
+ * chore: update dependency express to ^4.18.3 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^19.0.1 (renovate[bot])
+
+
 2024-02-27, Version 4.0.2
 =========================
 
