@@ -14,7 +14,7 @@ var ntlm = require('express-ntlm');
 
 var ntlmServer;
 
-var createGenericNTLMServer = function(postUrl, postResponse) {
+var createGenericNTLMServer = function(postUrl, postResponse, done) {
   var app = express();
 
   app.use(ntlm({
@@ -26,15 +26,20 @@ var createGenericNTLMServer = function(postUrl, postResponse) {
 
   app.post(postUrl, postResponse);
 
-  ntlmServer = app.listen(8002);
-  console.log('createGenericNTLMServer: listening on port 8002');
+  ntlmServer = app.listen(8002, function() {
+    console.log('createGenericNTLMServer: listening on port 8002');
+    done()
+  })
 };
 
-var cleanupGenericNTLMServer = function () {
-  if (ntlmServer) {
-    ntlmServer.close();
-    console.log('Closed ntlm server');
+var cleanupGenericNTLMServer = function (done) {
+  if (!ntlmServer) {
+    return done()
   }
+  ntlmServer.close(() => {
+    console.log('Closed ntlm server');
+    done()
+  })
 };
 
 
@@ -55,17 +60,12 @@ describe('NTLM Auth tests', function() {
 
       response.end(responseData);
     }
-    createGenericNTLMServer('/services/StockQuoteService', ntlmQCQPost);
-
-    done();
+    createGenericNTLMServer('/services/StockQuoteService', ntlmQCQPost, done);
   });
 
-  after(function(done) {
-    cleanupGenericNTLMServer();
-    done();
-  });
+  after(cleanupGenericNTLMServer);
 
-  it('should call ntlm endpoint', function() {
+  it('should call ntlm endpoint', function(done) {
     var ntlmSec = new NTLMSecurity(clientNTLMUsername,
       clientNTLMPassword,
       clientNTLMDomain,
@@ -74,11 +74,17 @@ describe('NTLM Auth tests', function() {
     var options = {};
     options.NTLMSecurity = ntlmSec;
     soap.createClient(__dirname+'/wsdl/strict/stockquote.wsdl', options, function(err, client) {
+      if (err) {
+        return done(err)
+      }
       assert.ok(client);
-      assert.ok(!err);
 
       client.GetLastTradePrice({}, function(err, result) {
-        assert.deepEqual(result, {price: 19.56})
+        if (err) {
+          return done(err)
+        }
+        assert.deepEqual(result, {price: 19.56});
+        done()
       }, null, {'test-header': 'test'});
     }, 'http://localhost:8002/services/StockQuoteService');
   });
