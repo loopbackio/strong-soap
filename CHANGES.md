@@ -1,3 +1,25 @@
+2024-03-22, Version 4.0.4
+=========================
+
+ * chore: update github/codeql-action action to v3.24.9 (renovate[bot])
+
+ * chore: update dependency express to ^4.19.1 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.24.3 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: switch to httpntlm and fix flaky test (Todd Tarsi)
+
+ * chore: update commitlint monorepo (renovate[bot])
+
+ * chore: update babel monorepo to ^7.24.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.24.8 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.24.7 (renovate[bot])
+
+
 2024-03-07, Version 4.0.3
 =========================
 
