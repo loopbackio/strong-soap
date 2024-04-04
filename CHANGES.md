@@ -1,3 +1,19 @@
+2024-04-04, Version 4.0.5
+=========================
+
+ * chore: update dependency readable-stream to v4 (renovate[bot])
+
+ * chore: update dependency glob to v10 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.24.4 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.4.0 (renovate[bot])
+
+ * chore: update dependency express to ^4.19.2 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+
 2024-03-22, Version 4.0.4
 =========================
 
