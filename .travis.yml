@@ -10,7 +10,7 @@ node_js:
   - 10.24.1
   - 12.22.12
   - 14.21.3
-  - 16
+  - 16.20.2
 before_install: |
   NODEJS_VERSION=$(node --version)
   if [ 'v10' == ${NODEJS_VERSION%%.*} ]
