@@ -1,3 +1,59 @@
+2024-05-13, Version 4.0.6
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency glob to ^10.3.15 (renovate[bot])
+
+ * chore: update dependency semver to ^7.6.2 (renovate[bot])
+
+ * chore: update dependency glob to ^10.3.14 (renovate[bot])
+
+ * chore: update actions/checkout action to v4.1.5 (renovate[bot])
+
+ * chore: update coverallsapp/github-action action to v2.3.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.4 (renovate[bot])
+
+ * chore: update dependency semver to ^7.6.1 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.2.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.24.5 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.3 (renovate[bot])
+
+ * chore: update actions/checkout action to v4.1.4 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^19.3.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.2 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.1.1 (renovate[bot])
+
+ * chore: update actions/checkout action to v4.1.3 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.1.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.0 (renovate[bot])
+
+ * chore: update dependency node to v16.20.2 (renovate[bot])
+
+ * chore: update dependency node to v14.21.3 (renovate[bot])
+
+ * chore: update dependency node to v12.22.12 (renovate[bot])
+
+ * chore: update dependency node to v10.24.1 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^19.2.2 (renovate[bot])
+
+ * chore: update dependency eslint to v9 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.24.10 (renovate[bot])
+
+
 2024-04-04, Version 4.0.5
 =========================
 
