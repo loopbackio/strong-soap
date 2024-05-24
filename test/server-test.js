@@ -498,3 +498,62 @@ it('should return a valid error if the server stops responding': function(done) 
 */
 
 });
+
+describe('SOAP Server Options', function() {
+  before(function(done) {
+    fs.readFile(__dirname + '/wsdl/strict/stockquote.wsdl', 'utf8', function(err, data) {
+      assert.ok(!err);
+      test.wsdl = data;
+      done();
+    });
+  });
+
+  var startServer = function(optionsOverride) {
+    test.server = http.createServer(function(req, res) {
+      res.statusCode = 404;
+      res.end();
+    });
+
+    var options = {
+      path: '/stockquote',
+      services: test.service,
+      xml: test.wsdl,
+      ...optionsOverride
+    };
+
+    test.server.listen(15099, null, null, function() {
+      test.soapServer = soap.listen(test.server, options);
+      test.baseUrl =
+        'http://' + test.server.address().address + ":" + test.server.address().port;
+
+      //windows return 0.0.0.0 as address and that is not
+      //valid to use in a request
+      if (test.server.address().address === '0.0.0.0' || test.server.address().address === '::') {
+        test.baseUrl =
+          'http://127.0.0.1:' + test.server.address().port;
+      }
+    });
+  };
+
+  afterEach(function(done) {
+    test.server.close(function() {
+      test.server = null;
+      delete test.soapServer;
+      test.soapServer = null;
+      done();
+    });
+  });
+
+  it('should return response without newlines and white spaces', function(done) {
+    startServer({prettyResponse: false});
+    soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
+      assert.ok(!err);
+      var expectedBody = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Header/><soap:Body><ns1:TradePrice xmlns:ns1="http://example.com/stockquote.xsd"><price>19.56</price></ns1:TradePrice></soap:Body></soap:Envelope>';
+      client.GetLastTradePrice({TradePriceRequest: { tickerSymbol: 'AAPL'}}, function(err, res, body) {
+        assert.ok(!err);
+        assert.strictEqual(body.toString(), expectedBody);
+        done();
+      });
+    });
+  });
+});

@@ -325,8 +325,8 @@ class Server extends Base {
       self.xmlHandler.jsonToXml(envelope.body, nsContext, outputBodyDescriptor, result);
 
       self._envelope(envelope, includeTimestamp);
-      var message = envelope.body.toString({pretty: true});
-      var xml = envelope.doc.end({pretty: true});
+      var message = envelope.body.toString({pretty: self.wsdl.options.prettyResponse});
+      var xml = envelope.doc.end({pretty: self.wsdl.options.prettyResponse});
 
       debug('Server handleResult. xml: %s ', xml);
       callback(xml);
@@ -423,9 +423,8 @@ class Server extends Base {
     this.xmlHandler.jsonToXml(envelope.body, nsContext, faultDescriptor, error.Fault);
 
     self._envelope(envelope, includeTimestamp);
-    var message = envelope.body.toString({pretty: true});
-    var xml = envelope.doc.end({pretty: true});
-
+    var message = envelope.body.toString({pretty: self.wsdl.options.prettyResponse});
+    var xml = envelope.doc.end({pretty: self.wsdl.options.prettyResponse});
     debug('Server sendError. Response envelope: %s ', xml);
     callback(xml, statusCode);
   }
