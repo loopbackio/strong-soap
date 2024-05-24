@@ -66,6 +66,7 @@ class Base extends EventEmitter {
     this.wsdl.options.attributesKey = options.attributesKey || 'attributes';
     this.wsdl.options.envelopeKey = options.envelopeKey || 'soap';
     this.wsdl.options.forceSoapVersion = options.forceSoapVersion;
+    this.wsdl.options.prettyResponse = options.prettyResponse !== undefined ? options.prettyResponse : true;
   }
 
   static createSOAPEnvelope(prefix, nsURI) {
