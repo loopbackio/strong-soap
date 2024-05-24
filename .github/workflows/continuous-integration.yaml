@@ -19,12 +19,12 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [18, 20, 21]
+        node-version: [18, 20, 22]
         include:
           - os: macos-latest
-            node-version: 18 # LTS
+            node-version: 20 # LTS
           - os: windows-latest
-            node-version: 18 # LTS
+            node-version: 20 # LTS
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
@@ -68,10 +68,10 @@ jobs:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
         with:
           fetch-depth: 0
-      - name: Use Node.js 18
+      - name: Use Node.js 20
         uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
-          node-version: 18
+          node-version: 20
       - name: Bootstrap project
         run: npm ci --ignore-scripts
       - name: Verify commit linting
