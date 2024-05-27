@@ -17,7 +17,7 @@
     "strong-globalize": "^6.0.6",
     "uuid": "^9.0.1",
     "xml-crypto": "^3.2.0",
-    "xmlbuilder": "^10.1.1"
+    "xmlbuilder": "^15.1.1"
   },
   "repository": {
     "type": "git",
