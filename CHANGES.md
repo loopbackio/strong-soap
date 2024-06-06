@@ -1,3 +1,37 @@
+2024-06-06, Version 4.1.0
+=========================
+
+ * chore: add node.js 22 to CI (dhmlau)
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency debug to ^4.3.5 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.4.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.7 (renovate[bot])
+
+ * chore: update dependency sax to ^1.4.1 (renovate[bot])
+
+ * chore: update dependency sax to ^1.4.0 (renovate[bot])
+
+ * feat: adding option to disable server pretty formatting (Natan Carvalho)
+
+ * chore: update babel monorepo to ^7.24.6 (renovate[bot])
+
+ * chore: update dependency glob to ^10.4.1 (renovate[bot])
+
+ * chore: update dependency glob to ^10.3.16 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.6 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.3.0 (renovate[bot])
+
+ * chore: update actions/checkout action to v4.1.6 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.5 (renovate[bot])
+
+
 2024-05-13, Version 4.0.6
 =========================
 
