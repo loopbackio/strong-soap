@@ -1,3 +1,39 @@
+2024-07-03, Version 4.1.1
+=========================
+
+ * chore: update dependency mocha to ^10.6.0 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^9.6.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.11 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.5.2 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.5.1 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.5.0 (renovate[bot])
+
+ * chore: update dependency glob to ^10.4.2 (renovate[bot])
+
+ * chore: update dependency uuid to v10 (renovate[bot])
+
+ * chore: update dependency nyc to v17 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.5.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.10 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.9 (renovate[bot])
+
+ * chore: update actions/checkout action to v4.1.7 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.8 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.24.7 (renovate[bot])
+
+
 2024-06-06, Version 4.1.0
 =========================
 
