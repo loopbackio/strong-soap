@@ -1,3 +1,62 @@
+2024-08-12, Version 4.1.3
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^9.9.0 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.7.3 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^19.4.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.0 (renovate[bot])
+
+ * chore: update dependency @babel/preset-env to ^7.25.3 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.25.2 (renovate[bot])
+
+ * chore: update dependency husky to ^9.1.4 (renovate[bot])
+
+ * chore: update dependency debug to ^4.3.6 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.8.0 (renovate[bot])
+
+ * chore: update dependency @babel/preset-env to ^7.25.0 (renovate[bot])
+
+ * chore: update dependency husky to ^9.1.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.15 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.7.0 (renovate[bot])
+
+ * chore: update dependency husky to ^9.1.2 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.14 (renovate[bot])
+
+ * chore: update dependency husky to ^9.1.0 (renovate[bot])
+
+ * chore: update dependency semver to ^7.6.3 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.24.9 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.7.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.25.12 (renovate[bot])
+
+ * chore: update actions/setup-node action to v4.0.3 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.24.8 (renovate[bot])
+
+ * chore: update dependency glob to ^10.4.5 (renovate[bot])
+
+ * chore: update dependency glob to ^10.4.4 (renovate[bot])
+
+ * chore: update dependency glob to ^10.4.3 (renovate[bot])
+
+
+2024-07-03, Version 4.1.2
+=========================
+
 
 
 2024-07-03, Version 4.1.1
