@@ -6,7 +6,7 @@
     "node": "18 || 20 || 21"
   },
   "dependencies": {
-    "@cypress/request": "^3.0.1",
+    "@cypress/request": "^3.0.4",
     "compress": "^0.99.0",
     "debug": "^4.3.6",
     "httpntlm": "^1.8.13",
