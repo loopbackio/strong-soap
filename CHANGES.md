@@ -1,3 +1,45 @@
+2024-09-09, Version 4.1.4
+=========================
+
+ * chore: update dependency diff to v7 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^9.10.0 (renovate[bot])
+
+ * chore: update dependency debug to ^4.3.7 (renovate[bot])
+
+ * chore: update dependency @cypress/request to ^3.0.4 (renovate[bot])
+
+ * chore: update dependency diff to v6 (renovate[bot])
+
+ * chore: update dependency glob to v11 (renovate[bot])
+
+ * chore: update dependency @babel/cli to ^7.25.6 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.6 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^19.4.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.5 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.9.1 (renovate[bot])
+
+ * chore: update dependency @babel/preset-env to ^7.25.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.4 (renovate[bot])
+
+ * chore: update dependency husky to ^9.1.5 (renovate[bot])
+
+ * chore: update dependency async to ^3.2.6 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.2 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.1 (renovate[bot])
+
+
 2024-08-12, Version 4.1.3
 =========================
 
