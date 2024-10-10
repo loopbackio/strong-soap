@@ -1,3 +1,53 @@
+2024-10-10, Version 4.1.5
+=========================
+
+ * chore: update babel monorepo to ^7.25.8 (renovate[bot])
+
+ * chore: update dependency express to ^4.21.1 (renovate[bot])
+
+ * fix: handling attributes on the body tag in the server for both rpc and document styles (Natan Carvalho)
+
+ * chore: update github/codeql-action action to v3.26.12 (renovate[bot])
+
+ * chore: update actions/checkout action to v4.2.1 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^9.12.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.11 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.25.7 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.10 (renovate[bot])
+
+ * chore: update actions/checkout action to v4.2.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.9 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.11.1 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.11.0 (renovate[bot])
+
+ * chore: update actions/setup-node action to v4.0.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.8 (renovate[bot])
+
+ * chore: update dependency nyc to ^17.1.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.7 (renovate[bot])
+
+ * chore: update dependency husky to ^9.1.6 (renovate[bot])
+
+ * chore: update dependency express to ^4.21.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^19.5.0 (renovate[bot])
+
+ * chore: update dependency express to ^4.20.0 (renovate[bot])
+
+ * chore: update dependency @cypress/request to ^3.0.5 (renovate[bot])
+
+
 2024-09-09, Version 4.1.4
 =========================
 
