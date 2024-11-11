@@ -32,6 +32,7 @@ class XMLHandler {
    * @param {Object} [options.date]
    * @param {Object} [options.date.timezone]
    * @param {boolean} [options.date.timezone.enabled]
+   * @param {boolean} [option.ignoreAttributesUndefined]
    */
   constructor(schemas, options) {
     this.schemas = schemas || {};
@@ -43,6 +44,7 @@ class XMLHandler {
     this.options.date = this.options.date || {};
     this.options.date.timezone = this.options.date.timezone || {};
     this.options.date.timezone.enabled = typeof this.options.date.timezone.enabled === 'boolean' ? this.options.date.timezone.enabled : true;
+    this.options.ignoreAttributesUndefined = typeof this.options.ignoreAttributesUndefined === 'boolean' ? this.options.ignoreAttributesUndefined : true;
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
@@ -162,8 +164,8 @@ class XMLHandler {
         }
       }
 
-      if (val == null) {
-        if (descriptor.isNillable) {
+      if (val === null ||(val === undefined && this.options.ignoreAttributesUndefined == true)) {
+        if (descriptor.isNillable ) {
           // Set xsi:nil = true
           declareNamespace(nsContext, element, 'xsi', helper.namespaces.xsi);
           if (typeof element.attribute === 'function') {
