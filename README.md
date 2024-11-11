@@ -530,6 +530,10 @@ soap.createClient(__dirname + '/wsdl/default_namespace.wsdl', wsdlOptions, funct
 
 To see it in practice, consider the sample in: [test/request-response-samples/addPets__force_namespaces](https://github.com/loopbackio/strong-soap/tree/master/test/request-response-samples/addPets__force_namespaces)
 
+### Mapping of undefined element values
+
+When the wsdl attribute nillable="true" it set, JSON values will map to null and XML values map to nillable='true' unless ignoreAttributesUndefined is set to false. When ignoreAttributesUndefined is set to false undefined element values will map to a self closing tag i.e. <tag/>
+
 ## XMLHandler
 
 XMLHandler enables you to to convert a JSON object to XML and XML to a JSON object.  It can also parse an XML string or stream into the XMLBuilder tree.

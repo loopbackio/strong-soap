@@ -1,3 +1,10 @@
+2024-11-11, Version 4.1.6
+=========================
+
+Placeholder for package maintainer
+
+ * feat: Override default strong-soap behaviour when mapping undefined element values to self closing tags (<tag/> instead of <tag xsi:nil=true></tag>. Option is ignoreAttributesUndefined, to enable option set to false. (Jamie Nicholson)
+
 2024-10-10, Version 4.1.5
 =========================
 
