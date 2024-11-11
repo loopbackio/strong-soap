@@ -52,7 +52,6 @@ describe('Nillable tests ', function() {
 
         client.addPets(requestArgs, function (err, result, body) {
           var request = client.lastMessage;
-          console.log(client.lastMessage)
           //check if the Breed element has xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" atttribute
           var index = request.indexOf('<Breed xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>');
           assert.ok(index > -1);
@@ -86,7 +85,6 @@ describe('Nillable tests ', function() {
         };
 
         client.addPets(requestArgs, function (err, result, body) {
-          console.log(client.lastMessage)
           var request = client.lastMessage;
           //check if the pet element has xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" atttribute
           var index = request.indexOf('<pet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>');
