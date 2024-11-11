@@ -1,3 +1,43 @@
+2024-11-11, Version 4.1.6
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.27.1 (renovate[bot])
+
+ * chore: add node 22 to engines (#900) (Fabian Cook)
+
+ * chore: update dependency eslint to ^9.14.0 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.8.2 (renovate[bot])
+
+ * chore: update dependency mocha to ^10.8.1 (renovate[bot])
+
+ * chore: update dependency @cypress/request to ^3.0.6 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.26.0 (renovate[bot])
+
+ * chore: update coverallsapp/github-action action to v2.3.4 (renovate[bot])
+
+ * chore: update actions/setup-node action to v4.1.0 (renovate[bot])
+
+ * chore: update actions/checkout action to v4.2.2 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.27.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.25.9 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.13.0 (renovate[bot])
+
+ * chore: update coverallsapp/github-action action to v2.3.3 (renovate[bot])
+
+ * chore: update coverallsapp/github-action action to v2.3.2 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.26.13 (renovate[bot])
+
+ * chore: update coverallsapp/github-action action to v2.3.1 (renovate[bot])
+
+
 2024-10-10, Version 4.1.5
 =========================
 
