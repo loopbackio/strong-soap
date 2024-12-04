@@ -1,3 +1,29 @@
+2024-12-04, Version 4.1.7
+=========================
+
+ * chore: update github/codeql-action action to v3.27.6 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^9.16.0 (renovate[bot])
+
+ * chore: update dependency uuid to v11 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.27.5 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^19.6.0 (renovate[bot])
+
+ * chore: update dependency husky to ^9.1.7 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.15.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.27.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.27.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.27.2 (renovate[bot])
+
+
 2024-11-11, Version 4.1.6
 =========================
 
