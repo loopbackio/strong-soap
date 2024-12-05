@@ -54,7 +54,7 @@
     "duplexer": "^0.1.2",
     "eslint": "^9.16.0",
     "eslint-config-google": "^0.14.0",
-    "express": "^4.21.1",
+    "express": "^4.21.2",
     "express-ntlm": "2.7.0",
     "glob": "^11.0.0",
     "husky": "^9.1.7",
