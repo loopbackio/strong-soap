@@ -56,7 +56,7 @@
     "eslint-config-google": "^0.14.0",
     "express": "^4.21.2",
     "express-ntlm": "2.7.0",
-    "glob": "^11.0.0",
+    "glob": "^11.0.1",
     "husky": "^9.1.7",
     "jshint": "^2.13.6",
     "mocha": "^11.0.1",
