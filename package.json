@@ -1,6 +1,6 @@
 {
   "name": "strong-soap",
-  "version": "4.1.7",
+  "version": "4.1.8",
   "description": "A minimal node SOAP client",
   "engines": {
     "node": "18 || 20 || 21 || 22"

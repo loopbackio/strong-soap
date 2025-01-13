@@ -1,3 +1,45 @@
+2025-01-13, Version 4.1.8
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency eslint to ^9.18.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.1 (renovate[bot])
+
+ * chore: update dependency glob to ^11.0.1 (renovate[bot])
+
+ * chore: update dependency uuid to ^11.0.5 (renovate[bot])
+
+ * chore: update dependency readable-stream to ^4.7.0 (renovate[bot])
+
+ * chore: update dependency uuid to ^11.0.4 (renovate[bot])
+
+ * docs: update readme (dhmlau)
+
+ * chore: update github/codeql-action action to v3.28.0 (renovate[bot])
+
+ * chore: update dependency mocha to v11 (renovate[bot])
+
+ * chore: update dependency readable-stream to ^4.6.0 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^19.6.1 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.17.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.27.9 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.27.7 (renovate[bot])
+
+ * chore: update dependency @cypress/request to ^3.0.7 (renovate[bot])
+
+ * chore: update dependency debug to ^4.4.0 (renovate[bot])
+
+ * chore: update dependency express to ^4.21.2 (renovate[bot])
+
+ * chore: update dependency @babel/cli to ^7.26.4 (renovate[bot])
+
+
 2024-12-04, Version 4.1.7
 =========================
 
