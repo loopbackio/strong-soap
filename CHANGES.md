@@ -1,3 +1,45 @@
+2025-02-10, Version 4.1.9
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update babel monorepo to ^7.26.8 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.20.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.9 (renovate[bot])
+
+ * chore: update dependency semver to ^7.7.1 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^19.7.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.8 (renovate[bot])
+
+ * chore: update dependency semver to ^7.7.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.6 (renovate[bot])
+
+ * chore: update actions/setup-node action to v4.2.0 (renovate[bot])
+
+ * chore: update coverallsapp/github-action action to v2.3.6 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.19.0 (renovate[bot])
+
+ * chore: update coverallsapp/github-action action to v2.3.5 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.5 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.26.7 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.3 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.1.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.2 (renovate[bot])
+
+
 2025-01-13, Version 4.1.8
 =========================
 
