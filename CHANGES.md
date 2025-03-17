@@ -1,3 +1,35 @@
+2025-03-17, Version 4.1.10
+==========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update actions/setup-node action to v4.3.0 (renovate[bot])
+
+ * chore: update dependency xml-crypto to ^3.2.1 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.26.10 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.22.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.11 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^19.8.0 (renovate[bot])
+
+ * chore: update dependency @cypress/request to ^3.0.8 (renovate[bot])
+
+ * chore: update dependency selectn to ^1.3.0 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.21.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.10 (renovate[bot])
+
+ * chore: update dependency uuid to ^11.1.0 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.26.9 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.20.1 (renovate[bot])
+
+
 2025-02-10, Version 4.1.9
 =========================
 
