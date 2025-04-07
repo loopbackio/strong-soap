@@ -32,6 +32,7 @@ class XMLHandler {
    * @param {Object} [options.date]
    * @param {Object} [options.date.timezone]
    * @param {boolean} [options.date.timezone.enabled]
+   * @param {boolean} [options.trimText]
    */
   constructor(schemas, options) {
     this.schemas = schemas || {};
@@ -43,6 +44,7 @@ class XMLHandler {
     this.options.date = this.options.date || {};
     this.options.date.timezone = this.options.date.timezone || {};
     this.options.date.timezone.enabled = typeof this.options.date.timezone.enabled === 'boolean' ? this.options.date.timezone.enabled : true;
+    this.options.trimText = typeof this.options.trimText === 'boolean' ? this.options.trimText : true;
   }
 
   jsonToXml(node, nsContext, descriptor, val) {
@@ -709,7 +711,9 @@ class XMLHandler {
     };
 
     p.ontext = function(text) {
-      text = text && text.trim();
+      if (self.options.trimText) {
+        text = text && text.trim();
+      }
       if (!text.length)
         return;
 
