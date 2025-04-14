@@ -1,3 +1,25 @@
+2025-04-14, Version 4.1.11
+==========================
+
+ * chore: update actions/setup-node action to v4.4.0 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.15 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.24.0 (renovate[bot])
+
+ * chore: update dependency express to v5 (renovate[bot])
+
+ * chore: update dependency @babel/cli to ^7.27.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.13 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.23.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.12 (renovate[bot])
+
+
 2025-03-17, Version 4.1.10
 ==========================
 
@@ -329,11 +351,6 @@
 
 
 2024-07-03, Version 4.1.2
-=========================
-
-
-
-2024-07-03, Version 4.1.1
 =========================
 
  * chore: update dependency mocha to ^10.6.0 (renovate[bot])
