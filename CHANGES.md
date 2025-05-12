@@ -1,3 +1,33 @@
+2025-05-12, Version 4.1.12
+==========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update commitlint monorepo to ^19.8.1 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.27.2 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.26.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.17 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.2.2 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.27.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.16 (renovate[bot])
+
+ * chore: update dependency glob to ^11.0.2 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.25.1 (renovate[bot])
+
+ * chore: include node v23 in tests as latest, update node lts for macos and windows (#996) (Fabian Cook)
+
+ * chore: update node engines to anything 18 or above (#996) (Fabian Cook)
+
+ * chore: update dependency eslint to ^9.25.0 (renovate[bot])
+
+
 2025-04-14, Version 4.1.11
 ==========================
 
