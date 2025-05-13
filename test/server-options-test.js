@@ -8,7 +8,7 @@
 var fs = require('fs'),
     soap = require('..').soap,
     assert = require('assert'),
-    request = require('request'),
+    request = require('@cypress/request'),
     http = require('http');
 
 var test = {};
