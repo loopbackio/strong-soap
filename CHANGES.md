@@ -1,3 +1,17 @@
+2025-05-16, Version 3.5.7
+=========================
+
+ * chore: downgrade version from 3.6.6 to 3.5.6 in package.json and package-lock.json (Diyorbek Rustamjonov)
+
+ * chore: replace request with @cypress/request in server-test.js (Diyorbek Rustamjonov)
+
+ * chore: replace request with @cypress/request in server-options-test.js (Diyorbek Rustamjonov)
+
+ * chore: replace request with @cypress/request in http.js (Diyorbek Rustamjonov)
+
+ * chore: update version to 3.6.6 and replace request with @cypress/request (dhmlau)
+
+
 2023-10-16, Version 3.5.6
 =========================
 
