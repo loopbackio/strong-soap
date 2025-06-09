@@ -1,3 +1,35 @@
+2025-06-09, Version 4.1.13
+==========================
+
+ * chore: update dependency mocha to ^11.6.0 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.19 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.28.0 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.27.4 (renovate[bot])
+
+ * chore: update dependency diff to v8 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.27.3 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.5.0 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.4.0 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.3.0 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.27.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.28.18 (renovate[bot])
+
+ * chore: update dependency debug to ^4.4.1 (renovate[bot])
+
+ * chore: update dependency semver to ^7.7.2 (renovate[bot])
+
+
 2025-05-12, Version 4.1.12
 ==========================
 
