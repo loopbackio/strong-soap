@@ -3,7 +3,7 @@
   "version": "4.1.14",
   "description": "A minimal node SOAP client",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "@cypress/request": "^3.0.8",
@@ -67,5 +67,5 @@
     "should": "^13.2.3",
     "timekeeper": "^2.3.1"
   },
-  "author": "IBM Corp."
+  "author": "IBM Corp. and LoopBack contributors"
 }
