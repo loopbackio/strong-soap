@@ -1,3 +1,31 @@
+2025-08-11, Version 5.0.0
+=========================
+
+ * chore: update actions/checkout action to v4.3.0 (renovate[bot])
+
+ * chore: drop Node.js 18 support BREAKING CHANGE: drop Node.js 18 support (dhmlau)
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency node to v20.19.4 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.33.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.29.8 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.29.7 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.29.5 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.32.0 (renovate[bot])
+
+ * chore: update dependency @cypress/request to ^3.0.9 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.29.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.29.3 (renovate[bot])
+
+
 2025-07-14, Version 4.1.14
 ==========================
 
