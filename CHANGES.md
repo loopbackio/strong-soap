@@ -1,3 +1,39 @@
+2025-09-08, Version 5.0.1
+=========================
+
+ * chore: update dependency debug to ^4.4.2 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.28.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.1 (renovate[bot])
+
+ * chore: update actions/setup-node action to v5 (renovate[bot])
+
+ * chore: update dependency node to v20.19.5 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.0 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.7.2 (renovate[bot])
+
+ * chore: update README (dhmlau)
+
+ * chore: remove unused coveralls dep (dhmlau)
+
+ * chore: update dependency eslint to ^9.34.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.29.11 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.29.10 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.28.3 (renovate[bot])
+
+ * chore: update actions/checkout action to v5 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.29.9 (renovate[bot])
+
+
 2025-08-11, Version 5.0.0
 =========================
 
