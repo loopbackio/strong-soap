@@ -8,7 +8,7 @@
   "dependencies": {
     "@cypress/request": "^3.0.9",
     "compress": "^0.99.0",
-    "debug": "^4.4.1",
+    "debug": "^4.4.2",
     "httpntlm": "^1.8.13",
     "lodash": "^4.17.21",
     "node-rsa": "^1.1.1",
