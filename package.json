@@ -62,7 +62,7 @@
     "nyc": "^17.1.0",
     "pinst": "^3.0.0",
     "readable-stream": "^4.7.0",
-    "semver": "^7.7.2",
+    "semver": "^7.7.3",
     "should": "^13.2.3",
     "timekeeper": "^2.3.1"
   },
