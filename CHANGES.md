@@ -1,3 +1,47 @@
+2025-10-14, Version 5.0.3
+=========================
+
+ * chore: update dependency uuid to v13 (renovate[bot])
+
+ * chore: update actions/setup-node action to v6 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.8 (renovate[bot])
+
+ * chore: update dependency semver to ^7.7.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.7 (renovate[bot])
+
+ * chore: update package-lock.json (dhmlau)
+
+ * chore: update commitlint monorepo to v20 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.37.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.6 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.7.4 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.7.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.5 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.4 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.36.0 (renovate[bot])
+
+ * chore: update dependency debug to ^4.4.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v3.30.2 (renovate[bot])
+
+ * chore: update dependency eslint to ^9.35.0 (renovate[bot])
+
+
 2025-09-08, Version 5.0.2
 =========================
 
