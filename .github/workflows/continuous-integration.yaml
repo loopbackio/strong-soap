@@ -28,7 +28,7 @@ jobs:
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           fetch-depth: 0
       - name: Use Node.js ${{ matrix.node-version }}
@@ -65,7 +65,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.pull_request }}
     steps:
-      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
           fetch-depth: 0
       - name: Use Node.js 20
@@ -84,7 +84,7 @@ jobs:
       # See: https://github.com/github/codeql-action/blob/008b2cc71c4cf3401f45919d8eede44a65b4a322/README.md#usage
       security-events: write
     steps:
-    - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+    - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
     - name: Initialize CodeQL
       uses: github/codeql-action/init@fdbfb4d2750291e159f0156def62b853c2798ca2 # v4.31.5
       with:
