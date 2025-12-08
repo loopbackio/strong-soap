@@ -1,3 +1,39 @@
+2025-12-08, Version 5.0.5
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update commitlint monorepo to ^20.2.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.31.7 (renovate[bot])
+
+ * chore: update actions/setup-node action to v6.1.0 (renovate[bot])
+
+ * chore: update actions/checkout action to v6.0.1 (renovate[bot])
+
+ * chore: update dependency express to ^5.2.1 (renovate[bot])
+
+ * chore: update dependency express to v5.2.0 [security] (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.31.6 (renovate[bot])
+
+ * chore: update dependency node to v20.19.6 (renovate[bot])
+
+ * chore: update actions/checkout action to v6 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.31.5 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.31.4 (renovate[bot])
+
+ * chore: update dependency glob to ^11.1.0 (renovate[bot])
+
+ * chore: update dependency glob to v11.1.0 [security] (renovate[bot])
+
+ * chore: update actions/checkout action to v5.0.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.31.3 (renovate[bot])
+
+
 2025-11-11, Version 5.0.4
 =========================
 
