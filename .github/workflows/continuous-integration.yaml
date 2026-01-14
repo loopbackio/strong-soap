@@ -71,7 +71,7 @@ jobs:
       - name: Use Node.js 20
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
         with:
-          node-version: 20.19.6
+          node-version: 20.20.0
       - name: Bootstrap project
         run: npm ci --ignore-scripts
       - name: Verify commit linting
