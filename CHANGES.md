@@ -1,3 +1,43 @@
+2026-02-09, Version 5.0.7
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.32.2 (renovate[bot])
+
+ * chore: update dependency semver to ^7.7.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.32.1 (renovate[bot])
+
+ * chore: update dependency glob to ^13.0.1 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^20.4.1 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.29.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^20.4.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.32.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.31.11 (renovate[bot])
+
+ * chore: update actions/checkout action to v6.0.2 (renovate[bot])
+
+ * chore: update dependency lodash to ^4.17.23 (renovate[bot])
+
+ * chore: update dependency lodash to v4.17.23 [security] (renovate[bot])
+
+ * chore: update actions/setup-node action to v6.2.0 (renovate[bot])
+
+ * chore: update dependency node to v20.20.0 (renovate[bot])
+
+ * chore: update dependency diff to ^8.0.3 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.28.6 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.31.10 (renovate[bot])
+
+
 2026-01-12, Version 5.0.6
 =========================
 
