@@ -49,7 +49,7 @@
     "async": "^3.2.6",
     "colors": "^1.4.0",
     "diff": "^8.0.3",
-    "doctoc": "^2.2.1",
+    "doctoc": "^2.3.0",
     "duplexer": "^0.1.2",
     "eslint": "^9.39.2",
     "eslint-config-google": "^0.14.0",
