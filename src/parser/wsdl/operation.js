@@ -293,7 +293,7 @@ class Operation extends WSDLElement {
         </soap:Fault>
      </soap:Body>
      */
-    if (isOutput && parameterDescriptor && parameterDescriptor.body.Fault) {
+    if (isOutput && parameterDescriptor && parameterDescriptor.body && parameterDescriptor.body.Fault) {
       let xsdStr = new QName(helper.namespaces.xsd, 'string', 'xsd');
       var form;
       if (soapVersion === '1.1') {
