@@ -1,3 +1,37 @@
+2026-04-13, Version 5.0.9
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * fix: check body property when is undefined (César Agustín)
+
+ * chore: update dependency doctoc to ^2.4.0 (renovate[bot])
+
+ * chore: update dependency lodash to ^4.18.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.35.1 (renovate[bot])
+
+ * chore: update dependency node to v20.20.2 (renovate[bot])
+
+ * chore: update dependency diff to ^8.0.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.34.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.34.0 (renovate[bot])
+
+ * revert uuid to v11 (Guillaume Khayat)
+
+ * chore: update dependency sax to ^1.6.0 (renovate[bot])
+
+ * chore: update dependency @babel/preset-env to ^7.29.2 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.33.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^20.5.0 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^20.4.4 (renovate[bot])
+
+
 2026-03-09, Version 5.0.8
 =========================
 
