@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [20, 22, 24]
+        node-version: [22, 24, 26]
         include:
           - os: macos-latest
             node-version: 22 # LTS
@@ -68,10 +68,10 @@ jobs:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
-      - name: Use Node.js 20
+      - name: Use Node.js 22
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
-          node-version: 20.20.2
+          node-version: 22
       - name: Bootstrap project
         run: npm ci --ignore-scripts
       - name: Verify commit linting
