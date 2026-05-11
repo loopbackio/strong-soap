@@ -1,3 +1,31 @@
+2026-05-11, Version 5.0.10
+==========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency semver to ^7.8.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.35.4 (renovate[bot])
+
+ * chore: update dependency uuid to ^11.1.1 (renovate[bot])
+
+ * chore: update dependency @babel/preset-env to ^7.29.5 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.35.3 (renovate[bot])
+
+ * chore: update dependency @babel/preset-env to ^7.29.3 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^20.5.3 (renovate[bot])
+
+ * chore: update dependency @commitlint/cli to ^20.5.2 (renovate[bot])
+
+ * chore: update actions/setup-node action to v6.4.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.35.2 (renovate[bot])
+
+ * chore: update dependency doctoc to ^2.4.1 (renovate[bot])
+
+
 2026-04-13, Version 5.0.9
 =========================
 
