@@ -3,7 +3,7 @@
   "version": "5.0.10",
   "description": "A minimal node SOAP client",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "dependencies": {
     "@cypress/request": "^3.0.10",
