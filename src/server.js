@@ -135,7 +135,7 @@ class Server extends Base {
     else {
       res.end();
     }
-  };
+  }
 
   _process(input, req, callback) {
     var self = this,
@@ -260,7 +260,7 @@ class Server extends Base {
       //Revisit - is this needed?
       throw error;
     }
-  };
+  }
 
   _executeMethod(options, req, callback) {
     options = options || {};
@@ -345,7 +345,7 @@ class Server extends Base {
     if (typeof result !== 'undefined') {
       handleResult(null, result);
     }
-  };
+  }
 
   _addWSSecurityHeader(headerElement) {
     var secElement = headerElement.element('wsse:Security')
@@ -381,7 +381,7 @@ class Server extends Base {
     //add soapHeaders to envelope. Header can be xml, or JSON object which may or may not be described in WSDL/XSD.
     this.addSoapHeadersToEnvelope(soapHeaderElement, this.xmlHandler);
     return env;
-  };
+  }
 
   _sendError(operation, error, callback, includeTimestamp) {
     var self = this,

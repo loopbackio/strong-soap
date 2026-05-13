@@ -11,7 +11,7 @@ class AttributeGroup extends XSDElement {
   constructor(nsName, attrs, options) {
     super(nsName, attrs, options);
   }
-  
+
   resolve(schemas) {
     if (this.$ref) {
       this.ref = this.resolveSchemaObject(schemas, 'attributeGroup', this.$ref);

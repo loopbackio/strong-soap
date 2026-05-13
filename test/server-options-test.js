@@ -159,8 +159,8 @@ describe('SOAP Server with Options', function() {
       });
     });
   });
-  
-  
+
+
   it('should return correct stock price in response body', function(done) {
     var responseData = '<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header/>\n  <soap:Body>\n    <ns1:TradePrice xmlns:ns1=\"http://example.com/stockquote.xsd\">\n      <price>19.56</price>\n    </ns1:TradePrice>\n  </soap:Body>\n</soap:Envelope>';
     test.server.listen(15099, null, null, function() {
@@ -178,7 +178,7 @@ describe('SOAP Server with Options', function() {
       if (test.server.address().address === '0.0.0.0' || test.server.address().address === '::') {
         test.baseUrl = 'http://127.0.0.1:' + test.server.address().port;
       }
-      
+
       soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
         assert.ok(!err);
         client.GetLastTradePrice({TradePriceRequest: { tickerSymbol: 'ACME' }}, function(err, response, body) {
@@ -239,7 +239,7 @@ describe('SOAP Server with Options', function() {
       if (test.server.address().address === '0.0.0.0' || test.server.address().address === '::') {
         test.baseUrl = 'http://127.0.0.1:' + test.server.address().port;
       }
-      
+
       soap.createClient(test.baseUrl + '/stockquote?wsdl', function(err, client) {
         assert.ok(!err);
         client.GetLastTradePrice({ tickerSymbol: 'xml response' }, function(err, response, body) {
@@ -250,5 +250,5 @@ describe('SOAP Server with Options', function() {
       });
     });
   });
-  
+
 });

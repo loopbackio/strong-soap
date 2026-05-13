@@ -17,7 +17,7 @@ class Security {
 
   addOptions(options) {
     _.merge(options, this.options);
-  };
+  }
 
   addHttpHeaders(headers) {
   }

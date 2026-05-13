@@ -10,7 +10,7 @@ var NamespaceContext = require('./parser/nscontext');
 var SOAPElement = require('./soapModel').SOAPElement;
 var xmlBuilder = require('xmlbuilder');
 var XMLHandler = require('./parser/xmlHandler');
-  
+
 class Base extends EventEmitter {
   constructor(wsdl, options) {
     super();

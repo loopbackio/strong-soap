@@ -63,7 +63,7 @@ class ClientSSLSecurity extends Security {
     options.ca = this.ca;
     _.merge(options, this.options);
     options.agent = new https.Agent(options);
-  };
+  }
 }
 
 module.exports = ClientSSLSecurity;

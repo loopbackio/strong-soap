@@ -90,7 +90,7 @@ class Element {
       this.constructor.allowedChildren.indexOf('any') === -1) {
       debug('Element %s is not allowed within %j', qname, this.nsName);
     }
-    
+
     if (ElementType) {
       child = new ElementType(nsName, attrs, options);
       child.nsURI = qname.nsURI;

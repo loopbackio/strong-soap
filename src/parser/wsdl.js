@@ -169,7 +169,7 @@ class WSDL {
     if (options.httpClient) {
       this.options.httpClient = options.httpClient;
     }
-    
+
     if (options.request) {
       this.options.request = options.request;
     }
@@ -357,7 +357,7 @@ class WSDL {
     p.write(xml).close();
 
     return root;
-  };
+  }
 
   _fromXML(xml) {
     this.definitions = this._parse(xml);
@@ -392,7 +392,7 @@ class WSDL {
       str += ' xmlns:' + prefix + '="' + ns + '"';
     }
     return str;
-  };
+  }
 
   /*
    * Have another function to load previous WSDLs as we

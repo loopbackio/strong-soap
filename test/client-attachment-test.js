@@ -19,7 +19,7 @@ describe('SOAP Http attachment', function() {
     it('attachment length 1', function(done){
         var httpClient = new http({})
         const optionEx = {
-            attachments:[{ 
+            attachments:[{
                 name: 'teste',
                 contentId: '123445555',
                 mimetype: 'jpeg',

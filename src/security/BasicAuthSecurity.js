@@ -19,7 +19,7 @@ class BasicAuthSecurity extends Security {
     var cred = Buffer.from((this.username + ':' + this.password) || '')
       .toString('base64');
     headers.Authorization = 'Basic ' + cred;
-  };
+  }
 }
 
 module.exports = BasicAuthSecurity;

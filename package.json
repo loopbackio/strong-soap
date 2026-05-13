@@ -33,7 +33,8 @@
     "prepublishOnly": "pinst --disable && npm run build",
     "postpublish": "pinst --enable",
     "toc": "doctoc Readme.md --github --maxlevel 3",
-    "_pretest": "jshint index.js lib test",
+    "lint": "eslint .",
+    "pretest": "npm run lint",
     "test": "nyc --reporter=lcov mocha --exit --timeout 60000 test/*-test.js test/security/*.js"
   },
   "keywords": [
@@ -51,8 +52,7 @@
     "diff": "^8.0.4",
     "doctoc": "^2.4.1",
     "duplexer": "^0.1.2",
-    "eslint": "^9.39.4",
-    "eslint-config-google": "^0.14.0",
+    "eslint": "^10.3.0",
     "express": "^5.2.1",
     "express-ntlm": "2.7.0",
     "glob": "^13.0.6",

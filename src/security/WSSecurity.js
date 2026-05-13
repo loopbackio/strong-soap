@@ -17,9 +17,9 @@ class WSSecurity extends Security {
     super(options);
     this._username = username;
     this._password = password;
-    //must account for backward compatibility for passwordType String param as 
-    // well as object options defaults: passwordType = 'PasswordText', 
-    // hasTimeStamp = true   
+    //must account for backward compatibility for passwordType String param as
+    // well as object options defaults: passwordType = 'PasswordText',
+    // hasTimeStamp = true
     if (typeof options === 'string') {
       this._passwordType = options ? options : 'PasswordText';
       options = {};
