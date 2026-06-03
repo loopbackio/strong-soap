@@ -80,7 +80,7 @@ class Binding extends WSDLElement {
       operations[name] = operation.describe(definitions);
     }
     return operations;
-  };
+  }
 }
 
 Binding.elementName = 'binding';

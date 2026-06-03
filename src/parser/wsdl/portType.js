@@ -33,7 +33,7 @@ class PortType extends WSDLElement {
       operations[name] = method.describe(definitions);
     }
     return operations;
-  };
+  }
 }
 
 PortType.elementName = 'portType';

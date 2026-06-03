@@ -11,7 +11,7 @@ class Part extends WSDLElement {
   constructor(nsName, attrs, options) {
     super(nsName, attrs, options);
   }
-  
+
   postProcess(definitions) {
     if (this.$element) {
       this.element = this.resolveSchemaObject(

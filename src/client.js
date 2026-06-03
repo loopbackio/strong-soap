@@ -174,13 +174,13 @@ class Client extends Base {
     }
 
     // Clear and Add new SOAP Headers
-     if (!_.isEmpty(dynamicSoapHeaders)) {             
+     if (!_.isEmpty(dynamicSoapHeaders)) {
         this.clearSoapHeaders();
         for (var attr in dynamicSoapHeaders) {
            this.addSoapHeader(dynamicSoapHeaders[attr]);
         }
     }
-    
+
     debug('client request. headers: %j', headers);
 
     //Unlike other security objects, NTLMSecurity is passed in through client options rather than client.setSecurity(ntlmSecurity) as some

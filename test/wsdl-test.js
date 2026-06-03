@@ -198,7 +198,7 @@ describe('wsdl-tests', function() {
       ) {
         var operation = def.definitions.bindings.RestrictionsBinding.operations.TestRestrictions;
         var operationDesc = operation.describe(def);
-  
+
         var requestElements = operationDesc.input.body.elements[0].elements;
 
         // second element in the operation request is an element with anonymous type

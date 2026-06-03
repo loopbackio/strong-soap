@@ -41,7 +41,7 @@ function generateId() {
 class WSSecurityCert extends Security {
   constructor(privatePEM, publicP12PEM, password) {
     super();
-    
+
     this.publicP12PEM = publicP12PEM.toString()
       .replace('-----BEGIN CERTIFICATE-----', '')
       .replace('-----END CERTIFICATE-----', '')

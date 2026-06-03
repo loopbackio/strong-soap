@@ -9,7 +9,7 @@ var SOAPElement = require('./soapElement');
 var helper = require('../helper');
 
 /**
- * <soap:fault name="nmtoken" use="literal|encoded" 
+ * <soap:fault name="nmtoken" use="literal|encoded"
  * encodingStyle="uri-list"? namespace="uri"?>
  */
 class Fault extends SOAPElement {

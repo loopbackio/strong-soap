@@ -22,7 +22,7 @@ var NamespaceContext = require('./nscontext');
 
 class XMLHandler {
   /**
-   * @param {Object} [schemas] 
+   * @param {Object} [schemas]
    * @param {Object} [options]
    * @param {boolean} [options.enforceRestrictions]
    * @param {string} [options.valueKey]
@@ -864,7 +864,7 @@ function parseValue(text, descriptor) {
   var jsType = descriptor && descriptor.jsType;
   if (jsType === Date) {
     var dateText = text;
-    // Checks for xs:date with tz, drops the tz 
+    // Checks for xs:date with tz, drops the tz
     // because xs:date doesn't have a time to offset
     // and JS Date object doesn't store an arbitrary tz
     if(dateText.length === 16){
@@ -884,12 +884,12 @@ function parseValue(text, descriptor) {
 }
 
 /**
- * 
- * @param {string | Date} date 
- * @param {Object} [options] 
+ *
+ * @param {string | Date} date
+ * @param {Object} [options]
  * @param {Object} [options.timezone]
  * @param {boolean} [options.timezone.enabled]
- * @returns 
+ * @returns
  */
 function toXmlDate(date, options) {
   try {
@@ -899,7 +899,7 @@ function toXmlDate(date, options) {
     if (!withTimezone) {
       return formattedDate;
     }
-    return formattedDate + 'Z';  
+    return formattedDate + 'Z';
   } catch (err) {
     return date;
   }
@@ -908,7 +908,7 @@ function toXmlDate(date, options) {
 function toXmlTime(date) {
   try {
     const isoStr = new Date(date).toISOString();
-    return isoStr.split('T')[1];  
+    return isoStr.split('T')[1];
   } catch (err) {
     return date;
   }
@@ -916,16 +916,16 @@ function toXmlTime(date) {
 
 function toXmlDateTime(date) {
   try {
-    return new Date(date).toISOString();  
+    return new Date(date).toISOString();
   } catch (err) {
-    return date; 
+    return date;
   }
 }
 
 /**
- * 
- * @param {object} descriptor 
- * @param {* | null} val 
+ *
+ * @param {object} descriptor
+ * @param {* | null} val
  * @param {Object} options
  * @param {Object} options.timezone
  * @param {boolean} options.timezone.enabled

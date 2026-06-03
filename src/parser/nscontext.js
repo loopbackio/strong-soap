@@ -297,7 +297,7 @@ class NamespaceContext {
       this.currentScope.namespaces[mapping.prefix] = mapping;
     }
     return mapping;
-  };
+  }
 }
 
 module.exports = NamespaceContext;

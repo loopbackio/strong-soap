@@ -4,9 +4,9 @@
 // License text available at https://opensource.org/licenses/MIT
 
 /*
-strip the BOM characters in the beginning of UTF-8 
+strip the BOM characters in the beginning of UTF-8
 or other unicode encoded strings
-http://en.wikipedia.org/wiki/Byte_order_mark 
+http://en.wikipedia.org/wiki/Byte_order_mark
 */
 'use strict';
 module.exports = stripBom;
@@ -29,4 +29,4 @@ function stripBom(str){
 		value = transformed.toString();
 	}
 	return value;
-};
+}

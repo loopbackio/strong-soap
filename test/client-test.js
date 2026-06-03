@@ -339,7 +339,7 @@ describe('SOAP Client', function() {
             'EventEmitter': true,
             'Promise': true
           }
-        };      
+        };
         var lastRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n"
         + "    <esnext>false</esnext>\n    <moz>true</moz>\n    <boss>true</boss>\n    <node>true</node>\n    <validthis>true</validthis>\n    <globals>\n      <EventEmitter>true</EventEmitter>\n      <Promise>true</Promise>\n    </globals>\n"
         + "  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>";
@@ -367,7 +367,7 @@ describe('SOAP Client', function() {
             'EventEmitter': true,
             'Promise': true
           }
-        };      
+        };
         var lastRequest = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Header>\n"
         + "    <esnext>false</esnext>\n    <moz>true</moz>\n    <boss>true</boss>\n    <node>true</node>\n    <validthis>true</validthis>\n    <globals>\n      <EventEmitter>true</EventEmitter>\n      <Promise>true</Promise>\n    </globals>\n"
         + "  </soap:Header>\n  <soap:Body/>\n</soap:Envelope>";

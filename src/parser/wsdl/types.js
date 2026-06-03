@@ -31,7 +31,7 @@ class Types extends WSDLElement {
         this.schemas[targetNamespace].merge(child, true);
       }
     }
-  };
+  }
 }
 
 Types.elementName = 'types';

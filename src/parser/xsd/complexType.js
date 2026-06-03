@@ -64,7 +64,7 @@ class ComplexType extends XSDElement {
             }
           }
         }
-      }  
+      }
     }
   }
 }
