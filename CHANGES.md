@@ -1,3 +1,35 @@
+2026-06-09, Version 6.0.0
+=========================
+
+ * chore: update commitlint monorepo to v21 (renovate[bot])
+
+ * chore: update dependency semver to ^7.8.3 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.36.2 (renovate[bot])
+
+ * chore: update dependency semver to ^7.8.2 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.36.1 (renovate[bot])
+
+ * chore: update actions/checkout action to v6.0.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.36.0 (renovate[bot])
+
+ * chore: update dependency node to v22.22.3 (renovate[bot])
+
+ * chore: update babel monorepo to ^7.29.7 (renovate[bot])
+
+ * chore: update dependency semver to ^7.8.1 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.7.6 (renovate[bot])
+
+ * chore: drop Node.js 20 support BREAKING CHANGE: Drop Node.js 20 support (dhmlau)
+
+ * chore: update github/codeql-action action to v4.35.5 (renovate[bot])
+
+
 2026-05-11, Version 5.0.10
 ==========================
 
