@@ -42,6 +42,7 @@ jobs:
       - name: Run tests
         run: npm test --ignore-scripts
       - name: Coveralls Parallel
+        if: matrix.os == 'ubuntu-latest'
         uses: coverallsapp/github-action@648a8eb78e6d50909eff900e4ec85cab4524a45b # v2.3.6
         with:
           github-token: ${{ secrets.github_token }}
