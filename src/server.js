@@ -391,6 +391,10 @@ class Server extends Base {
     if (error.Fault.statusCode) {
       statusCode = error.Fault.statusCode;
       error.Fault.statusCode = undefined;
+    } else {
+      // Default SOAP Fault responses to HTTP 500 per the SOAP spec. A service
+      // method can override this by setting a `statusCode` on the Fault object.
+      statusCode = 500;
     }
 
     var operationDescriptor = operation.describe(this.wsdl.definitions);

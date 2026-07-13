@@ -736,6 +736,21 @@ An example of using the SOAP server is in [test/server-test](https://github.com/
 A service method can reply with a SOAP Fault to a client by `throw`ing an
 object with a `Fault` property.
 
+Fault responses default to HTTP status code `500`, in line with the SOAP
+specification. To return a different status code, set a `statusCode` property on
+the `Fault` object; that value is used as the HTTP status code and is not
+serialized into the Fault XML. For example:
+
+```js
+    throw {
+      Fault: {
+        statusCode: 401,
+        faultcode: "soap:Client",
+        faultstring: "Unauthorized"
+      }
+    }
+```
+
 Example SOAP 1.1 Fault:
 
 ```js
