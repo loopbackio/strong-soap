@@ -421,7 +421,7 @@ describe('SOAP Server', function() {
         assert.equal(fault.Code.Value, "soap:Sender");
         assert.equal(fault.Reason.Text, "Processing Error");
         assert.equal(body.toString(), expectedBody);
-        assert.equal(err.response.statusCode, 200);
+        assert.equal(err.response.statusCode, 500);
         done();
       });
     });
@@ -443,6 +443,7 @@ describe('SOAP Server', function() {
           "Body should contain faultcode-element without namespace");
         assert.ok(body.match(/<faultstring>.*<\/faultstring>/g),
           "Body should contain faultstring-element without namespace");
+        assert.equal(err.response.statusCode, 500);
         done();
       });
     });
