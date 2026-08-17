@@ -1,4 +1,38 @@
-2026-07-15, Version 6.0.1
+2026-08-17, Version 6.0.2
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.7 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^21.2.2 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.6 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.5 (renovate[bot])
+
+ * chore: update dependency mocha to ^11.8.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.4 (renovate[bot])
+
+ * chore: update dependency node to v22.23.2 (renovate[bot])
+
+ * chore: update coverallsapp/github-action action to v2.3.8 (renovate[bot])
+
+ * chore: update dependency sax to ^1.6.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.2 (renovate[bot])
+
+ * chore: update actions/checkout action to v7.0.1 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.1 (renovate[bot])
+
+ * fix: default SOAP Fault responses to HTTP 500 (Matt Van Horn)
+
+
+2026-07-14, Version 6.0.1
 =========================
 
  * chore: update actions/setup-node action to v7 (renovate[bot])
