@@ -50,7 +50,7 @@ class SimpleType extends XSDElement {
       let memberTypes = [];
       memberTypes.union = true; // Set the union flag to true
       this.union.postProcess(definitions);
-      if (this.union.memberTypes) {
+      if (this.union.memberTypes && !this.union.memberTypes.includes(null)) {
         this.union.memberTypes.forEach(function(t) {
           t.postProcess(definitions);
           memberTypes.push(t.type);
