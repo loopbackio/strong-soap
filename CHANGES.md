@@ -1,3 +1,15 @@
+2026-09-15, Version 6.0.3
+=========================
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.38.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.9 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.37.8 (renovate[bot])
+
+
 2026-08-17, Version 6.0.2
 =========================
 
