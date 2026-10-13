@@ -1,3 +1,27 @@
+2026-10-13, Version 6.0.4
+=========================
+
+ * chore: update dependency mocha to v12 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency express to ^5.3.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.38.3 (renovate[bot])
+
+ * chore: update dependency readable-stream to ^4.8.0 (renovate[bot])
+
+ * chore: update actions/setup-node action to v7.1.0 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.38.2 (renovate[bot])
+
+ * chore: update dependency node to v22.23.3 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^21.2.3 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.38.1 (renovate[bot])
+
+
 2026-09-15, Version 6.0.3
 =========================
 
