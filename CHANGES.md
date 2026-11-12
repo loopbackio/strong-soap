@@ -1,3 +1,33 @@
+2026-11-12, Version 6.0.5
+=========================
+
+ * chore: update dependency node to v22.23.5 (renovate[bot])
+
+ * chore: update dependency @babel/preset-env to ^7.29.14 (renovate[bot])
+
+ * chore: lock file maintenance (renovate[bot])
+
+ * chore: update dependency glob to ^13.0.7 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.39.3 (renovate[bot])
+
+ * chore: update dependency @babel/core to ^7.29.13 (renovate[bot])
+
+ * chore: update dependency semver to ^7.8.6 (renovate[bot])
+
+ * chore: update dependency httpntlm to ^1.8.14 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.39.2 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.39.1 (renovate[bot])
+
+ * chore: update dependency node to v22.23.4 (renovate[bot])
+
+ * chore: update commitlint monorepo to ^21.2.4 (renovate[bot])
+
+ * chore: update github/codeql-action action to v4.39.0 (renovate[bot])
+
+
 2026-10-13, Version 6.0.4
 =========================
 
