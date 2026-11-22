@@ -500,6 +500,63 @@ it('should return a valid error if the server stops responding': function(done) 
 
 });
 
+describe('SOAP Server with shared SOAP 1.1 and SOAP 1.2 addresses', function() {
+  const wsdl = fs.readFileSync(__dirname + '/wsdl/strict/shared-soap-address.wsdl', 'utf8');
+  const service = {
+    StockQuoteService: {
+      Soap11Port: {
+        GetPrice: function() {
+          throw {Fault: {faultcode: 'soap:Server', faultstring: 'SOAP 1.1 fault'}};
+        }
+      },
+      Soap12Port: {
+        GetPrice: function() {
+          throw {Fault: {Code: {Value: 'soap:Receiver'}, Reason: {Text: 'SOAP 1.2 fault'}}};
+        }
+      }
+    }
+  };
+  let server;
+
+  before(function(done) {
+    server = http.createServer();
+    soap.listen(server, '/stockquote', service, wsdl);
+    server.listen(0, '127.0.0.1', done);
+  });
+
+  after(function(done) {
+    server.close(done);
+  });
+
+  for (const {version, contentType, namespace, fault} of [
+    {
+      version: '1.1',
+      contentType: 'text/xml',
+      namespace: 'http://schemas.xmlsoap.org/soap/envelope/',
+      fault: '<faultstring>SOAP 1.1 fault</faultstring>'
+    },
+    {
+      version: '1.2',
+      contentType: 'application/soap+xml',
+      namespace: 'http://www.w3.org/2003/05/soap-envelope',
+      fault: '<soap:Text>SOAP 1.2 fault</soap:Text>'
+    }
+  ]) {
+    it('should dispatch SOAP ' + version + ' requests to their matching port', async function() {
+      const response = await fetch('http://127.0.0.1:' + server.address().port + '/stockquote', {
+        method: 'POST',
+        headers: {'Content-Type': contentType + '; charset=utf-8'},
+        body: '<Envelope xmlns="' + namespace + '"><Body>' +
+          '<GetPrice xmlns="urn:stockquote">ABC</GetPrice></Body></Envelope>'
+      });
+      const body = await response.text();
+      assert.strictEqual(response.status, 500);
+      assert.ok(body.includes('xmlns:soap="' + namespace + '"'), body);
+      assert.ok(body.includes(fault), body);
+    });
+  }
+});
+
 describe('SOAP Server Options', function() {
   before(function(done) {
     fs.readFile(__dirname + '/wsdl/strict/stockquote.wsdl', 'utf8', function(err, data) {

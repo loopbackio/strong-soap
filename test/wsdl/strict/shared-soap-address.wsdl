@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="urn:stockquote"
+                  targetNamespace="urn:stockquote">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:stockquote">
+      <xsd:element name="GetPrice" type="xsd:string"/>
+      <xsd:element name="GetPriceResponse" type="xsd:float"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPriceInput">
+    <wsdl:part name="body" element="tns:GetPrice"/>
+  </wsdl:message>
+  <wsdl:message name="GetPriceOutput">
+    <wsdl:part name="body" element="tns:GetPriceResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="StockQuotePortType">
+    <wsdl:operation name="GetPrice">
+      <wsdl:input message="tns:GetPriceInput"/>
+      <wsdl:output message="tns:GetPriceOutput"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Soap11Binding" type="tns:StockQuotePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetPrice">
+      <soap:operation soapAction="urn:GetPrice"/>
+      <wsdl:input><soap:body use="literal"/></wsdl:input>
+      <wsdl:output><soap:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Soap12Binding" type="tns:StockQuotePortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetPrice">
+      <soap12:operation soapAction="urn:GetPrice"/>
+      <wsdl:input><soap12:body use="literal"/></wsdl:input>
+      <wsdl:output><soap12:body use="literal"/></wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StockQuoteService">
+    <wsdl:port name="Soap11Port" binding="tns:Soap11Binding">
+      <soap:address location="http://localhost/stockquote"/>
+    </wsdl:port>
+    <wsdl:port name="Soap12Port" binding="tns:Soap12Binding">
+      <soap12:address location="http://localhost/stockquote"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
