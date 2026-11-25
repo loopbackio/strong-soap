@@ -22,6 +22,9 @@ try {
   // Ignore error
 }
 
+const SOAP11_ENVELOPE = 'http://schemas.xmlsoap.org/soap/envelope/';
+const SOAP12_ENVELOPE = 'http://www.w3.org/2003/05/soap-envelope';
+
 class Server extends Base {
 
   constructor(server, path, services, wsdl, options) {
@@ -137,15 +140,50 @@ class Server extends Base {
     }
   };
 
+  _findPort(pathname, soapVersion) {
+    const services = this.wsdl.definitions.services;
+    let firstPort;
+    let firstPathMatch;
+    for (const serviceName in services) {
+      const ports = services[serviceName].ports;
+      for (const portName in ports) {
+        const port = ports[portName];
+        const portPathname = url.parse(port.location).pathname.replace(/\/$/, '');
+        const match = {serviceName, portName, binding: port.binding};
+
+        if (typeof this.log === 'function') {
+          this.log('info', 'Trying ' + portName + ' from path ' + portPathname);
+        }
+
+        if (portPathname === pathname) {
+          if (!soapVersion || port.binding.soapVersion === soapVersion) {
+            return match;
+          }
+          firstPathMatch = firstPathMatch || match;
+        }
+        firstPort = firstPort || match;
+      }
+    }
+    // Generated WSDLs sometimes advertise a different path from the listener.
+    return firstPathMatch || firstPort;
+  }
+
   _process(input, req, callback) {
+    let soapVersion;
+    const obj = this.xmlHandler.xmlToJson(null, input, null, function(root) {
+      if (root.name === 'Envelope') {
+        if (root.nsURI === SOAP11_ENVELOPE) {
+          soapVersion = '1.1';
+        } else if (root.nsURI === SOAP12_ENVELOPE) {
+          soapVersion = '1.2';
+        }
+      }
+    });
     var self = this,
       pathname = url.parse(req.url).pathname.replace(/\/$/, ''),
-      obj = this.xmlHandler.xmlToJson(null, input),
       body = obj.Body,
       headers = obj.Header,
-      bindings = this.wsdl.definitions.bindings, binding,
-      operation, operationName,
-      serviceName, portName,
+      operationName,
       includeTimestamp = obj.Header && obj.Header.Security &&
         obj.Header.Security.Timestamp;
 
@@ -162,39 +200,11 @@ class Server extends Base {
       self.log('info', 'Attempting to bind to ' + pathname);
     }
 
-    // use port.location and current url to find the right binding
-    binding = (function(self) {
-      var services = self.wsdl.definitions.services;
-      var firstPort;
-      var name;
-      for (name in services) {
-        serviceName = name;
-        var service = services[serviceName];
-        var ports = service.ports;
-        for (name in ports) {
-          portName = name;
-          var port = ports[portName];
-          var portPathname = url.parse(port.location).pathname.replace(/\/$/, '');
-
-          if (typeof self.log === 'function') {
-            self.log('info', 'Trying ' + portName + ' from path ' + portPathname);
-          }
-
-          if (portPathname === pathname)
-            return port.binding;
-
-          // The port path is almost always wrong for generated WSDLs
-          if (!firstPort) {
-            firstPort = port;
-          }
-        }
-      }
-      return !firstPort ? void 0 : firstPort.binding;
-    })(this);
-
-    if (!binding) {
+    const port = this._findPort(pathname, soapVersion);
+    if (!port) {
       throw new Error(g.f('Failed to bind to {{WSDL}}'));
     }
+    const {binding, serviceName, portName} = port;
 
     try {
       if (binding.style === 'rpc') {
@@ -310,11 +320,11 @@ class Server extends Base {
       var outputBodyDescriptor = operationDescriptor.output.body;
       debugDetail('Server handleResult. outputBodyDescriptor: %j ', outputBodyDescriptor);
 
-      var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
+      var soapNsURI = SOAP11_ENVELOPE;
       var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
 
       if (operation.soapVersion === '1.2') {
-        soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
+        soapNsURI = SOAP12_ENVELOPE;
       }
 
       debug('Server soapNsURI: %s soapNsPrefix: %s', soapNsURI, soapNsPrefix);
@@ -404,11 +414,11 @@ class Server extends Base {
     var faultEnvDescriptor = operation.descriptor.faultEnvelope.elements[0];
 
 
-    var soapNsURI = 'http://schemas.xmlsoap.org/soap/envelope/';
+    var soapNsURI = SOAP11_ENVELOPE;
     var soapNsPrefix = self.wsdl.options.envelopeKey || 'soap';
 
     if (operation.soapVersion === '1.2') {
-      soapNsURI = 'http://www.w3.org/2003/05/soap-envelope';
+      soapNsURI = SOAP12_ENVELOPE;
     }
 
     var nsContext = self.createNamespaceContext(soapNsPrefix, soapNsURI);

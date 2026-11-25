@@ -7,6 +7,7 @@
 
 var WSDLElement = require('./wsdlElement');
 var QName = require('../qname');
+var namespaces = require('../helper').namespaces;
 
 class Binding extends WSDLElement {
   constructor(nsName, attrs, options) {
@@ -20,6 +21,11 @@ class Binding extends WSDLElement {
     if (child.name === 'binding') {
       this.transport = child.$transport;
       this.style = child.$style;
+      if (child.nsURI === namespaces.soap) {
+        this.soapVersion = '1.1';
+      } else if (child.nsURI === namespaces.soap12) {
+        this.soapVersion = '1.2';
+      }
     }
   }
 

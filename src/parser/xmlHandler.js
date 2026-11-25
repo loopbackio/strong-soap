@@ -559,7 +559,7 @@ class XMLHandler {
     }
   }
 
-  xmlToJson(nsContext, xml, descriptor) {
+  xmlToJson(nsContext, xml, descriptor, onRootElement) {
     var self = this;
     var p = sax.parser(true);
     nsContext = nsContext || new NamespaceContext();
@@ -634,6 +634,9 @@ class XMLHandler {
 
       var elementQName = QName.parse(nsName);
       elementQName.nsURI = nsContext.getNamespaceURI(elementQName.prefix);
+      if (onRootElement && stack.length === 1) {
+        onRootElement(elementQName);
+      }
 
       // SOAP href (#id)
       if (attrs.href != null) {
